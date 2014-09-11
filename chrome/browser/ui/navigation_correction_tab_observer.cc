@@ -59,7 +59,7 @@ void NavigationCorrectionTabObserver::SetAllowEnableCorrectionsForTesting(
 void NavigationCorrectionTabObserver::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* prefs) {
   prefs->RegisterBooleanPref(embedder_support::kAlternateErrorPagesEnabled,
-                             true,
+                             false,
                              user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
 }
 
