@@ -73,7 +73,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
 };
 
 const char kDefaultAutofillServerURL[] =
-    "https://clients1.google.com/tbproxy/af/";
+    "trk:158:https://clients1.google.com/tbproxy/af/";
 
 // Returns the base URL for the autofill server.
 GURL GetAutofillServerURL() {
