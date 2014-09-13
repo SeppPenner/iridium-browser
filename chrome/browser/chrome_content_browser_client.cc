@@ -833,7 +833,7 @@ ChromeContentBrowserClient::~ChromeContentBrowserClient() {
 void ChromeContentBrowserClient::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(prefs::kDisable3DAPIs, false);
-  registry->RegisterBooleanPref(prefs::kEnableHyperlinkAuditing, true);
+  registry->RegisterBooleanPref(prefs::kEnableHyperlinkAuditing, false);
   registry->RegisterListPref(prefs::kEnableDeprecatedWebPlatformFeatures);
 }
 
