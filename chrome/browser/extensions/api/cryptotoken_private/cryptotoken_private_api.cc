@@ -15,8 +15,8 @@ namespace api {
 
 const char kGoogleDotCom[] = "google.com";
 const char* kGoogleGstaticAppIds[] = {
-  "https://www.gstatic.com/securitykey/origins.json",
-  "https://www.gstatic.com/securitykey/a/google.com/origins.json"
+  "trk:273:https://www.gstatic.com/securitykey/origins.json",
+  "trk:274:https://www.gstatic.com/securitykey/a/google.com/origins.json"
 };
 
 CryptotokenPrivateCanOriginAssertAppIdFunction::

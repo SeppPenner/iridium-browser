@@ -35,7 +35,7 @@ namespace {
 const int kWidthOfDescriptionText = 330;
 
 // The URL to be used to re-install Chrome when auto-update failed for too long.
-const char kDownloadChromeUrl[] = "https://www.google.com/chrome/?&brand=CHWL"
+const char kDownloadChromeUrl[] = "trk:242:https://www.google.com/chrome/?&brand=CHWL"
     "&utm_campaign=en&utm_source=en-et-na-us-chrome-bubble&utm_medium=et";
 
 // The maximum number of ignored bubble we track in the NumLaterPerReinstall

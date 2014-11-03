@@ -60,7 +60,7 @@ base::string16 LocalizeUrl(const wchar_t* url) {
 }
 
 base::string16 GetWelcomeBackUrl() {
-  const wchar_t kWelcomeUrl[] = L"http://www.google.com/chrome/intl/$1/"
+  const wchar_t kWelcomeUrl[] = L"trk:254:http://www.google.com/chrome/intl/$1/"
                                 L"welcomeback-new.html";
   return LocalizeUrl(kWelcomeUrl);
 }

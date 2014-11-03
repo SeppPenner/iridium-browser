@@ -17,7 +17,7 @@
 
 static const char* kExpectedGupdateProtocol = "2.0";
 static const char* kExpectedGupdateXmlns =
-    "http://www.google.com/update2/response";
+    "trk:182:http://www.google.com/update2/response";
 
 UpdateManifest::Result::Result() : size(0), diff_size(0) {}
 

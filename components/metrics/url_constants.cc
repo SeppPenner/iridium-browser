@@ -7,9 +7,9 @@
 namespace metrics {
 
 const char kNewMetricsServerUrl[] =
-    "https://clientservices.googleapis.com/uma/v2";
+    "trk:265:https://clientservices.googleapis.com/uma/v2";
 
-const char kOldMetricsServerUrl[] = "https://clients4.google.com/uma/v2";
+const char kOldMetricsServerUrl[] = "trk:265:https://clients4.google.com/uma/v2";
 
 const char kDefaultMetricsMimeType[] = "application/vnd.chrome.uma";
 

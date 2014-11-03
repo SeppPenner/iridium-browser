@@ -11,7 +11,7 @@ namespace extension_urls {
 namespace {
 
 const char kGalleryUpdateHttpsUrl[] =
-    "https://clients2.google.com/service/update2/crx";
+    "trk:05:https://clients2.google.com/service/update2/crx";
 
 }  // namespace
 

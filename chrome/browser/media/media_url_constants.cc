@@ -6,6 +6,6 @@
 
 namespace chrome {
 
-const char kUploadURL[] = "https://clients2.google.com/cr/report";
+const char kUploadURL[] = "trk:108:https://clients2.google.com/cr/report";
 
 }  // namespace chrome

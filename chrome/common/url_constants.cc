@@ -325,7 +325,7 @@ const char kChromeUIVoiceSearchHost[] = "voicesearch";
 const char kEULAPathFormat[] = "/usr/share/chromeos-assets/eula/%s/eula.html";
 const char kOemEulaURLPath[] = "oem";
 const char kOnlineEulaURLPath[] =
-    "https://www.google.com/intl/%s/chrome/eula_text.html";
+    "trk:250:https://www.google.com/intl/%s/chrome/eula_text.html";
 
 const char kChromeOSCreditsPath[] =
     "/opt/google/chrome/resources/about_os_credits.html";
@@ -394,7 +394,7 @@ const char kExtensionConfigureCommandsSubPage[] = "configureCommands";
 const char kExtensionInvalidRequestURL[] = "chrome-extension://invalid/";
 
 const char kSyncGoogleDashboardURL[] =
-    "https://www.google.com/settings/chrome/sync/";
+    "trk:251:https://www.google.com/settings/chrome/sync/";
 
 const char kGoogleAccountActivityControlsURL[] =
     "https://myaccount.google.com/activitycontrols/search";
@@ -599,7 +599,7 @@ const char kCloudPrintLearnMoreURL[] =
 #endif
 
 const char kCloudPrintNoDestinationsLearnMoreURL[] =
-    "https://www.google.com/cloudprint/learn/";
+    "trk:252:https://www.google.com/cloudprint/learn/";
 
 const char kAppLauncherHelpURL[] =
     "https://support.google.com/chrome_webstore/?p=cws_app_launcher";
