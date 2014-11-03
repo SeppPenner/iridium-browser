@@ -1504,7 +1504,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
       SigninManagerFactory::GetForProfile(GetProfile());
   const std::string& account_id = signin_manager->GetAuthenticatedAccountId();
   std::vector<std::string> scopes;
-  scopes.emplace_back("https://www.googleapis.com/auth/drive.readonly");
+  scopes.emplace_back("trk:208:https://www.googleapis.com/auth/drive.readonly");
 
   scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory =
       content::BrowserContext::GetDefaultStoragePartition(GetProfile())
