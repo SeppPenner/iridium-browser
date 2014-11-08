@@ -91,7 +91,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   *result = config_dir.Append("google-chrome" + GetChannelSuffixForDataDir());
 #else
-  *result = config_dir.Append("chromium");
+  *result = config_dir.Append("iridium");
 #endif
   return true;
 }
