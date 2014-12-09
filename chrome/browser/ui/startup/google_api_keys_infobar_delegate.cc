@@ -15,6 +15,7 @@
 
 // static
 void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
+  return;
   if (google_apis::HasKeysConfigured())
     return;
 
