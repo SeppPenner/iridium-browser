@@ -1,16 +1,44 @@
-# ![Logo](chrome/app/theme/chromium/product_logo_64.png) Chromium
+Iridium Browser
+==============================
 
-Chromium is an open-source browser project that aims to build a safer, faster,
-and more stable way for all users to experience the web.
+Iridium is an open modification of the Chromium code base, with privacy being enhanced in several key areas. Automatic transmission of partial queries, keywords, metrics to central services is inhibited and only occurs with consent.
 
-The project's web site is https://www.chromium.org.
+Some more information and binary downloads can be found at [https://iridiumbrowser.de](https://iridiumbrowser.de).
 
-Documentation in the source is rooted in [docs/README.md](docs/README.md).
+## Development
 
-Learn how to [Get Around the Chromium Source Code Directory Structure
-](https://www.chromium.org/developers/how-tos/getting-around-the-chrome-source-code).
+The repository is at [https://github.com/iridium-browser/iridium-browser/](https://github.com/iridium-browser/iridium-browser/).
 
-For historical reasons, there are some small top level directories. Now the
-guidance is that new top level directories are for product (e.g. Chrome,
-Android WebView, Ash). Even if these products have multiple executables, the
-code should be in subdirectories of the product.
+The easy way to build from source is to re-use the mechanisms of one's Linux distribution, that is, their build environment and description for chromium, and replacing the source tarball by the one from [https://dl.iridiumbrowser.de/source/](https://dl.iridiumbrowser.de/source/).
+
+For the more adventurous, there is a 10-step(-ish) guide to build from git:
+
+1. Download `[https://chromium.googlesource.com/chromium/tools/depot_tools.git](depot_tools)` and add it to your `$PATH`.
+
+2. Issue command: `gclient sync` (this utility comes from depot_tools). For gclient, you need to have python 2(!) and python2-virtualenv. The sync command will not necessary complete successfully due to webrtc.
+
+3. Download WebRTC if gclient did not do it for you. Google populates the Chromium `DEPS` file with a commit hash for WebRTC, and if there is no branch head which is exactly equal to the hash, `gclient sync` barfs about it. Then, you have to fetch the data manually:
+
+	pushd third_party/webrtc/
+	git ls-remote origin | grep 0b2302e5e0418b6716fbc0b3927874fd3a842caf
+	    abcdef...   refs/branch-heads/m78
+	git fetch origin refs/branch-heads/m78
+	git reset --hard FETCH_HEAD
+	popd
+
+4. The gn files in Iridium are edited to respect the `$CC` etc. environment variables. These env vars _must_ always be set, so issue `export CC=gcc CXX=g++ AR=ar NM=nm` (can pick any preferred toolchain, though).
+
+5. Link up nodejs:
+
+	mkdir -p third_party/node/linux/node-linux-x64/bin
+	ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/
+
+6. Issue `gn gen '--args= custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" linux_use_bundled_binutils=false use_custom_libcxx=false is_debug=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true concurrent_links=1 symbol_level=1 blink_symbol_level=0 use_kerberos=true enable_vr=false optimize_webui=false enable_reading_list=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="tcmalloc" fieldtrial_testing_like_official_build=true use_gold=true use_gnome_keyring=false use_unofficial_version_number=false use_lld=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_dbus=true use_system_minigbm=true use_system_harfbuzz=true use_system_freetype=true enable_hangout_services_extension=true enable_vulkan=true enable_hevc_demuxing=true rtc_use_pipewire=true rtc_link_pipewire=true rtc_use_pipewire_version="0.3" is_clang=false icu_use_data_file=false proprietary_codecs=true ffmpeg_branding="Chrome"' out/Release`
+
+7. There are a number of dependencies, and they may vary across operating systems. The gn command fails if there are unmet dependencies, and it will tell you which. Install and repeat the gn command as needed. Consult your distribution's package manager.
+
+8. Issue `LD_LIBRARY_PATH=$PWD/out/Release ninja -C out/Release chrome chromedriver`.
+
+## Reporting bugs and issues
+
+Use the [Iridium Browser tracker](https://github.com/iridium-browser/iridium-browser/issues) on GitHub to report your findings or to add feature requests.
