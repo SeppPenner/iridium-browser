@@ -160,6 +160,7 @@ class InfoBarDelegate {
     SAFETY_TIP_INFOBAR_DELEGATE = 94,
     SMS_RECEIVER_INFOBAR_DELEGATE = 95,
     KNOWN_INTERCEPTION_DISCLOSURE_INFOBAR_DELEGATE = 96,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be
