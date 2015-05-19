@@ -147,6 +147,7 @@ class InfoBarDelegate {
     VR_SERVICES_UPGRADE_ANDROID = 74,
     READER_MODE_INFOBAR_ANDROID = 75,
     VR_FEEDBACK_INFOBAR_ANDROID = 76,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be

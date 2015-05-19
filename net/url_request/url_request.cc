@@ -48,6 +48,8 @@ using std::string;
 
 namespace net {
 
+void (*trace_urlreq_cb)(const std::string &, const GURL &);
+
 namespace {
 
 // Max number of http redirects to follow.  Same number as gecko.
@@ -593,6 +595,10 @@ URLRequest::URLRequest(const GURL& url,
   // Sanity check out environment.
   DCHECK(base::ThreadTaskRunnerHandle::IsSet());
 
+	if (trace_urlreq_cb != NULL)
+		(*trace_urlreq_cb)("URLRequest", url);
+	if (url.scheme() == url::kTraceScheme)
+		url_chain_[0] = url.strip_trk();
   context->InsertURLRequest(this);
   net_log_.BeginEvent(
       NetLogEventType::REQUEST_ALIVE,

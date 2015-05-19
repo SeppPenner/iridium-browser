@@ -15,6 +15,10 @@
 #include "content/public/common/content_switches.h"
 #include "headless/public/headless_shell.h"
 #include "ui/gfx/switches.h"
+#if !defined(CHROME_MULTIPLE_DLL_CHILD)
+#	include "net/url_request/url_request.h"
+#	include "iridium/trknotify.h"
+#endif
 
 #if BUILDFLAG(ENABLE_PACKAGE_MASH_SERVICES)
 #include "services/service_manager/runner/common/client_util.h"
@@ -44,6 +48,19 @@ DLLEXPORT int __cdecl ChromeMain(HINSTANCE instance,
 extern "C" {
 __attribute__((visibility("default")))
 int ChromeMain(int argc, const char** argv);
+}
+#endif
+
+#if !defined(CHROME_MULTIPLE_DLL_CHILD)
+static void trace_url_request(const std::string &caller, const GURL &url)
+{
+	iridium::log_url_request(caller, url);
+	if (url.scheme() != url::kTraceScheme)
+		/* Do not show infobar for non-trk URLs */
+		return;
+	if (url.is_trq())
+		return;
+	iridium::trace_url_request(caller, url);
 }
 #endif
 
@@ -119,6 +136,9 @@ int ChromeMain(int argc, const char** argv) {
   }
 #endif  // BUILDFLAG(ENABLE_PACKAGE_MASH_SERVICES)
 
+#if !defined(CHROME_MULTIPLE_DLL_CHILD)
+  net::trace_urlreq_cb = &trace_url_request;
+#endif
   int rv = content::ContentMain(params);
 
   return rv;
