@@ -33775,6 +33775,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
   <int value="95" label="SMS_RECEIVER_INFOBAR_DELEGATE"/>
   <int value="96" label="KNOWN_INTERCEPTION_DISCLOSURE_INFOBAR_DELEGATE"/>
   <int value="97" label="SYNC_ERROR_INFOBAR_DELEGATE_ANDROID"/>
+  <int value="9001" label="TRACKING_ALERT_INFOBAR_DELEGATE"/>
 </enum>
 
 <enum name="InfoBarResponse">

@@ -234,6 +234,8 @@ if (!is_android && !is_mac) {
       sources += [ "app/chrome_exe_main_aura.cc" ]
     }
 
+    deps += ["//iridium:trknotify"]
+
     if (is_linux) {
       sources += [
         "app/chrome_dll_resource.h",
@@ -448,6 +450,7 @@ if (is_win) {
         "//content/public/app:child",
         "//content/public/common:service_names",
         "//headless:headless_shell_child_lib",
+        "//iridium:trknotify",
         "//services/service_manager/embedder",
       ]
 
