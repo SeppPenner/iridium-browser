@@ -155,6 +155,7 @@ class InfoBarDelegate {
     BLOATED_RENDERER_INFOBAR_DELEGATE = 84,
     SUPERVISED_USERS_DEPRECATED_INFOBAR_DELEGATE = 85,
     NEAR_OOM_REDUCTION_INFOBAR_ANDROID = 86,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be
