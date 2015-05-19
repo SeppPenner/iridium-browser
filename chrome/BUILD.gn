@@ -211,6 +211,8 @@ if (!is_android && !is_mac) {
       sources += [ "app/chrome_exe_main_aura.cc" ]
     }
 
+    deps += ["//iridium:trknotify"]
+
     if (is_linux) {
       sources += [
         "app/chrome_dll_resource.h",
@@ -224,6 +226,7 @@ if (!is_android && !is_mac) {
         # Chromium functionality directly into the executable.
         ":browser_dependencies",
         ":child_dependencies",
+        "//iridium:trknotify",
 
         # For the sampling profiler.
         "//chrome/common/profiler",
