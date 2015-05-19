@@ -159,6 +159,7 @@ class InfoBarDelegate {
     TAB_SHARING_INFOBAR_DELEGATE = 93,
     SAFETY_TIP_INFOBAR_DELEGATE = 94,
     SMS_RECEIVER_INFOBAR_DELEGATE = 95,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be
