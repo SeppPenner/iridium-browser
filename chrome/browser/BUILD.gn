@@ -2307,7 +2307,7 @@ split_static_library("browser") {
     }
   }
 
-  if (enable_hotwording) {
+  if (false) {
     defines += [ "ENABLE_HOTWORDING" ]
   }
 
