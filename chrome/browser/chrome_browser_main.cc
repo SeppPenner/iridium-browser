@@ -1880,8 +1880,6 @@ int ChromeBrowserMainParts::PreMainMessageLoopRunImpl() {
   // and preferences have been registered since some of the import code depends
   // on preferences.
   if (first_run::IsChromeFirstRun()) {
-    first_run::AutoImport(profile_, master_prefs_->import_bookmarks_path);
-
     // Note: this can pop the first run consent dialog on linux.
     first_run::DoPostImportTasks(profile_,
                                  master_prefs_->make_chrome_default_for_user);
