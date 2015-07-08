@@ -1,7 +1,7 @@
-From a4aaf7b8d213c3d8558804c943e4faacd1619f14 Mon Sep 17 00:00:00 2001
+From 73b9a80dcb8fcd97f0e9243c9e95265253b81b7d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
-Subject: [PATCH 07/59] dns: send IPv6 connectivity probes to RIPE DNS rather
+Subject: [PATCH 07/58] dns: send IPv6 connectivity probes to RIPE DNS rather
  than Google
 
 Short of disabling the code (we may do that in a subsequent patch
@@ -29,5 +29,5 @@ index 3a279aaef068..1e97539b3ab0 100644
  // We use a separate histogram name for each platform to facilitate the
  // display of error codes by their symbolic name (since each platform has
 -- 
-2.16.3
+2.19.1
 

@@ -56,4 +56,3 @@ all-add-trk-prefixes-to-possibly-evil-connections.patch
 Disable-smooth-scrolling-on-Linux.patch
 doc-add-README.md-for-github.patch
 common-set-Iridium-version-and-change-User-Agent-acc.patch
-chromium-fix-Google-s-beta-quality-code.patch

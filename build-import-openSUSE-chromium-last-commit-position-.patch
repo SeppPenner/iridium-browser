@@ -1,7 +1,7 @@
-From fd7b1abd52cae1e898df1ce03584c3fb692087df Mon Sep 17 00:00:00 2001
+From 3f33a49adb80684a1bc2e124a3cdf81b96dfe11c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 23 Apr 2017 21:49:42 +0200
-Subject: [PATCH 04/59] build: import openSUSE
+Subject: [PATCH 04/58] build: import openSUSE
  chromium-last-commit-position-r0.patch
 
 ---
@@ -40,5 +40,5 @@ index 4d51158e7d16..e9ef84866c0d 100644
  namespace {
  
 -- 
-2.16.3
+2.19.1
 

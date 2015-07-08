@@ -1,7 +1,7 @@
-From 27f00de53aa14b3c475743801690fdc3c51c1415 Mon Sep 17 00:00:00 2001
+From 675644a6ed76832223bc6f62b8b9c66cdbb38558 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 13/59] prefs: disable "Use a prediction service to help
+Subject: [PATCH 13/58] prefs: disable "Use a prediction service to help
  complete searches..."
 
 This autocomplete service would send search queries as soon as you
@@ -29,5 +29,5 @@ index 2a7f42b22270..bd3d00a43978 100644
  #if defined(OS_ANDROID)
    registry->RegisterStringPref(
 -- 
-2.16.3
+2.19.1
 

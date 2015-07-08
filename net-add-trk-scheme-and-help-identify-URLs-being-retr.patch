@@ -1,7 +1,7 @@
-From 3ec3e50a51bf27aca51d61b7731a81eea10d22e1 Mon Sep 17 00:00:00 2001
+From 65502a62bb34dbf03725433654358ad1d728b9d2 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
-Subject: [PATCH 38/59] net: add "trk:" scheme and help identify URLs being
+Subject: [PATCH 38/58] net: add "trk:" scheme and help identify URLs being
  retrieved
 
 The Chromium codebase has left us with a number of suspect URLs, and
@@ -27,28 +27,28 @@ We hack up the URLFetcher class which sits in the network stack, and
 most of the URL that get loaded pass through here. The trk: prefix is
 stripped and processing continues with the inner URL.
 ---
- chrome/BUILD.gn                                    |  2 +
- chrome/app/chrome_main.cc                          | 17 +++++++
- .../chrome_autocomplete_scheme_classifier.cc       |  1 +
- chrome/browser/history/history_utils.cc            |  1 +
- chrome/browser/ui/browser_navigator.cc             |  8 +++
- chrome/browser/ui/singleton_tabs.cc                |  3 +-
- components/infobars/core/infobar_delegate.h        |  1 +
- components/omnibox/browser/autocomplete_input.cc   |  8 +--
- content/browser/browser_url_handler_impl.cc        | 20 ++++++++
- .../browser/child_process_security_policy_impl.cc  |  1 +
- iridium/BUILD.gn                                   |  9 ++++
- iridium/trkbar.cpp                                 | 45 +++++++++++++++++
- iridium/trkbar.h                                   | 33 ++++++++++++
- iridium/trknotify.cpp                              | 59 ++++++++++++++++++++++
- iridium/trknotify.h                                | 20 ++++++++
- net/url_request/url_request.cc                     |  6 +++
- net/url_request/url_request.h                      |  2 +
- tools/metrics/histograms/enums.xml                 |  1 +
- url/gurl.cc                                        | 35 +++++++++++++
- url/gurl.h                                         |  5 ++
- url/url_constants.cc                               |  1 +
- url/url_constants.h                                |  1 +
+ chrome/BUILD.gn                               |  2 +
+ chrome/app/chrome_main.cc                     | 17 ++++++
+ .../chrome_autocomplete_scheme_classifier.cc  |  1 +
+ chrome/browser/history/history_utils.cc       |  1 +
+ chrome/browser/ui/browser_navigator.cc        |  8 +++
+ chrome/browser/ui/singleton_tabs.cc           |  3 +-
+ components/infobars/core/infobar_delegate.h   |  1 +
+ .../omnibox/browser/autocomplete_input.cc     |  8 ++-
+ content/browser/browser_url_handler_impl.cc   | 20 +++++++
+ .../child_process_security_policy_impl.cc     |  1 +
+ iridium/BUILD.gn                              |  9 +++
+ iridium/trkbar.cpp                            | 45 ++++++++++++++
+ iridium/trkbar.h                              | 33 +++++++++++
+ iridium/trknotify.cpp                         | 59 +++++++++++++++++++
+ iridium/trknotify.h                           | 20 +++++++
+ net/url_request/url_request.cc                |  6 ++
+ net/url_request/url_request.h                 |  2 +
+ tools/metrics/histograms/enums.xml            |  1 +
+ url/gurl.cc                                   | 35 +++++++++++
+ url/gurl.h                                    |  5 ++
+ url/url_constants.cc                          |  1 +
+ url/url_constants.h                           |  1 +
  22 files changed, 275 insertions(+), 4 deletions(-)
  create mode 100644 iridium/BUILD.gn
  create mode 100644 iridium/trkbar.cpp
@@ -57,10 +57,10 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 4304cc82494f..20e836db9199 100644
+index 3ddaa916a0bf..24d38d176792 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -251,6 +251,7 @@ if (!is_android && !is_mac) {
+@@ -252,6 +252,7 @@ if (!is_android && !is_mac) {
          deps += [
            # On Linux, link the dependencies (libraries) that make up actual
            # Chromium functionality directly into the executable.
@@ -68,7 +68,7 @@ index 4304cc82494f..20e836db9199 100644
            ":browser_dependencies",
            ":child_dependencies",
  
-@@ -505,6 +506,7 @@ if (is_win) {
+@@ -506,6 +507,7 @@ if (is_win) {
          "//content/public/app:child",
          "//content/public/common:service_names",
          "//headless:headless_shell_child_lib",
@@ -112,7 +112,7 @@ index 9ff589299bff..293757f6ebf9 100644
  DLLEXPORT int __cdecl ChromeMain(HINSTANCE instance,
                                   sandbox::SandboxInterfaceInfo* sandbox_info,
 diff --git a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc b/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
-index 620df4bac144..5452c1943f82 100644
+index 2e7247405e48..0eaa277ef85c 100644
 --- a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
 +++ b/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
 @@ -28,6 +28,7 @@ ChromeAutocompleteSchemeClassifier::GetInputTypeForScheme(
@@ -136,7 +136,7 @@ index 8bf6a91e67cd..57dd5e1fb5c0 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme))
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index 9614bf4f5cfd..d8f723756a56 100644
+index 5127eec690d6..c2a2576091f4 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
 @@ -730,6 +730,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
@@ -494,10 +494,10 @@ index 57273101f211..80b4731820d6 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index 71c50d74eadb..57eb5e22b8b8 100644
+index d046e7d6a221..58548cbea413 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -23338,6 +23338,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
+@@ -23367,6 +23367,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
    <int value="79" label="NEAR_OOM_INFOBAR_ANDROID"/>
    <int value="80" label="INSTALLABLE_AMBIENT_BADGE_INFOBAR_DELEGATE"/>
    <int value="81" label="PAGE_LOAD_CAPPING_INFOBAR_DELEGATE"/>
@@ -599,5 +599,5 @@ index e06af29979f2..7517e1c5f340 100644
  URL_EXPORT extern const char kWssScheme[];
  
 -- 
-2.16.3
+2.19.1
 

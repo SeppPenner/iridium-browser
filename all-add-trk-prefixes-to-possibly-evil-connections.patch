@@ -1,7 +1,7 @@
-From 25d6f14b3b47d8cacc2f113c83f60499b47319bd Mon Sep 17 00:00:00 2001
+From 451a34244253c3e7b8517013d7b3f032d3d6ec8e Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 3 Nov 2014 10:52:56 +0100
-Subject: [PATCH 55/59] all: add trk: prefixes to possibly evil connections
+Subject: [PATCH 55/58] all: add trk: prefixes to possibly evil connections
 
 Prefix URLs to Google services with trk: so that whenever something
 tries to load them, the developer will be informed via printf and
@@ -11,59 +11,59 @@ If you see such dialog, we know that (a) either the URL needs to be
 whitelisted, or (b) the feature that triggered it needs to be disabled
 by default.
 ---
- build/mac/tweak_info_plist.py                          |  2 +-
- .../chromeos/customization/customization_document.cc   |  2 +-
- .../extensions/file_manager/private_api_drive.cc       |  2 +-
- .../extensions/file_manager/private_api_misc.cc        |  2 +-
- .../extensions/file_manager/private_api_strings.cc     | 12 ++++++------
- .../api/cryptotoken_private/cryptotoken_private_api.cc |  4 ++--
- chrome/browser/extensions/install_signer.cc            |  2 +-
- chrome/browser/nacl_host/nacl_infobar_delegate.cc      |  2 +-
- chrome/browser/net/predictor.cc                        |  2 +-
- chrome/browser/profiles/profile_avatar_downloader.cc   |  2 +-
- .../chromeos/chromevox/chromevox/background/prefs.js   |  4 ++--
- .../resources/default_apps/external_extensions.json    |  6 +++---
- .../safe_browsing/client_side_detection_service.cc     |  4 ++--
- .../download_protection/download_feedback.cc           |  2 +-
- .../browser/safe_search_api/safe_search_url_checker.cc |  2 +-
- .../spellchecker/spellcheck_hunspell_dictionary.cc     |  2 +-
- .../browser/supervised_user/supervised_user_service.cc |  2 +-
- chrome/browser/tracing/crash_service_uploader.cc       |  2 +-
- .../browser/ui/views/outdated_upgrade_bubble_view.cc   |  2 +-
- chrome/browser/ui/webui/ntp/ntp_resource_cache.cc      |  8 ++++----
- chrome/common/extensions/chrome_extensions_client.cc   |  4 ++--
- chrome/installer/util/google_chrome_distribution.cc    |  2 +-
- chromecast/browser/service/cast_service_simple.cc      |  2 +-
- chromeos/geolocation/simple_geolocation_provider.cc    |  2 +-
- components/cloud_devices/common/cloud_devices_urls.cc  |  8 ++++----
- components/crash/content/app/breakpad_linux.cc         |  2 +-
- components/drive/service/drive_api_service.cc          |  8 ++++----
- components/feedback/feedback_uploader.cc               |  2 +-
- components/gcm_driver/gcm_account_tracker.cc           |  4 ++--
- components/google/core/browser/google_url_tracker.cc   |  2 +-
- components/history/core/browser/web_history_service.cc |  6 +++---
- components/invalidation/impl/gcm_network_channel.cc    |  2 +-
- components/invalidation/impl/p2p_invalidator.cc        |  2 +-
- components/metrics/url_constants.cc                    |  2 +-
- .../password_manager/core/browser/password_store.cc    |  8 ++++----
- components/policy/core/common/policy_loader_win.cc     |  2 +-
- components/rappor/rappor_service_impl.cc               |  2 +-
- .../translate/core/browser/translate_url_fetcher.cc    |  1 +
- components/translate/core/common/translate_util.cc     |  2 +-
- components/variations/variations_url_constants.cc      |  2 +-
- content/browser/speech/speech_recognition_engine.cc    |  2 +-
- content/browser/webauth/authenticator_impl.cc          |  4 ++--
- content/shell/browser/shell_browser_main_parts.cc      |  2 +-
- google_apis/gaia/gaia_constants.cc                     | 18 +++++++++---------
- google_apis/gaia/google_service_auth_error.cc          |  2 +-
- google_apis/gcm/engine/gservices_settings.cc           |  6 +++---
- jingle/notifier/base/gaia_token_pre_xmpp_auth.cc       |  2 +-
- remoting/base/breakpad_mac.mm                          |  2 +-
- remoting/protocol/jingle_messages.cc                   |  2 +-
- remoting/webapp/base/js/xmpp_login_handler.js          |  2 +-
- remoting/webapp/crd/manifest.json.jinja2               |  2 +-
- rlz/lib/lib_values.cc                                  |  2 +-
- ui/views/examples/webview_example.cc                   |  2 +-
+ build/mac/tweak_info_plist.py                  |  2 +-
+ .../customization/customization_document.cc    |  2 +-
+ .../file_manager/private_api_drive.cc          |  2 +-
+ .../file_manager/private_api_misc.cc           |  2 +-
+ .../file_manager/private_api_strings.cc        | 12 ++++++------
+ .../cryptotoken_private_api.cc                 |  4 ++--
+ chrome/browser/extensions/install_signer.cc    |  2 +-
+ .../browser/nacl_host/nacl_infobar_delegate.cc |  2 +-
+ chrome/browser/net/predictor.cc                |  2 +-
+ .../profiles/profile_avatar_downloader.cc      |  2 +-
+ .../chromevox/chromevox/background/prefs.js    |  4 ++--
+ .../default_apps/external_extensions.json      |  6 +++---
+ .../client_side_detection_service.cc           |  4 ++--
+ .../download_protection/download_feedback.cc   |  2 +-
+ .../safe_search_api/safe_search_url_checker.cc |  2 +-
+ .../spellcheck_hunspell_dictionary.cc          |  2 +-
+ .../supervised_user/supervised_user_service.cc |  2 +-
+ .../browser/tracing/crash_service_uploader.cc  |  2 +-
+ .../ui/views/outdated_upgrade_bubble_view.cc   |  2 +-
+ .../browser/ui/webui/ntp/ntp_resource_cache.cc |  8 ++++----
+ .../extensions/chrome_extensions_client.cc     |  4 ++--
+ .../util/google_chrome_distribution.cc         |  2 +-
+ .../browser/service/cast_service_simple.cc     |  2 +-
+ .../geolocation/simple_geolocation_provider.cc |  2 +-
+ .../cloud_devices/common/cloud_devices_urls.cc |  8 ++++----
+ components/crash/content/app/breakpad_linux.cc |  2 +-
+ components/drive/service/drive_api_service.cc  |  8 ++++----
+ components/feedback/feedback_uploader.cc       |  2 +-
+ components/gcm_driver/gcm_account_tracker.cc   |  4 ++--
+ .../google/core/browser/google_url_tracker.cc  |  2 +-
+ .../core/browser/web_history_service.cc        |  6 +++---
+ .../invalidation/impl/gcm_network_channel.cc   |  2 +-
+ .../invalidation/impl/p2p_invalidator.cc       |  2 +-
+ components/metrics/url_constants.cc            |  2 +-
+ .../core/browser/password_store.cc             |  8 ++++----
+ .../policy/core/common/policy_loader_win.cc    |  2 +-
+ components/rappor/rappor_service_impl.cc       |  2 +-
+ .../core/browser/translate_url_fetcher.cc      |  1 +
+ .../translate/core/common/translate_util.cc    |  2 +-
+ .../variations/variations_url_constants.cc     |  2 +-
+ .../speech/speech_recognition_engine.cc        |  2 +-
+ content/browser/webauth/authenticator_impl.cc  |  4 ++--
+ .../shell/browser/shell_browser_main_parts.cc  |  2 +-
+ google_apis/gaia/gaia_constants.cc             | 18 +++++++++---------
+ google_apis/gaia/google_service_auth_error.cc  |  2 +-
+ google_apis/gcm/engine/gservices_settings.cc   |  6 +++---
+ .../notifier/base/gaia_token_pre_xmpp_auth.cc  |  2 +-
+ remoting/base/breakpad_mac.mm                  |  2 +-
+ remoting/protocol/jingle_messages.cc           |  2 +-
+ remoting/webapp/base/js/xmpp_login_handler.js  |  2 +-
+ remoting/webapp/crd/manifest.json.jinja2       |  2 +-
+ rlz/lib/lib_values.cc                          |  2 +-
+ ui/views/examples/webview_example.cc           |  2 +-
  53 files changed, 90 insertions(+), 89 deletions(-)
 
 diff --git a/build/mac/tweak_info_plist.py b/build/mac/tweak_info_plist.py
@@ -80,7 +80,7 @@ index 9ea794b1517f..8c22fc375dce 100755
    _RemoveKeys(plist, 'KSChannelID')
    for tag_suffix in _TagSuffixes():
 diff --git a/chrome/browser/chromeos/customization/customization_document.cc b/chrome/browser/chromeos/customization/customization_document.cc
-index f7bde92ac729..b0b6d6508e32 100644
+index ebd8bbca1acb..b404a668332d 100644
 --- a/chrome/browser/chromeos/customization/customization_document.cc
 +++ b/chrome/browser/chromeos/customization/customization_document.cc
 @@ -167,7 +167,7 @@ std::string ReadFileInBackground(const base::FilePath& file) {
@@ -171,7 +171,7 @@ index ea1cbebd36ae..2abebd6a6a69 100644
  // ContainsAppIdByHash returns true iff the SHA-256 hash of one of the
  // elements of |list| equals |hash|.
 diff --git a/chrome/browser/extensions/install_signer.cc b/chrome/browser/extensions/install_signer.cc
-index d9fdf055584c..3462423d4e18 100644
+index 26dbc15ccef7..92400b8fd931 100644
 --- a/chrome/browser/extensions/install_signer.cc
 +++ b/chrome/browser/extensions/install_signer.cc
 @@ -65,7 +65,7 @@ const int kSignatureFormatVersion = 2;
@@ -315,10 +315,10 @@ index aeb5838a2a99..72a0eeb2c3b7 100644
    return GURL(std::string(kDownloadServerUrl) +
                base::ToLowerASCII(bdict_file));
 diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index 875eb80ccf48..f4ccccd0c8cc 100644
+index 9256a72362b5..133652502d30 100644
 --- a/chrome/browser/supervised_user/supervised_user_service.cc
 +++ b/chrome/browser/supervised_user/supervised_user_service.cc
-@@ -102,7 +102,7 @@ namespace {
+@@ -100,7 +100,7 @@ namespace {
  
  // The URL from which to download a host blacklist if no local one exists yet.
  const char kBlacklistURL[] =
@@ -477,10 +477,10 @@ index 1dde47fb6bba..15d6509d16d9 100644
  
  bool g_is_crash_reporter_enabled = false;
 diff --git a/components/drive/service/drive_api_service.cc b/components/drive/service/drive_api_service.cc
-index 0af0ada6fef5..d59724a274c3 100644
+index a12472aaf506..acb83304b77b 100644
 --- a/components/drive/service/drive_api_service.cc
 +++ b/components/drive/service/drive_api_service.cc
-@@ -77,11 +77,11 @@ namespace drive {
+@@ -80,11 +80,11 @@ namespace drive {
  namespace {
  
  // OAuth2 scopes for Drive API.
@@ -510,7 +510,7 @@ index 7bd55ba97fbc..489d8a8806d5 100644
  constexpr char kProtoBufMimeType[] = "application/x-protobuf";
  
 diff --git a/components/gcm_driver/gcm_account_tracker.cc b/components/gcm_driver/gcm_account_tracker.cc
-index 052b0597f985..1a06967e57a8 100644
+index 58e9426a0db4..d1102df4d6c7 100644
 --- a/components/gcm_driver/gcm_account_tracker.cc
 +++ b/components/gcm_driver/gcm_account_tracker.cc
 @@ -23,9 +23,9 @@ namespace gcm {
@@ -526,7 +526,7 @@ index 052b0597f985..1a06967e57a8 100644
  const char kGCMAccountTrackerName[] = "gcm_account_tracker";
  // Minimum token validity when sending to GCM groups server.
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index e7436af5a658..d4ff48f2b4d2 100644
+index ca5ac30b7677..5d77baac6685 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
 @@ -35,7 +35,7 @@
@@ -536,8 +536,8 @@ index e7436af5a658..d4ff48f2b4d2 100644
 -    "https://www.google.com/";
 +    "trk:192:https://www.google.com/";
  const char GoogleURLTracker::kSearchDomainCheckURL[] =
- /* trk:193 */
-     "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
+ /* trk:193 */    "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
+ const base::Feature GoogleURLTracker::kNoSearchDomainCheck{
 diff --git a/components/history/core/browser/web_history_service.cc b/components/history/core/browser/web_history_service.cc
 index 6a6ae16bbd15..bbfe996e1962 100644
 --- a/components/history/core/browser/web_history_service.cc
@@ -695,7 +695,7 @@ index 856f9a1df552..38806a064d62 100644
  const char kUpstreamUrl[] = "/up?";
  
 diff --git a/content/browser/webauth/authenticator_impl.cc b/content/browser/webauth/authenticator_impl.cc
-index 08a8a7be4146..be5db7ff691b 100644
+index 3e8e141f25c4..7d5a52c5b2af 100644
 --- a/content/browser/webauth/authenticator_impl.cc
 +++ b/content/browser/webauth/authenticator_impl.cc
 @@ -150,9 +150,9 @@ bool IsAppIdAllowedForOrigin(const GURL& appid, const url::Origin& origin) {
@@ -769,10 +769,10 @@ index d3d0cd9cc95f..91210c88c596 100644
   // Used to mint uber auth tokens when needed.
  const char kGaiaSid[] = "sid";
 diff --git a/google_apis/gaia/google_service_auth_error.cc b/google_apis/gaia/google_service_auth_error.cc
-index d28bc258fb97..d4b9170b9a9b 100644
+index 3feba3cf9c4d..b6a7ba2674a3 100644
 --- a/google_apis/gaia/google_service_auth_error.cc
 +++ b/google_apis/gaia/google_service_auth_error.cc
-@@ -211,7 +211,7 @@ std::string GoogleServiceAuthError::ToString() const {
+@@ -212,7 +212,7 @@ std::string GoogleServiceAuthError::ToString() const {
      case WEB_LOGIN_REQUIRED:
        return "Less secure apps may not authenticate with this account. "
               "Please visit: "
@@ -899,5 +899,5 @@ index f23b646fd551..4f6f355aa8cf 100644
  }
  
 -- 
-2.16.3
+2.19.1
 

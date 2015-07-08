@@ -1,16 +1,16 @@
-From 7770ba4a1cf5f3e945383734433462b378490065 Mon Sep 17 00:00:00 2001
+From 0f9872e7ee7fc0cacdf8a4ed366643049c856255 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/59] build: remove calling untrusted hooks
+Subject: [PATCH 01/58] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 238 +------------------------------------------------------------------
+ DEPS | 238 +----------------------------------------------------------
  1 file changed, 3 insertions(+), 235 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index d9d56e2ad8df..9a56e8982062 100644
+index ddb2893a90ca..b834d896e141 100644
 --- a/DEPS
 +++ b/DEPS
 @@ -32,16 +32,14 @@ vars = {
@@ -33,7 +33,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    'chromium_git':
      'https://chromium.googlesource.com',
    'cros_board':
-@@ -1385,71 +1383,6 @@ hooks = [
+@@ -1375,71 +1373,6 @@ hooks = [
      'condition':
        'checkout_nacl'
    },
@@ -105,7 +105,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1494,28 +1427,6 @@ hooks = [
+@@ -1484,28 +1417,6 @@ hooks = [
      'condition':
        'checkout_ios or checkout_mac'
    },
@@ -134,7 +134,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1607,24 +1518,6 @@ hooks = [
+@@ -1597,24 +1508,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -159,7 +159,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1661,24 +1554,6 @@ hooks = [
+@@ -1651,24 +1544,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -184,7 +184,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1733,24 +1608,6 @@ hooks = [
+@@ -1723,24 +1598,6 @@ hooks = [
      'condition':
        'checkout_win and host_os == "linux"'
    },
@@ -209,7 +209,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1805,24 +1662,6 @@ hooks = [
+@@ -1795,24 +1652,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -234,7 +234,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -1895,42 +1734,6 @@ hooks = [
+@@ -1885,42 +1724,6 @@ hooks = [
      'condition':
        'checkout_instrumented_libraries'
    },
@@ -277,7 +277,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'python',
-@@ -2061,23 +1864,6 @@ hooks = [
+@@ -2051,23 +1854,6 @@ hooks = [
      'condition':
        'host_os == "win" and checkout_traffic_annotation_tools'
    },
@@ -301,7 +301,7 @@ index d9d56e2ad8df..9a56e8982062 100644
    {
      'action': [
        'src/build/cipd/clobber_cipd_root.py',
-@@ -2116,24 +1902,6 @@ hooks = [
+@@ -2106,24 +1892,6 @@ hooks = [
      'condition':
        'checkout_android'
    },
@@ -327,5 +327,5 @@ index d9d56e2ad8df..9a56e8982062 100644
      'action': [
        'python',
 -- 
-2.16.3
+2.19.1
 

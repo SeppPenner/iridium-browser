@@ -1,7 +1,7 @@
-From d698fa76aa2f6785eceb5a122aad5a33df1bab95 Mon Sep 17 00:00:00 2001
+From 9ea894bb63c67ff59015889e5baf698330ab618c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 13 Feb 2015 00:59:04 +0100
-Subject: [PATCH 33/59] updater: disable auto-update
+Subject: [PATCH 33/58] updater: disable auto-update
 
 As per http://www.chromium.org/administrators/turning-off-auto-updates ,
 the auto update function is decidedly disabled on Linux, i.e.
@@ -15,7 +15,7 @@ the case anyway, since we are based off Chromium, not Chrome.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/app_controller_mac.mm b/chrome/browser/app_controller_mac.mm
-index 17e452789c64..6fff70655eea 100644
+index 7602fe5a4e36..b2c10d4bf692 100644
 --- a/chrome/browser/app_controller_mac.mm
 +++ b/chrome/browser/app_controller_mac.mm
 @@ -690,7 +690,7 @@ static base::mac::ScopedObjCClassSwizzler* g_swizzle_imk_input_session;
@@ -28,5 +28,5 @@ index 17e452789c64..6fff70655eea 100644
      CFPreferencesSetAppValue(checkInterval, value, app);
      CFPreferencesAppSynchronize(app);
 -- 
-2.16.3
+2.19.1
 

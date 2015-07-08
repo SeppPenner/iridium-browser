@@ -1,7 +1,7 @@
-From d3b6d5ed975469c1b650d7d26253df35aeff3465 Mon Sep 17 00:00:00 2001
+From 26afb76bd970e08d5262b7b06c0af023307f9d61 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 30 Oct 2014 22:04:24 +0100
-Subject: [PATCH 25/59] prefs: disable translation service
+Subject: [PATCH 25/58] prefs: disable translation service
 
 When translation is enabled, the translation manager will request a
 list of supported languages from translate.googleapis.com.
@@ -26,5 +26,5 @@ index 2364c1ba2490..2d094f507cdd 100644
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
 -- 
-2.16.3
+2.19.1
 

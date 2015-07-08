@@ -1,7 +1,7 @@
-From d8b2d6eb927a0a42958467d174d4152aae78e6f0 Mon Sep 17 00:00:00 2001
+From 73c29754dce3b431cdb80e9da8ac6341f098f365 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 14/59] prefs: enable "Send a Do-Not-Track header"
+Subject: [PATCH 14/58] prefs: enable "Send a Do-Not-Track header"
 
 Set enable_do_not_track to true by default.
 
@@ -36,5 +36,5 @@ index ca2068de96cd..e27bd182542b 100644
  #if !defined(OS_CHROMEOS) && !defined(OS_ANDROID)
    registry->RegisterBooleanPref(prefs::kPrintPreviewUseSystemDefaultPrinter,
 -- 
-2.16.3
+2.19.1
 

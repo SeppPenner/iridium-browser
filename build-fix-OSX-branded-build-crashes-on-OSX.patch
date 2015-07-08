@@ -1,7 +1,7 @@
-From 50d536a89393f378adb516afe2afe5c36a2957a3 Mon Sep 17 00:00:00 2001
+From 71dd0ca895e0675d11cc7d0cdc2d1e469aab55ab Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 29/59] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 29/58] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -48,5 +48,5 @@ index f32ffad1a95b..59963e387079 100644
  #error Unknown branding
  #endif
 -- 
-2.16.3
+2.19.1
 

@@ -1,7 +1,7 @@
-From 558bb053c9da8759c3360b9cebb866dbf53c25f9 Mon Sep 17 00:00:00 2001
+From 2137e74c42ecf1b9e789f456254981f6858e5990 Mon Sep 17 00:00:00 2001
 From: Robert Nagy <robert@openbsd.org>
 Date: Sat, 1 Oct 2016 11:23:40 +0200
-Subject: [PATCH 54/59] first_run: barf if metrics_reporting is activated
+Subject: [PATCH 54/58] first_run: barf if metrics_reporting is activated
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -39,5 +39,5 @@ index 3af5f9792ef2..9637704fb769 100644
        g_browser_process->local_state(),
        is_opt_in ? metrics::EnableMetricsDefault::OPT_IN
 -- 
-2.16.3
+2.19.1
 

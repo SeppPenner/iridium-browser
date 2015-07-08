@@ -1,22 +1,22 @@
-From e70c161ab2a127b60ab1829c062b490326cb54d6 Mon Sep 17 00:00:00 2001
+From 39df6213e62b21a89a1cae50ba78b36ded253cfc Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 10 Dec 2014 12:44:49 +0100
-Subject: [PATCH 28/59] ui/translation: update strings to read "Iridium"
+Subject: [PATCH 28/58] ui/translation: update strings to read "Iridium"
  instead
 
 ---
- .../java/strings/android_chrome_strings.grd        |  32 +-
- chrome/app/chromium_strings.grd                    | 448 ++++++++++-----------
- chrome/app/generated_resources.grd                 |  12 +-
- chrome/app/google_chrome_strings.grd               |   8 +-
- chrome/app/settings_google_chrome_strings.grdp     |   8 +-
- chrome/browser/resources/chrome-logo-faded.png     | Bin 896 -> 1267 bytes
- components/components_chromium_strings.grd         |  18 +-
- .../app/strings/ios_google_chrome_strings.grd      |  26 +-
+ .../java/strings/android_chrome_strings.grd   |  32 +-
+ chrome/app/chromium_strings.grd               | 448 +++++++++---------
+ chrome/app/generated_resources.grd            |  12 +-
+ chrome/app/google_chrome_strings.grd          |   8 +-
+ .../app/settings_google_chrome_strings.grdp   |   8 +-
+ .../browser/resources/chrome-logo-faded.png   | Bin 896 -> 1267 bytes
+ components/components_chromium_strings.grd    |  18 +-
+ .../app/strings/ios_google_chrome_strings.grd |  26 +-
  8 files changed, 276 insertions(+), 276 deletions(-)
 
 diff --git a/chrome/android/java/strings/android_chrome_strings.grd b/chrome/android/java/strings/android_chrome_strings.grd
-index 59175be95738..f06e1163b593 100644
+index 65ea48fa2798..ebccd0004025 100644
 --- a/chrome/android/java/strings/android_chrome_strings.grd
 +++ b/chrome/android/java/strings/android_chrome_strings.grd
 @@ -283,10 +283,10 @@ CHAR-LIMIT guidelines:
@@ -116,7 +116,7 @@ index 59175be95738..f06e1163b593 100644
        </message>
        <message name="IDS_DATA_REDUCTION_PROMO_SNACKBAR_BUTTON" desc="Text to be displayed in the data reduction promo snackbar view button that takes the user to the data reduction settings page">
          View
-@@ -1239,7 +1239,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1242,7 +1242,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
  
        <!-- About Chrome preferences -->
        <message name="IDS_PREFS_ABOUT_CHROME" desc="Title for the About Chrome page. [CHAR-LIMIT=32]">
@@ -125,7 +125,7 @@ index 59175be95738..f06e1163b593 100644
        </message>
        <message name="IDS_LEGAL_INFORMATION_SUMMARY" desc="Summary for legal information" meaning="Android">
          Copyright <ph name="year">%1$d<ex>2014</ex></ph> Google Inc. All rights reserved.
-@@ -1254,7 +1254,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1257,7 +1257,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Operating system
        </message>
        <message name="IDS_DEPRECATION_WARNING" desc="Warning about Chrome updates no longer being supported">
@@ -134,7 +134,7 @@ index 59175be95738..f06e1163b593 100644
        </message>
  
        <!-- Account management UI strings. -->
-@@ -1268,7 +1268,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1271,7 +1271,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Syncing to <ph name="SYNC_ACCOUNT_USER_NAME">%1$s<ex>johndoe@gmail.com</ex></ph>
        </message>
        <message name="IDS_ACCOUNT_MANAGEMENT_SIGN_OUT" desc="Button text for signing out of Chrome">
@@ -1371,7 +1371,7 @@ index 069198e5313b..357d5459c752 100644
        </if>
      </messages>
 diff --git a/chrome/app/generated_resources.grd b/chrome/app/generated_resources.grd
-index bcabf55e8150..2b1d8277317d 100644
+index dbe788831033..946561e193a8 100644
 --- a/chrome/app/generated_resources.grd
 +++ b/chrome/app/generated_resources.grd
 @@ -277,7 +277,7 @@ are declared in build/common.gypi.
@@ -1399,7 +1399,7 @@ index bcabf55e8150..2b1d8277317d 100644
        </message>
        <message name="IDS_MD_HISTORY_MENU_PROMO" desc="Text body of a promotional tooltip that shows up the first time a user runs the Material Design History UI in narrow mode to help find 'Clear Browsing Data' and the side navigation.">
          You can clear your browsing data from this menu
-@@ -1967,10 +1967,10 @@ are declared in build/common.gypi.
+@@ -1964,10 +1964,10 @@ are declared in build/common.gypi.
            Quit
          </message>
          <message name="IDS_QUIT_WITH_APPS_EXPLANATION" desc="Text displayed in a notification explaining that Chrome will continue running in the background as long as there are Chrome Apps open.">
@@ -1412,7 +1412,7 @@ index bcabf55e8150..2b1d8277317d 100644
          </message>
          <message name="IDS_QUIT_WITH_APPS_SUPPRESSION_LABEL" desc="Button text to prevent a notification from showing in future.">
            Don't show this again
-@@ -10740,7 +10740,7 @@ For more information, visit our <ph name="BEGIN_LINK">&lt;a target="_blank" href
+@@ -10762,7 +10762,7 @@ For more information, visit our <ph name="BEGIN_LINK">&lt;a target="_blank" href
          The web browser by Google, for you
        </message>
        <message name="IDS_WELCOME_DESCRIPTION" desc="A message on the welcome page explaining the purpose of signing in.">
@@ -1608,7 +1608,7 @@ index cb8023831f5a..7e8bec0fbe4f 100644
      </messages>
    </release>
 diff --git a/ios/chrome/app/strings/ios_google_chrome_strings.grd b/ios/chrome/app/strings/ios_google_chrome_strings.grd
-index bffe7987ee27..64966edd0ea6 100644
+index 373659fe21dd..4961281a5cbe 100644
 --- a/ios/chrome/app/strings/ios_google_chrome_strings.grd
 +++ b/ios/chrome/app/strings/ios_google_chrome_strings.grd
 @@ -126,7 +126,7 @@ locale.  The strings in this file are specific to iOS.
@@ -1620,12 +1620,17 @@ index bffe7987ee27..64966edd0ea6 100644
        </message>
        <message name="IDS_IOS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
          Google Inc.
-@@ -135,32 +135,32 @@ locale.  The strings in this file are specific to iOS.
+@@ -135,7 +135,7 @@ locale.  The strings in this file are specific to iOS.
          Copyright <ph name="YEAR">$1</ph> Google Inc. All rights reserved.
        </message>
        <message name="IDS_IOS_ACCOUNT_CONSISTENCY_SETUP_TITLE" desc="Title of the screen where users select an account to use. [Length: 20em] [iOS only]">
 -        Sign in to Chrome
 +        Sign in to browser
+       </message>
+       <message name="IDS_IOS_ACCOUNT_UNIFIED_CONSENT_BETTER_BROWSER" desc="Description on the sign-in consent dialog to explain the benefit to sign-in. [Length: unlimited] [iOS only]" translateable="false">
+       Improve Chrome and its security by sending system and usage data to Google
+@@ -147,29 +147,29 @@ locale.  The strings in this file are specific to iOS.
+         Get Google smarts in Chrome
        </message>
        <message name="IDS_IOS_APP_RATING_PROMO_STRING" desc="Text displayed for the rate this app promo. [iOS only]">
 -        Enjoying Chrome? <ph name="BEGIN_LINK"><ex>BEGIN_LINK</ex>BEGIN_LINK</ph>Rate this app<ph name="END_LINK"><ex>END_LINK</ex>END_LINK</ph>
@@ -1661,7 +1666,7 @@ index bffe7987ee27..64966edd0ea6 100644
        </message>
        <message name="IDS_IOS_FIRSTRUN_TERMS_TITLE" desc="Title for the Terms of Service page shown to user on First Run. [Length: 30em]">
          Google Chrome Terms of Service
-@@ -169,16 +169,16 @@ locale.  The strings in this file are specific to iOS.
+@@ -178,16 +178,16 @@ locale.  The strings in this file are specific to iOS.
          Google Chrome Privacy Notice
        </message>
        <message name="IDS_IOS_FIRSTRUN_WELCOME_TO_CHROME" desc="Title on the Welcome to Chrome screen presented to the user on First Run. [iOS only]">
@@ -1683,5 +1688,5 @@ index bffe7987ee27..64966edd0ea6 100644
        <message name="IDS_IOS_MANAGED_DISCONNECT_DIALOG_INFO" desc="Message explaini ng that signing out of a managed account will clear all the Chrome data.[Length: 200em, may be line wrapped to multiple lines at run time.].">
          You are signing out of an account managed by <ph name="SIGNOUT_MANAGED_DOMAIN">$1<ex>google.com</ex></ph>. This will delete your Chrome data from this device, but your data will remain in your Google account.
 -- 
-2.16.3
+2.19.1
 

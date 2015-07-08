@@ -1,7 +1,7 @@
-From 1b95808479335ec6491688b64ea1f34e08904fea Mon Sep 17 00:00:00 2001
+From f7bad8a0ced9c845cf840693d4b29eb054dc823e Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 6 Jul 2015 18:18:03 +0200
-Subject: [PATCH 42/59] safe_browsing: support trk: prefix
+Subject: [PATCH 42/58] safe_browsing: support trk: prefix
 
 ---
  chrome/browser/safe_browsing/protocol_manager.cc | 8 +++++---
@@ -29,5 +29,5 @@ index 37e449c6cf18..a9a7271a60cd 100644
        next_url.append("https://");
      else
 -- 
-2.16.3
+2.19.1
 

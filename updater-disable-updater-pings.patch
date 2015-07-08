@@ -1,14 +1,14 @@
-From d05160236d466dc3d7dc53d2fcd3218c69c57fee Mon Sep 17 00:00:00 2001
+From dc8123311aee8f968e8ba2b36ac71467ebf5743a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 39/59] updater: disable updater pings
+Subject: [PATCH 39/58] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
 (trk:170, trk:171)
 ---
- components/component_updater/component_updater_url_constants.cc | 2 +-
- components/component_updater/configurator_impl.cc               | 6 ++++--
+ .../component_updater/component_updater_url_constants.cc    | 2 +-
+ components/component_updater/configurator_impl.cc           | 6 ++++--
  2 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/components/component_updater/component_updater_url_constants.cc b/components/component_updater/component_updater_url_constants.cc
@@ -64,5 +64,5 @@ index 43e9696ce49f..14dab0bf65bf 100644
  }
  
 -- 
-2.16.3
+2.19.1
 

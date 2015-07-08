@@ -1,7 +1,7 @@
-From 6eeef9c2ee50da6c6ee27aa1c1dc1e8636cb7940 Mon Sep 17 00:00:00 2001
+From 8cc03470fe4f09de884b01f830f02fca50b97a2e Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 29 Jan 2015 10:46:40 +0100
-Subject: [PATCH 10/59] mime_util: force text/x-suse-ymp to be downloaded
+Subject: [PATCH 10/58] mime_util: force text/x-suse-ymp to be downloaded
 
 YMP files (YaST One Click Install) are plaintext XML, but also not
 very interesting in themselves. Force them to be stored.
@@ -22,5 +22,5 @@ index f1667107f2ea..134e4dbc2641 100644
      "text/csv",
      "text/tab-separated-values",
 -- 
-2.16.3
+2.19.1
 

@@ -1,7 +1,7 @@
-From 002ee085f7b13f0e930de9e9f8766224a6b5131c Mon Sep 17 00:00:00 2001
+From 4463258cb5e209e1cf4bd5f1aa852a634f46ed6c Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 6 Jul 2015 17:17:20 +0200
-Subject: [PATCH 46/59] search: show blank tab for new tab page
+Subject: [PATCH 46/58] search: show blank tab for new tab page
 
 Avoid loading the search page everytime, just show a blank one instead.
 
@@ -23,5 +23,5 @@ index 05ca70f8d068..162fc7460ab5 100644
      if (profile->IsOffTheRecord())
        return NewTabURLDetails(GURL(), NEW_TAB_URL_INCOGNITO);
 -- 
-2.16.3
+2.19.1
 

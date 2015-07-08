@@ -1,7 +1,7 @@
-From 2787d0c9eedf70275e3cfe5c7c1f6942c14bd304 Mon Sep 17 00:00:00 2001
+From 14bf05cbb4ac29ca55225599f76c72f89c23b17b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 19 Oct 2014 14:49:10 +0200
-Subject: [PATCH 23/59] search_engines: add DuckDuckGo as selectable and
+Subject: [PATCH 23/58] search_engines: add DuckDuckGo as selectable and
  default search engine
 
 There is a lot of code pertaining to DefaultSearchEngine,
@@ -11,9 +11,9 @@ The default default's seem to default to index 0 in the
 "engines_default" (or language-specific engines_XX) array, so
 prepending &duckduckgo yields the desired result, for now at least.
 ---
- .../search_engines/prepopulated_engines.json       |  11 ++
- components/search_engines/search_engine_type.h     |   1 +
- .../template_url_prepopulate_data.cc               | 218 ++++++++++-----------
+ .../search_engines/prepopulated_engines.json  |  11 +
+ .../search_engines/search_engine_type.h       |   1 +
+ .../template_url_prepopulate_data.cc          | 218 +++++++++---------
  3 files changed, 121 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
@@ -713,5 +713,5 @@ index 0c686f6ebda2..d287c4f0d611 100644
      &yahoo, &yahoo_ar, &yahoo_at, &yahoo_au, &yahoo_br, &yahoo_ca, &yahoo_ch,
      &yahoo_cl, &yahoo_co, &yahoo_de, &yahoo_dk, &yahoo_es, &yahoo_fi, &yahoo_fr,
 -- 
-2.16.3
+2.19.1
 

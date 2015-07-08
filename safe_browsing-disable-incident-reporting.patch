@@ -1,17 +1,17 @@
-From d125e82b8b53a9f7869720132511e980e8a050c1 Mon Sep 17 00:00:00 2001
+From 06dddc10b54fc62153f71290aa9f8d4a5e07318c Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
-Subject: [PATCH 40/59] safe_browsing: disable incident reporting
+Subject: [PATCH 40/58] safe_browsing: disable incident reporting
 
 Disables the safebrowsing incident reporting where you could upload
 information about a blocked URL to Google (also added a trk prefix to
 the URL so we get notified if this happens again in the future).
 ---
- .../safe_browsing/incident_reporting/incident_report_uploader_impl.cc  | 2 +-
- .../safe_browsing/incident_reporting/incident_reporting_service.cc     | 3 +++
- chrome/browser/safe_browsing/safe_browsing_blocking_page.cc            | 3 +--
- chrome/browser/safe_browsing/safe_browsing_service.cc                  | 2 ++
- components/security_interstitials/core/safe_browsing_loud_error_ui.cc  | 1 +
+ .../incident_reporting/incident_report_uploader_impl.cc        | 2 +-
+ .../incident_reporting/incident_reporting_service.cc           | 3 +++
+ chrome/browser/safe_browsing/safe_browsing_blocking_page.cc    | 3 +--
+ chrome/browser/safe_browsing/safe_browsing_service.cc          | 2 ++
+ .../security_interstitials/core/safe_browsing_loud_error_ui.cc | 1 +
  5 files changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc b/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
@@ -88,5 +88,5 @@ index 4e40f5c59f93..44a06ed7874f 100644
  
  // Constants for the V4 phishing string upgrades.
 -- 
-2.16.3
+2.19.1
 

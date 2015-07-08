@@ -1,14 +1,14 @@
-From f33523af06857280644a14c29f64c61e35d0568a Mon Sep 17 00:00:00 2001
+From aabc7dfbb85697b3444d3fb4ebe3bb0f1f80eba5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 11:53:30 +0200
-Subject: [PATCH 47/59] Make default welcome page be blank
+Subject: [PATCH 47/58] Make default welcome page be blank
 
 Because replacing kChromeUIWelcomeURL with about:blank leads the
 browser to load some broken URL instead.
 ---
- chrome/browser/resources/welcome/welcome.html      |  42 ---
- .../browser/resources/welcome/welcome_win10.html   | 376 ---------------------
- 2 files changed, 418 deletions(-)
+ chrome/browser/resources/welcome/welcome.html |  42 --
+ .../resources/welcome/welcome_win10.html      | 367 ------------------
+ 2 files changed, 409 deletions(-)
 
 diff --git a/chrome/browser/resources/welcome/welcome.html b/chrome/browser/resources/welcome/welcome.html
 index b2b6c1135ec4..e69de29bb2d1 100644
@@ -58,10 +58,10 @@ index b2b6c1135ec4..e69de29bb2d1 100644
 -</body>
 -</html>
 diff --git a/chrome/browser/resources/welcome/welcome_win10.html b/chrome/browser/resources/welcome/welcome_win10.html
-index 84b8c28c5a05..e69de29bb2d1 100644
+index a70038748893..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/welcome_win10.html
 +++ b/chrome/browser/resources/welcome/welcome_win10.html
-@@ -1,376 +0,0 @@
+@@ -1,367 +0,0 @@
 -<!DOCTYPE html>
 -<html>
 -<head>
@@ -72,20 +72,15 @@ index 84b8c28c5a05..e69de29bb2d1 100644
 -
 -  <link rel="import" href="chrome://resources/cr_elements/icons.html">
 -  <link rel="import" href="chrome://resources/html/cr.html">
--  <link rel="import" href="chrome://resources/html/load_time_data.html">
--  <link rel="import" href="chrome://resources/html/util.html">
--
 -  <link rel="import" href="chrome://resources/html/action_link.html">
 -  <link rel="import" href="chrome://resources/html/action_link_css.html">
--
+-  <link rel="import" href="chrome://resources/html/util.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/iron-icon/iron-icon.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-button/paper-button.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-styles/color.html">
 -
 -  <link rel="stylesheet" href="chrome://resources/css/text_defaults_md.css">
 -  <link rel="stylesheet" href="/welcome_win10.css">
--
--  <script src="strings.js"></script>
 -
 -  <dom-module id="welcome-win10">
 -    <template>
@@ -98,10 +93,6 @@ index 84b8c28c5a05..e69de29bb2d1 100644
 -          opacity: 0;
 -          padding: 4em 1.5em 1.5em 1.5em;
 -          transition: opacity 300ms;
--        }
--
--        :host(.accelerated) {
--          --expandable-section-height: 26.375em;
 -        }
 -
 -        a {
@@ -347,7 +338,7 @@ index 84b8c28c5a05..e69de29bb2d1 100644
 -        }
 -      </style>
 -      <div class="header-logo" role="presentation"></div>
--      <div class="heading" role="heading" aria-level="1">$i18n{headerText}</div>
+-      <div class="heading">$i18n{headerText}</div>
 -      <div class="sections">
 -        <div class$="[[computeClasses(isCombined)]]">
 -          <template is="dom-if" if="[[isCombined]]">
@@ -439,5 +430,5 @@ index 84b8c28c5a05..e69de29bb2d1 100644
 -</body>
 -</html>
 -- 
-2.16.3
+2.19.1
 

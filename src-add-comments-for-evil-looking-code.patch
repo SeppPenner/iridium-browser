@@ -1,7 +1,7 @@
-From b1683ea8db04d04b35a7139a83c26ca3a765b8e0 Mon Sep 17 00:00:00 2001
+From f31f3d46039d116ddc0598a014a2c26b02b82fc0 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 6 May 2015 14:13:00 +0200
-Subject: [PATCH 36/59] src: add comments for evil-looking code
+Subject: [PATCH 36/58] src: add comments for evil-looking code
 
 A trk:193 alert would show whenever the Omnibar is set to use Google
 as search engine. When it does, it tries to find the most suitable TLD
@@ -10,14 +10,14 @@ for your request.
 Well, since we do not use Google as default search engine, this entry
 can be whitelisted, i.e. have no trk: prefix.
 ---
- components/google/core/browser/google_url_tracker.cc | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ components/google/core/browser/google_url_tracker.cc | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index 73037f72791b..e7436af5a658 100644
+index f5168671420f..ca5ac30b7677 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
-@@ -25,9 +25,19 @@
+@@ -25,10 +25,19 @@
  #include "net/url_request/url_request_status.h"
  
  
@@ -33,10 +33,11 @@ index 73037f72791b..e7436af5a658 100644
  const char GoogleURLTracker::kDefaultGoogleHomepage[] =
      "https://www.google.com/";
  const char GoogleURLTracker::kSearchDomainCheckURL[] =
-+/* trk:193 */
-     "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
+-    "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
++/* trk:193 */    "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
+ const base::Feature GoogleURLTracker::kNoSearchDomainCheck{
+     "NoSearchDomainCheck", base::FEATURE_DISABLED_BY_DEFAULT};
  
- GoogleURLTracker::GoogleURLTracker(
 -- 
-2.16.3
+2.19.1
 

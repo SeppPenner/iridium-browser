@@ -1,18 +1,18 @@
-From d5177f8b086478974d6684ecabb696cda2c1e2de Mon Sep 17 00:00:00 2001
+From 3bb04136d55706c72b5973bd46bf4f2d4bcb2595 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 43/59] safe_browsing: disable cookie transmission
+Subject: [PATCH 43/58] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
 
 References: https://github.com/iridium-browser/iridium-browser/issues/37
 ---
- chrome/browser/safe_browsing/client_side_detection_service.cc     | 4 ++--
- .../download_protection/check_client_download_request.cc          | 2 +-
- .../safe_browsing/download_protection/ppapi_download_request.cc   | 2 +-
- chrome/browser/safe_browsing/protocol_manager.cc                  | 8 ++++----
- components/safe_browsing/browser/threat_details_cache.cc          | 1 +
+ .../safe_browsing/client_side_detection_service.cc        | 4 ++--
+ .../download_protection/check_client_download_request.cc  | 2 +-
+ .../download_protection/ppapi_download_request.cc         | 2 +-
+ chrome/browser/safe_browsing/protocol_manager.cc          | 8 ++++----
+ components/safe_browsing/browser/threat_details_cache.cc  | 1 +
  5 files changed, 9 insertions(+), 8 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
@@ -116,5 +116,5 @@ index 5f9d575f413f..b807ad773550 100644
    current_load_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                                     traffic_annotation);
 -- 
-2.16.3
+2.19.1
 

@@ -1,7 +1,7 @@
-From e61b8ecb38f438304e5547ef00f8df7c4f25be40 Mon Sep 17 00:00:00 2001
+From ccd4914a33477f5b7dc6029984ff6da7ab485e3a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:43:55 +0200
-Subject: [PATCH 16/59] prefs: block third-party cookies by default
+Subject: [PATCH 16/58] prefs: block third-party cookies by default
 
 Reject extra cookies which are likely used for tracking and whatnot.
 There are very few websites which require this, and if you do visit
@@ -24,5 +24,5 @@ index 1c238600a832..2de89ac08f2f 100644
  }
  
 -- 
-2.16.3
+2.19.1
 

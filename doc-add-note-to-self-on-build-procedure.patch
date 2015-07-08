@@ -1,7 +1,7 @@
-From 8e5cd0b617c2adbaf0deaea53ea70cd39e623aed Mon Sep 17 00:00:00 2001
+From 82434774b9b2aa18e9702559b62e0f09423613a0 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 30 Nov 2017 15:56:12 +0100
-Subject: [PATCH 03/59] doc: add note to self on build procedure
+Subject: [PATCH 03/58] doc: add note to self on build procedure
 
 ---
  testbuild.txt | 16 ++++++++++++++++
@@ -31,5 +31,5 @@ index 000000000000..93edc05c5c1a
 +5.
 +ninja -C out/Release chrome chrome_sandbox chromedriver
 -- 
-2.16.3
+2.19.1
 
