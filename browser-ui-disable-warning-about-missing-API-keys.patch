@@ -1,7 +1,7 @@
-From b768dffdedd17c4bc27c25699a933401c6cd24da Mon Sep 17 00:00:00 2001
+From c860e806ca9165ed81c5b1093faf5b26c4433eae Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 9 Dec 2014 17:19:41 +0100
-Subject: [PATCH 16/62] browser-ui: disable warning about missing API keys
+Subject: [PATCH 15/61] browser-ui: disable warning about missing API keys
 
 We do not want to use the services anyway ;)
 ---

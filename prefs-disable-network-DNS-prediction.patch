@@ -1,7 +1,7 @@
-From e8334639c4a72db89acaefc9063ca138e137fa93 Mon Sep 17 00:00:00 2001
+From 22102f502d74a18a94492693c986d62e79c5b864 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:20:11 +0200
-Subject: [PATCH 22/62] prefs: disable network/DNS prediction
+Subject: [PATCH 21/61] prefs: disable network/DNS prediction
 
 Stop wasting my bandwidth (however little), and also don't tell others
 what I am about to visit.

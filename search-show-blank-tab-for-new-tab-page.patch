@@ -1,7 +1,7 @@
-From 397c35b1a626e9da6c8338018b41246aee3a2d2d Mon Sep 17 00:00:00 2001
+From 2e0bed894b3a6b0c634a46ffcc599c47e3db62fb Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 6 Jul 2015 17:17:20 +0200
-Subject: [PATCH 48/62] search: show blank tab for new tab page
+Subject: [PATCH 47/61] search: show blank tab for new tab page
 
 Avoid loading the search page everytime, just show a blank one instead.
 

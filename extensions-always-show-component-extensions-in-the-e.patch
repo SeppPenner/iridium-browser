@@ -1,7 +1,7 @@
-From b66568866b1b323c13a873baa5e42bea587b9ffa Mon Sep 17 00:00:00 2001
+From 1da8eefaaf36d74b590e99a538482d9e79023c22 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 25 Jun 2015 15:34:10 +0200
-Subject: [PATCH 51/62] extensions: always show component extensions in the ext
+Subject: [PATCH 50/61] extensions: always show component extensions in the ext
  list
 
 The attached patch makes sure that component extensions are always

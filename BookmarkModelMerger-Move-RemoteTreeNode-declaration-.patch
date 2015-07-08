@@ -1,7 +1,7 @@
-From 69c436d0b375aa7dae1e6a94144b6f304e249930 Mon Sep 17 00:00:00 2001
+From ad07f05415b74431cf6259433367a60106c3cfeb Mon Sep 17 00:00:00 2001
 From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
 Date: Mon, 16 Dec 2019 11:39:11 +0000
-Subject: [PATCH 10/62] BookmarkModelMerger: Move RemoteTreeNode declaration to
+Subject: [PATCH 09/61] BookmarkModelMerger: Move RemoteTreeNode declaration to
  header.
 
 [openSUSE chromium-80-gcc-incomplete-type.patch]

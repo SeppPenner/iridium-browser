@@ -1,7 +1,7 @@
-From 5313395589007fddaf0743203e1c6fe9d23c661c Mon Sep 17 00:00:00 2001
+From 495d70eb88d05fea90aa13f3a3a3262337c7c49c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 17:03:14 +0200
-Subject: [PATCH 02/62] build: select default toolchain
+Subject: [PATCH 02/61] build: select default toolchain
 
 (Patch used from openSUSE.)
 

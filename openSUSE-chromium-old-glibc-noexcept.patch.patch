@@ -1,7 +1,7 @@
-From d1c99612e589673b63e964ed801bb25d898661c7 Mon Sep 17 00:00:00 2001
+From ad297235d1f238cf0b32097757ea0b4fe53a6bb8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 16:22:53 +0100
-Subject: [PATCH 05/62] openSUSE chromium-old-glibc-noexcept.patch
+Subject: [PATCH 05/61] openSUSE chromium-old-glibc-noexcept.patch
 
 ---
  chrome/common/media_router/media_sink.cc                  | 4 ++--

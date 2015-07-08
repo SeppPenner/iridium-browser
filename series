@@ -3,7 +3,6 @@ build-select-default-toolchain.patch
 build-use-python3-to-run-landmines.patch
 doc-add-README.md-for-github.patch
 openSUSE-chromium-old-glibc-noexcept.patch.patch
-readme.patch
 openSUSE-chromium-79-gcc-alignas.patch.patch
 openSUSE-chromium-80-gcc-abstract.patch.patch
 openSUSE-chromium-80-gcc-blink.patch.patch

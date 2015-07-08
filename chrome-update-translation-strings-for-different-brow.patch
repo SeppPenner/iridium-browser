@@ -1,7 +1,7 @@
-From e5128432692865668b18d53825c84db5bbae7a00 Mon Sep 17 00:00:00 2001
+From 3581a2951d702eae7a2b5246fae8a9f73f995beb Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 7 Nov 2019 15:54:07 +0100
-Subject: [PATCH 61/62] chrome: update translation strings for different
+Subject: [PATCH 60/61] chrome: update translation strings for different
  browser name(s)
 
 ---

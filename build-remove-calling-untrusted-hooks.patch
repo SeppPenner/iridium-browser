@@ -1,7 +1,7 @@
-From 481da74a5972cff01d27da32a78a8e8ed3a86b9e Mon Sep 17 00:00:00 2001
+From c8b2459800da4754a5a881bee7299e7f540a097f Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/62] build: remove calling untrusted hooks
+Subject: [PATCH 01/61] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
@@ -10,7 +10,7 @@ sysroot.
  1 file changed, 4 insertions(+), 211 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index 44172423d091c..cbcb958e7bed8 100644
+index f072c759bb5b9..9f00b14aa6e2f 100644
 --- a/DEPS
 +++ b/DEPS
 @@ -76,7 +76,7 @@ vars = {

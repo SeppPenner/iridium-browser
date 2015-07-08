@@ -1,7 +1,7 @@
-From 6c917172a4fdea851df22931683e0724ac73405c Mon Sep 17 00:00:00 2001
+From 299ff381670d4bee518e5c9963ec4c5d5d219ac5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 18:28:46 +0200
-Subject: [PATCH 46/62] safe_browsing: disable reporting of safebrowsing
+Subject: [PATCH 45/61] safe_browsing: disable reporting of safebrowsing
  override
 
 Disables reporting of the safebrowsing override, i.e. the report sent

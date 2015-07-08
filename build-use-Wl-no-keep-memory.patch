@@ -1,7 +1,7 @@
-From a97e40f06101bf7ee500031ee4442d374269ce16 Mon Sep 17 00:00:00 2001
+From 60ff87f0034887f47be7a1732aaa82c862f7f1d8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 20 Dec 2015 11:12:00 +0100
-Subject: [PATCH 54/62] build: use -Wl,--no-keep-memory
+Subject: [PATCH 53/61] build: use -Wl,--no-keep-memory
 
 ---
  chrome/BUILD.gn        | 1 +

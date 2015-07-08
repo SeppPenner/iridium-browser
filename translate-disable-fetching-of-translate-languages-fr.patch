@@ -1,7 +1,7 @@
-From 8e46c64623fdbf69fe903f56d8959b72b02381bc Mon Sep 17 00:00:00 2001
+From e7468dd4d5b84a5813593e292431d97cb6870371 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Oct 2015 14:18:05 +0100
-Subject: [PATCH 53/62] translate: disable fetching of translate languages from
+Subject: [PATCH 52/61] translate: disable fetching of translate languages from
  server
 
 GH issue #18.

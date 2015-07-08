@@ -1,7 +1,7 @@
-From 6fc95003950ceb1d345fc2df0ef4bdc204f4ad6d Mon Sep 17 00:00:00 2001
+From d34799365e001d238bc37921e3051b9892b94a29 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 25 Jun 2015 15:51:59 +0200
-Subject: [PATCH 50/62] browser: disable profile auto-import on first run
+Subject: [PATCH 49/61] browser: disable profile auto-import on first run
 
 ---
  chrome/browser/chrome_browser_main.cc | 2 ++

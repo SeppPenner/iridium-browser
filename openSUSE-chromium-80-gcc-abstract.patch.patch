@@ -1,7 +1,7 @@
-From ee76336c5b9e05e88e5010f805f078171df75ee0 Mon Sep 17 00:00:00 2001
+From bafa08f7086abb3cc1f6504774b184b9819c3bc8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:15:07 +0100
-Subject: [PATCH 08/62] openSUSE chromium-80-gcc-abstract.patch
+Subject: [PATCH 07/61] openSUSE chromium-80-gcc-abstract.patch
 
 ---
  .../peerconnection/adapters/web_rtc_cross_thread_copier.h    | 5 +++--

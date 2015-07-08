@@ -1,7 +1,7 @@
-From 8d282a803ecd2254ca64ee2438241012f7a41adc Mon Sep 17 00:00:00 2001
+From 3e581b66ce07f75824ee225cd759962daca3c7a7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 18/62] autofill: disable autofill download manager
+Subject: [PATCH 17/61] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---

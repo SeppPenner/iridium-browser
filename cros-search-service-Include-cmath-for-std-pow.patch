@@ -1,7 +1,7 @@
-From 0bdadca990040a91f90af47bea04ae84ad7ded53 Mon Sep 17 00:00:00 2001
+From b3a2c69034b47d7bc561c91b07140aa142e00164 Mon Sep 17 00:00:00 2001
 From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
 Date: Tue, 10 Dec 2019 20:59:57 +0000
-Subject: [PATCH 12/62] [cros search service]: Include <cmath> for std::pow()
+Subject: [PATCH 11/61] [cros search service]: Include <cmath> for std::pow()
 
 [openSUSE chromium-80-include.patch]
 

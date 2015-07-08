@@ -1,7 +1,7 @@
-From 440b34ba9190aa5fdeafe25816fbf194ac29e11c Mon Sep 17 00:00:00 2001
+From f1dbb83562e46f3f614a15e6a05f6e1787570332 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
-Subject: [PATCH 14/62] dns: send IPv6 connectivity probes to RIPE DNS rather
+Subject: [PATCH 13/61] dns: send IPv6 connectivity probes to RIPE DNS rather
  than Google
 
 Short of disabling the code (we may do that in a subsequent patch

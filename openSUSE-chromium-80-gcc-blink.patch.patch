@@ -1,7 +1,7 @@
-From 7bd4de17bf31b72179893d7b8da26c61fc1c6033 Mon Sep 17 00:00:00 2001
+From 1805e16f4197cb55adcf02e7d6e20870a59ed119 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:15:28 +0100
-Subject: [PATCH 09/62] openSUSE chromium-80-gcc-blink.patch
+Subject: [PATCH 08/61] openSUSE chromium-80-gcc-blink.patch
 
 ---
  .../core/editing/commands/delete_selection_command.cc     | 8 ++++++--

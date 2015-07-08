@@ -1,7 +1,7 @@
-From 38bce1df8272d9e53028b04e850b205f7a878adf Mon Sep 17 00:00:00 2001
+From 493bae52c6782a34cf504ba89b335ad08453118d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 11:44:46 +0200
-Subject: [PATCH 60/62] prefs: disable signinallowed by default
+Subject: [PATCH 59/61] prefs: disable signinallowed by default
 
 ---
  .../signin/internal/identity_manager/primary_account_manager.cc | 2 +-

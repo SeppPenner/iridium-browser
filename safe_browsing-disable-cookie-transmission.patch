@@ -1,7 +1,7 @@
-From 947ec008d075db69a1d01a290853d2b0f872d6c8 Mon Sep 17 00:00:00 2001
+From 56274d02a73d5df36fd080f91db1e5d6e06c8dc8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 47/62] safe_browsing: disable cookie transmission
+Subject: [PATCH 46/61] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.

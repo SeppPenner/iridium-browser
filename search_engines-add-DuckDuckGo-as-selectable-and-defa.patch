@@ -1,7 +1,7 @@
-From bb2c05a4c14a1be737da518fe2e3aec8ad1d24df Mon Sep 17 00:00:00 2001
+From e8c04ef3757749eb0f178450d77bd82a0a453136 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 19 Oct 2014 14:49:10 +0200
-Subject: [PATCH 30/62] search_engines: add DuckDuckGo as selectable and
+Subject: [PATCH 29/61] search_engines: add DuckDuckGo as selectable and
  default search engine
 
 The default default's seem to default to index 0 in the

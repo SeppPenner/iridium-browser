@@ -1,7 +1,7 @@
-From 869c1d2891ac65e17a81f938f1cafcf6f96d4ba4 Mon Sep 17 00:00:00 2001
+From a7bcec1b5becf79ddc5a760c31f71e88b6b9e0f4 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:16:05 +0100
-Subject: [PATCH 11/62] openSUSE chromium-80-gcc-permissive.patch
+Subject: [PATCH 10/61] openSUSE chromium-80-gcc-permissive.patch
 
 ---
  media/base/media_log_properties_helper.h | 4 ++--

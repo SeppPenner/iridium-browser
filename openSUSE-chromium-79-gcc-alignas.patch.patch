@@ -1,7 +1,7 @@
-From f6a1577bd761e0e8aa257fe8acebf599b3b0e34a Mon Sep 17 00:00:00 2001
+From 8a4004f8029180bb4c9a4c7cfd97ae42debf7da9 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:14:48 +0100
-Subject: [PATCH 07/62] openSUSE chromium-79-gcc-alignas.patch
+Subject: [PATCH 06/61] openSUSE chromium-79-gcc-alignas.patch
 
 ---
  .../protobuf/src/google/protobuf/arena.h      |  2 +-

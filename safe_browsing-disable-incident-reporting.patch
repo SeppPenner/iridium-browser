@@ -1,7 +1,7 @@
-From 5beada2a635e1074135c92853ec0bc498bcc40d2 Mon Sep 17 00:00:00 2001
+From 2aa527cb27094cb95bcc868969ee96cd2e81ca4f Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
-Subject: [PATCH 45/62] safe_browsing: disable incident reporting
+Subject: [PATCH 44/61] safe_browsing: disable incident reporting
 
 Disables the safebrowsing incident reporting where you could upload
 information about a blocked URL to Google (also added a trk prefix to

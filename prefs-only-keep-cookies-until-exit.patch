@@ -1,7 +1,7 @@
-From 7cd53bc233386db69cbcfa17b8f5b0cdb05383cc Mon Sep 17 00:00:00 2001
+From 0e1d02156d0d4b3ecd1a0a20f224ec03774ecf86 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:25:47 +0200
-Subject: [PATCH 28/62] prefs: only keep cookies until exit
+Subject: [PATCH 27/61] prefs: only keep cookies until exit
 
 Out with all those tracking cookies!
 ---

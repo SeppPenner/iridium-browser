@@ -1,7 +1,7 @@
-From 2c3475895a767632b4952928e2c9c42ac6813657 Mon Sep 17 00:00:00 2001
+From d423b9a7803cf2c2e5214a05a873c041da2c5bce Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 09:37:51 +0200
-Subject: [PATCH 57/62] all: add trk: prefixes to possibly evil connections
+Subject: [PATCH 56/61] all: add trk: prefixes to possibly evil connections
 
 Prefix URLs to Google services with trk: so that whenever something
 tries to load them, the developer will be informed via printf and
