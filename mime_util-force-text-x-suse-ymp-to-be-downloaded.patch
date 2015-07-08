@@ -1,4 +1,4 @@
-From 81eee9a81ca53f9e6205b1cbce4b7a85a6afb0ef Mon Sep 17 00:00:00 2001
+From bb0b96bb83a7f2b0979ead7798dfa98742e07146 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 29 Jan 2015 10:46:40 +0100
 Subject: [PATCH 17/62] mime_util: force text/x-suse-ymp to be downloaded
@@ -10,7 +10,7 @@ very interesting in themselves. Force them to be stored.
  1 file changed, 1 insertion(+)
 
 diff --git a/third_party/blink/common/mime_util/mime_util.cc b/third_party/blink/common/mime_util/mime_util.cc
-index c36ddda950026..e11039f93704a 100644
+index cdc2e14eae00d..5f4c6f7d56c27 100644
 --- a/third_party/blink/common/mime_util/mime_util.cc
 +++ b/third_party/blink/common/mime_util/mime_util.cc
 @@ -75,6 +75,7 @@ static const char* const kUnsupportedTextTypes[] = {
@@ -22,5 +22,5 @@ index c36ddda950026..e11039f93704a 100644
      "text/csv",
      "text/tab-separated-values",
 -- 
-2.25.0
+2.25.1
 

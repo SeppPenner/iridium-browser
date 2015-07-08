@@ -1,4 +1,4 @@
-From d6fdfd9b240a2f97019f1b8201e473703cc521e9 Mon Sep 17 00:00:00 2001
+From 6a3a0cd27d75d5d8172e08b90a778649871925d0 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
 Subject: [PATCH 35/62] build: fix OSX branded build crashes on OSX
@@ -49,5 +49,5 @@ index dbfe0a800de4d..ac0225c49209e 100644
  #error Unknown branding
  #endif
 -- 
-2.25.0
+2.25.1
 

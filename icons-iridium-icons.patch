@@ -1,4 +1,4 @@
-From c815ae2ed4ea08646cd41cceb7b3bf0ab2dea1a1 Mon Sep 17 00:00:00 2001
+From 33fa168ce79b067aaf0580389727ec3245e60e96 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
 Subject: [PATCH 55/62] icons: iridium icons
@@ -2131,7 +2131,7 @@ index 0000000000000..45d8e586f93c3
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index a0289216e29e4..2b238c06ed6ea 100644
+index c48c0f22da36c..016277b01c7b5 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
 @@ -75,7 +75,7 @@ without changes to the corresponding grd file. -->
@@ -2144,5 +2144,5 @@ index a0289216e29e4..2b238c06ed6ea 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.25.0
+2.25.1
 

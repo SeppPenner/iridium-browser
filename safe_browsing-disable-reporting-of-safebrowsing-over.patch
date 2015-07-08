@@ -1,4 +1,4 @@
-From 8881489d27033e2202fb1166925e1664225b9902 Mon Sep 17 00:00:00 2001
+From 6c917172a4fdea851df22931683e0724ac73405c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 18:28:46 +0200
 Subject: [PATCH 46/62] safe_browsing: disable reporting of safebrowsing
@@ -68,5 +68,5 @@ index 3a25c63972d06..453cd94fa569e 100644
  
  void ClientSideDetectionService::HandlePhishingVerdict(
 -- 
-2.25.0
+2.25.1
 

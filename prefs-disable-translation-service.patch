@@ -1,4 +1,4 @@
-From 366856460b8132301ae91b4aa11ce1a9491e7c4b Mon Sep 17 00:00:00 2001
+From 689230c30ae1398d3d6ec6ced379c3ba1a789bf3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 30 Oct 2014 22:04:24 +0100
 Subject: [PATCH 32/62] prefs: disable translation service
@@ -26,5 +26,5 @@ index 7a39b6506cb12..b634cb7c05ee4 100644
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
 -- 
-2.25.0
+2.25.1
 

@@ -1,0 +1,28 @@
+From ee76336c5b9e05e88e5010f805f078171df75ee0 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 24 Feb 2020 18:15:07 +0100
+Subject: [PATCH 08/62] openSUSE chromium-80-gcc-abstract.patch
+
+---
+ .../peerconnection/adapters/web_rtc_cross_thread_copier.h    | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/third_party/blink/renderer/modules/peerconnection/adapters/web_rtc_cross_thread_copier.h b/third_party/blink/renderer/modules/peerconnection/adapters/web_rtc_cross_thread_copier.h
+index 54cb7d13bff38..0d6c40f0b4287 100644
+--- a/third_party/blink/renderer/modules/peerconnection/adapters/web_rtc_cross_thread_copier.h
++++ b/third_party/blink/renderer/modules/peerconnection/adapters/web_rtc_cross_thread_copier.h
+@@ -165,8 +165,9 @@ struct CrossThreadCopier<blink::MediaStreamVideoTrack>
+ };
+ 
+ template <>
+-struct CrossThreadCopier<webrtc::VideoTrackInterface>
+-    : public CrossThreadCopierPassThrough<webrtc::VideoTrackInterface> {
++struct CrossThreadCopier<rtc::scoped_refptr<webrtc::VideoTrackInterface>>
++    : public CrossThreadCopierPassThrough<
++          rtc::scoped_refptr<webrtc::VideoTrackInterface>> {
+   STATIC_ONLY(CrossThreadCopier);
+ };
+ 
+-- 
+2.25.1
+

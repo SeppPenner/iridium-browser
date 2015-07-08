@@ -1,4 +1,4 @@
-From e3791a70b7abbad61b202bb21cd05140d9e13dd2 Mon Sep 17 00:00:00 2001
+From 0298ba0815750862b3cc08f9369c3879e4768ac1 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 28 Oct 2014 18:45:19 +0100
 Subject: [PATCH 15/62] profile-resetter: do not tick send-settings by default
@@ -28,5 +28,5 @@ index fee0739a04ab8..c6581c384ceb0 100644
  GURL GetClientReportUrl(const std::string& report_url) {
    GURL url(report_url);
 -- 
-2.25.0
+2.25.1
 

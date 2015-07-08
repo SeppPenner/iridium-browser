@@ -1,4 +1,4 @@
-From 13d861179b3f1741f6df3b3e57b93268eb7d7b24 Mon Sep 17 00:00:00 2001
+From 8d282a803ecd2254ca64ee2438241012f7a41adc Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
 Subject: [PATCH 18/62] autofill: disable autofill download manager
@@ -10,10 +10,10 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index 47f0b71fd953c..19636d6a8b486 100644
+index b0a51bd3a7d25..87bac8960b7cd 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -96,7 +96,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
+@@ -97,7 +97,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
  };
  
  const char kDefaultAutofillServerURL[] =
@@ -23,10 +23,10 @@ index 47f0b71fd953c..19636d6a8b486 100644
  // The default number of days after which to reset the registry of autofill
  // events for which an upload has been sent.
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index a23e3c536e632..6f474e0b7c58c 100644
+index 04dd106095e67..58bf108ad0bab 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1507,11 +1507,13 @@ AutofillManager::AutofillManager(
+@@ -1522,11 +1522,13 @@ AutofillManager::AutofillManager(
                                      : std::make_unique<CreditCardAccessManager>(
                                            driver, client_, personal_data_,
                                            credit_card_form_event_logger_.get());
@@ -41,5 +41,5 @@ index a23e3c536e632..6f474e0b7c58c 100644
  }
  
 -- 
-2.25.0
+2.25.1
 

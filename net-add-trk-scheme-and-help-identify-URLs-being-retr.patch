@@ -1,4 +1,4 @@
-From 8bc1e51844d0c9af4316c413f11b9c822696e328 Mon Sep 17 00:00:00 2001
+From a49a0e24e9e8a37c993566af6bb1fb5fe0dce3df Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
 Subject: [PATCH 43/62] net: add "trk:" scheme and help identify URLs being
@@ -57,10 +57,10 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 16653e1529b61..53400be4926ee 100644
+index c38d03923119b..632e9c65eccd5 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -253,6 +253,8 @@ if (!is_android && !is_mac) {
+@@ -274,6 +274,8 @@ if (!is_android && !is_mac) {
        sources += [ "app/chrome_exe_main_aura.cc" ]
      }
  
@@ -69,7 +69,7 @@ index 16653e1529b61..53400be4926ee 100644
      if (is_linux) {
        sources += [
          "app/chrome_dll_resource.h",
-@@ -473,6 +475,7 @@ if (is_win) {
+@@ -498,6 +500,7 @@ if (is_win) {
          "//content/public/app:child",
          "//content/public/common:service_names",
          "//headless:headless_shell_child_lib",
@@ -148,7 +148,7 @@ index a76f2cc1230fe..9930cc6bc44c9 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme) ||
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index e1fd94026c293..a6b5171c34168 100644
+index ed922d78b0f99..482faa1e21ed1 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
 @@ -796,6 +796,11 @@ bool IsURLAllowedInIncognito(const GURL& url,
@@ -179,13 +179,13 @@ index 96d08a2b01bed..ca2a2bde4a49f 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index aeb127a573768..5f4b3085541d3 100644
+index 5c55e91768dc5..c73eb249b2147 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
-@@ -159,6 +159,7 @@ class InfoBarDelegate {
-     TAB_SHARING_INFOBAR_DELEGATE = 93,
+@@ -160,6 +160,7 @@ class InfoBarDelegate {
      SAFETY_TIP_INFOBAR_DELEGATE = 94,
      SMS_RECEIVER_INFOBAR_DELEGATE = 95,
+     KNOWN_INTERCEPTION_DISCLOSURE_INFOBAR_DELEGATE = 96,
 +    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
    };
  
@@ -257,10 +257,10 @@ index 13dadc21794b7..bc1cfd828e354 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index 770929b84a35c..9e2c5c7ea7a95 100644
+index a017be5153602..00e20eb64d184 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -526,6 +526,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -630,6 +630,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
    RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
    RegisterPseudoScheme(kGoogleChromeScheme);
@@ -468,7 +468,7 @@ index 0000000000000..3c58d22a44265
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index dabcd7afa65bf..09886a4a66cd3 100644
+index b82b412c18dfe..0f5ee940d600b 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
 @@ -46,6 +46,8 @@ using std::string;
@@ -480,7 +480,7 @@ index dabcd7afa65bf..09886a4a66cd3 100644
  namespace {
  
  // True once the first URLRequest was started.
-@@ -592,6 +594,10 @@ URLRequest::URLRequest(const GURL& url,
+@@ -579,6 +581,10 @@ URLRequest::URLRequest(const GURL& url,
    // Sanity check out environment.
    DCHECK(base::ThreadTaskRunnerHandle::IsSet());
  
@@ -492,10 +492,10 @@ index dabcd7afa65bf..09886a4a66cd3 100644
    net_log_.BeginEvent(NetLogEventType::REQUEST_ALIVE, [&] {
      return NetLogURLRequestConstructorParams(url, priority_,
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index afbd582da102d..88289dd4309df 100644
+index 672a5f93c06e6..3d0077c07668b 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -960,6 +960,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
+@@ -954,6 +954,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -505,10 +505,10 @@ index afbd582da102d..88289dd4309df 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index e311e15ef5b97..0e3e367deea27 100644
+index d3b774e16ed7b..70beef82aa90c 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -31702,6 +31702,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
+@@ -32378,6 +32378,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
    <int value="93" label="TAB_SHARING_INFOBAR_DELEGATE"/>
    <int value="94" label="SAFETY_TIP_INFOBAR_DELEGATE"/>
    <int value="95" label="SMS_RECEIVER_INFOBAR_DELEGATE"/>
@@ -517,10 +517,10 @@ index e311e15ef5b97..0e3e367deea27 100644
  
  <enum name="InfoBarResponse">
 diff --git a/url/gurl.cc b/url/gurl.cc
-index d2374df4f47aa..4150f4f9b524b 100644
+index fb06480ed6e54..dd4f641a4020f 100644
 --- a/url/gurl.cc
 +++ b/url/gurl.cc
-@@ -502,6 +502,41 @@ bool GURL::IsAboutUrl(base::StringPiece allowed_path) const {
+@@ -506,6 +506,41 @@ bool GURL::IsAboutUrl(base::StringPiece allowed_path) const {
    return false;
  }
  
@@ -563,10 +563,10 @@ index d2374df4f47aa..4150f4f9b524b 100644
    return out << url.possibly_invalid_spec();
  }
 diff --git a/url/gurl.h b/url/gurl.h
-index 9c680e08538d0..b355103a7d25d 100644
+index ad9f565586eb4..093852c1c3ecb 100644
 --- a/url/gurl.h
 +++ b/url/gurl.h
-@@ -434,6 +434,9 @@ class COMPONENT_EXPORT(URL) GURL {
+@@ -437,6 +437,9 @@ class COMPONENT_EXPORT(URL) GURL {
    // See base/trace_event/memory_usage_estimator.h for more info.
    size_t EstimateMemoryUsage() const;
  
@@ -576,7 +576,7 @@ index 9c680e08538d0..b355103a7d25d 100644
   private:
    // Variant of the string parsing constructor that allows the caller to elect
    // retain trailing whitespace, if any, on the passed URL spec, but only if
-@@ -482,6 +485,8 @@ class COMPONENT_EXPORT(URL) GURL {
+@@ -485,6 +488,8 @@ class COMPONENT_EXPORT(URL) GURL {
  // Stream operator so GURL can be used in assertion statements.
  COMPONENT_EXPORT(URL)
  std::ostream& operator<<(std::ostream& out, const GURL& url);
@@ -586,22 +586,22 @@ index 9c680e08538d0..b355103a7d25d 100644
  COMPONENT_EXPORT(URL) bool operator==(const GURL& x, const GURL& y);
  COMPONENT_EXPORT(URL) bool operator!=(const GURL& x, const GURL& y);
 diff --git a/url/url_constants.cc b/url/url_constants.cc
-index 3540240bbc6c7..ca72e1e4b00a1 100644
+index 69399e420045f..23b8312deb6af 100644
 --- a/url/url_constants.cc
 +++ b/url/url_constants.cc
-@@ -26,6 +26,7 @@ const char kHttpsScheme[] = "https";
- const char kJavaScriptScheme[] = "javascript";
- const char kMailToScheme[] = "mailto";
+@@ -28,6 +28,7 @@ const char kMailToScheme[] = "mailto";
+ // See also: https://www.iana.org/assignments/uri-schemes/prov/quic-transport
+ const char kQuicTransportScheme[] = "quic-transport";
  const char kTelScheme[] = "tel";
 +const char kTraceScheme[] = "trk";
  const char kWsScheme[] = "ws";
  const char kWssScheme[] = "wss";
  
 diff --git a/url/url_constants.h b/url/url_constants.h
-index d538e4dc023b9..2603453f4f410 100644
+index f5a33dd813571..202dd8d4e1a15 100644
 --- a/url/url_constants.h
 +++ b/url/url_constants.h
-@@ -34,6 +34,7 @@ COMPONENT_EXPORT(URL) extern const char kMailToScheme[];
+@@ -34,6 +34,7 @@ COMPONENT_EXPORT(URL) extern const char kQuicTransportScheme[];
  COMPONENT_EXPORT(URL) extern const char kTelScheme[];
  COMPONENT_EXPORT(URL) extern const char kWsScheme[];
  COMPONENT_EXPORT(URL) extern const char kWssScheme[];
@@ -610,5 +610,5 @@ index d538e4dc023b9..2603453f4f410 100644
  // Used to separate a standard scheme and the hostname: "://".
  COMPONENT_EXPORT(URL) extern const char kStandardSchemeSeparator[];
 -- 
-2.25.0
+2.25.1
 

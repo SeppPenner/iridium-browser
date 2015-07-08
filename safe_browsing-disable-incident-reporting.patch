@@ -1,4 +1,4 @@
-From acca1fbe478a77048c7c7ddd771ba2d02d131b82 Mon Sep 17 00:00:00 2001
+From 5beada2a635e1074135c92853ec0bc498bcc40d2 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
 Subject: [PATCH 45/62] safe_browsing: disable incident reporting
@@ -47,7 +47,7 @@ index 24915836b0139..cc663945dead2 100644
  
  IncidentReportingService::IncidentReportingService(
 diff --git a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-index 22ddc6743067a..bdf05c17901de 100644
+index 803806e980e7b..ebc4518649a22 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
 @@ -62,8 +62,7 @@ class SafeBrowsingBlockingPageFactoryImpl
@@ -61,10 +61,10 @@ index 22ddc6743067a..bdf05c17901de 100644
          prefs->GetBoolean(prefs::kSafeBrowsingProceedAnywayDisabled);
  
 diff --git a/chrome/browser/safe_browsing/safe_browsing_service.cc b/chrome/browser/safe_browsing/safe_browsing_service.cc
-index 9b6629db0cb58..174c82f1ef5dc 100644
+index 267cdfbacf367..da11f8bdb4b7c 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_service.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_service.cc
-@@ -232,7 +232,7 @@ SafeBrowsingUIManager* SafeBrowsingService::CreateUIManager() {
+@@ -229,7 +229,7 @@ SafeBrowsingUIManager* SafeBrowsingService::CreateUIManager() {
  }
  
  void SafeBrowsingService::RegisterAllDelayedAnalysis() {
@@ -86,5 +86,5 @@ index 49de2ab45edf7..dd76a85ec7bf7 100644
  
  // Constants for the V4 phishing string upgrades.
 -- 
-2.25.0
+2.25.1
 

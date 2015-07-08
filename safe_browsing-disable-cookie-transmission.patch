@@ -1,4 +1,4 @@
-From a1fc104a31a45ac26b9508a7caeb8113a9cb2f52 Mon Sep 17 00:00:00 2001
+From 947ec008d075db69a1d01a290853d2b0f872d6c8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
 Subject: [PATCH 47/62] safe_browsing: disable cookie transmission
@@ -11,8 +11,8 @@ References: https://github.com/iridium-browser/iridium-browser/issues/37
  chrome/browser/safe_browsing/client_side_detection_service.cc | 4 ++--
  .../download_protection/check_client_download_request_base.cc | 2 +-
  .../download_protection/ppapi_download_request.cc             | 2 +-
- components/safe_browsing/browser/threat_details_cache.cc      | 1 +
- 4 files changed, 5 insertions(+), 4 deletions(-)
+ components/safe_browsing/browser/threat_details_cache.cc      | 3 ++-
+ 4 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
 index 453cd94fa569e..7a95432d441ed 100644
@@ -37,10 +37,10 @@ index 453cd94fa569e..7a95432d441ed 100644
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-index e099bfcfa3000..96d6cb24d51cd 100644
+index fb08a8bf427c8..b57fde4d249f1 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-@@ -610,7 +610,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
+@@ -625,7 +625,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -63,17 +63,19 @@ index 8076255e6e13e..084ad715ae86e 100644
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/components/safe_browsing/browser/threat_details_cache.cc b/components/safe_browsing/browser/threat_details_cache.cc
-index 0abc641a88f9e..a3042f29d5bb8 100644
+index 9314114913f13..645f707a4b3f7 100644
 --- a/components/safe_browsing/browser/threat_details_cache.cc
 +++ b/components/safe_browsing/browser/threat_details_cache.cc
-@@ -113,6 +113,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
-   // Only from cache, and don't save cookies.
-   resource_request->load_flags = net::LOAD_ONLY_FROM_CACHE |
-                                  net::LOAD_SKIP_CACHE_VALIDATION |
-+                                 net::LOAD_DO_NOT_SEND_COOKIES |
-                                  net::LOAD_DO_NOT_SAVE_COOKIES;
+@@ -112,7 +112,8 @@ void ThreatDetailsCacheCollector::OpenEntry() {
+   resource_request->url = GURL(resources_it_->first);
+   // Only from cache, and don't use cookies.
+   resource_request->load_flags =
+-      net::LOAD_ONLY_FROM_CACHE | net::LOAD_SKIP_CACHE_VALIDATION;
++      net::LOAD_ONLY_FROM_CACHE | net::LOAD_SKIP_CACHE_VALIDATION |
++      net::LOAD_DO_NOT_SEND_COOKIES | net::LOAD_DO_NOT_SAVE_COOKIES;
+   resource_request->credentials_mode = network::mojom::CredentialsMode::kOmit;
    current_load_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                                     traffic_annotation);
 -- 
-2.25.0
+2.25.1
 

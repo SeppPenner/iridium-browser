@@ -1,4 +1,4 @@
-From 5963d71a4c5060037610cb88fffdb25465370f61 Mon Sep 17 00:00:00 2001
+From 8e46c64623fdbf69fe903f56d8959b72b02381bc Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Oct 2015 14:18:05 +0100
 Subject: [PATCH 53/62] translate: disable fetching of translate languages from
@@ -30,5 +30,5 @@ index f2605b01846d3..05df7086c13e8 100644
  
  void TranslateLanguageList::SetResourceRequestsAllowed(bool allowed) {
 -- 
-2.25.0
+2.25.1
 

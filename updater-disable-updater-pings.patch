@@ -1,4 +1,4 @@
-From 73d76738ba8f27b691776e3cf2c687558e718ca0 Mon Sep 17 00:00:00 2001
+From b08c40e9e59677f10a2d3a17b79473ab2d93b989 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
 Subject: [PATCH 44/62] updater: disable updater pings
@@ -28,7 +28,7 @@ index 42bf2c4b96de5..d8d709482b5a2 100644
  
  }  // namespace component_updater
 diff --git a/components/component_updater/configurator_impl.cc b/components/component_updater/configurator_impl.cc
-index 81225e22d549a..4359ec0e406c4 100644
+index d809633f00778..12ac97d7498c3 100644
 --- a/components/component_updater/configurator_impl.cc
 +++ b/components/component_updater/configurator_impl.cc
 @@ -42,7 +42,7 @@ ConfiguratorImpl::ConfiguratorImpl(
@@ -49,5 +49,5 @@ index 81225e22d549a..4359ec0e406c4 100644
    std::vector<GURL> urls{GURL(kUpdaterJSONDefaultUrl),
                           GURL(kUpdaterJSONFallbackUrl)};
 -- 
-2.25.0
+2.25.1
 

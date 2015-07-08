@@ -21,6 +21,6 @@ rm -fv ./*.patch series
 git format-patch "$1..$2" || exit 1
 ls -1 *.patch | perl -lpe 's{^\d+-}{}' >series
 mmv "????-*.patch" "#5.patch"
-git add -A .
+git add .
 tagdate=$(git show -s --pretty="format:%ad" "$2" | tail -n1)
 GIT_AUTHOR_DATE="$tagdate" git commit -m "$2"

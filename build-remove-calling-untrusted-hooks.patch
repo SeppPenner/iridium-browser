@@ -1,4 +1,4 @@
-From 52f879e23b94576a2c54bc3329d406f8d545f154 Mon Sep 17 00:00:00 2001
+From 481da74a5972cff01d27da32a78a8e8ed3a86b9e Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
 Subject: [PATCH 01/62] build: remove calling untrusted hooks
@@ -6,14 +6,14 @@ Subject: [PATCH 01/62] build: remove calling untrusted hooks
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 204 ++---------------------------------------------------------
- 1 file changed, 4 insertions(+), 200 deletions(-)
+ DEPS | 215 ++---------------------------------------------------------
+ 1 file changed, 4 insertions(+), 211 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index dd9be412cc604..f0cef385cded4 100644
+index 44172423d091c..cbcb958e7bed8 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -75,7 +75,7 @@ vars = {
+@@ -76,7 +76,7 @@ vars = {
  
    # Check out and download nacl by default. This can be disabled e.g. with
    # custom_vars.
@@ -22,7 +22,7 @@ index dd9be412cc604..f0cef385cded4 100644
  
    # By default, do not check out src-internal. This can be overridden e.g. with
    # custom_vars.
-@@ -99,8 +99,8 @@ vars = {
+@@ -100,8 +100,8 @@ vars = {
    # support for other platforms may be added in the future.
    'checkout_openxr' : 'checkout_win',
  
@@ -33,7 +33,7 @@ index dd9be412cc604..f0cef385cded4 100644
  
    # By default, do not check out WebKit for iOS, as it is not needed unless
    # running against ToT WebKit rather than system WebKit. This can be overridden
-@@ -588,24 +588,6 @@ deps = {
+@@ -597,24 +597,6 @@ deps = {
    'src/net/third_party/quiche/src':
      Var('quiche_git') + '/quiche.git' + '@' +  Var('quiche_revision'),
  
@@ -58,7 +58,7 @@ index dd9be412cc604..f0cef385cded4 100644
    # SPIRV-Cross is in third_party/spirv-cross/spirv-cross instead of
    # third_party/spirv-cross/src  because its header files are at the root of
    # the repository and dependencies include them like so:
-@@ -3141,49 +3123,6 @@ hooks = [
+@@ -3401,49 +3383,6 @@ hooks = [
          'sync', '--extract',
      ],
    },
@@ -108,7 +108,7 @@ index dd9be412cc604..f0cef385cded4 100644
    {
      # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
      'name': 'ciopfs_linux',
-@@ -3211,43 +3150,6 @@ hooks = [
+@@ -3471,44 +3410,6 @@ hooks = [
      'condition': 'checkout_mac',
      'action': ['python', 'src/build/mac_toolchain.py'],
    },
@@ -147,12 +147,13 @@ index dd9be412cc604..f0cef385cded4 100644
 -    'name': 'clang_coverage',
 -    'pattern': '.',
 -    'condition': 'checkout_clang_coverage_tools',
--    'action': ['python', 'src/tools/code_coverage/update_clang_coverage_tools.py'],
+-    'action': ['python', 'src/tools/clang/scripts/update.py',
+-               '--package=coverage_tools'],
 -  },
    {
      # Mac doesn't use lld so it's not included in the default clang bundle
      # there.  lld is however needed in win and Fuchsia cross builds, so
-@@ -3307,18 +3209,6 @@ hooks = [
+@@ -3569,18 +3470,6 @@ hooks = [
                  '-s', 'src/buildtools/mac/clang-format.sha1',
      ],
    },
@@ -171,7 +172,7 @@ index dd9be412cc604..f0cef385cded4 100644
    # Pull rc binaries using checked-in hashes.
    {
      'name': 'rc_win',
-@@ -3344,29 +3234,6 @@ hooks = [
+@@ -3606,39 +3495,6 @@ hooks = [
                  '-s', 'src/build/toolchain/win/rc/mac/rc.sha1',
      ],
    },
@@ -198,10 +199,20 @@ index dd9be412cc604..f0cef385cded4 100644
 -                '-s', 'src/third_party/test_fonts/test_fonts.tar.gz.sha1',
 -    ],
 -  },
+-  # Download test resources for opus, i.e. audio files.
+-  {
+-    'name': 'opus_test_files',
+-    'pattern': '.',
+-    'action': ['download_from_google_storage',
+-               '--no_auth',
+-               '--quiet',
+-               '--bucket', 'chromium-webrtc-resources',
+-               '-d', 'src/third_party/opus/tests/resources'],
+-  },
    # Pull order files for the win/clang build.
    {
      'name': 'orderfiles_win',
-@@ -3411,57 +3278,8 @@ hooks = [
+@@ -3683,57 +3539,8 @@ hooks = [
                  'src/third_party/apache-win32',
      ],
    },
@@ -259,7 +270,7 @@ index dd9be412cc604..f0cef385cded4 100644
    {
      'name': 'node_mac',
      'pattern': '.',
-@@ -3555,20 +3373,6 @@ hooks = [
+@@ -3827,20 +3634,6 @@ hooks = [
      ],
    },
  
@@ -280,7 +291,7 @@ index dd9be412cc604..f0cef385cded4 100644
    # Pull down Android RenderTest goldens
    {
      'name': 'Fetch Android RenderTest goldens',
-@@ -3582,7 +3386,7 @@ hooks = [
+@@ -3854,7 +3647,7 @@ hooks = [
    {
      'name': 'Fetch Android AFDO profile',
      'pattern': '.',
@@ -290,5 +301,5 @@ index dd9be412cc604..f0cef385cded4 100644
                  'src/tools/download_cros_provided_profile.py',
                  '--newest_state=src/chrome/android/profiles/newest.txt',
 -- 
-2.25.0
+2.25.1
 

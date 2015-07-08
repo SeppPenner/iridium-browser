@@ -1,4 +1,4 @@
-From 3252a77b69f0c1b317dc428dc86bfd7467f862ec Mon Sep 17 00:00:00 2001
+From e8334639c4a72db89acaefc9063ca138e137fa93 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:20:11 +0200
 Subject: [PATCH 22/62] prefs: disable network/DNS prediction
@@ -36,5 +36,5 @@ index 2ae6a1093090d..7fc83de1aa0fa 100644
  
  enum class NetworkPredictionStatus {
 -- 
-2.25.0
+2.25.1
 

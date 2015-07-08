@@ -1,4 +1,4 @@
-From 3f3a8f28611a15ab735a4843ff46b3ef2421c735 Mon Sep 17 00:00:00 2001
+From 7fcc96842640304e7a13c7e4ebfa253fb4c25962 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:35:12 +0200
 Subject: [PATCH 19/62] prefs: disable "Use a web service to help resolve
@@ -14,10 +14,10 @@ Set alternate_error_pages to be disabled by default.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/navigation_correction_tab_observer.cc b/chrome/browser/ui/navigation_correction_tab_observer.cc
-index 945d1b5247023..3b73068266543 100644
+index 1b02879894061..f2aa068efdc3b 100644
 --- a/chrome/browser/ui/navigation_correction_tab_observer.cc
 +++ b/chrome/browser/ui/navigation_correction_tab_observer.cc
-@@ -43,7 +43,7 @@ NavigationCorrectionTabObserver::~NavigationCorrectionTabObserver() {}
+@@ -57,7 +57,7 @@ void NavigationCorrectionTabObserver::SetAllowEnableCorrectionsForTesting(
  // static
  void NavigationCorrectionTabObserver::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* prefs) {
@@ -27,5 +27,5 @@ index 945d1b5247023..3b73068266543 100644
  }
  
 -- 
-2.25.0
+2.25.1
 

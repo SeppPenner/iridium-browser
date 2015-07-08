@@ -1,0 +1,34 @@
+From 869c1d2891ac65e17a81f938f1cafcf6f96d4ba4 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 24 Feb 2020 18:16:05 +0100
+Subject: [PATCH 11/62] openSUSE chromium-80-gcc-permissive.patch
+
+---
+ media/base/media_log_properties_helper.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/media/base/media_log_properties_helper.h b/media/base/media_log_properties_helper.h
+index 95ff70a82be04..549b0037da716 100644
+--- a/media/base/media_log_properties_helper.h
++++ b/media/base/media_log_properties_helper.h
+@@ -83,7 +83,7 @@ struct MediaLogPropertyTypeConverter<std::vector<T>> {
+ 
+ // Specializer for sending AudioDecoderConfigs to the media tab in devtools.
+ template <>
+-struct internal::MediaLogPropertyTypeConverter<media::AudioDecoderConfig> {
++struct MediaLogPropertyTypeConverter<media::AudioDecoderConfig> {
+   static base::Value Convert(const AudioDecoderConfig& value) {
+     base::Value result(base::Value::Type::DICTIONARY);
+     result.SetStringKey("codec", GetCodecName(value.codec()));
+@@ -114,7 +114,7 @@ struct internal::MediaLogPropertyTypeConverter<media::AudioDecoderConfig> {
+ 
+ // Specializer for sending VideoDecoderConfigs to the media tab in devtools.
+ template <>
+-struct internal::MediaLogPropertyTypeConverter<VideoDecoderConfig> {
++struct MediaLogPropertyTypeConverter<VideoDecoderConfig> {
+   static base::Value Convert(const VideoDecoderConfig& value) {
+     base::Value result(base::Value::Type::DICTIONARY);
+     result.SetStringKey("codec", GetCodecName(value.codec()));
+-- 
+2.25.1
+

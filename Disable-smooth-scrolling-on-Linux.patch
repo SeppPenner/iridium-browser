@@ -1,4 +1,4 @@
-From 6399cc0ddf02f19d08cef18a88ecd77bc4b7eb56 Mon Sep 17 00:00:00 2001
+From 53205a09cf2e716626fb305d9c5f9664d5642076 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 16:11:53 +0200
 Subject: [PATCH 58/62] Disable smooth scrolling on Linux
@@ -16,10 +16,10 @@ setting.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/ui/gfx/animation/animation.cc b/ui/gfx/animation/animation.cc
-index 096ed517a0f74..86e0c27d9a03c 100644
+index 4295c88de6bcb..2154fabd8b7c3 100644
 --- a/ui/gfx/animation/animation.cc
 +++ b/ui/gfx/animation/animation.cc
-@@ -123,7 +123,7 @@ bool Animation::ShouldRenderRichAnimationImpl() {
+@@ -122,7 +122,7 @@ bool Animation::ShouldRenderRichAnimationImpl() {
  // static
  bool Animation::ScrollAnimationsEnabledBySystem() {
    // Defined in platform specific files for Windows and OSX.
@@ -29,5 +29,5 @@ index 096ed517a0f74..86e0c27d9a03c 100644
  
  #if !defined(OS_ANDROID)
 -- 
-2.25.0
+2.25.1
 

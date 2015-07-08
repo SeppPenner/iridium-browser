@@ -1,4 +1,4 @@
-From a3d8b65d9c70cc263e6003c1bfdc44bb7e53d616 Mon Sep 17 00:00:00 2001
+From 80006c46ed9b1fd9d71cf7562483210395713f78 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 2 Apr 2015 12:44:23 +0200
 Subject: [PATCH 41/62] Remove EV certificates
@@ -43,5 +43,5 @@ index 052161a349802..7d6ebf236d6cd 100644
  #endif  // defined(PLATFORM_USES_CHROMIUM_EV_METADATA)
  }  // namespace
 -- 
-2.25.0
+2.25.1
 

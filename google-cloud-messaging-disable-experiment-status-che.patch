@@ -1,4 +1,4 @@
-From 0fda88304f226ea6c30caf0f150136787282c443 Mon Sep 17 00:00:00 2001
+From 21de84d8ebc51921f69dd8a24e12c246e9b60a52 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 1 Jun 2015 17:14:34 +0200
 Subject: [PATCH 42/62] google-cloud-messaging: disable experiment status check
@@ -42,5 +42,5 @@ index 7ace8e78f3eb4..20a91778e2f98 100644
  
  void GCMChannelStatusRequest::OnSimpleLoaderComplete(
 -- 
-2.25.0
+2.25.1
 

@@ -1,4 +1,4 @@
-From 511f839e709c0d6cff0088c90ae54fca8700f2d6 Mon Sep 17 00:00:00 2001
+From 397c35b1a626e9da6c8338018b41246aee3a2d2d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 6 Jul 2015 17:17:20 +0200
 Subject: [PATCH 48/62] search: show blank tab for new tab page
@@ -23,5 +23,5 @@ index c3a68e4d757a1..e3b4158b4cc40 100644
      if (profile->IsOffTheRecord())
        return NewTabURLDetails(GURL(), NEW_TAB_URL_INCOGNITO);
 -- 
-2.25.0
+2.25.1
 

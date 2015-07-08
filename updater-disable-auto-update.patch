@@ -1,4 +1,4 @@
-From f4de392ff5230f5fedc743315898b253c0d014af Mon Sep 17 00:00:00 2001
+From 67a33101dd2b7264a737d3eac168f8080b9cc90c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 13 Feb 2015 00:59:04 +0100
 Subject: [PATCH 39/62] updater: disable auto-update
@@ -15,10 +15,10 @@ the case anyway, since we are based off Chromium, not Chrome.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/app_controller_mac.mm b/chrome/browser/app_controller_mac.mm
-index ad1691d959e29..3b31703515042 100644
+index 3a34c111bead6..cb2bccc388dca 100644
 --- a/chrome/browser/app_controller_mac.mm
 +++ b/chrome/browser/app_controller_mac.mm
-@@ -660,7 +660,7 @@ static base::mac::ScopedObjCClassSwizzler* g_swizzle_imk_input_session;
+@@ -661,7 +661,7 @@ static base::mac::ScopedObjCClassSwizzler* g_swizzle_imk_input_session;
    CFStringRef checkInterval = CFSTR("checkInterval");
    CFPropertyListRef plist = CFPreferencesCopyAppValue(checkInterval, app);
    if (!plist) {
@@ -28,5 +28,5 @@ index ad1691d959e29..3b31703515042 100644
      CFPreferencesSetAppValue(checkInterval, value, app);
      CFPreferencesAppSynchronize(app);
 -- 
-2.25.0
+2.25.1
 

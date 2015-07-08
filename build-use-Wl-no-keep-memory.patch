@@ -1,4 +1,4 @@
-From 8528d9d28c28cd151a5d5d67752eac7aa530b627 Mon Sep 17 00:00:00 2001
+From a97e40f06101bf7ee500031ee4442d374269ce16 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 20 Dec 2015 11:12:00 +0100
 Subject: [PATCH 54/62] build: use -Wl,--no-keep-memory
@@ -9,10 +9,10 @@ Subject: [PATCH 54/62] build: use -Wl,--no-keep-memory
  2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 53400be4926ee..1e0c9c569ba56 100644
+index 632e9c65eccd5..8211b3b127765 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -288,6 +288,7 @@ if (!is_android && !is_mac) {
+@@ -309,6 +309,7 @@ if (!is_android && !is_mac) {
        ]
  
        ldflags = []
@@ -34,5 +34,5 @@ index a94ec6d25ad56..bd62cf4d32db6 100644
  }
  
 -- 
-2.25.0
+2.25.1
 

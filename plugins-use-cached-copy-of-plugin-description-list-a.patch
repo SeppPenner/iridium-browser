@@ -1,4 +1,4 @@
-From 7ed56fe0aa00e83e1899ed31282a6835fafb4da4 Mon Sep 17 00:00:00 2001
+From d815ec09146f5771e0a831c22941f04451c60c62 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 2 Apr 2015 12:44:23 +0200
 Subject: [PATCH 40/62] plugins: use cached copy of plugin description list at
@@ -15,10 +15,10 @@ regular basis.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/plugins/plugins_resource_service.cc b/chrome/browser/plugins/plugins_resource_service.cc
-index 85003dd6cb04d..abb8b0b0cb5c4 100644
+index 1e063a0c1aab3..2cea285d0e72f 100644
 --- a/chrome/browser/plugins/plugins_resource_service.cc
 +++ b/chrome/browser/plugins/plugins_resource_service.cc
-@@ -55,7 +55,7 @@ const int kStartResourceFetchDelayMs = 60 * 1000;
+@@ -54,7 +54,7 @@ const int kStartResourceFetchDelayMs = 60 * 1000;
  const int kCacheUpdateDelayMs = 24 * 60 * 60 * 1000;
  
  const char kPluginsServerUrl[] =
@@ -28,5 +28,5 @@ index 85003dd6cb04d..abb8b0b0cb5c4 100644
  GURL GetPluginsServerURL() {
    std::string filename;
 -- 
-2.25.0
+2.25.1
 

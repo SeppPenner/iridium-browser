@@ -1,4 +1,4 @@
-From e7061425c9cf6a084fa2f911e34e065a6c779c3d Mon Sep 17 00:00:00 2001
+From a7c95ea8cfa508bb1d079b722e3b149e8439416e Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 13 Feb 2015 01:04:21 +0100
 Subject: [PATCH 29/62] prefs: always prompt for download directory by default
@@ -28,7 +28,7 @@ TLDR: Do not let files sneak onto the disk too easily.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/download/download_prefs.cc b/chrome/browser/download/download_prefs.cc
-index 207cce649db59..f7aa267e82c62 100644
+index c880e6ba17664..818450f7f84a4 100644
 --- a/chrome/browser/download/download_prefs.cc
 +++ b/chrome/browser/download/download_prefs.cc
 @@ -246,7 +246,7 @@ void DownloadPrefs::RegisterProfilePrefs(
@@ -41,5 +41,5 @@ index 207cce649db59..f7aa267e82c62 100644
    registry->RegisterStringPref(prefs::kDownloadExtensionsToOpen, std::string());
    registry->RegisterBooleanPref(prefs::kDownloadDirUpgraded, false);
 -- 
-2.25.0
+2.25.1
 

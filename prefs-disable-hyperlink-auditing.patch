@@ -1,4 +1,4 @@
-From b1c601ebce0cfb90fd70d78ed5128e3da436c730 Mon Sep 17 00:00:00 2001
+From badc301ec04335f7dba85809e8324e5f560fd371 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:03:17 +0200
 Subject: [PATCH 26/62] prefs: disable hyperlink auditing
@@ -15,10 +15,10 @@ https://html.spec.whatwg.org/multipage/semantics.html#hyperlink-auditing .
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/chrome_content_browser_client.cc b/chrome/browser/chrome_content_browser_client.cc
-index 04a864ebd3e3f..7efd2f0e59b7d 100644
+index 5cdfec3a834b6..d356e4f381ea3 100644
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
-@@ -1141,7 +1141,7 @@ void ChromeContentBrowserClient::RegisterLocalStatePrefs(
+@@ -1170,7 +1170,7 @@ void ChromeContentBrowserClient::RegisterLocalStatePrefs(
  void ChromeContentBrowserClient::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(prefs::kDisable3DAPIs, false);
@@ -28,5 +28,5 @@ index 04a864ebd3e3f..7efd2f0e59b7d 100644
    // Register user prefs for mapping SitePerProcess and IsolateOrigins in
    // user policy in addition to the same named ones in Local State (which are
 -- 
-2.25.0
+2.25.1
 

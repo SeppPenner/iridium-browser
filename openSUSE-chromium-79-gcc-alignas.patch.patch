@@ -1,9 +1,8 @@
-From f82ef58636369ce745c8b3ace3a7d70e640608db Mon Sep 17 00:00:00 2001
+From f6a1577bd761e0e8aa257fe8acebf599b3b0e34a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
-Date: Sat, 25 Jan 2020 14:24:04 +0100
-Subject: [PATCH 06/62] [openSUSE chromium-79-gcc-alignas.patch]
+Date: Mon, 24 Feb 2020 18:14:48 +0100
+Subject: [PATCH 07/62] openSUSE chromium-79-gcc-alignas.patch
 
-Re-use chromium alignas workaround in protobuf.
 ---
  .../protobuf/src/google/protobuf/arena.h      |  2 +-
  .../protobuf/src/google/protobuf/port_def.inc | 29 +++++++++++++++++++
@@ -76,5 +75,5 @@ index b7e67fe4a65f6..ba1fffc62cb15 100644
  
  
 -- 
-2.25.0
+2.25.1
 

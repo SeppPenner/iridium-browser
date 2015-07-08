@@ -1,4 +1,4 @@
-From 7cf689d6142b2c43f83388541242d17298ca8722 Mon Sep 17 00:00:00 2001
+From 35334c31974e5af869a4b37476a7a4d875636d93 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:43:55 +0200
 Subject: [PATCH 23/62] prefs: block third-party cookies by default
@@ -11,7 +11,7 @@ some, static exceptions can be defined.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/content_settings/core/browser/cookie_settings.cc b/components/content_settings/core/browser/cookie_settings.cc
-index a8119bc317f5d..3ff57d47744d2 100644
+index 84d150c6bb34e..63ff054a30703 100644
 --- a/components/content_settings/core/browser/cookie_settings.cc
 +++ b/components/content_settings/core/browser/cookie_settings.cc
 @@ -58,7 +58,7 @@ void CookieSettings::GetCookieSettings(
@@ -24,5 +24,5 @@ index a8119bc317f5d..3ff57d47744d2 100644
    registry->RegisterIntegerPref(
        prefs::kCookieControlsMode,
 -- 
-2.25.0
+2.25.1
 

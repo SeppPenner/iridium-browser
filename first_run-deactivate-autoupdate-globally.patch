@@ -1,4 +1,4 @@
-From d728e303c24f094a3ad867c7e98abecbc1595410 Mon Sep 17 00:00:00 2001
+From 8f70fa6ff3eeefda0aaa002514cd3990c1e2c735 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:12:43 +0200
 Subject: [PATCH 34/62] first_run: deactivate autoupdate globally
@@ -28,5 +28,5 @@ index fc7866e6386f1..3fc70d22bebb5 100644
    if (!extensions_enabled ||
        chromeos::ProfileHelper::IsLockScreenAppProfile(profile_)) {
 -- 
-2.25.0
+2.25.1
 

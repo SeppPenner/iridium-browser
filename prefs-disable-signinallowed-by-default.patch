@@ -1,4 +1,4 @@
-From aef2783f60a3e5cbc96b6621a2c4fd6389cf17fa Mon Sep 17 00:00:00 2001
+From 38bce1df8272d9e53028b04e850b205f7a878adf Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 11:44:46 +0200
 Subject: [PATCH 60/62] prefs: disable signinallowed by default
@@ -8,7 +8,7 @@ Subject: [PATCH 60/62] prefs: disable signinallowed by default
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/signin/internal/identity_manager/primary_account_manager.cc b/components/signin/internal/identity_manager/primary_account_manager.cc
-index b96c001854207..d6f698daf7bc9 100644
+index aebcdb1d75a1f..96bf00085f9cc 100644
 --- a/components/signin/internal/identity_manager/primary_account_manager.cc
 +++ b/components/signin/internal/identity_manager/primary_account_manager.cc
 @@ -56,7 +56,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
@@ -21,5 +21,5 @@ index b96c001854207..d6f698daf7bc9 100644
  }
  
 -- 
-2.25.0
+2.25.1
 

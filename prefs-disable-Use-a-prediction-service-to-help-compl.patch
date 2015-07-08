@@ -1,4 +1,4 @@
-From ff9b1edccb81c0ef2cb2687672ee90186d72c892 Mon Sep 17 00:00:00 2001
+From 85b70f6f795827b11ee87ec0d59e8da0d392ff32 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
 Subject: [PATCH 20/62] prefs: disable "Use a prediction service to help
@@ -16,7 +16,7 @@ Set suggest_enabled to false by default.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/profiles/profile.cc b/chrome/browser/profiles/profile.cc
-index 9e0d25bc3367f..a5392897a2ede 100644
+index 2b1140fdd27ec..abf009bf923ea 100644
 --- a/chrome/browser/profiles/profile.cc
 +++ b/chrome/browser/profiles/profile.cc
 @@ -149,7 +149,7 @@ const char Profile::kProfileKey[] = "__PROFILE__";
@@ -29,5 +29,5 @@ index 9e0d25bc3367f..a5392897a2ede 100644
  #if defined(OS_ANDROID)
    registry->RegisterStringPref(
 -- 
-2.25.0
+2.25.1
 

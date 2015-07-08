@@ -1,4 +1,4 @@
-From b60f662ff9e1e82574529f3f89621c04b5a90881 Mon Sep 17 00:00:00 2001
+From 2c3475895a767632b4952928e2c9c42ac6813657 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 09:37:51 +0200
 Subject: [PATCH 57/62] all: add trk: prefixes to possibly evil connections
@@ -15,13 +15,14 @@ by default.
  .../customization/customization_document.cc   |  2 +-
  .../file_manager/private_api_drive.cc         |  2 +-
  .../file_manager/private_api_misc.cc          |  2 +-
+ .../remote_commands/crd_host_delegate.cc      |  6 +++---
  .../cryptotoken_private_api.cc                |  4 ++--
  chrome/browser/extensions/install_signer.cc   |  2 +-
  .../media/webrtc/webrtc_event_log_uploader.cc |  2 +-
  .../media/webrtc/webrtc_log_uploader.cc       |  2 +-
  .../nacl_host/nacl_infobar_delegate.cc        |  2 +-
  .../profiles/profile_avatar_downloader.cc     |  2 +-
- .../chromevox/chromevox/background/prefs.js   |  4 ++--
+ .../chromevox/background/prefs.js             |  4 ++--
  .../default_apps/external_extensions.json     |  6 +++---
  .../client_side_detection_service.cc          |  4 ++--
  .../download_protection/download_feedback.cc  |  2 +-
@@ -64,11 +65,12 @@ by default.
  .../notifier/base/gaia_token_pre_xmpp_auth.cc |  2 +-
  remoting/base/breakpad_mac.mm                 |  2 +-
  remoting/protocol/jingle_messages.cc          |  2 +-
- remoting/webapp/base/js/xmpp_login_handler.js |  2 +-
- remoting/webapp/crd/manifest.json.jinja2      |  2 +-
  rlz/lib/lib_values.cc                         |  2 +-
+ third_party/libjingle_xmpp/xmpp/constants.cc  |  6 +++---
+ .../chromevox/background/prefs.js             |  4 ++--
+ .../chromevoxclassic/host/chrome/host.js      |  4 ++--
  ui/views/examples/webview_example.cc          |  2 +-
- 57 files changed, 88 insertions(+), 87 deletions(-)
+ 59 files changed, 96 insertions(+), 95 deletions(-)
 
 diff --git a/build/mac/tweak_info_plist.py b/build/mac/tweak_info_plist.py
 index bbf3332d35084..1faf1da872820 100755
@@ -84,10 +86,10 @@ index bbf3332d35084..1faf1da872820 100755
    _RemoveKeys(plist, 'KSChannelID')
    for tag_suffix in _TagSuffixes():
 diff --git a/chrome/browser/chromeos/customization/customization_document.cc b/chrome/browser/chromeos/customization/customization_document.cc
-index 6ab83d7f46a2c..36a5f0b750947 100644
+index cb8c9708477cf..2f7757a9e4a48 100644
 --- a/chrome/browser/chromeos/customization/customization_document.cc
 +++ b/chrome/browser/chromeos/customization/customization_document.cc
-@@ -175,7 +175,7 @@ std::string ReadFileInBackground(const base::FilePath& file) {
+@@ -172,7 +172,7 @@ std::string ReadFileInBackground(const base::FilePath& file) {
  
  // Template URL where to fetch OEM services customization manifest from.
  const char ServicesCustomizationDocument::kManifestUrl[] =
@@ -97,12 +99,12 @@ index 6ab83d7f46a2c..36a5f0b750947 100644
  // A custom extensions::ExternalLoader that the ServicesCustomizationDocument
  // creates and uses to publish OEM default apps to the extensions system.
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-index b25b3b3754ccc..5fac40b3487d4 100644
+index 13a0f88942cf8..69b6a8b591035 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-@@ -1053,7 +1053,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
+@@ -1042,7 +1042,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
        IdentityManagerFactory::GetForProfile(chrome_details.GetProfile());
-   const std::string& account_id = identity_manager->GetPrimaryAccountId();
+   const CoreAccountId& account_id = identity_manager->GetPrimaryAccountId();
    std::vector<std::string> scopes;
 -  scopes.emplace_back("https://www.googleapis.com/auth/drive.readonly");
 +  scopes.emplace_back("trk:208:https://www.googleapis.com/auth/drive.readonly");
@@ -110,10 +112,10 @@ index b25b3b3754ccc..5fac40b3487d4 100644
    scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory =
        content::BrowserContext::GetDefaultStoragePartition(
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-index c5863c0bb59f4..7b8634d7e2f88 100644
+index 28216bdcddfed..dd1e39dfba18e 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-@@ -84,7 +84,7 @@ namespace {
+@@ -82,7 +82,7 @@ namespace {
  
  using api::file_manager_private::ProfileInfo;
  
@@ -122,6 +124,25 @@ index c5863c0bb59f4..7b8634d7e2f88 100644
  
  // Thresholds for mountCrostini() API.
  constexpr base::TimeDelta kMountCrostiniSlowOperationThreshold =
+diff --git a/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc b/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
+index 1552d443fc8e4..626d1bb81d925 100644
+--- a/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
++++ b/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
+@@ -80,11 +80,11 @@ constexpr char kCRDConnectClientKey[] = "client";
+ 
+ // OAuth2 Token scopes
+ constexpr char kCloudDevicesOAuth2Scope[] =
+-    "https://www.googleapis.com/auth/clouddevices";
++    "trk:233:https://www.googleapis.com/auth/clouddevices";
+ constexpr char kChromotingRemoteSupportOAuth2Scope[] =
+-    "https://www.googleapis.com/auth/chromoting.remote.support";
++    "trk:234:https://www.googleapis.com/auth/chromoting.remote.support";
+ constexpr char kTachyonOAuth2Scope[] =
+-    "https://www.googleapis.com/auth/tachyon";
++    "trk:235:https://www.googleapis.com/auth/tachyon";
+ 
+ }  // namespace
+ 
 diff --git a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
 index 0a4dc66eb5e16..323b2cbc96e61 100644
 --- a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
@@ -151,10 +172,10 @@ index 2e165d23e42e4..4b5653c6532e7 100644
  const char kPublicKeyPEM[] =                                            \
      "-----BEGIN PUBLIC KEY-----"                                        \
 diff --git a/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc b/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-index 17f542efa7561..131ebd0b0807e 100644
+index b095a44da6c7e..eed96d5a717a5 100644
 --- a/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
 +++ b/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-@@ -122,7 +122,7 @@ void OnURLLoadUploadProgress(uint64_t current, uint64_t total) {
+@@ -123,7 +123,7 @@ void OnURLLoadUploadProgress(uint64_t current, uint64_t total) {
  }  // namespace
  
  const char WebRtcEventLogUploaderImpl::kUploadURL[] =
@@ -188,7 +209,7 @@ index 69da54d223889..0cb1638e109f4 100644
 +  return GURL("trk:143:https://support.google.com/chrome/?p=ib_nacl");
  }
 diff --git a/chrome/browser/profiles/profile_avatar_downloader.cc b/chrome/browser/profiles/profile_avatar_downloader.cc
-index 99e329e8ea49a..29e75209cb7bd 100644
+index dd3100a668f05..c57c35fccf824 100644
 --- a/chrome/browser/profiles/profile_avatar_downloader.cc
 +++ b/chrome/browser/profiles/profile_avatar_downloader.cc
 @@ -18,7 +18,7 @@
@@ -200,19 +221,19 @@ index 99e329e8ea49a..29e75209cb7bd 100644
  }
  
  ProfileAvatarDownloader::ProfileAvatarDownloader(
-diff --git a/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js b/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
-index b6e14ac96d838..55c566d2983a3 100644
---- a/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
-+++ b/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
-@@ -87,9 +87,9 @@ cvox.ChromeVoxPrefs.DEFAULT_PREFS = {
+diff --git a/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js b/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
+index 1f751aea63223..89ceb8787f780 100644
+--- a/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
++++ b/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
+@@ -86,9 +86,9 @@ ChromeVoxPrefs.DEFAULT_PREFS = {
    'position': '{}',
    'siteSpecificEnhancements': true,
    'siteSpecificScriptBase':
 -      'https://ssl.gstatic.com/accessibility/javascript/ext/',
-+      'trk:152:https://ssl.gstatic.com/accessibility/javascript/ext/',
++      'trk:240:https://ssl.gstatic.com/accessibility/javascript/ext/',
    'siteSpecificScriptLoader':
 -      'https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
-+      'trk:153:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
++      'trk:241:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
    'speakTextUnderMouse': false,
    'sticky': false,
    'typingEcho': 0,
@@ -269,10 +290,10 @@ index 7d8a7b060336f..1f52c824931ce 100644
  // static
  DownloadFeedbackFactory* DownloadFeedback::factory_ = nullptr;
 diff --git a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-index 78432896094af..24b005d7fdb89 100644
+index 8f1c8d5340169..af955eeaefaa2 100644
 --- a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
 +++ b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-@@ -264,7 +264,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
+@@ -256,7 +256,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
    DCHECK(!bdict_file.empty());
  
    static const char kDownloadServerUrl[] =
@@ -282,7 +303,7 @@ index 78432896094af..24b005d7fdb89 100644
    return GURL(std::string(kDownloadServerUrl) +
                base::ToLowerASCII(bdict_file));
 diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index 76a94c5a6ed73..85f2c3d43164e 100644
+index e778b70593612..d581b30562ea8 100644
 --- a/chrome/browser/supervised_user/supervised_user_service.cc
 +++ b/chrome/browser/supervised_user/supervised_user_service.cc
 @@ -81,7 +81,7 @@ namespace {
@@ -308,7 +329,7 @@ index 257f29ee3cffc..e2fbfcd3323c9 100644
  const char kCrashMultipartBoundary[] =
      "----**--yradnuoBgoLtrapitluMklaTelgooG--**----";
 diff --git a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
-index 73afcdcb6c855..c69d2a2a1a4f3 100644
+index 432c52e538f31..91cb27d040d3d 100644
 --- a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
 +++ b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
 @@ -34,7 +34,7 @@ namespace {
@@ -321,10 +342,10 @@ index 73afcdcb6c855..c69d2a2a1a4f3 100644
  
  // The maximum number of ignored bubble we track in the NumLaterPerReinstall
 diff --git a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-index 3614c8d97577f..70075ce9eea0e 100644
+index 95e3357a2274c..c83e00bb21ffc 100644
 --- a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 +++ b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-@@ -73,17 +73,17 @@ namespace {
+@@ -78,17 +78,17 @@ namespace {
  // The URL for the the Learn More page shown on incognito new tab.
  const char kLearnMoreIncognitoUrl[] =
  #if defined(OS_CHROMEOS)
@@ -389,11 +410,11 @@ index af915b06e311e..93559fa85f747 100644
  }
  
 diff --git a/chrome/updater/updater_constants.cc b/chrome/updater/updater_constants.cc
-index d726e793e14bc..8464f8175fff2 100644
+index 95f942dacd3ed..5eabd81f80a28 100644
 --- a/chrome/updater/updater_constants.cc
 +++ b/chrome/updater/updater_constants.cc
-@@ -20,7 +20,7 @@ const char kLoggingModuleSwitch[] = "vmodule";
- 
+@@ -26,7 +26,7 @@ const char kLoggingModuleSwitch[] = "vmodule";
+ // URLs.
  const char kUpdaterJSONDefaultUrl[] =
      "https://update.googleapis.com/service/update2/json";
 -const char kCrashUploadURL[] = "https://clients2.google.com/cr/report";
@@ -402,7 +423,7 @@ index d726e793e14bc..8464f8175fff2 100644
      "https://clients2.google.com/cr/staging_report";
  
 diff --git a/chromecast/browser/service/cast_service_simple.cc b/chromecast/browser/service/cast_service_simple.cc
-index 01da7d673b4c1..6aee60a8b0127 100644
+index 3f7ea0abc3d48..e3abf6c76a26c 100644
 --- a/chromecast/browser/service/cast_service_simple.cc
 +++ b/chromecast/browser/service/cast_service_simple.cc
 @@ -27,7 +27,7 @@ GURL GetStartupURL() {
@@ -428,7 +449,7 @@ index f0588fe5bdba5..8699cc5ec4974 100644
  const char kVirtualChannel[] = "virtual-channel";
  
 diff --git a/chromeos/geolocation/simple_geolocation_provider.cc b/chromeos/geolocation/simple_geolocation_provider.cc
-index 63f6b01cdcdc4..0e1e4b8ef06d1 100644
+index 015e62b43801b..e6f0a7fa070b1 100644
 --- a/chromeos/geolocation/simple_geolocation_provider.cc
 +++ b/chromeos/geolocation/simple_geolocation_provider.cc
 @@ -20,7 +20,7 @@ namespace chromeos {
@@ -470,7 +491,7 @@ index b08cc6f087812..e23589a652571 100644
  }
  
 diff --git a/components/crash/content/app/breakpad_linux.cc b/components/crash/content/app/breakpad_linux.cc
-index 7e561db0dd60f..4f45f2df54148 100644
+index 27683246750c4..be1e9e587624d 100644
 --- a/components/crash/content/app/breakpad_linux.cc
 +++ b/components/crash/content/app/breakpad_linux.cc
 @@ -103,7 +103,7 @@ namespace {
@@ -551,7 +572,7 @@ index 83443c5f1ec1a..327e9a85a5daf 100644
  constexpr char kProtoBufMimeType[] = "application/x-protobuf";
  
 diff --git a/components/gcm_driver/gcm_account_tracker.cc b/components/gcm_driver/gcm_account_tracker.cc
-index 98d6b7ccfa5b5..a65b07bc2e360 100644
+index bc7b5cbc41c2b..fe288908f406d 100644
 --- a/components/gcm_driver/gcm_account_tracker.cc
 +++ b/components/gcm_driver/gcm_account_tracker.cc
 @@ -26,9 +26,9 @@ namespace gcm {
@@ -614,10 +635,10 @@ index f60d33bfa1625..d768d60b81789 100644
  const char kNewMetricsServerUrlInsecure[] =
      "http://clientservices.googleapis.com/uma/v2";
 diff --git a/components/password_manager/core/browser/password_store.cc b/components/password_manager/core/browser/password_store.cc
-index 023246221d3d1..c40bc72862abe 100644
+index 3c7edacb371cb..a4bbf57319510 100644
 --- a/components/password_manager/core/browser/password_store.cc
 +++ b/components/password_manager/core/browser/password_store.cc
-@@ -230,10 +230,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
+@@ -239,10 +239,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
    // TODO(mdm): actually delete them at some point, say M24 or so.
    base::Time cutoff;  // the null time
    if (form.scheme == PasswordForm::Scheme::kHtml &&
@@ -736,10 +757,10 @@ index e55a430e58190..9e96ce3668df1 100644
  const char kUpstreamUrl[] = "/up?";
  
 diff --git a/content/browser/webauth/authenticator_common.cc b/content/browser/webauth/authenticator_common.cc
-index b90edc0c1296f..5763fb73ca4ed 100644
+index cea81abea6f80..114fa944d1694 100644
 --- a/content/browser/webauth/authenticator_common.cc
 +++ b/content/browser/webauth/authenticator_common.cc
-@@ -267,9 +267,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
+@@ -291,9 +291,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
    // special-case AppIDs. Firefox also does this:
    // https://groups.google.com/forum/#!msg/mozilla.dev.platform/Uiu3fwnA2xw/201ynAiPAQAJ
    const GURL kGstatic1 =
@@ -752,7 +773,7 @@ index b90edc0c1296f..5763fb73ca4ed 100644
  
    if (origin.DomainIs("google.com") && !appid_url.has_ref() &&
 diff --git a/content/shell/browser/shell_browser_main_parts.cc b/content/shell/browser/shell_browser_main_parts.cc
-index d6633e27da653..e5eb2af59e937 100644
+index e07782a1335a2..bb90a4fe40c15 100644
 --- a/content/shell/browser/shell_browser_main_parts.cc
 +++ b/content/shell/browser/shell_browser_main_parts.cc
 @@ -73,7 +73,7 @@ GURL GetStartupURL() {
@@ -880,32 +901,6 @@ index 9367bd0a50372..e803e0e71c20d 100644
  
  const char kWebrtcTransportNamespace[] = "google:remoting:webrtc";
  
-diff --git a/remoting/webapp/base/js/xmpp_login_handler.js b/remoting/webapp/base/js/xmpp_login_handler.js
-index b80e88c8f145e..267c83719bcc9 100644
---- a/remoting/webapp/base/js/xmpp_login_handler.js
-+++ b/remoting/webapp/base/js/xmpp_login_handler.js
-@@ -295,7 +295,7 @@ remoting.XmppLoginHandler.prototype.startAuthStream_ = function() {
-              'auth:allow-generated-jid="true" ' +
-              'auth:client-uses-full-bind-result="true" ' +
-              'auth:allow-non-google-login="true" ' +
--             'xmlns:auth="http://www.google.com/talk/protocol/auth">' +
-+             'xmlns:auth="trk:176:http://www.google.com/talk/protocol/auth">' +
-         cookie +
-       '</auth>');
- };
-diff --git a/remoting/webapp/crd/manifest.json.jinja2 b/remoting/webapp/crd/manifest.json.jinja2
-index fe97207b9b046..89c52cc529c5f 100644
---- a/remoting/webapp/crd/manifest.json.jinja2
-+++ b/remoting/webapp/crd/manifest.json.jinja2
-@@ -24,7 +24,7 @@
-     "client_id": "{{ REMOTING_IDENTITY_API_CLIENT_ID }}",
-     "scopes": [
-       {% if USE_GCD %}
--      "https://www.googleapis.com/auth/clouddevices",
-+      "trk:198:https://www.googleapis.com/auth/clouddevices",
-       {% endif %}
-       "https://www.googleapis.com/auth/chromoting",
-       "https://www.googleapis.com/auth/googletalk",
 diff --git a/rlz/lib/lib_values.cc b/rlz/lib/lib_values.cc
 index d9cfbbe1480a0..4c6cee0e30ef1 100644
 --- a/rlz/lib/lib_values.cc
@@ -919,6 +914,69 @@ index d9cfbbe1480a0..4c6cee0e30ef1 100644
  const int kFinancialPort = 443;
  
  // Ping times in 100-nanosecond intervals.
+diff --git a/third_party/libjingle_xmpp/xmpp/constants.cc b/third_party/libjingle_xmpp/xmpp/constants.cc
+index 1102746586d34..b19a5612ae5ce 100644
+--- a/third_party/libjingle_xmpp/xmpp/constants.cc
++++ b/third_party/libjingle_xmpp/xmpp/constants.cc
+@@ -194,7 +194,7 @@ const StaticQName QN_SASL_TEMPORARY_AUTH_FAILURE =
+ 
+ // These are non-standard.
+ const char NS_GOOGLE_AUTH_PROTOCOL[] =
+-    "http://www.google.com/talk/protocol/auth";
++    "trk:236:http://www.google.com/talk/protocol/auth";
+ const StaticQName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT =
+     { NS_GOOGLE_AUTH_PROTOCOL, "client-uses-full-bind-result" };
+ const StaticQName QN_GOOGLE_ALLOW_NON_GOOGLE_ID_XMPP_LOGIN =
+@@ -338,7 +338,7 @@ const char STR_SHOW_DND[] = "dnd";
+ const char STR_SHOW_XA[] = "xa";
+ const char STR_SHOW_OFFLINE[] = "offline";
+ 
+-const char NS_GOOGLE_PSTN_CONFERENCE[] = "http://www.google.com/pstn-conference";
++const char NS_GOOGLE_PSTN_CONFERENCE[] = "trk:237:http://www.google.com/pstn-conference";
+ const StaticQName QN_GOOGLE_PSTN_CONFERENCE_STATUS = { NS_GOOGLE_PSTN_CONFERENCE, "status" };
+ const StaticQName QN_ATTR_STATUS = { STR_EMPTY, "status" };
+ 
+@@ -433,7 +433,7 @@ const StaticQName QN_MUC_ROLE = { NS_MUC, "role" };
+ const char STR_AFFILIATION_NONE[] = "none";
+ const char STR_ROLE_PARTICIPANT[] = "participant";
+ 
+-const char NS_GOOGLE_SESSION[] = "http://www.google.com/session";
++const char NS_GOOGLE_SESSION[] = "trk:238:http://www.google.com/session";
+ const StaticQName QN_GOOGLE_CIRCLE_ID = { STR_EMPTY, "google-circle-id" };
+ const StaticQName QN_GOOGLE_USER_ID = { STR_EMPTY, "google-user-id" };
+ const StaticQName QN_GOOGLE_SESSION_BLOCKED = { NS_GOOGLE_SESSION, "blocked" };
+diff --git a/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js b/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
+index 0e07a87572fe7..8f211e4bcd3d7 100644
+--- a/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
++++ b/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
+@@ -72,9 +72,9 @@ cvox.ChromeVoxPrefs.DEFAULT_PREFS = {
+   'outputContextFirst': false,
+   'position': '{}',
+   'siteSpecificScriptBase':
+-      'https://ssl.gstatic.com/accessibility/javascript/ext/',
++      'trk:242:https://ssl.gstatic.com/accessibility/javascript/ext/',
+   'siteSpecificScriptLoader':
+-      'https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
++      'trk:243:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
+   'sticky': false,
+   'typingEcho': 0,
+   'useIBeamCursor': cvox.ChromeVox.isMac,
+diff --git a/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js b/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
+index 44ef19f8c5521..3affd32ce9052 100644
+--- a/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
++++ b/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
+@@ -96,9 +96,9 @@ cvox.ChromeHost.prototype.init = function() {
+           (!cvox.ApiImplementation.siteSpecificScriptLoader ||
+            !cvox.ApiImplementation.siteSpecificScriptBase);
+       cvox.ApiImplementation.siteSpecificScriptLoader =
+-          'https://ssl.gstatic.com/accessibility/javascript/ext/loader.js';
++          'trk:244:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js';
+       cvox.ApiImplementation.siteSpecificScriptBase =
+-          'https://ssl.gstatic.com/accessibility/javascript/ext/';
++          'trk:245:https://ssl.gstatic.com/accessibility/javascript/ext/';
+       if (apiPrefsChanged) {
+         var searchInit = prefs['siteSpecificEnhancements'] === 'true' ?
+             cvox.SearchLoader.init :
 diff --git a/ui/views/examples/webview_example.cc b/ui/views/examples/webview_example.cc
 index 86d4c9741b367..128a952d7191d 100644
 --- a/ui/views/examples/webview_example.cc
@@ -933,5 +991,5 @@ index 86d4c9741b367..128a952d7191d 100644
  }
  
 -- 
-2.25.0
+2.25.1
 

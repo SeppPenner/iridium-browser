@@ -1,0 +1,39 @@
+From 7bd4de17bf31b72179893d7b8da26c61fc1c6033 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 24 Feb 2020 18:15:28 +0100
+Subject: [PATCH 09/62] openSUSE chromium-80-gcc-blink.patch
+
+---
+ .../core/editing/commands/delete_selection_command.cc     | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc b/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
+index 9425c9c546ef3..b8cc2237f3dce 100644
+--- a/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
++++ b/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
+@@ -224,6 +224,10 @@ static Position TrailingWhitespacePosition(const Position& position,
+   return Position();
+ }
+ 
++static bool IsAHTMLTableRowElement(const Node* node) {
++  return IsA<HTMLTableRowElement>(node);
++}
++
+ void DeleteSelectionCommand::InitializePositionData(
+     EditingState* editing_state) {
+   DCHECK(!GetDocument().NeedsLayoutTreeUpdate());
+@@ -253,9 +257,9 @@ void DeleteSelectionCommand::InitializePositionData(
+   end_root_ = RootEditableElementOf(end);
+ 
+   start_table_row_ = To<HTMLTableRowElement>(
+-      EnclosingNodeOfType(start, &IsA<HTMLTableRowElement>));
++      EnclosingNodeOfType(start, &IsAHTMLTableRowElement));
+   end_table_row_ = To<HTMLTableRowElement>(
+-      EnclosingNodeOfType(end, &IsA<HTMLTableRowElement>));
++      EnclosingNodeOfType(end, &IsAHTMLTableRowElement));
+ 
+   // Don't move content out of a table cell.
+   // If the cell is non-editable, enclosingNodeOfType won't return it by
+-- 
+2.25.1
+

@@ -1,7 +1,7 @@
-From 1e1db52495c7ea3b41c465c1eaeb0d1190dde570 Mon Sep 17 00:00:00 2001
+From d1c99612e589673b63e964ed801bb25d898661c7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
-Date: Sat, 25 Jan 2020 10:40:49 +0100
-Subject: [PATCH 05/62] [openSUSE chromium-old-glibc-noexcept.patch]
+Date: Mon, 24 Feb 2020 16:22:53 +0100
+Subject: [PATCH 05/62] openSUSE chromium-old-glibc-noexcept.patch
 
 ---
  chrome/common/media_router/media_sink.cc                  | 4 ++--
@@ -59,7 +59,7 @@ index 7915c4ba7dda2..e92b3d02b42c8 100644
  // MostVisitedURL --------------------------------------------------------------
  
 diff --git a/components/history/core/browser/history_types.h b/components/history/core/browser/history_types.h
-index 3e57793db0d1d..aec5424908dfb 100644
+index 88dfac3a6a1d4..1481e7522b4ff 100644
 --- a/components/history/core/browser/history_types.h
 +++ b/components/history/core/browser/history_types.h
 @@ -141,7 +141,7 @@ class QueryResults {
@@ -150,7 +150,7 @@ index 05aae77a8a8d1..6af0072978d24 100644
  
  }  // namespace search_provider_logos
 diff --git a/components/signin/public/identity_manager/account_info.cc b/components/signin/public/identity_manager/account_info.cc
-index 0a61b7d74e490..e7c6688d88cba 100644
+index 17c2856cf73bc..38a775164cef9 100644
 --- a/components/signin/public/identity_manager/account_info.cc
 +++ b/components/signin/public/identity_manager/account_info.cc
 @@ -58,7 +58,7 @@ CoreAccountInfo::CoreAccountInfo(CoreAccountInfo&& other) noexcept = default;
@@ -172,33 +172,33 @@ index 0a61b7d74e490..e7c6688d88cba 100644
  bool AccountInfo::IsEmpty() const {
    return CoreAccountInfo::IsEmpty() && hosted_domain.empty() &&
 diff --git a/google_apis/gaia/core_account_id.cc b/google_apis/gaia/core_account_id.cc
-index 0fc8c416d236e..a4984db46c168 100644
+index deb367f7743d6..f1b57f31a3e03 100644
 --- a/google_apis/gaia/core_account_id.cc
 +++ b/google_apis/gaia/core_account_id.cc
-@@ -14,7 +14,7 @@ CoreAccountId::~CoreAccountId() = default;
+@@ -24,7 +24,7 @@ CoreAccountId::~CoreAccountId() = default;
  
  CoreAccountId& CoreAccountId::operator=(const CoreAccountId&) = default;
  
 -CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) noexcept = default;
 +CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) = default;
  
- CoreAccountId::CoreAccountId(const char* id) : id(id) {}
- 
+ // static
+ CoreAccountId CoreAccountId::FromGaiaId(const std::string& gaia_id) {
 diff --git a/google_apis/gaia/core_account_id.h b/google_apis/gaia/core_account_id.h
-index 055875433783d..3654b02cca1d5 100644
+index 4b4f9503b4218..03f43144cb48a 100644
 --- a/google_apis/gaia/core_account_id.h
 +++ b/google_apis/gaia/core_account_id.h
-@@ -20,7 +20,7 @@ struct CoreAccountId {
+@@ -30,7 +30,7 @@ struct CoreAccountId {
    ~CoreAccountId();
  
    CoreAccountId& operator=(const CoreAccountId&);
 -  CoreAccountId& operator=(CoreAccountId&&) noexcept;
 +  CoreAccountId& operator=(CoreAccountId&&);
  
-   // Those implicit constructor and conversion operator allow to
-   // progressively migrate the code to use this struct. Removing
+   // Checks if the account is valid or not.
+   bool empty() const;
 diff --git a/gpu/config/gpu_info.cc b/gpu/config/gpu_info.cc
-index 91cf6c1090ef7..c07fcbd298ed2 100644
+index da699bb06321d..31bc00655735b 100644
 --- a/gpu/config/gpu_info.cc
 +++ b/gpu/config/gpu_info.cc
 @@ -173,7 +173,7 @@ GPUInfo::GPUDevice& GPUInfo::GPUDevice::operator=(
@@ -211,5 +211,5 @@ index 91cf6c1090ef7..c07fcbd298ed2 100644
  GPUInfo::GPUInfo()
      : optimus(false),
 -- 
-2.25.0
+2.25.1
 

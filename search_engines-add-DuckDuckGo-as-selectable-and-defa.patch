@@ -1,4 +1,4 @@
-From 43f6f626c5cba8d94dacfeece798c1275eb6d724 Mon Sep 17 00:00:00 2001
+From bb2c05a4c14a1be737da518fe2e3aec8ad1d24df Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 19 Oct 2014 14:49:10 +0200
 Subject: [PATCH 30/62] search_engines: add DuckDuckGo as selectable and
@@ -12,7 +12,7 @@ prepending &duckduckgo yields the desired result, for now at least.
  1 file changed, 109 insertions(+), 62 deletions(-)
 
 diff --git a/components/search_engines/template_url_prepopulate_data.cc b/components/search_engines/template_url_prepopulate_data.cc
-index 52dd123a9294e..1ea1b002ce04e 100644
+index afd8d81a177bf..35e4135f3d203 100644
 --- a/components/search_engines/template_url_prepopulate_data.cc
 +++ b/components/search_engines/template_url_prepopulate_data.cc
 @@ -32,6 +32,7 @@ namespace {
@@ -206,7 +206,7 @@ index 52dd123a9294e..1ea1b002ce04e 100644
  const PrepopulatedEngine* const engines_CZ[] = {
 +    &duckduckgo,
      &google,
-     &seznam,
+     &seznam_cz,
      &bing,
 @@ -211,30 +222,31 @@ const PrepopulatedEngine* const engines_CZ[] = {
  
@@ -938,5 +938,5 @@ index 52dd123a9294e..1ea1b002ce04e 100644
      &bing,
      &yahoo,
 -- 
-2.25.0
+2.25.1
 

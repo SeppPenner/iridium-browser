@@ -1,4 +1,4 @@
-From a6f57a7d37546cc2bd4b7b36c9677a5ff154a158 Mon Sep 17 00:00:00 2001
+From 7c45c43c1267170cbaafb766c0ef1284c239fa50 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 08:45:52 +0200
 Subject: [PATCH 49/62] Make default welcome page be blank
@@ -37,5 +37,5 @@ index 88145e7cae916..e69de29bb2d1d 100644
 -  </body>
 -</html>
 -- 
-2.25.0
+2.25.1
 

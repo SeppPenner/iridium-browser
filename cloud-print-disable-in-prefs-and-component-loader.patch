@@ -1,4 +1,4 @@
-From 12101f13f80121e700d222091c82f7d0ff7d8a69 Mon Sep 17 00:00:00 2001
+From e0638559fb52cebc070bc840ad07b94a31464162 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
 Subject: [PATCH 24/62] cloud-print: disable in prefs and component loader
@@ -16,10 +16,10 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 76129e19fe3fc..baef43000ace3 100644
+index a881e3bead9c0..2cddaf5b761ef 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -445,9 +445,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
+@@ -448,9 +448,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
  #else  // defined(OS_CHROMEOS)
    DCHECK(!skip_session_components);
  #if BUILDFLAG(ENABLE_PRINTING)
@@ -45,7 +45,7 @@ index bfbcbb30d0bb7..7a39b6506cb12 100644
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
    registry->RegisterDictionaryPref(prefs::kAppWindowPlacement);
 diff --git a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-index 4b2a6a713f2aa..3002e439d17f4 100644
+index 0113cab1ba81b..4afdd457b7f6e 100644
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 +++ b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 @@ -107,10 +107,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(
@@ -60,5 +60,5 @@ index 4b2a6a713f2aa..3002e439d17f4 100644
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
 -- 
-2.25.0
+2.25.1
 

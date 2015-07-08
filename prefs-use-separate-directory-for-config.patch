@@ -1,4 +1,4 @@
-From b35e4289437f00920fbf83c21244a05ad7814ec6 Mon Sep 17 00:00:00 2001
+From 47329c38b8fe052901b04e8418a00d629d7aeb41 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 8 Nov 2014 21:40:49 +0100
 Subject: [PATCH 33/62] prefs: use separate directory for config
@@ -9,18 +9,18 @@ Do not overwrite an existing Chromium configuration.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/common/chrome_paths_linux.cc b/chrome/common/chrome_paths_linux.cc
-index b81cd35ffe4d1..037c8d6f6c0ca 100644
+index 42d355bed93d9..0f409a39a2f9b 100644
 --- a/chrome/common/chrome_paths_linux.cc
 +++ b/chrome/common/chrome_paths_linux.cc
 @@ -91,7 +91,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
  #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-   *result = config_dir.Append("google-chrome" + GetChannelSuffixForDataDir());
+   std::string data_dir_basename = "google-chrome";
  #else
--  *result = config_dir.Append("chromium");
-+  *result = config_dir.Append("iridium");
+-  std::string data_dir_basename = "chromium";
++  std::string data_dir_basename = "iridium";
  #endif
+   *result = config_dir.Append(data_dir_basename + GetChannelSuffixForDataDir());
    return true;
- }
 -- 
-2.25.0
+2.25.1
 
