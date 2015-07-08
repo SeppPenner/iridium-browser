@@ -1,7 +1,7 @@
-From c94d2c5276e5660725d4b170ea838265ac461776 Mon Sep 17 00:00:00 2001
+From 705b1d196a4639245b3ffce2c0808accbf009e30 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 58/58] common: set Iridium version and change User-Agent
+Subject: [PATCH 59/59] common: set Iridium version and change User-Agent
  accordingly
 
 Reduced version number:
@@ -15,27 +15,28 @@ really are still Chromium.
 Note to self:
 Update "Chromium/*" in UA string when updating chrome/version.
 ---
- chrome/VERSION                                              | 6 +++---
- components/version_info/version_info.cc                     | 2 +-
- components/version_info/version_info_values.h.version       | 2 +-
- content/common/user_agent.cc                                | 2 ++
- extensions/shell/common/version.h.in                        | 2 +-
- tools/metrics/histograms/extract_histograms.py              | 2 +-
- .../metrics/histograms/generate_expired_histograms_array.py | 4 ++--
- 7 files changed, 11 insertions(+), 9 deletions(-)
+ chrome/VERSION                                            | 8 ++++----
+ components/version_info/version_info.cc                   | 2 +-
+ components/version_info/version_info_values.h.version     | 2 +-
+ content/common/user_agent.cc                              | 2 ++
+ extensions/shell/common/version.h.in                      | 2 +-
+ tools/metrics/histograms/extract_histograms.py            | 2 +-
+ .../histograms/generate_expired_histograms_array.py       | 4 ++--
+ 7 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 0f9b9c831f2f..019b85e46951 100644
+index 4be16ad904c5..f6cd88c5260f 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=68
+-MAJOR=70
 -MINOR=0
--BUILD=3403
+-BUILD=3538
+-PATCH=77
 +MAJOR=2018
-+MINOR=4
-+BUILD=68
- PATCH=0
++MINOR=11
++BUILD=70
++PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
 index f378da9a6857..d30c8b6149a6 100644
 --- a/components/version_info/version_info.cc
@@ -63,15 +64,15 @@ index 6232e359ef20..3cf4fee096c0 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index b071e6ba90d6..36514757555e 100644
+index cf3b6df7b1a0..fb646392a39e 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -187,6 +187,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -188,6 +188,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/68.0.3403.0");
++	base::StringAppendF(&user_agent, " Chrome/70.0.0.0");
    return user_agent;
  }
  

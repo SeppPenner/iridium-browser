@@ -1,7 +1,7 @@
-From 73c29754dce3b431cdb80e9da8ac6341f098f365 Mon Sep 17 00:00:00 2001
+From a0d1a5b40b7d25a5b78a9beb3b445457825f84c7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 14/58] prefs: enable "Send a Do-Not-Track header"
+Subject: [PATCH 17/59] prefs: enable "Send a Do-Not-Track header"
 
 Set enable_do_not_track to true by default.
 
@@ -23,10 +23,10 @@ OPT-OUT.]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index ca2068de96cd..e27bd182542b 100644
+index a972e1fcca20..bef6315d763b 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -81,7 +81,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -78,7 +78,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterDictionaryPref(prefs::kAppWindowPlacement);
    registry->RegisterBooleanPref(
        prefs::kEnableDoNotTrack,

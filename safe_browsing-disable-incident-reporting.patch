@@ -1,7 +1,7 @@
-From 06dddc10b54fc62153f71290aa9f8d4a5e07318c Mon Sep 17 00:00:00 2001
+From 89e594fea08b2f12376b1819745d26b6eebaf0b4 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
-Subject: [PATCH 40/58] safe_browsing: disable incident reporting
+Subject: [PATCH 43/59] safe_browsing: disable incident reporting
 
 Disables the safebrowsing incident reporting where you could upload
 information about a blocked URL to Google (also added a trk prefix to
@@ -28,7 +28,7 @@ index 03167bae02d4..c0511a954ae8 100644
  constexpr net::NetworkTrafficAnnotationTag
      kSafeBrowsingIncidentTrafficAnnotation =
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
-index 57e1df9c63c3..dac0e7ad0ad4 100644
+index 7f6aaaa8cca7..bec94bbd9ec1 100644
 --- a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
 +++ b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
 @@ -310,11 +310,14 @@ IncidentReportingService::UploadContext::~UploadContext() {
@@ -47,10 +47,10 @@ index 57e1df9c63c3..dac0e7ad0ad4 100644
  
  IncidentReportingService::IncidentReportingService(
 diff --git a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-index aa5c4e491989..5e762b573f4b 100644
+index 9fd85ab8e8a1..0030123c4719 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-@@ -58,8 +58,7 @@ class SafeBrowsingBlockingPageFactoryImpl
+@@ -59,8 +59,7 @@ class SafeBrowsingBlockingPageFactoryImpl
      PrefService* prefs =
          Profile::FromBrowserContext(web_contents->GetBrowserContext())
              ->GetPrefs();
@@ -61,10 +61,10 @@ index aa5c4e491989..5e762b573f4b 100644
          prefs->GetBoolean(prefs::kSafeBrowsingProceedAnywayDisabled);
  
 diff --git a/chrome/browser/safe_browsing/safe_browsing_service.cc b/chrome/browser/safe_browsing/safe_browsing_service.cc
-index ffe274dedfdb..472487d73317 100644
+index 0bad81c63156..20d2bb37ec20 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_service.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_service.cc
-@@ -353,8 +353,10 @@ SafeBrowsingDatabaseManager* SafeBrowsingService::CreateDatabaseManager() {
+@@ -326,8 +326,10 @@ SafeBrowsingUIManager* SafeBrowsingService::CreateUIManager() {
  
  void SafeBrowsingService::RegisterAllDelayedAnalysis() {
  #if defined(FULL_SAFE_BROWSING)
@@ -74,9 +74,9 @@ index ffe274dedfdb..472487d73317 100644
 +#endif
  }
  
- SafeBrowsingProtocolConfig SafeBrowsingService::GetProtocolConfig() const {
+ V4ProtocolConfig SafeBrowsingService::GetV4ProtocolConfig() const {
 diff --git a/components/security_interstitials/core/safe_browsing_loud_error_ui.cc b/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
-index 4e40f5c59f93..44a06ed7874f 100644
+index 522fdb30ec9f..fdd99d8c16cf 100644
 --- a/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
 +++ b/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
 @@ -23,6 +23,7 @@ namespace {

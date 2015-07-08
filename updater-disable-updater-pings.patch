@@ -1,68 +1,61 @@
-From dc8123311aee8f968e8ba2b36ac71467ebf5743a Mon Sep 17 00:00:00 2001
+From 038f939aa8fd33da536dbfc8c86d2807c5ab81aa Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 39/58] updater: disable updater pings
+Subject: [PATCH 42/59] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
 (trk:170, trk:171)
 ---
- .../component_updater/component_updater_url_constants.cc    | 2 +-
+ .../component_updater/component_updater_url_constants.cc    | 4 ++--
  components/component_updater/configurator_impl.cc           | 6 ++++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ 2 files changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/components/component_updater/component_updater_url_constants.cc b/components/component_updater/component_updater_url_constants.cc
-index 754f83394e15..b3ea2e5233dc 100644
+index f797f7259e3c..7ea259c0d10c 100644
 --- a/components/component_updater/component_updater_url_constants.cc
 +++ b/components/component_updater/component_updater_url_constants.cc
-@@ -14,7 +14,7 @@ namespace component_updater {
- //
+@@ -15,9 +15,9 @@ namespace component_updater {
  // The value of |kDefaultUrlSource| can be overridden with
  // --component-updater=url-source=someurl.
--const char kUpdaterDefaultUrl[] = "https://clients2.google.com/service/update2";
-+const char kUpdaterDefaultUrl[] = "trk:171:https://clients2.google.com/service/update2";
+ const char kUpdaterDefaultUrl[] =
+-    "https://update.googleapis.com/service/update2";
++    "trk:171:https://update.googleapis.com/service/update2";
  
- const char kUpdaterFallbackUrl[] = "http://clients2.google.com/service/update2";
+ const char kUpdaterFallbackUrl[] =
+-    "http://update.googleapis.com/service/update2";
++    "trk:171:http://update.googleapis.com/service/update2";
  
+ }  // namespace component_updater
 diff --git a/components/component_updater/configurator_impl.cc b/components/component_updater/configurator_impl.cc
-index 43e9696ce49f..14dab0bf65bf 100644
+index 2a631301d4be..9f0b168d8001 100644
 --- a/components/component_updater/configurator_impl.cc
 +++ b/components/component_updater/configurator_impl.cc
-@@ -43,7 +43,9 @@ const char kSwitchRequestParam[] = "test-request";
- 
- // Disables pings. Pings are the requests sent to the update server that report
- // the success or the failure of component install or update attempts.
-+#if 0
- const char kSwitchDisablePings[] = "disable-pings";
-+#endif
- 
- // Sets the URL for updates.
- const char kSwitchUrlSource[] = "url-source";
-@@ -93,7 +95,6 @@ ConfiguratorImpl::ConfiguratorImpl(const base::CommandLine* cmdline,
-       cmdline->GetSwitchValueASCII(switches::kComponentUpdater), ",",
-       base::KEEP_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
-   fast_update_ = base::ContainsValue(switch_values, kSwitchFastUpdate);
--  pings_enabled_ = !base::ContainsValue(switch_values, kSwitchDisablePings);
-   deltas_enabled_ =
-       !base::ContainsValue(switch_values, kSwitchDisableDeltaUpdates);
- 
-@@ -140,6 +141,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
-     return urls;
+@@ -39,7 +39,7 @@ ConfiguratorImpl::ConfiguratorImpl(
+     : background_downloads_enabled_(config_policy.BackgroundDownloadsEnabled()),
+       deltas_enabled_(config_policy.DeltaUpdatesEnabled()),
+       fast_update_(config_policy.FastUpdate()),
+-      pings_enabled_(config_policy.PingsEnabled()),
++      pings_enabled_(false),
+       require_encryption_(require_encryption),
+       url_source_override_(config_policy.UrlSourceOverride()),
+       initial_delay_(config_policy.InitialDelay()) {
+@@ -71,12 +71,14 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
+   if (url_source_override_.is_valid()) {
+     return {GURL(url_source_override_)};
    }
- 
+-
++  return {};
 +#if 0
-   if (base::FeatureList::IsEnabled(kAlternateComponentUrls)) {
-     urls.push_back(GURL(kUpdaterDefaultUrlAlt));
-     urls.push_back(GURL(kUpdaterFallbackUrlAlt));
-@@ -150,7 +152,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
- 
+   std::vector<GURL> urls{GURL(kUpdaterDefaultUrl), GURL(kUpdaterFallbackUrl)};
    if (require_encryption_)
      update_client::RemoveUnsecureUrls(&urls);
--
-+#endif
+ 
    return urls;
++#endif
  }
  
+ std::vector<GURL> ConfiguratorImpl::PingUrl() const {
 -- 
 2.19.1
 

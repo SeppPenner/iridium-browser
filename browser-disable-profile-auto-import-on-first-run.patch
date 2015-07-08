@@ -1,25 +1,26 @@
-From d415b9f12df26d840e6e9bdb7835b0f9e3d6a59f Mon Sep 17 00:00:00 2001
+From 78b5d433b2848c1542aa976a634c17b27c48c41e Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Thu, 25 Jun 2015 15:51:59 +0200
-Subject: [PATCH 48/58] browser: disable profile auto-import on first run
+Subject: [PATCH 49/59] browser: disable profile auto-import on first run
 
 ---
- chrome/browser/chrome_browser_main.cc | 2 --
- 1 file changed, 2 deletions(-)
+ chrome/browser/chrome_browser_main.cc | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/chrome/browser/chrome_browser_main.cc b/chrome/browser/chrome_browser_main.cc
-index 376e24658ef6..bbea79b9aa3c 100644
+index a5d11d2d1ee9..99fb8ae16df7 100644
 --- a/chrome/browser/chrome_browser_main.cc
 +++ b/chrome/browser/chrome_browser_main.cc
-@@ -1820,8 +1820,6 @@ int ChromeBrowserMainParts::PreMainMessageLoopRunImpl() {
+@@ -1769,7 +1769,9 @@ int ChromeBrowserMainParts::PreMainMessageLoopRunImpl() {
    // and preferences have been registered since some of the import code depends
    // on preferences.
    if (first_run::IsChromeFirstRun()) {
--    first_run::AutoImport(profile_, master_prefs_->import_bookmarks_path);
--
-     // Note: this can pop the first run consent dialog on linux.
++#if 0
+     first_run::AutoImport(profile_, master_prefs_->import_bookmarks_path);
++#endif
+ 
+     // Note: This can pop-up the first run consent dialog on Linux & Mac.
      first_run::DoPostImportTasks(profile_,
-                                  master_prefs_->make_chrome_default_for_user);
 -- 
 2.19.1
 

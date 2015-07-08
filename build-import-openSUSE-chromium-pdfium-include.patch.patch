@@ -1,0 +1,24 @@
+From 1c2279fbd5f2c3eb2f4638b5cf7c80fec6bb87cc Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Tue, 30 Oct 2018 12:44:50 +0100
+Subject: [PATCH 07/59] build: import openSUSE chromium-pdfium-include.patch
+
+---
+ pdf/pdfium/pdfium_mem_buffer_file_write.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pdf/pdfium/pdfium_mem_buffer_file_write.h b/pdf/pdfium/pdfium_mem_buffer_file_write.h
+index 03c54bb63800..82e82d23684d 100644
+--- a/pdf/pdfium/pdfium_mem_buffer_file_write.h
++++ b/pdf/pdfium/pdfium_mem_buffer_file_write.h
+@@ -6,6 +6,7 @@
+ #define PDF_PDFIUM_PDFIUM_MEM_BUFFER_FILE_WRITE_H_
+ 
+ #include <stddef.h>
++#include <stdint.h>
+ 
+ #include <vector>
+ 
+-- 
+2.19.1
+

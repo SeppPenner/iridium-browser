@@ -1,7 +1,7 @@
-From d9b0f465276f7d6e3ef1e1cf5648f7565535da49 Mon Sep 17 00:00:00 2001
+From e01cc9102dd9a14d75dae539233e12dacc31cfe4 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 1 Jun 2015 17:14:34 +0200
-Subject: [PATCH 37/58] google-cloud-messaging: disable experiment status check
+Subject: [PATCH 40/59] google-cloud-messaging: disable experiment status check
 
 This avoids trk:263 from triggering.
 ---
@@ -9,10 +9,10 @@ This avoids trk:263 from triggering.
  1 file changed, 6 insertions(+)
 
 diff --git a/components/gcm_driver/gcm_channel_status_request.cc b/components/gcm_driver/gcm_channel_status_request.cc
-index 897244794308..415b1ab936d7 100644
+index 15d16e044163..38a2c0f4d21f 100644
 --- a/components/gcm_driver/gcm_channel_status_request.cc
 +++ b/components/gcm_driver/gcm_channel_status_request.cc
-@@ -23,8 +23,10 @@ namespace gcm {
+@@ -24,8 +24,10 @@ namespace gcm {
  
  namespace {
  
@@ -23,24 +23,24 @@ index 897244794308..415b1ab936d7 100644
  const int kDefaultPollIntervalSeconds = 60 * 60;  // 60 minutes.
  const int kMinPollIntervalSeconds = 30 * 60;  // 30 minutes.
  
-@@ -57,6 +59,7 @@ int GCMChannelStatusRequest::min_poll_interval_seconds() {
- }
+@@ -61,6 +63,7 @@ void GCMChannelStatusRequest::Start() {
+   if (!url_loader_factory_)
+     return;
  
- void GCMChannelStatusRequest::Start() {
 +#if 0
-   DCHECK(!url_fetcher_.get());
+   DCHECK(!simple_url_loader_);
  
    GURL request_url(channel_status_request_url_);
-@@ -112,6 +115,9 @@ void GCMChannelStatusRequest::Start() {
-   url_fetcher_->SetLoadFlags(net::LOAD_DO_NOT_SEND_COOKIES |
-                              net::LOAD_DO_NOT_SAVE_COOKIES);
-   url_fetcher_->Start();
+@@ -124,6 +127,9 @@ void GCMChannelStatusRequest::Start() {
+       url_loader_factory_.get(),
+       base::BindOnce(&GCMChannelStatusRequest::OnSimpleLoaderComplete,
+                      base::Unretained(this)));
 +#endif
 +  // Simulate an empty response and disable GCM.
 +  callback_.Run(false, false, 0);
  }
  
- void GCMChannelStatusRequest::OnURLFetchComplete(
+ void GCMChannelStatusRequest::OnSimpleLoaderComplete(
 -- 
 2.19.1
 

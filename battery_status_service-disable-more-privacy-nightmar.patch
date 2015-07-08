@@ -1,7 +1,7 @@
-From 2ac2744e909a715ff38f5a417f833aef8dc289d1 Mon Sep 17 00:00:00 2001
+From 54e65d576caee60da9787bc55cb3bbb5eb826631 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 4 Aug 2015 15:15:53 +0200
-Subject: [PATCH 50/58] battery_status_service: disable more privacy nightmares
+Subject: [PATCH 51/59] battery_status_service: disable more privacy nightmares
 
 The W3C Battery Status API[1] has quite a laughable statement:
 

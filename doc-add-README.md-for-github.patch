@@ -1,7 +1,7 @@
-From 5894a54c31276a60ef085540af23bf4c748c079a Mon Sep 17 00:00:00 2001
+From ecc7515745301f9c53b8e721766ae3872d32bcd0 Mon Sep 17 00:00:00 2001
 From: Simon Eisenmann <simon@struktur.de>
 Date: Mon, 4 May 2015 14:30:46 +0200
-Subject: [PATCH 57/58] doc: add README.md for github
+Subject: [PATCH 58/59] doc: add README.md for github
 
 ---
  README.md | 21 ++++++++++++++-------

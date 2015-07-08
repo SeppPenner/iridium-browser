@@ -1,0 +1,102 @@
+From 5d961caa5590b3865398a80da693f9ea139b7e10 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Fri, 19 Oct 2018 00:40:24 +0200
+Subject: [PATCH 04/59] build: import openSUSE chromium-gcc8-constexpr.patch
+
+---
+ .../ui/views/omnibox/omnibox_text_view.cc     |  3 +-
+ .../core/animation/animation_time_delta.cc    | 22 ++++++++++++++
+ .../core/animation/animation_time_delta.h     | 30 +++++++------------
+ 3 files changed, 34 insertions(+), 21 deletions(-)
+
+diff --git a/chrome/browser/ui/views/omnibox/omnibox_text_view.cc b/chrome/browser/ui/views/omnibox/omnibox_text_view.cc
+index f0a8083dc930..9021284f166d 100644
+--- a/chrome/browser/ui/views/omnibox/omnibox_text_view.cc
++++ b/chrome/browser/ui/views/omnibox/omnibox_text_view.cc
+@@ -175,7 +175,8 @@ void ApplyTextStyleForType(SuggestionAnswer::TextStyle text_style,
+       style = {part_color, .baseline = gfx::SUPERIOR};
+       break;
+     case SuggestionAnswer::TextStyle::BOLD:
+-      style = {part_color, .weight = gfx::Font::Weight::BOLD};
++      style = {part_color, .baseline = gfx::NORMAL_BASELINE,
++               .weight = gfx::Font::Weight::BOLD};
+       break;
+     case SuggestionAnswer::TextStyle::NORMAL:
+     case SuggestionAnswer::TextStyle::NORMAL_DIM:
+diff --git a/third_party/blink/renderer/core/animation/animation_time_delta.cc b/third_party/blink/renderer/core/animation/animation_time_delta.cc
+index 1b25469c7f2f..2e30a18890da 100644
+--- a/third_party/blink/renderer/core/animation/animation_time_delta.cc
++++ b/third_party/blink/renderer/core/animation/animation_time_delta.cc
+@@ -7,6 +7,28 @@
+ namespace blink {
+ 
+ #if !defined(BLINK_ANIMATION_USE_TIME_DELTA)
++// Comparison operators on AnimationTimeDelta.
++bool CORE_EXPORT operator==(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs) {
++  return lhs.InSecondsF() == rhs.InSecondsF();
++}
++bool CORE_EXPORT operator!=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs) {
++  return lhs.InSecondsF() != rhs.InSecondsF();
++}
++bool CORE_EXPORT operator>(const AnimationTimeDelta& lhs,
++                                     const AnimationTimeDelta& rhs) {
++  return lhs.InSecondsF() > rhs.InSecondsF();
++}
++bool CORE_EXPORT operator>=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs) {
++  return lhs.InSecondsF() >= rhs.InSecondsF();
++}
++bool CORE_EXPORT operator<=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs) {
++  return lhs.InSecondsF() <= rhs.InSecondsF();
++}
++
+ std::ostream& operator<<(std::ostream& os, AnimationTimeDelta time) {
+   return os << time.InSecondsF() << " s";
+ }
+diff --git a/third_party/blink/renderer/core/animation/animation_time_delta.h b/third_party/blink/renderer/core/animation/animation_time_delta.h
+index 1903c1150d3e..95d218466d90 100644
+--- a/third_party/blink/renderer/core/animation/animation_time_delta.h
++++ b/third_party/blink/renderer/core/animation/animation_time_delta.h
+@@ -90,26 +90,16 @@ AnimationTimeDelta operator*(T a, AnimationTimeDelta td) {
+ }
+ 
+ // Comparison operators on AnimationTimeDelta.
+-constexpr bool CORE_EXPORT operator==(const AnimationTimeDelta& lhs,
+-                                      const AnimationTimeDelta& rhs) {
+-  return lhs.InSecondsF() == rhs.InSecondsF();
+-}
+-constexpr bool CORE_EXPORT operator!=(const AnimationTimeDelta& lhs,
+-                                      const AnimationTimeDelta& rhs) {
+-  return lhs.InSecondsF() != rhs.InSecondsF();
+-}
+-constexpr bool CORE_EXPORT operator>(const AnimationTimeDelta& lhs,
+-                                     const AnimationTimeDelta& rhs) {
+-  return lhs.InSecondsF() > rhs.InSecondsF();
+-}
+-constexpr bool CORE_EXPORT operator>=(const AnimationTimeDelta& lhs,
+-                                      const AnimationTimeDelta& rhs) {
+-  return lhs.InSecondsF() >= rhs.InSecondsF();
+-}
+-constexpr bool CORE_EXPORT operator<=(const AnimationTimeDelta& lhs,
+-                                      const AnimationTimeDelta& rhs) {
+-  return lhs.InSecondsF() <= rhs.InSecondsF();
+-}
++bool CORE_EXPORT operator==(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs);
++bool CORE_EXPORT operator!=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs);
++bool CORE_EXPORT operator>(const AnimationTimeDelta& lhs,
++                                     const AnimationTimeDelta& rhs);
++bool CORE_EXPORT operator>=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs);
++bool CORE_EXPORT operator<=(const AnimationTimeDelta& lhs,
++                                      const AnimationTimeDelta& rhs);
+ 
+ // Defined to allow DCHECK_EQ/etc to work with the class.
+ CORE_EXPORT std::ostream& operator<<(std::ostream& os, AnimationTimeDelta time);
+-- 
+2.19.1
+

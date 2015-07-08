@@ -1,7 +1,7 @@
-From c839354a82d5503df9b472746a964d203aef7534 Mon Sep 17 00:00:00 2001
+From 194e63447fa341fb20c5b3bd2f7ecf1c9cc1a0b8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 26 Sep 2017 10:02:32 +0200
-Subject: [PATCH 05/58] build: import openSUSE
+Subject: [PATCH 06/59] build: import openSUSE
  fix_building_widevinecdm_with_chromium.patch
 
 ---

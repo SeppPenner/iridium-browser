@@ -1,7 +1,7 @@
-From da4df96942e05164e39a0cb2bb2b6052e490b68e Mon Sep 17 00:00:00 2001
+From 45d8d8a8f01f81fdf3422653c0bc5660df023fff Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 11/58] autofill: disable autofill download manager
+Subject: [PATCH 14/59] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -10,23 +10,23 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index 7b1be675a5a1..e8192a0e2e30 100644
+index 1903d2e6ea21..a18e3fbe2797 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -158,7 +158,7 @@ std::string RequestTypeToString(AutofillDownloadManager::RequestType type) {
- }
+@@ -73,7 +73,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
+ };
  
- GURL GetRequestUrl(AutofillDownloadManager::RequestType request_type) {
--  return GURL("https://clients1.google.com/tbproxy/af/" +
-+  return GURL("trk:158:https://clients1.google.com/tbproxy/af/" +
-               RequestTypeToString(request_type) + "?client=" + kClientName);
- }
+ const char kDefaultAutofillServerURL[] =
+-    "https://clients1.google.com/tbproxy/af/";
++    "trk:158:https://clients1.google.com/tbproxy/af/";
  
+ // Returns the base URL for the autofill server.
+ GURL GetAutofillServerURL() {
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index 6c89214c4ff7..ca4db482d4d0 100644
+index a83084e922b4..ebe95a78ff4c 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1262,9 +1262,11 @@ AutofillManager::AutofillManager(
+@@ -1150,9 +1150,11 @@ AutofillManager::AutofillManager(
        weak_ptr_factory_(this) {
    DCHECK(driver);
    DCHECK(client_);

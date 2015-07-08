@@ -1,7 +1,7 @@
-From 61f6f7ee4815a10d59b73082a21408d06cc42e97 Mon Sep 17 00:00:00 2001
+From aa5cca9e42821f5e4fb7f665d656b9c27b18f3ad Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 8 Nov 2014 21:40:49 +0100
-Subject: [PATCH 26/58] prefs: use separate directory for config
+Subject: [PATCH 29/59] prefs: use separate directory for config
 
 Do not overwrite an existing Chromium configuration.
 ---
@@ -9,7 +9,7 @@ Do not overwrite an existing Chromium configuration.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/common/chrome_paths_linux.cc b/chrome/common/chrome_paths_linux.cc
-index fc47bd3f1241..2efcd8c36409 100644
+index 5659ef5d6f97..9be81f76639f 100644
 --- a/chrome/common/chrome_paths_linux.cc
 +++ b/chrome/common/chrome_paths_linux.cc
 @@ -90,7 +90,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {

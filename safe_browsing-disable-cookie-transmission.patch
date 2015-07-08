@@ -1,25 +1,24 @@
-From 3bb04136d55706c72b5973bd46bf4f2d4bcb2595 Mon Sep 17 00:00:00 2001
+From ebb822e554ddf7766b825059edbf6f10c5c34d79 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 43/58] safe_browsing: disable cookie transmission
+Subject: [PATCH 45/59] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
 
 References: https://github.com/iridium-browser/iridium-browser/issues/37
 ---
- .../safe_browsing/client_side_detection_service.cc        | 4 ++--
- .../download_protection/check_client_download_request.cc  | 2 +-
- .../download_protection/ppapi_download_request.cc         | 2 +-
- chrome/browser/safe_browsing/protocol_manager.cc          | 8 ++++----
- components/safe_browsing/browser/threat_details_cache.cc  | 1 +
- 5 files changed, 9 insertions(+), 8 deletions(-)
+ chrome/browser/safe_browsing/client_side_detection_service.cc | 4 ++--
+ .../download_protection/check_client_download_request.cc      | 2 +-
+ .../download_protection/ppapi_download_request.cc             | 2 +-
+ components/safe_browsing/browser/threat_details_cache.cc      | 1 +
+ 4 files changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 2f1a055e4c4d..d2e55ff45b5d 100644
+index aa8b6d9f1f70..7293192fcdb0 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -348,7 +348,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -358,7 +358,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = GetClientReportUrl(kClientReportPhishingUrl);
    resource_request->method = "POST";
@@ -28,7 +27,7 @@ index 2f1a055e4c4d..d2e55ff45b5d 100644
    auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
-@@ -430,7 +430,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
+@@ -440,7 +440,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = GetClientReportUrl(kClientReportMalwareUrl);
    resource_request->method = "POST";
@@ -38,10 +37,10 @@ index 2f1a055e4c4d..d2e55ff45b5d 100644
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-index 49cef0dec182..20dac0b41a8d 100644
+index f5aaff83c87a..cfc195cd7d8b 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-@@ -1008,7 +1008,7 @@ void CheckClientDownloadRequest::SendRequest() {
+@@ -1075,7 +1075,7 @@ void CheckClientDownloadRequest::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -51,10 +50,10 @@ index 49cef0dec182..20dac0b41a8d 100644
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-index fc3696b64a73..d30b5d3bc65a 100644
+index 88f67363710b..c96f46820353 100644
 --- a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-@@ -242,7 +242,7 @@ void PPAPIDownloadRequest::SendRequest() {
+@@ -248,7 +248,7 @@ void PPAPIDownloadRequest::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -63,48 +62,8 @@ index fc3696b64a73..d30b5d3bc65a 100644
    loader_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
-diff --git a/chrome/browser/safe_browsing/protocol_manager.cc b/chrome/browser/safe_browsing/protocol_manager.cc
-index a9a7271a60cd..4236a8429d96 100644
---- a/chrome/browser/safe_browsing/protocol_manager.cc
-+++ b/chrome/browser/safe_browsing/protocol_manager.cc
-@@ -282,7 +282,7 @@ void SafeBrowsingProtocolManager::GetFullHash(
-   auto resource_request = std::make_unique<network::ResourceRequest>();
-   resource_request->url = gethash_url;
-   resource_request->method = "POST";
--  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
-   auto loader_ptr = network::SimpleURLLoader::Create(
-       std::move(resource_request), traffic_annotation);
-   loader_ptr->AttachStringForUpload(FormatGetHash(prefixes), "text/plain");
-@@ -688,7 +688,7 @@ bool SafeBrowsingProtocolManager::IssueBackupUpdateRequest(
-   auto resource_request = std::make_unique<network::ResourceRequest>();
-   resource_request->url = backup_update_url;
-   resource_request->method = "POST";
--  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
-   request_ = network::SimpleURLLoader::Create(std::move(resource_request),
-                                               traffic_annotation);
-   request_->AttachStringForUpload(update_list_data_, "text/plain");
-@@ -719,7 +719,7 @@ void SafeBrowsingProtocolManager::IssueChunkRequest() {
- 
-   auto resource_request = std::make_unique<network::ResourceRequest>();
-   resource_request->url = chunk_url;
--  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SEND_COOKIES | net::LOAD_DO_NOT_SAVE_COOKIES;
-   request_ = network::SimpleURLLoader::Create(
-       std::move(resource_request), kChunkBackupRequestTrafficAnnotation);
-   request_->DownloadToStringOfUnboundedSizeUntilCrashAndDie(
-@@ -777,7 +777,7 @@ void SafeBrowsingProtocolManager::OnGetChunksComplete(
-   auto resource_request = std::make_unique<network::ResourceRequest>();
-   resource_request->url = update_url;
-   resource_request->method = "POST";
--  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
-   request_ = network::SimpleURLLoader::Create(
-       std::move(resource_request), kChunkBackupRequestTrafficAnnotation);
-   request_->AttachStringForUpload(update_list_data_, "text/plain");
 diff --git a/components/safe_browsing/browser/threat_details_cache.cc b/components/safe_browsing/browser/threat_details_cache.cc
-index 5f9d575f413f..b807ad773550 100644
+index d8ee18a7c471..b18c1de4281e 100644
 --- a/components/safe_browsing/browser/threat_details_cache.cc
 +++ b/components/safe_browsing/browser/threat_details_cache.cc
 @@ -113,6 +113,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {

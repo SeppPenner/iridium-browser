@@ -1,7 +1,7 @@
-From ccd4914a33477f5b7dc6029984ff6da7ab485e3a Mon Sep 17 00:00:00 2001
+From e9eb9368a8726c5eea4f74b9efeb7acad7fd2573 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:43:55 +0200
-Subject: [PATCH 16/58] prefs: block third-party cookies by default
+Subject: [PATCH 19/59] prefs: block third-party cookies by default
 
 Reject extra cookies which are likely used for tracking and whatnot.
 There are very few websites which require this, and if you do visit
@@ -11,10 +11,10 @@ some, static exceptions can be defined.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/content_settings/core/browser/cookie_settings.cc b/components/content_settings/core/browser/cookie_settings.cc
-index 1c238600a832..2de89ac08f2f 100644
+index 47430eec6e88..99f944a0dabd 100644
 --- a/components/content_settings/core/browser/cookie_settings.cc
 +++ b/components/content_settings/core/browser/cookie_settings.cc
-@@ -111,7 +111,7 @@ void CookieSettings::GetCookieSettings(
+@@ -50,7 +50,7 @@ void CookieSettings::GetCookieSettings(
  void CookieSettings::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(

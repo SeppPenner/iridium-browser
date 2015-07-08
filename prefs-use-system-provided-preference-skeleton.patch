@@ -1,7 +1,7 @@
-From 32a8115ac012197ec7ab1fdfb69a9cad3bfac206 Mon Sep 17 00:00:00 2001
+From 04a9f2dcc4c26830027757044c0d114945c5322b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 29 Jan 2015 10:36:43 +0100
-Subject: [PATCH 31/58] prefs: use system-provided preference skeleton
+Subject: [PATCH 34/59] prefs: use system-provided preference skeleton
 
 This patch makes it possible for distributions to have a global
 default preferences file in /etc/iridium-browser/preferences that get
@@ -11,7 +11,7 @@ copied over to ~ when the user starts the program for the first time.
  1 file changed, 4 insertions(+)
 
 diff --git a/chrome/browser/first_run/first_run_internal_linux.cc b/chrome/browser/first_run/first_run_internal_linux.cc
-index f2441e2956d5..abfafcd7cb49 100644
+index c67666610c39..40d86c4d6f2d 100644
 --- a/chrome/browser/first_run/first_run_internal_linux.cc
 +++ b/chrome/browser/first_run/first_run_internal_linux.cc
 @@ -20,8 +20,12 @@ bool IsOrganicFirstRun() {
@@ -21,7 +21,7 @@ index f2441e2956d5..abfafcd7cb49 100644
 +#ifndef ANDROID
 +  master_prefs = base::FilePath("/etc/iridium-browser");
 +#else
-   if (!PathService::Get(base::DIR_EXE, &master_prefs))
+   if (!base::PathService::Get(base::DIR_EXE, &master_prefs))
      return base::FilePath();
 +#endif
    return master_prefs.AppendASCII(installer::kDefaultMasterPrefs);

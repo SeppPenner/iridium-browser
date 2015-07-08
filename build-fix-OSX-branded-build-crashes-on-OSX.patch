@@ -1,7 +1,7 @@
-From 71dd0ca895e0675d11cc7d0cdc2d1e469aab55ab Mon Sep 17 00:00:00 2001
+From 309eecad0b8e7ab98a52c9d22d305b2963a2508c Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 29/58] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 32/59] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -9,10 +9,10 @@ Subject: [PATCH 29/58] build: fix OSX branded build crashes on OSX
  2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/chrome/app/theme/chromium/BRANDING b/chrome/app/theme/chromium/BRANDING
-index 4f9ef78ce599..eedf1f1cc35a 100644
+index 4167796dd60f..60aa7590cc0b 100644
 --- a/chrome/app/theme/chromium/BRANDING
 +++ b/chrome/app/theme/chromium/BRANDING
-@@ -1,9 +1,9 @@
+@@ -1,10 +1,10 @@
 -COMPANY_FULLNAME=The Chromium Authors
 -COMPANY_SHORTNAME=The Chromium Authors
 -PRODUCT_FULLNAME=Chromium
@@ -29,8 +29,9 @@ index 4f9ef78ce599..eedf1f1cc35a 100644
 +COPYRIGHT=Copyright 2018 The browser authors. All rights reserved.
  MAC_BUNDLE_ID=org.chromium.Chromium
  MAC_CREATOR_CODE=Cr24
+ MAC_TEAM_ID=
 diff --git a/chrome/common/chrome_constants.cc b/chrome/common/chrome_constants.cc
-index f32ffad1a95b..59963e387079 100644
+index 38f30f6ecd6c..09e264f93162 100644
 --- a/chrome/common/chrome_constants.cc
 +++ b/chrome/common/chrome_constants.cc
 @@ -10,11 +10,11 @@

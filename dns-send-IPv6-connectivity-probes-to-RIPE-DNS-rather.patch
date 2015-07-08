@@ -1,7 +1,7 @@
-From 73b9a80dcb8fcd97f0e9243c9e95265253b81b7d Mon Sep 17 00:00:00 2001
+From c84875e28a4c16c3426495f8032a40a35ff63d87 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
-Subject: [PATCH 07/58] dns: send IPv6 connectivity probes to RIPE DNS rather
+Subject: [PATCH 10/59] dns: send IPv6 connectivity probes to RIPE DNS rather
  than Google
 
 Short of disabling the code (we may do that in a subsequent patch
@@ -11,10 +11,10 @@ anyway), avoid sending to Google.
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/net/dns/host_resolver_impl.cc b/net/dns/host_resolver_impl.cc
-index 3a279aaef068..1e97539b3ab0 100644
+index 1a9366beb99b..a94c28d05d8c 100644
 --- a/net/dns/host_resolver_impl.cc
 +++ b/net/dns/host_resolver_impl.cc
-@@ -109,10 +109,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
+@@ -110,10 +110,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
  // cached.
  const int kIPv6ProbePeriodMs = 1000;
  

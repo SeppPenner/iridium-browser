@@ -1,7 +1,7 @@
-From 65502a62bb34dbf03725433654358ad1d728b9d2 Mon Sep 17 00:00:00 2001
+From 41ed3045b95617376cfa00da7a4047d3e2ffc4ed Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
-Subject: [PATCH 38/58] net: add "trk:" scheme and help identify URLs being
+Subject: [PATCH 41/59] net: add "trk:" scheme and help identify URLs being
  retrieved
 
 The Chromium codebase has left us with a number of suspect URLs, and
@@ -57,7 +57,7 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 3ddaa916a0bf..24d38d176792 100644
+index 4865a69fe984..82793a2fea58 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
 @@ -252,6 +252,7 @@ if (!is_android && !is_mac) {
@@ -68,7 +68,7 @@ index 3ddaa916a0bf..24d38d176792 100644
            ":browser_dependencies",
            ":child_dependencies",
  
-@@ -506,6 +507,7 @@ if (is_win) {
+@@ -517,6 +518,7 @@ if (is_win) {
          "//content/public/app:child",
          "//content/public/common:service_names",
          "//headless:headless_shell_child_lib",
@@ -112,7 +112,7 @@ index 9ff589299bff..293757f6ebf9 100644
  DLLEXPORT int __cdecl ChromeMain(HINSTANCE instance,
                                   sandbox::SandboxInterfaceInfo* sandbox_info,
 diff --git a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc b/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
-index 2e7247405e48..0eaa277ef85c 100644
+index 620df4bac144..5452c1943f82 100644
 --- a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
 +++ b/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
 @@ -28,6 +28,7 @@ ChromeAutocompleteSchemeClassifier::GetInputTypeForScheme(
@@ -124,10 +124,10 @@ index 2e7247405e48..0eaa277ef85c 100644
         base::LowerCaseEqualsASCII(scheme, url::kDataScheme))) {
      return metrics::OmniboxInputType::URL;
 diff --git a/chrome/browser/history/history_utils.cc b/chrome/browser/history/history_utils.cc
-index 8bf6a91e67cd..57dd5e1fb5c0 100644
+index 4cfbd05e5bc3..8164d2408bc4 100644
 --- a/chrome/browser/history/history_utils.cc
 +++ b/chrome/browser/history/history_utils.cc
-@@ -21,6 +21,7 @@ bool CanAddURLToHistory(const GURL& url) {
+@@ -22,6 +22,7 @@ bool CanAddURLToHistory(const GURL& url) {
        url.SchemeIs(content::kChromeDevToolsScheme) ||
        url.SchemeIs(content::kChromeUIScheme) ||
        url.SchemeIs(content::kViewSourceScheme) ||
@@ -136,10 +136,10 @@ index 8bf6a91e67cd..57dd5e1fb5c0 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme))
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index 5127eec690d6..c2a2576091f4 100644
+index 7d3ebdaa0c75..27f3ddafb437 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
-@@ -730,6 +730,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
+@@ -708,6 +708,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
      return stripped_url.is_valid() &&
          IsURLAllowedInIncognito(stripped_url, browser_context);
    }
@@ -155,10 +155,10 @@ index 5127eec690d6..c2a2576091f4 100644
    // chrome://extensions is on the list because it redirects to
    // chrome://settings.
 diff --git a/chrome/browser/ui/singleton_tabs.cc b/chrome/browser/ui/singleton_tabs.cc
-index aefcb09568bc..4a9981508880 100644
+index 18b45d13262a..c8ca682aa3d0 100644
 --- a/chrome/browser/ui/singleton_tabs.cc
 +++ b/chrome/browser/ui/singleton_tabs.cc
-@@ -100,7 +100,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
+@@ -99,7 +99,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
  
      // Skip view-source tabs. This is needed because RewriteURLIfNecessary
      // removes the "view-source:" scheme which leads to incorrect matching.
@@ -169,13 +169,13 @@ index aefcb09568bc..4a9981508880 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index 6e72ea81ed7e..6d84980845c2 100644
+index f4080993c259..843188260b74 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
-@@ -150,6 +150,7 @@ class InfoBarDelegate {
-     NEAR_OOM_INFOBAR_ANDROID = 79,
-     INSTALLABLE_AMBIENT_BADGE_INFOBAR_DELEGATE = 80,
-     PAGE_LOAD_CAPPING_INFOBAR_DELEGATE = 81,
+@@ -155,6 +155,7 @@ class InfoBarDelegate {
+     BLOATED_RENDERER_INFOBAR_DELEGATE = 84,
+     SUPERVISED_USERS_DEPRECATED_INFOBAR_DELEGATE = 85,
+     NEAR_OOM_REDUCTION_INFOBAR_ANDROID = 86,
 +    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
    };
  
@@ -249,10 +249,10 @@ index ef78ddd5e26b..8a1c8c900493 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index 09d1adb47f31..94f87e0da24e 100644
+index bd757e4fdefb..b5baccc1974a 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -347,6 +347,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -396,6 +396,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
    RegisterPseudoScheme(url::kAboutScheme);
    RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
@@ -457,10 +457,10 @@ index 000000000000..3c58d22a4426
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index 7418a38294bf..48d487fb3e79 100644
+index 397941220d4e..6a70dd3c4862 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
-@@ -54,6 +54,8 @@ using std::string;
+@@ -55,6 +55,8 @@ using std::string;
  
  namespace net {
  
@@ -469,7 +469,7 @@ index 7418a38294bf..48d487fb3e79 100644
  namespace {
  
  // TODO(battre): Delete this, see http://crbug.com/89321:
-@@ -583,6 +585,10 @@ URLRequest::URLRequest(const GURL& url,
+@@ -598,6 +600,10 @@ URLRequest::URLRequest(const GURL& url,
    // Sanity check out environment.
    DCHECK(base::ThreadTaskRunnerHandle::IsSet());
  
@@ -481,10 +481,10 @@ index 7418a38294bf..48d487fb3e79 100644
    net_log_.BeginEvent(
        NetLogEventType::REQUEST_ALIVE,
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index 57273101f211..80b4731820d6 100644
+index a64498d1786c..f063f27510a3 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -935,6 +935,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
+@@ -971,6 +971,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -494,22 +494,22 @@ index 57273101f211..80b4731820d6 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index d046e7d6a221..58548cbea413 100644
+index 63d9a3ec825e..87a2c1f00f62 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -23367,6 +23367,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
-   <int value="79" label="NEAR_OOM_INFOBAR_ANDROID"/>
-   <int value="80" label="INSTALLABLE_AMBIENT_BADGE_INFOBAR_DELEGATE"/>
-   <int value="81" label="PAGE_LOAD_CAPPING_INFOBAR_DELEGATE"/>
+@@ -25028,6 +25028,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
+   <int value="83" label="AR_CORE_UPGRADE_ANDROID"/>
+   <int value="84" label="BLOATED_RENDERER_INFOBAR_DELEGATE"/>
+   <int value="85" label="SUPERVISED_USERS_DEPRECATED_INFOBAR_DELEGATE"/>
 +  <int value="9001" label="TRACKING_ALERT_INFOBAR_DELEGATE"/>
  </enum>
  
  <enum name="InfoBarResponse">
 diff --git a/url/gurl.cc b/url/gurl.cc
-index cec69c7cc494..c100164d7d52 100644
+index d9f36f675568..76d446730370 100644
 --- a/url/gurl.cc
 +++ b/url/gurl.cc
-@@ -470,6 +470,41 @@ size_t GURL::EstimateMemoryUsage() const {
+@@ -468,6 +468,41 @@ size_t GURL::EstimateMemoryUsage() const {
           (parsed_.inner_parsed() ? sizeof(url::Parsed) : 0);
  }
  
@@ -552,7 +552,7 @@ index cec69c7cc494..c100164d7d52 100644
    return out << url.possibly_invalid_spec();
  }
 diff --git a/url/gurl.h b/url/gurl.h
-index 96ea8645da69..429a480672d7 100644
+index 58ab96dc68a5..8c6b07ce9822 100644
 --- a/url/gurl.h
 +++ b/url/gurl.h
 @@ -425,6 +425,9 @@ class URL_EXPORT GURL {
