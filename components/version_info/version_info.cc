@@ -16,7 +16,9 @@
 namespace version_info {
 
 std::string GetProductNameAndVersionForUserAgent() {
-  return "Chrome/" + GetVersionNumber();
+  /* Currently, the Iridium install base is so small that it would make us rather identifiable if we had our own tag. */
+  return "Chrome/79.0.3945.130";
+//  return "Iridium/" + GetVersionNumber();
 }
 
 std::string GetProductName() {
