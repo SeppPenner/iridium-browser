@@ -1,7 +1,7 @@
-From 1c90f81ef50b386eb6c3f90f39edcd0ef5d537e5 Mon Sep 17 00:00:00 2001
+From 7f820bcd71a2e8411f939745671cb50fb1d402a3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 34/61] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 35/61] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -49,5 +49,5 @@ index dbfe0a800de4d..ac0225c49209e 100644
  #error Unknown branding
  #endif
 -- 
-2.25.1
+2.26.0
 

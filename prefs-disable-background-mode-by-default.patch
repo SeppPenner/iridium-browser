@@ -1,7 +1,7 @@
-From 3df5b43cd64a4afa96129d12f75419aa0c134830 Mon Sep 17 00:00:00 2001
+From c2c723d201fa04bf219e8710f463d4e903f017df Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:59:10 +0200
-Subject: [PATCH 24/61] prefs: disable background mode by default
+Subject: [PATCH 25/61] prefs: disable background mode by default
 
 If I tell the browser to quit, I mean it. Relinquish the memory,
 do not linger around, do not possibly collect data somewhere.
@@ -23,5 +23,5 @@ index 4b1cbb53aaed4..cb7848e5e046c 100644
  
  void BackgroundModeManager::RegisterProfile(Profile* profile) {
 -- 
-2.25.1
+2.26.0
 

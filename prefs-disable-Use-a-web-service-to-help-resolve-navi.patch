@@ -1,7 +1,7 @@
-From 7ec3b994307dddcc375452179b8091a007ac11b5 Mon Sep 17 00:00:00 2001
+From 5bcb6bf6fabc10812007ba908968f4625d7f4872 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:35:12 +0200
-Subject: [PATCH 18/61] prefs: disable "Use a web service to help resolve
+Subject: [PATCH 19/61] prefs: disable "Use a web service to help resolve
  navigation errors"
 
 This goes towards reducing promiscuous outbound requests to
@@ -14,18 +14,18 @@ Set alternate_error_pages to be disabled by default.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/navigation_correction_tab_observer.cc b/chrome/browser/ui/navigation_correction_tab_observer.cc
-index 1b02879894061..f2aa068efdc3b 100644
+index b3e3237e667c7..4a85d5f6e63ce 100644
 --- a/chrome/browser/ui/navigation_correction_tab_observer.cc
 +++ b/chrome/browser/ui/navigation_correction_tab_observer.cc
-@@ -57,7 +57,7 @@ void NavigationCorrectionTabObserver::SetAllowEnableCorrectionsForTesting(
- // static
+@@ -59,7 +59,7 @@ void NavigationCorrectionTabObserver::SetAllowEnableCorrectionsForTesting(
  void NavigationCorrectionTabObserver::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* prefs) {
--  prefs->RegisterBooleanPref(prefs::kAlternateErrorPagesEnabled, true,
-+  prefs->RegisterBooleanPref(prefs::kAlternateErrorPagesEnabled, false,
+   prefs->RegisterBooleanPref(embedder_support::kAlternateErrorPagesEnabled,
+-                             true,
++                             false,
                               user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
  
 -- 
-2.25.1
+2.26.0
 

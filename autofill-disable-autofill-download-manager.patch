@@ -1,7 +1,7 @@
-From 3e581b66ce07f75824ee225cd759962daca3c7a7 Mon Sep 17 00:00:00 2001
+From e12900a51a5d469e6058947beaf1538b101640e4 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 17/61] autofill: disable autofill download manager
+Subject: [PATCH 18/61] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -23,10 +23,10 @@ index b0a51bd3a7d25..87bac8960b7cd 100644
  // The default number of days after which to reset the registry of autofill
  // events for which an upload has been sent.
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index 04dd106095e67..58bf108ad0bab 100644
+index eeff2cfb0ac23..db9102612b20e 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1522,11 +1522,13 @@ AutofillManager::AutofillManager(
+@@ -1582,11 +1582,13 @@ AutofillManager::AutofillManager(
                                      : std::make_unique<CreditCardAccessManager>(
                                            driver, client_, personal_data_,
                                            credit_card_form_event_logger_.get());
@@ -41,5 +41,5 @@ index 04dd106095e67..58bf108ad0bab 100644
  }
  
 -- 
-2.25.1
+2.26.0
 

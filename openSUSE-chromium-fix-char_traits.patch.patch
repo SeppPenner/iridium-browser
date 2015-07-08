@@ -1,0 +1,28 @@
+From 5b713ba76d0fb15358ff4f62979711e57892323e Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Wed, 8 Apr 2020 21:44:07 +0200
+Subject: [PATCH 08/61] openSUSE chromium-fix-char_traits.patch
+
+---
+ base/strings/char_traits.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/base/strings/char_traits.h b/base/strings/char_traits.h
+index b193e216cccad..d42a4b671362a 100644
+--- a/base/strings/char_traits.h
++++ b/base/strings/char_traits.h
+@@ -67,9 +67,9 @@ constexpr int CharTraits<char>::compare(const char* s1,
+   return __builtin_memcmp(s1, s2, n);
+ #else
+   for (; n; --n, ++s1, ++s2) {
+-    if (*s1 < *s2)
++    if ((unsigned char)*s1 < (unsigned char)*s2)
+       return -1;
+-    if (*s1 > *s2)
++    if ((unsigned char)*s1 > (unsigned char)*s2)
+       return 1;
+   }
+   return 0;
+-- 
+2.26.0
+

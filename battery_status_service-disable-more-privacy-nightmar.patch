@@ -1,4 +1,4 @@
-From 2f1481f9dc9b8f14061837a7fc6764688cbc951d Mon Sep 17 00:00:00 2001
+From 2f0d40faea80a31f66ae66635183d2552a178541 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 4 Aug 2015 15:15:53 +0200
 Subject: [PATCH 51/61] battery_status_service: disable more privacy nightmares
@@ -23,10 +23,10 @@ References: https://github.com/iridium-browser/iridium-browser/issues/40
  1 file changed, 2 insertions(+)
 
 diff --git a/services/device/battery/battery_status_service.cc b/services/device/battery/battery_status_service.cc
-index e1800aae0a82b..9e722f885172d 100644
+index 67f6c9f7136e9..7389bd097990a 100644
 --- a/services/device/battery/battery_status_service.cc
 +++ b/services/device/battery/battery_status_service.cc
-@@ -70,6 +70,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
+@@ -43,6 +43,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
    if (!battery_fetcher_)
      battery_fetcher_ = BatteryStatusManager::Create(update_callback_);
  
@@ -34,7 +34,7 @@ index e1800aae0a82b..9e722f885172d 100644
    if (callback_list_.empty()) {
      bool success = battery_fetcher_->StartListeningBatteryChange();
      // On failure pass the default values back.
-@@ -81,6 +82,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
+@@ -54,6 +55,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
      // Send recent status to the new callback if already available.
      callback.Run(status_);
    }
@@ -43,5 +43,5 @@ index e1800aae0a82b..9e722f885172d 100644
    return callback_list_.Add(callback);
  }
 -- 
-2.25.1
+2.26.0
 

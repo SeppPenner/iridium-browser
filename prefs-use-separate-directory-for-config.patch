@@ -1,7 +1,7 @@
-From 6c9f8bdd9cfd4a6806a672be81614d5a13b9bfbf Mon Sep 17 00:00:00 2001
+From 606cbc827b6d3acd1be4b618fe51948741739cdb Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 8 Nov 2014 21:40:49 +0100
-Subject: [PATCH 32/61] prefs: use separate directory for config
+Subject: [PATCH 33/61] prefs: use separate directory for config
 
 Do not overwrite an existing Chromium configuration.
 ---
@@ -22,5 +22,5 @@ index 42d355bed93d9..0f409a39a2f9b 100644
    *result = config_dir.Append(data_dir_basename + GetChannelSuffixForDataDir());
    return true;
 -- 
-2.25.1
+2.26.0
 

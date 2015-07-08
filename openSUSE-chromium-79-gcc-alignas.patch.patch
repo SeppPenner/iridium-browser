@@ -1,4 +1,4 @@
-From 8a4004f8029180bb4c9a4c7cfd97ae42debf7da9 Mon Sep 17 00:00:00 2001
+From c9bca37a0c294e54903ff8cfbd9c1fea1741b2a3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:14:48 +0100
 Subject: [PATCH 06/61] openSUSE chromium-79-gcc-alignas.patch
@@ -75,5 +75,5 @@ index b7e67fe4a65f6..ba1fffc62cb15 100644
  
  
 -- 
-2.25.1
+2.26.0
 

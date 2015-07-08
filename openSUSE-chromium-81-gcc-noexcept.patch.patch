@@ -1,0 +1,25 @@
+From dbac11da11a053c95b7f7839fb16a1f5252e3ccf Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Wed, 8 Apr 2020 21:45:16 +0200
+Subject: [PATCH 10/61] openSUSE chromium-81-gcc-noexcept.patch
+
+---
+ components/paint_preview/browser/paint_preview_client.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/components/paint_preview/browser/paint_preview_client.cc b/components/paint_preview/browser/paint_preview_client.cc
+index 38ab6beb571f0..dccf07f01323c 100644
+--- a/components/paint_preview/browser/paint_preview_client.cc
++++ b/components/paint_preview/browser/paint_preview_client.cc
+@@ -78,7 +78,7 @@ PaintPreviewClient::PaintPreviewData::PaintPreviewData() = default;
+ PaintPreviewClient::PaintPreviewData::~PaintPreviewData() = default;
+ 
+ PaintPreviewClient::PaintPreviewData& PaintPreviewClient::PaintPreviewData::
+-operator=(PaintPreviewData&& rhs) noexcept = default;
++operator=(PaintPreviewData&& rhs) = default;
+ PaintPreviewClient::PaintPreviewData::PaintPreviewData(
+     PaintPreviewData&& other) noexcept = default;
+ 
+-- 
+2.26.0
+

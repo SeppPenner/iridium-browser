@@ -1,4 +1,4 @@
-From c8b2459800da4754a5a881bee7299e7f540a097f Mon Sep 17 00:00:00 2001
+From b3d4aa94e3215457657596853294cdf9ffe512be Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
 Subject: [PATCH 01/61] build: remove calling untrusted hooks
@@ -10,10 +10,10 @@ sysroot.
  1 file changed, 4 insertions(+), 211 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index f072c759bb5b9..9f00b14aa6e2f 100644
+index 352738248846d..fc2d94d4ce37b 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -76,7 +76,7 @@ vars = {
+@@ -81,7 +81,7 @@ vars = {
  
    # Check out and download nacl by default. This can be disabled e.g. with
    # custom_vars.
@@ -22,7 +22,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
  
    # By default, do not check out src-internal. This can be overridden e.g. with
    # custom_vars.
-@@ -100,8 +100,8 @@ vars = {
+@@ -108,8 +108,8 @@ vars = {
    # support for other platforms may be added in the future.
    'checkout_openxr' : 'checkout_win',
  
@@ -33,7 +33,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
  
    # By default, do not check out WebKit for iOS, as it is not needed unless
    # running against ToT WebKit rather than system WebKit. This can be overridden
-@@ -597,24 +597,6 @@ deps = {
+@@ -601,24 +601,6 @@ deps = {
    'src/net/third_party/quiche/src':
      Var('quiche_git') + '/quiche.git' + '@' +  Var('quiche_revision'),
  
@@ -58,7 +58,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
    # SPIRV-Cross is in third_party/spirv-cross/spirv-cross instead of
    # third_party/spirv-cross/src  because its header files are at the root of
    # the repository and dependencies include them like so:
-@@ -3401,49 +3383,6 @@ hooks = [
+@@ -3502,49 +3484,6 @@ hooks = [
          'sync', '--extract',
      ],
    },
@@ -108,7 +108,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
    {
      # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
      'name': 'ciopfs_linux',
-@@ -3471,44 +3410,6 @@ hooks = [
+@@ -3572,44 +3511,6 @@ hooks = [
      'condition': 'checkout_mac',
      'action': ['python', 'src/build/mac_toolchain.py'],
    },
@@ -151,9 +151,9 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
 -               '--package=coverage_tools'],
 -  },
    {
-     # Mac doesn't use lld so it's not included in the default clang bundle
-     # there.  lld is however needed in win and Fuchsia cross builds, so
-@@ -3569,18 +3470,6 @@ hooks = [
+     # This is also supposed to support the same set of platforms as 'clang'
+     # above. LLVM ToT support isn't provided at the moment.
+@@ -3679,18 +3580,6 @@ hooks = [
                  '-s', 'src/buildtools/mac/clang-format.sha1',
      ],
    },
@@ -172,7 +172,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
    # Pull rc binaries using checked-in hashes.
    {
      'name': 'rc_win',
-@@ -3606,39 +3495,6 @@ hooks = [
+@@ -3716,39 +3605,6 @@ hooks = [
                  '-s', 'src/build/toolchain/win/rc/mac/rc.sha1',
      ],
    },
@@ -212,7 +212,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
    # Pull order files for the win/clang build.
    {
      'name': 'orderfiles_win',
-@@ -3683,57 +3539,8 @@ hooks = [
+@@ -3793,57 +3649,8 @@ hooks = [
                  'src/third_party/apache-win32',
      ],
    },
@@ -263,14 +263,14 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
 -                '--no_resume',
 -                '--extract',
 -                '--no_auth',
--                '--bucket', 'chromium-nodejs/10.15.3',
+-                '--bucket', 'chromium-nodejs/12.14.1',
 -                '-s', 'src/third_party/node/linux/node-linux-x64.tar.gz.sha1',
 -    ],
 -  },
    {
      'name': 'node_mac',
      'pattern': '.',
-@@ -3827,20 +3634,6 @@ hooks = [
+@@ -3937,20 +3744,6 @@ hooks = [
      ],
    },
  
@@ -291,7 +291,7 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
    # Pull down Android RenderTest goldens
    {
      'name': 'Fetch Android RenderTest goldens',
-@@ -3854,7 +3647,7 @@ hooks = [
+@@ -3964,7 +3757,7 @@ hooks = [
    {
      'name': 'Fetch Android AFDO profile',
      'pattern': '.',
@@ -301,5 +301,5 @@ index f072c759bb5b9..9f00b14aa6e2f 100644
                  'src/tools/download_cros_provided_profile.py',
                  '--newest_state=src/chrome/android/profiles/newest.txt',
 -- 
-2.25.1
+2.26.0
 

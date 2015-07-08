@@ -1,4 +1,4 @@
-From 1be81163768cc521a6d6e38e376fcb453715a108 Mon Sep 17 00:00:00 2001
+From 13ee9025c441bdd6440010581bfd018a8d4962df Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
 Subject: [PATCH 42/61] net: add "trk:" scheme and help identify URLs being
@@ -57,10 +57,10 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index c38d03923119b..632e9c65eccd5 100644
+index fe09f99a91e3b..139ff36d03e3c 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -274,6 +274,8 @@ if (!is_android && !is_mac) {
+@@ -250,6 +250,8 @@ if (!is_android && !is_mac) {
        sources += [ "app/chrome_exe_main_aura.cc" ]
      }
  
@@ -69,7 +69,7 @@ index c38d03923119b..632e9c65eccd5 100644
      if (is_linux) {
        sources += [
          "app/chrome_dll_resource.h",
-@@ -498,6 +500,7 @@ if (is_win) {
+@@ -469,6 +471,7 @@ if (is_win) {
          "//content/public/app:child",
          "//content/public/common:service_names",
          "//headless:headless_shell_child_lib",
@@ -148,10 +148,10 @@ index a76f2cc1230fe..9930cc6bc44c9 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme) ||
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index ed922d78b0f99..482faa1e21ed1 100644
+index f069d00cad74c..36dffb506cf4b 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
-@@ -796,6 +796,11 @@ bool IsURLAllowedInIncognito(const GURL& url,
+@@ -784,6 +784,11 @@ bool IsURLAllowedInIncognito(const GURL& url,
      return stripped_url.is_valid() &&
             IsURLAllowedInIncognito(stripped_url, browser_context);
    }
@@ -165,10 +165,10 @@ index ed922d78b0f99..482faa1e21ed1 100644
    return IsHostAllowedInIncognito(url);
  }
 diff --git a/chrome/browser/ui/singleton_tabs.cc b/chrome/browser/ui/singleton_tabs.cc
-index 96d08a2b01bed..ca2a2bde4a49f 100644
+index 6f7e94a9898f5..842dc53e0ca51 100644
 --- a/chrome/browser/ui/singleton_tabs.cc
 +++ b/chrome/browser/ui/singleton_tabs.cc
-@@ -100,7 +100,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
+@@ -99,7 +99,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
  
      // Skip view-source tabs. This is needed because RewriteURLIfNecessary
      // removes the "view-source:" scheme which leads to incorrect matching.
@@ -179,13 +179,13 @@ index 96d08a2b01bed..ca2a2bde4a49f 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index 5c55e91768dc5..c73eb249b2147 100644
+index e5a5e81c90880..81124786a74f7 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
-@@ -160,6 +160,7 @@ class InfoBarDelegate {
-     SAFETY_TIP_INFOBAR_DELEGATE = 94,
+@@ -162,6 +162,7 @@ class InfoBarDelegate {
      SMS_RECEIVER_INFOBAR_DELEGATE = 95,
      KNOWN_INTERCEPTION_DISCLOSURE_INFOBAR_DELEGATE = 96,
+     SYNC_ERROR_INFOBAR_DELEGATE_ANDROID = 97,
 +    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
    };
  
@@ -216,7 +216,7 @@ index fed29aa1d6fc2..a6c8aed8c80b2 100644
  }
  
 diff --git a/content/browser/browser_url_handler_impl.cc b/content/browser/browser_url_handler_impl.cc
-index 13dadc21794b7..bc1cfd828e354 100644
+index d0a943d69f50f..6dab037a8acd1 100644
 --- a/content/browser/browser_url_handler_impl.cc
 +++ b/content/browser/browser_url_handler_impl.cc
 @@ -15,9 +15,28 @@
@@ -257,10 +257,10 @@ index 13dadc21794b7..bc1cfd828e354 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index a017be5153602..00e20eb64d184 100644
+index 2b768dc8f4be2..ae036ae8572f4 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -630,6 +630,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -633,6 +633,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
    RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
    RegisterPseudoScheme(kGoogleChromeScheme);
@@ -468,7 +468,7 @@ index 0000000000000..3c58d22a44265
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index b82b412c18dfe..0f5ee940d600b 100644
+index 4f913f013a5e5..9ceb206edddfd 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
 @@ -46,6 +46,8 @@ using std::string;
@@ -492,10 +492,10 @@ index b82b412c18dfe..0f5ee940d600b 100644
    net_log_.BeginEvent(NetLogEventType::REQUEST_ALIVE, [&] {
      return NetLogURLRequestConstructorParams(url, priority_,
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index 672a5f93c06e6..3d0077c07668b 100644
+index 2d3e5c60d2c2a..2b27b3f7e1f35 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -954,6 +954,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
+@@ -950,6 +950,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -505,13 +505,13 @@ index 672a5f93c06e6..3d0077c07668b 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index d3b774e16ed7b..70beef82aa90c 100644
+index e9229774c7dbe..b5cdf4a95bf6f 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -32378,6 +32378,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
-   <int value="93" label="TAB_SHARING_INFOBAR_DELEGATE"/>
-   <int value="94" label="SAFETY_TIP_INFOBAR_DELEGATE"/>
+@@ -33153,6 +33153,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
    <int value="95" label="SMS_RECEIVER_INFOBAR_DELEGATE"/>
+   <int value="96" label="KNOWN_INTERCEPTION_DISCLOSURE_INFOBAR_DELEGATE"/>
+   <int value="97" label="SYNC_ERROR_INFOBAR_DELEGATE_ANDROID"/>
 +  <int value="9001" label="TRACKING_ALERT_INFOBAR_DELEGATE"/>
  </enum>
  
@@ -610,5 +610,5 @@ index f5a33dd813571..202dd8d4e1a15 100644
  // Used to separate a standard scheme and the hostname: "://".
  COMPONENT_EXPORT(URL) extern const char kStandardSchemeSeparator[];
 -- 
-2.25.1
+2.26.0
 

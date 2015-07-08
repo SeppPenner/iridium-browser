@@ -1,4 +1,4 @@
-From 2aa527cb27094cb95bcc868969ee96cd2e81ca4f Mon Sep 17 00:00:00 2001
+From 95e6f8a679f101b4c3d6deda9666b44b53c16c4a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
 Subject: [PATCH 44/61] safe_browsing: disable incident reporting
@@ -15,7 +15,7 @@ the URL so we get notified if this happens again in the future).
  5 files changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc b/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
-index 9940414addd1c..68a816368ba5a 100644
+index 7481ba1fcdddc..515fa2a3530e0 100644
 --- a/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
 +++ b/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
 @@ -22,7 +22,7 @@ namespace safe_browsing {
@@ -28,10 +28,10 @@ index 9940414addd1c..68a816368ba5a 100644
  constexpr net::NetworkTrafficAnnotationTag
      kSafeBrowsingIncidentTrafficAnnotation =
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
-index 24915836b0139..cc663945dead2 100644
+index a3431e91dc3db..e9d99e68b32d7 100644
 --- a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
 +++ b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
-@@ -311,11 +311,14 @@ IncidentReportingService::UploadContext::~UploadContext() {
+@@ -301,11 +301,14 @@ IncidentReportingService::UploadContext::~UploadContext() {
  
  // static
  bool IncidentReportingService::IsEnabledForProfile(Profile* profile) {
@@ -47,10 +47,10 @@ index 24915836b0139..cc663945dead2 100644
  
  IncidentReportingService::IncidentReportingService(
 diff --git a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-index 803806e980e7b..ebc4518649a22 100644
+index b2b9f379fd343..389950efd3d4f 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-@@ -62,8 +62,7 @@ class SafeBrowsingBlockingPageFactoryImpl
+@@ -64,8 +64,7 @@ class SafeBrowsingBlockingPageFactoryImpl
      PrefService* prefs =
          Profile::FromBrowserContext(web_contents->GetBrowserContext())
              ->GetPrefs();
@@ -61,7 +61,7 @@ index 803806e980e7b..ebc4518649a22 100644
          prefs->GetBoolean(prefs::kSafeBrowsingProceedAnywayDisabled);
  
 diff --git a/chrome/browser/safe_browsing/safe_browsing_service.cc b/chrome/browser/safe_browsing/safe_browsing_service.cc
-index 267cdfbacf367..da11f8bdb4b7c 100644
+index 52b2482a664d4..9c4b6ea562179 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_service.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_service.cc
 @@ -229,7 +229,7 @@ SafeBrowsingUIManager* SafeBrowsingService::CreateUIManager() {
@@ -74,7 +74,7 @@ index 267cdfbacf367..da11f8bdb4b7c 100644
  #endif
  }
 diff --git a/components/security_interstitials/core/safe_browsing_loud_error_ui.cc b/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
-index 49de2ab45edf7..dd76a85ec7bf7 100644
+index d6537dab07580..8a0058d9975b8 100644
 --- a/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
 +++ b/components/security_interstitials/core/safe_browsing_loud_error_ui.cc
 @@ -23,6 +23,7 @@ namespace {
@@ -86,5 +86,5 @@ index 49de2ab45edf7..dd76a85ec7bf7 100644
  
  // Constants for the V4 phishing string upgrades.
 -- 
-2.25.1
+2.26.0
 

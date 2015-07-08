@@ -1,4 +1,4 @@
-From cd61f5ccc879424685e711bddc33d93ab4f13316 Mon Sep 17 00:00:00 2001
+From af7af58a8cfc3ff3327ee2e34bd67f9855114b29 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
 Subject: [PATCH 61/61] common: set Iridium version / User-Agent
@@ -14,17 +14,17 @@ Subject: [PATCH 61/61] common: set Iridium version / User-Agent
  7 files changed, 14 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index c1d12649b3d01..fa99511d12779 100644
+index 877fb3c871cd0..83033a80b49ed 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=80
+-MAJOR=81
 -MINOR=0
--BUILD=3987
--PATCH=149
+-BUILD=4044
+-PATCH=92
 +MAJOR=2020
-+MINOR=03
-+BUILD=80
++MINOR=04
++BUILD=81
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
 index 57cf7a7fef9de..b0f99859c3180 100644
@@ -55,15 +55,15 @@ index 6232e359ef20f..3cf4fee096c06 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index 37e72394997a0..9ef834d76552d 100644
+index e7d9a7c8ec97d..867fc414dac17 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -200,6 +200,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -222,6 +222,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/80.0.3987.149");
++	base::StringAppendF(&user_agent, " Chrome/81.0.4044.92");
    return user_agent;
  }
  
@@ -81,7 +81,7 @@ index c4627fe512a1b..bf7d27484e997 100644
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
 diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
-index fdb9b6d524457..42eaada2c4015 100644
+index 00a2a6e9993e2..0ba59764edede 100644
 --- a/tools/metrics/histograms/extract_histograms.py
 +++ b/tools/metrics/histograms/extract_histograms.py
 @@ -80,7 +80,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
@@ -109,5 +109,5 @@ index 423f9e2d0a0c7..ae67ef294abb3 100755
  _SCRIPT_NAME = "generate_expired_histograms_array.py"
  _HASH_DATATYPE = "uint64_t"
 -- 
-2.25.1
+2.26.0
 

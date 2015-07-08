@@ -1,4 +1,4 @@
-From 6db230d1997ea5394e1ecb88c3347ec2107111b7 Mon Sep 17 00:00:00 2001
+From 01c7a2b8c14b8320208397f7422d58522c879f72 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
 Subject: [PATCH 54/61] icons: iridium icons
@@ -2144,5 +2144,5 @@ index c48c0f22da36c..016277b01c7b5 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.25.1
+2.26.0
 

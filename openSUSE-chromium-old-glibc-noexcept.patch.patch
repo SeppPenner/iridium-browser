@@ -1,4 +1,4 @@
-From ad297235d1f238cf0b32097757ea0b4fe53a6bb8 Mon Sep 17 00:00:00 2001
+From 41ea91398f2e23db84d72fee6b4655e139eb5202 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 16:22:53 +0100
 Subject: [PATCH 05/61] openSUSE chromium-old-glibc-noexcept.patch
@@ -37,7 +37,7 @@ index 36f2183d35554..dc1fdbe79cdd8 100644
  bool MediaSink::IsMaybeCloudSink() const {
    switch (icon_type_) {
 diff --git a/components/history/core/browser/history_types.cc b/components/history/core/browser/history_types.cc
-index 7915c4ba7dda2..e92b3d02b42c8 100644
+index a962b81d4d161..3fe6cf3867c0a 100644
 --- a/components/history/core/browser/history_types.cc
 +++ b/components/history/core/browser/history_types.cc
 @@ -42,7 +42,7 @@ QueryResults::QueryResults(QueryResults&& other) noexcept {
@@ -59,7 +59,7 @@ index 7915c4ba7dda2..e92b3d02b42c8 100644
  // MostVisitedURL --------------------------------------------------------------
  
 diff --git a/components/history/core/browser/history_types.h b/components/history/core/browser/history_types.h
-index 88dfac3a6a1d4..1481e7522b4ff 100644
+index c33148686e11c..ff1dedd2ee308 100644
 --- a/components/history/core/browser/history_types.h
 +++ b/components/history/core/browser/history_types.h
 @@ -141,7 +141,7 @@ class QueryResults {
@@ -107,7 +107,7 @@ index 7192e42e9fa82..6776fcf7662be 100644
  // static
  bool SuggestionAnswer::TextField::ParseTextField(const base::Value& field_json,
 diff --git a/components/policy/core/common/policy_map.cc b/components/policy/core/common/policy_map.cc
-index f6f10ac8bee64..a7d4db4fd7011 100644
+index 1cde07c3771b4..5ff0063574a54 100644
 --- a/components/policy/core/common/policy_map.cc
 +++ b/components/policy/core/common/policy_map.cc
 @@ -52,7 +52,7 @@ PolicyMap::Entry::Entry(
@@ -150,7 +150,7 @@ index 05aae77a8a8d1..6af0072978d24 100644
  
  }  // namespace search_provider_logos
 diff --git a/components/signin/public/identity_manager/account_info.cc b/components/signin/public/identity_manager/account_info.cc
-index 17c2856cf73bc..38a775164cef9 100644
+index e9aef3c5f552e..46d283fc93dcd 100644
 --- a/components/signin/public/identity_manager/account_info.cc
 +++ b/components/signin/public/identity_manager/account_info.cc
 @@ -58,7 +58,7 @@ CoreAccountInfo::CoreAccountInfo(CoreAccountInfo&& other) noexcept = default;
@@ -172,7 +172,7 @@ index 17c2856cf73bc..38a775164cef9 100644
  bool AccountInfo::IsEmpty() const {
    return CoreAccountInfo::IsEmpty() && hosted_domain.empty() &&
 diff --git a/google_apis/gaia/core_account_id.cc b/google_apis/gaia/core_account_id.cc
-index deb367f7743d6..f1b57f31a3e03 100644
+index 56cc8216bc425..e114fe134f90b 100644
 --- a/google_apis/gaia/core_account_id.cc
 +++ b/google_apis/gaia/core_account_id.cc
 @@ -24,7 +24,7 @@ CoreAccountId::~CoreAccountId() = default;
@@ -185,7 +185,7 @@ index deb367f7743d6..f1b57f31a3e03 100644
  // static
  CoreAccountId CoreAccountId::FromGaiaId(const std::string& gaia_id) {
 diff --git a/google_apis/gaia/core_account_id.h b/google_apis/gaia/core_account_id.h
-index 4b4f9503b4218..03f43144cb48a 100644
+index 43294c9bdf145..f156105bd0fc6 100644
 --- a/google_apis/gaia/core_account_id.h
 +++ b/google_apis/gaia/core_account_id.h
 @@ -30,7 +30,7 @@ struct CoreAccountId {
@@ -198,7 +198,7 @@ index 4b4f9503b4218..03f43144cb48a 100644
    // Checks if the account is valid or not.
    bool empty() const;
 diff --git a/gpu/config/gpu_info.cc b/gpu/config/gpu_info.cc
-index da699bb06321d..31bc00655735b 100644
+index 5d62fab7ac6a5..981c6d1be5871 100644
 --- a/gpu/config/gpu_info.cc
 +++ b/gpu/config/gpu_info.cc
 @@ -173,7 +173,7 @@ GPUInfo::GPUDevice& GPUInfo::GPUDevice::operator=(
@@ -211,5 +211,5 @@ index da699bb06321d..31bc00655735b 100644
  GPUInfo::GPUInfo()
      : optimus(false),
 -- 
-2.25.1
+2.26.0
 

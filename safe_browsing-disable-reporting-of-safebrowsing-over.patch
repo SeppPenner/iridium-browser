@@ -1,4 +1,4 @@
-From 299ff381670d4bee518e5c9963ec4c5d5d219ac5 Mon Sep 17 00:00:00 2001
+From 3f0c1f7a153860d0c567dd5f82afe1c9025afebe Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 7 Jul 2015 18:28:46 +0200
 Subject: [PATCH 45/61] safe_browsing: disable reporting of safebrowsing
@@ -8,28 +8,14 @@ Disables reporting of the safebrowsing override, i.e. the report sent
 if a user decides to visit a page that was flagged as "insecure".
 This prevents trk:148 (phishing) and trk:149 (malware).
 ---
- .../safe_browsing/client_side_detection_service.cc   | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ .../browser/safe_browsing/client_side_detection_service.cc   | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 3a25c63972d06..453cd94fa569e 100644
+index a695382340037..c611a95dafba2 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -61,11 +61,13 @@ enum MalwareReportTypes {
-   REPORT_RESULT_MAX
- };
- 
-+#if 0
- void UpdateEnumUMAHistogram(MalwareReportTypes report_type) {
-   DCHECK(report_type >= 0 && report_type < REPORT_RESULT_MAX);
-   UMA_HISTOGRAM_ENUMERATION("SBClientMalware.SentReports", report_type,
-                             REPORT_RESULT_MAX);
- }
-+#endif
- 
- }  // namespace
- 
-@@ -277,6 +279,10 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -224,6 +224,10 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
      return;
    }
  
@@ -40,33 +26,14 @@ index 3a25c63972d06..453cd94fa569e 100644
    // Fill in metadata about which model we used.
    if (is_extended_reporting) {
      request->set_model_filename(model_loader_extended_->name());
-@@ -359,6 +365,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -306,6 +310,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
  
    // Record that we made a request
    phishing_report_times_.push(base::Time::Now());
 +#endif
  }
  
- void ClientSideDetectionService::StartClientReportMalwareRequest(
-@@ -373,6 +380,10 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
-     return;
-   }
- 
-+#if 1
-+  if (!callback.is_null())
-+    callback.Run(GURL(request->url()), GURL(request->url()), false);
-+#else
-   std::string request_data;
-   if (!request->SerializeToString(&request_data)) {
-     UpdateEnumUMAHistogram(REPORT_FAILED_SERIALIZATION);
-@@ -442,6 +453,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
- 
-   // Record that we made a malware request
-   malware_report_times_.push(base::Time::Now());
-+#endif
- }
- 
  void ClientSideDetectionService::HandlePhishingVerdict(
 -- 
-2.25.1
+2.26.0
 

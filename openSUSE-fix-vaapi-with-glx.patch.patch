@@ -1,0 +1,25 @@
+From 659212ba1f9f762fc2179550a743e984833d917f Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Wed, 8 Apr 2020 21:45:40 +0200
+Subject: [PATCH 11/61] openSUSE fix-vaapi-with-glx.patch
+
+---
+ media/gpu/vaapi/vaapi_picture_tfp.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/media/gpu/vaapi/vaapi_picture_tfp.cc b/media/gpu/vaapi/vaapi_picture_tfp.cc
+index 227c31b18bef0..b42620d74553e 100644
+--- a/media/gpu/vaapi/vaapi_picture_tfp.cc
++++ b/media/gpu/vaapi/vaapi_picture_tfp.cc
+@@ -57,7 +57,7 @@ bool VaapiTFPPicture::Initialize() {
+   if (make_context_current_cb_ && !make_context_current_cb_.Run())
+     return false;
+ 
+-  glx_image_ = new gl::GLImageGLX(size_, GL_RGB);
++  glx_image_ = new gl::GLImageGLX(size_, gfx::BufferFormat::BGRX_8888);
+   if (!glx_image_->Initialize(x_pixmap_)) {
+     // x_pixmap_ will be freed in the destructor.
+     DLOG(ERROR) << "Failed creating a GLX Pixmap for TFP";
+-- 
+2.26.0
+

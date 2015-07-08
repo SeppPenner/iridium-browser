@@ -1,4 +1,4 @@
-From 51f576fff5edc3db61beedfabc1b2ca81f9bba95 Mon Sep 17 00:00:00 2001
+From 9948f99926e67681c4ba570f9e2c11560351ddf6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 9 Nov 2018 11:31:17 +0100
 Subject: [PATCH 58/61] components: disable subdomain stripping
@@ -9,7 +9,7 @@ https://www.bleepingcomputer.com/news/security/chrome-69-shows-the-www-and-m-sub
  1 file changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/components/omnibox/common/omnibox_features.cc b/components/omnibox/common/omnibox_features.cc
-index ec51512df6573..df9a7870ee4bd 100644
+index 90b2ff9621217..a3fd8fd067153 100644
 --- a/components/omnibox/common/omnibox_features.cc
 +++ b/components/omnibox/common/omnibox_features.cc
 @@ -14,34 +14,26 @@ const base::Feature kHideFileUrlScheme {
@@ -50,5 +50,5 @@ index ec51512df6573..df9a7870ee4bd 100644
  
  // Feature used to undo all omnibox elisions on a single click or focus action.
 -- 
-2.25.1
+2.26.0
 

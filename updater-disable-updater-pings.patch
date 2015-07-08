@@ -1,4 +1,4 @@
-From 6fbbb5089f43e61b868dc763c137d2abae2f188e Mon Sep 17 00:00:00 2001
+From 9f7a396b69e79689042c059a434d7c76ab4958fb Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
 Subject: [PATCH 43/61] updater: disable updater pings
@@ -49,5 +49,5 @@ index d809633f00778..12ac97d7498c3 100644
    std::vector<GURL> urls{GURL(kUpdaterJSONDefaultUrl),
                           GURL(kUpdaterJSONFallbackUrl)};
 -- 
-2.25.1
+2.26.0
 

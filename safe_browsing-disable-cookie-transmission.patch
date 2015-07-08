@@ -1,4 +1,4 @@
-From 56274d02a73d5df36fd080f91db1e5d6e06c8dc8 Mon Sep 17 00:00:00 2001
+From f4eca93d8f2b059d36e11afc7043cb8cfbfe6abd Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
 Subject: [PATCH 46/61] safe_browsing: disable cookie transmission
@@ -8,17 +8,17 @@ prevents the long-living tracking cookie from being set.
 
 References: https://github.com/iridium-browser/iridium-browser/issues/37
 ---
- chrome/browser/safe_browsing/client_side_detection_service.cc | 4 ++--
- .../download_protection/check_client_download_request_base.cc | 2 +-
- .../download_protection/ppapi_download_request.cc             | 2 +-
- components/safe_browsing/browser/threat_details_cache.cc      | 3 ++-
- 4 files changed, 6 insertions(+), 5 deletions(-)
+ chrome/browser/safe_browsing/client_side_detection_service.cc  | 2 +-
+ .../download_protection/check_client_download_request_base.cc  | 2 +-
+ .../download_protection/ppapi_download_request.cc              | 2 +-
+ .../safe_browsing/content/browser/threat_details_cache.cc      | 3 ++-
+ 4 files changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 453cd94fa569e..7a95432d441ed 100644
+index c611a95dafba2..6e324515de44f 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -346,7 +346,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -291,7 +291,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = GetClientReportUrl(kClientReportPhishingUrl);
    resource_request->method = "POST";
@@ -27,20 +27,11 @@ index 453cd94fa569e..7a95432d441ed 100644
    auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
-@@ -428,7 +428,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
-   auto resource_request = std::make_unique<network::ResourceRequest>();
-   resource_request->url = GetClientReportUrl(kClientReportMalwareUrl);
-   resource_request->method = "POST";
--  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
-   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
-                                                  traffic_annotation);
-   loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-index fb08a8bf427c8..b57fde4d249f1 100644
+index b2fcf42e6ce7f..62a9c28240b90 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-@@ -625,7 +625,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
+@@ -586,7 +586,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -50,7 +41,7 @@ index fb08a8bf427c8..b57fde4d249f1 100644
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-index 8076255e6e13e..084ad715ae86e 100644
+index 8e26ca834492e..d3cc7d173e5ff 100644
 --- a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
 @@ -249,7 +249,7 @@ void PPAPIDownloadRequest::SendRequest() {
@@ -62,10 +53,10 @@ index 8076255e6e13e..084ad715ae86e 100644
    loader_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
-diff --git a/components/safe_browsing/browser/threat_details_cache.cc b/components/safe_browsing/browser/threat_details_cache.cc
-index 9314114913f13..645f707a4b3f7 100644
---- a/components/safe_browsing/browser/threat_details_cache.cc
-+++ b/components/safe_browsing/browser/threat_details_cache.cc
+diff --git a/components/safe_browsing/content/browser/threat_details_cache.cc b/components/safe_browsing/content/browser/threat_details_cache.cc
+index f123958b77cef..bd12d911908a6 100644
+--- a/components/safe_browsing/content/browser/threat_details_cache.cc
++++ b/components/safe_browsing/content/browser/threat_details_cache.cc
 @@ -112,7 +112,8 @@ void ThreatDetailsCacheCollector::OpenEntry() {
    resource_request->url = GURL(resources_it_->first);
    // Only from cache, and don't use cookies.
@@ -77,5 +68,5 @@ index 9314114913f13..645f707a4b3f7 100644
    current_load_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                                     traffic_annotation);
 -- 
-2.25.1
+2.26.0
 

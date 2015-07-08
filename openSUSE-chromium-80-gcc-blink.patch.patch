@@ -1,17 +1,17 @@
-From 1805e16f4197cb55adcf02e7d6e20870a59ed119 Mon Sep 17 00:00:00 2001
+From c7bcb0336397cc2f000372c1db5392d591e6f092 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Feb 2020 18:15:28 +0100
-Subject: [PATCH 08/61] openSUSE chromium-80-gcc-blink.patch
+Subject: [PATCH 07/61] openSUSE chromium-80-gcc-blink.patch
 
 ---
  .../core/editing/commands/delete_selection_command.cc     | 8 ++++++--
  1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc b/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
-index 9425c9c546ef3..b8cc2237f3dce 100644
+index 62204351fd6f0..e73dc86ef9b85 100644
 --- a/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
 +++ b/third_party/blink/renderer/core/editing/commands/delete_selection_command.cc
-@@ -224,6 +224,10 @@ static Position TrailingWhitespacePosition(const Position& position,
+@@ -225,6 +225,10 @@ static Position TrailingWhitespacePosition(const Position& position,
    return Position();
  }
  
@@ -22,7 +22,7 @@ index 9425c9c546ef3..b8cc2237f3dce 100644
  void DeleteSelectionCommand::InitializePositionData(
      EditingState* editing_state) {
    DCHECK(!GetDocument().NeedsLayoutTreeUpdate());
-@@ -253,9 +257,9 @@ void DeleteSelectionCommand::InitializePositionData(
+@@ -254,9 +258,9 @@ void DeleteSelectionCommand::InitializePositionData(
    end_root_ = RootEditableElementOf(end);
  
    start_table_row_ = To<HTMLTableRowElement>(
@@ -35,5 +35,5 @@ index 9425c9c546ef3..b8cc2237f3dce 100644
    // Don't move content out of a table cell.
    // If the cell is non-editable, enclosingNodeOfType won't return it by
 -- 
-2.25.1
+2.26.0
 

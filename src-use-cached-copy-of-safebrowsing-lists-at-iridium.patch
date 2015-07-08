@@ -1,7 +1,7 @@
-From f10a95b0750a04456a1fd18eac1f2ae18b1db6c8 Mon Sep 17 00:00:00 2001
+From 7daa48a21935374461db8f86efc7cb74d52190ea Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Jan 2015 13:57:44 +0100
-Subject: [PATCH 35/61] src: use cached copy of safebrowsing lists at
+Subject: [PATCH 36/61] src: use cached copy of safebrowsing lists at
  iridiumbrowser.de
 
 To avoid contacing Google, let the UA use safebrowsing lists hosted at
@@ -12,10 +12,10 @@ regular basis.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_model_loader.cc b/chrome/browser/safe_browsing/client_side_model_loader.cc
-index 41b579ff2ddc3..b081796809a18 100644
+index 1f626d44cb867..8e4b3b74237d9 100644
 --- a/chrome/browser/safe_browsing/client_side_model_loader.cc
 +++ b/chrome/browser/safe_browsing/client_side_model_loader.cc
-@@ -35,7 +35,7 @@ namespace safe_browsing {
+@@ -34,7 +34,7 @@ namespace safe_browsing {
  const size_t ModelLoader::kMaxModelSizeBytes = 150 * 1024;
  const int ModelLoader::kClientModelFetchIntervalMs = 3600 * 1000;
  const char ModelLoader::kClientModelUrlPrefix[] =
@@ -25,5 +25,5 @@ index 41b579ff2ddc3..b081796809a18 100644
      "client_model_v5%s_variation_%d.pb";
  const char ModelLoader::kClientModelFinchExperiment[] =
 -- 
-2.25.1
+2.26.0
 

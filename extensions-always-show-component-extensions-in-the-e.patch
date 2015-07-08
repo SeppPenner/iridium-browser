@@ -1,4 +1,4 @@
-From 1da8eefaaf36d74b590e99a538482d9e79023c22 Mon Sep 17 00:00:00 2001
+From fe44ce56d4ba94ca8befd40b209f05ca98165235 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 25 Jun 2015 15:34:10 +0200
 Subject: [PATCH 50/61] extensions: always show component extensions in the ext
@@ -35,5 +35,5 @@ index 34998826841b6..24bfd78bae577 100644
  
  Extension::ManifestData* Extension::GetManifestData(const std::string& key)
 -- 
-2.25.1
+2.26.0
 
