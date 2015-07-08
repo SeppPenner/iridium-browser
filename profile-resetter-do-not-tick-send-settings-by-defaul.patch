@@ -1,7 +1,7 @@
-From 8b562c42564edfba94a228d0b6d5aa8d4db156a1 Mon Sep 17 00:00:00 2001
+From ae8ba22294b5f5736dbda10c05ee44cffbae4342 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 28 Oct 2014 18:45:19 +0100
-Subject: [PATCH 11/64] profile-resetter: do not tick send-settings by default
+Subject: [PATCH 09/58] profile-resetter: do not tick send-settings by default
 
 When the user wishes to reset his preferences, Chromium would suggest
 to send over the old settings to Google. I presume that this is for
@@ -28,5 +28,5 @@ index 4c7b445e34be..50c6a00b774b 100644
  GURL GetClientReportUrl(const std::string& report_url) {
    GURL url(report_url);
 -- 
-2.15.0
+2.16.3
 

@@ -1,7 +1,7 @@
-From 2ac0c1dc682ae0b7ac2cca80b00e60c8043f5a15 Mon Sep 17 00:00:00 2001
+From 3ec068a8a6b22fd11b5c6065471a115289d47e90 Mon Sep 17 00:00:00 2001
 From: Simon Eisenmann <simon@struktur.de>
 Date: Mon, 26 Oct 2015 14:18:05 +0100
-Subject: [PATCH 56/64] translate: disable fetching of translate languages from
+Subject: [PATCH 51/58] translate: disable fetching of translate languages from
  server
 
 GH issue #18.
@@ -10,10 +10,10 @@ GH issue #18.
  1 file changed, 2 insertions(+)
 
 diff --git a/components/translate/core/browser/translate_language_list.cc b/components/translate/core/browser/translate_language_list.cc
-index b5d27cf8d706..8e928809a550 100644
+index 41ceeaa354ef..de07ba4eb0c0 100644
 --- a/components/translate/core/browser/translate_language_list.cc
 +++ b/components/translate/core/browser/translate_language_list.cc
-@@ -206,6 +206,7 @@ GURL TranslateLanguageList::TranslateLanguageUrl() {
+@@ -207,6 +207,7 @@ GURL TranslateLanguageList::TranslateLanguageUrl() {
  }
  
  void TranslateLanguageList::RequestLanguageList() {
@@ -21,7 +21,7 @@ index b5d27cf8d706..8e928809a550 100644
    // If resource requests are not allowed, we'll get a callback when they are.
    if (!resource_requests_allowed_) {
      request_pending_ = true;
-@@ -232,6 +233,7 @@ void TranslateLanguageList::RequestLanguageList() {
+@@ -233,6 +234,7 @@ void TranslateLanguageList::RequestLanguageList() {
      if (!result)
        NotifyEvent(__LINE__, "Request is omitted due to retry limit");
    }
@@ -30,5 +30,5 @@ index b5d27cf8d706..8e928809a550 100644
  
  void TranslateLanguageList::SetResourceRequestsAllowed(bool allowed) {
 -- 
-2.15.0
+2.16.3
 

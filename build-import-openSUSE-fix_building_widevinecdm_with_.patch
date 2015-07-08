@@ -1,7 +1,7 @@
-From d1ce0a42e58d3219ea88878153ceaffa77475266 Mon Sep 17 00:00:00 2001
+From 22000ce4ba6001868edc119593bde8a6c5418b5a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 26 Sep 2017 10:02:32 +0200
-Subject: [PATCH 07/64] build: import openSUSE
+Subject: [PATCH 05/58] build: import openSUSE
  fix_building_widevinecdm_with_chromium.patch
 
 ---
@@ -21,5 +21,5 @@ index 659683ba2aca..dd76a0b5f785 100644
  
  #endif  // WIDEVINE_CDM_VERSION_H_
 -- 
-2.15.0
+2.16.3
 

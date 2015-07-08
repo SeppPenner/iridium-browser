@@ -1,7 +1,7 @@
-From 75dd4d147b8fbeb59f6af42c930e0ef86ff4b87b Mon Sep 17 00:00:00 2001
+From ae6659fb959fa956b2aa9b352c3488665dbd2e4f Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 43/64] updater: disable updater pings
+Subject: [PATCH 39/58] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
@@ -25,7 +25,7 @@ index 754f83394e15..b3ea2e5233dc 100644
  const char kUpdaterFallbackUrl[] = "http://clients2.google.com/service/update2";
  
 diff --git a/components/component_updater/configurator_impl.cc b/components/component_updater/configurator_impl.cc
-index efc46c515a69..d9b1eb4763bd 100644
+index 144d250e3a9d..dec0bd957874 100644
 --- a/components/component_updater/configurator_impl.cc
 +++ b/components/component_updater/configurator_impl.cc
 @@ -43,7 +43,9 @@ const char kSwitchRequestParam[] = "test-request";
@@ -33,12 +33,12 @@ index efc46c515a69..d9b1eb4763bd 100644
  // Disables pings. Pings are the requests sent to the update server that report
  // the success or the failure of component install or update attempts.
 +#if 0
- extern const char kSwitchDisablePings[] = "disable-pings";
+ const char kSwitchDisablePings[] = "disable-pings";
 +#endif
  
  // Sets the URL for updates.
  const char kSwitchUrlSource[] = "url-source";
-@@ -96,7 +98,6 @@ ConfiguratorImpl::ConfiguratorImpl(
+@@ -93,7 +95,6 @@ ConfiguratorImpl::ConfiguratorImpl(const base::CommandLine* cmdline,
        cmdline->GetSwitchValueASCII(switches::kComponentUpdater), ",",
        base::KEEP_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
    fast_update_ = base::ContainsValue(switch_values, kSwitchFastUpdate);
@@ -46,7 +46,7 @@ index efc46c515a69..d9b1eb4763bd 100644
    deltas_enabled_ =
        !base::ContainsValue(switch_values, kSwitchDisableDeltaUpdates);
  
-@@ -143,6 +144,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
+@@ -140,6 +141,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
      return urls;
    }
  
@@ -54,7 +54,7 @@ index efc46c515a69..d9b1eb4763bd 100644
    if (base::FeatureList::IsEnabled(kAlternateComponentUrls)) {
      urls.push_back(GURL(kUpdaterDefaultUrlAlt));
      urls.push_back(GURL(kUpdaterFallbackUrlAlt));
-@@ -153,7 +155,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
+@@ -150,7 +152,7 @@ std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
  
    if (require_encryption_)
      update_client::RemoveUnsecureUrls(&urls);
@@ -64,5 +64,5 @@ index efc46c515a69..d9b1eb4763bd 100644
  }
  
 -- 
-2.15.0
+2.16.3
 

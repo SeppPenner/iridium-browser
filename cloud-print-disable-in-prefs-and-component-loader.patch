@@ -1,7 +1,7 @@
-From c5ac56f361cf345e270fa1b14402bbc31571195d Mon Sep 17 00:00:00 2001
+From c54acaec751c46c04f03d915ab15c410af894857 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
-Subject: [PATCH 20/64] cloud-print: disable in prefs and component loader
+Subject: [PATCH 17/58] cloud-print: disable in prefs and component loader
 
 Cloud Print should normally be autodisabled if no printers are shared.
 But maybe that is not enough(?) Probably also needs to gain a checkbox
@@ -16,10 +16,10 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 796b0bf956b0..09c6aadf2f66 100644
+index 9829c085696b..dbac5fe0e5cb 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -494,9 +494,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
+@@ -481,9 +481,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
          base::FilePath(FILE_PATH_LITERAL("bookmark_manager")));
    }
  #if BUILDFLAG(ENABLE_PRINTING)
@@ -32,10 +32,10 @@ index 796b0bf956b0..09c6aadf2f66 100644
  #endif  // defined(OS_CHROMEOS)
  
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 3ed02ec2394d..212e8c3324ba 100644
+index aafc82168cdb..0c5b14b372bc 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -66,7 +66,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -69,7 +69,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
@@ -45,7 +45,7 @@ index 3ed02ec2394d..212e8c3324ba 100644
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacement);
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
 diff --git a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-index 8d043bdcef50..69aa9f42d449 100644
+index 2c1cb6e35676..0948c4178294 100644
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 +++ b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 @@ -143,10 +143,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(
@@ -60,5 +60,5 @@ index 8d043bdcef50..69aa9f42d449 100644
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
 -- 
-2.15.0
+2.16.3
 

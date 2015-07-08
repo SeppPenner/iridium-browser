@@ -1,7 +1,7 @@
-From 32fe677a0b26170995ce21f1032e9c61afc00663 Mon Sep 17 00:00:00 2001
+From dff3c2a1a54e6880c14fd2bdceb798df963d43b0 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 32/64] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 29/58] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -9,7 +9,7 @@ Subject: [PATCH 32/64] build: fix OSX branded build crashes on OSX
  2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/chrome/app/theme/chromium/BRANDING b/chrome/app/theme/chromium/BRANDING
-index 6a6bc265f7ee..79efa5ca50b6 100644
+index 4f9ef78ce599..eedf1f1cc35a 100644
 --- a/chrome/app/theme/chromium/BRANDING
 +++ b/chrome/app/theme/chromium/BRANDING
 @@ -1,9 +1,9 @@
@@ -19,18 +19,18 @@ index 6a6bc265f7ee..79efa5ca50b6 100644
 -PRODUCT_SHORTNAME=Chromium
 -PRODUCT_INSTALLER_FULLNAME=Chromium Installer
 -PRODUCT_INSTALLER_SHORTNAME=Chromium Installer
--COPYRIGHT=Copyright 2016 The Chromium Authors. All rights reserved.
+-COPYRIGHT=Copyright 2017 The Chromium Authors. All rights reserved.
 +COMPANY_FULLNAME=The browser authors
 +COMPANY_SHORTNAME=The browser authors
 +PRODUCT_FULLNAME=Iridium
 +PRODUCT_SHORTNAME=Iridium
 +PRODUCT_INSTALLER_FULLNAME=Iridium Installer
 +PRODUCT_INSTALLER_SHORTNAME=Iridium Installer
-+COPYRIGHT=Copyright 2016 the browser authors. Some rights reserved.
++COPYRIGHT=Copyright 2018 The browser authors. All rights reserved.
  MAC_BUNDLE_ID=org.chromium.Chromium
  MAC_CREATOR_CODE=Cr24
 diff --git a/chrome/common/chrome_constants.cc b/chrome/common/chrome_constants.cc
-index 99a3f8167560..0edcddff5903 100644
+index f32ffad1a95b..59963e387079 100644
 --- a/chrome/common/chrome_constants.cc
 +++ b/chrome/common/chrome_constants.cc
 @@ -10,11 +10,11 @@
@@ -48,5 +48,5 @@ index 99a3f8167560..0edcddff5903 100644
  #error Unknown branding
  #endif
 -- 
-2.15.0
+2.16.3
 

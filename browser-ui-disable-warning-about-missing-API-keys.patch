@@ -1,7 +1,7 @@
-From cc51b7dbd8ff5042bfb4edace95ca5f50ea01986 Mon Sep 17 00:00:00 2001
+From 6f4564addc188ecb87cb385c2a179ba1e19b5cbe Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <bauch@struktur.de>
 Date: Tue, 9 Dec 2014 17:19:41 +0100
-Subject: [PATCH 12/64] browser-ui: disable warning about missing API keys
+Subject: [PATCH 10/58] browser-ui: disable warning about missing API keys
 
 We do not want to use the services anyway ;)
 ---
@@ -9,17 +9,17 @@ We do not want to use the services anyway ;)
  1 file changed, 1 insertion(+)
 
 diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
-index 6bbd8826c497..f93b0925bff1 100644
+index f7af1a5abfdc..641a55d998ef 100644
 --- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
 +++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
-@@ -15,6 +15,7 @@
+@@ -14,6 +14,7 @@
  
  // static
  void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
 +  return;
-   if (google_apis::HasKeysConfigured())
-     return;
- 
+   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
+       std::unique_ptr<ConfirmInfoBarDelegate>(
+           new GoogleApiKeysInfoBarDelegate())));
 -- 
-2.15.0
+2.16.3
 

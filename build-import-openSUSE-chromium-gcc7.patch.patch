@@ -1,0 +1,183 @@
+From e3bb1edd6fd366118778f167bcc8c50409e1cda2 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Wed, 25 Apr 2018 08:27:09 +0200
+Subject: [PATCH 06/58] build: import openSUSE chromium-gcc7.patch
+
+---
+ cc/raster/playback_image_provider.cc                      |  7 +++++--
+ cc/raster/playback_image_provider.h                       |  6 ++++--
+ cc/raster/playback_image_provider_unittest.cc             | 15 ++++++++++-----
+ .../browser/supervised_user/supervised_user_url_filter.cc |  2 +-
+ content/browser/appcache/appcache_request_handler.cc      |  2 +-
+ .../service_worker_controllee_request_handler.cc          |  2 +-
+ device/fido/device_response_converter.cc                  |  4 ++--
+ 7 files changed, 24 insertions(+), 14 deletions(-)
+
+diff --git a/cc/raster/playback_image_provider.cc b/cc/raster/playback_image_provider.cc
+index 557b421bbaef..b2ace4dc4fa8 100644
+--- a/cc/raster/playback_image_provider.cc
++++ b/cc/raster/playback_image_provider.cc
+@@ -20,7 +20,7 @@ void UnrefImageFromCache(DrawImage draw_image,
+ PlaybackImageProvider::PlaybackImageProvider(
+     ImageDecodeCache* cache,
+     const gfx::ColorSpace& target_color_space,
+-    base::Optional<Settings> settings)
++    base::Optional<Settings>&& settings)
+     : cache_(cache),
+       target_color_space_(target_color_space),
+       settings_(std::move(settings)) {
+@@ -70,7 +70,10 @@ PlaybackImageProvider::GetDecodedDrawImage(const DrawImage& draw_image) {
+ }
+ 
+ PlaybackImageProvider::Settings::Settings() = default;
+-PlaybackImageProvider::Settings::Settings(const Settings& other) = default;
++PlaybackImageProvider::Settings::Settings(PlaybackImageProvider::Settings&&) =
++    default;
+ PlaybackImageProvider::Settings::~Settings() = default;
++PlaybackImageProvider::Settings& PlaybackImageProvider::Settings::operator=(
++    PlaybackImageProvider::Settings&&) = default;
+ 
+ }  // namespace cc
+diff --git a/cc/raster/playback_image_provider.h b/cc/raster/playback_image_provider.h
+index 67974f3f341d..a33092d2b5b4 100644
+--- a/cc/raster/playback_image_provider.h
++++ b/cc/raster/playback_image_provider.h
+@@ -20,8 +20,10 @@ class CC_EXPORT PlaybackImageProvider : public ImageProvider {
+  public:
+   struct CC_EXPORT Settings {
+     Settings();
+-    Settings(const Settings& other);
++    Settings(const Settings&) = delete;
++    Settings(Settings&&);
+     ~Settings();
++    Settings& operator=(Settings&&);
+ 
+     // The set of image ids to skip during raster.
+     PaintImageIdFlatSet images_to_skip;
+@@ -34,7 +36,7 @@ class CC_EXPORT PlaybackImageProvider : public ImageProvider {
+   // If no settings are provided, all images are skipped during rasterization.
+   PlaybackImageProvider(ImageDecodeCache* cache,
+                         const gfx::ColorSpace& target_color_space,
+-                        base::Optional<Settings> settings);
++                        base::Optional<Settings>&& settings);
+   ~PlaybackImageProvider() override;
+ 
+   PlaybackImageProvider(PlaybackImageProvider&& other);
+diff --git a/cc/raster/playback_image_provider_unittest.cc b/cc/raster/playback_image_provider_unittest.cc
+index 0206999d6e4a..40036e87032d 100644
+--- a/cc/raster/playback_image_provider_unittest.cc
++++ b/cc/raster/playback_image_provider_unittest.cc
+@@ -85,7 +85,8 @@ TEST(PlaybackImageProviderTest, SkipsSomeImages) {
+   settings.emplace();
+   settings->images_to_skip = {skip_image.stable_id()};
+ 
+-  PlaybackImageProvider provider(&cache, gfx::ColorSpace(), settings);
++  PlaybackImageProvider provider(&cache, gfx::ColorSpace(),
++                                 std::move(settings));
+ 
+   SkIRect rect = SkIRect::MakeWH(10, 10);
+   SkMatrix matrix = SkMatrix::I();
+@@ -99,7 +100,8 @@ TEST(PlaybackImageProviderTest, RefAndUnrefDecode) {
+ 
+   base::Optional<PlaybackImageProvider::Settings> settings;
+   settings.emplace();
+-  PlaybackImageProvider provider(&cache, gfx::ColorSpace(), settings);
++  PlaybackImageProvider provider(&cache, gfx::ColorSpace(),
++                                 std::move(settings));
+ 
+   {
+     SkRect rect = SkRect::MakeWH(10, 10);
+@@ -127,7 +129,8 @@ TEST(PlaybackImageProviderTest, SwapsGivenFrames) {
+   settings.emplace();
+   settings->image_to_current_frame_index = image_to_frame;
+ 
+-  PlaybackImageProvider provider(&cache, gfx::ColorSpace(), settings);
++  PlaybackImageProvider provider(&cache, gfx::ColorSpace(),
++                                 std::move(settings));
+ 
+   SkIRect rect = SkIRect::MakeWH(10, 10);
+   SkMatrix matrix = SkMatrix::I();
+@@ -143,7 +146,8 @@ TEST(PlaybackImageProviderTest, BitmapImages) {
+ 
+   base::Optional<PlaybackImageProvider::Settings> settings;
+   settings.emplace();
+-  PlaybackImageProvider provider(&cache, gfx::ColorSpace(), settings);
++  PlaybackImageProvider provider(&cache, gfx::ColorSpace(),
++                                 std::move(settings));
+ 
+   {
+     SkIRect rect = SkIRect::MakeWH(10, 10);
+@@ -174,7 +178,8 @@ TEST(PlaybackImageProviderTest, TextureImages) {
+   MockDecodeCache cache;
+   base::Optional<PlaybackImageProvider::Settings> settings;
+   settings.emplace();
+-  PlaybackImageProvider provider(&cache, gfx::ColorSpace(), settings);
++  PlaybackImageProvider provider(&cache, gfx::ColorSpace(),
++                                 std::move(settings));
+   {
+     SkIRect rect = SkIRect::MakeWH(10, 10);
+     SkMatrix matrix = SkMatrix::I();
+diff --git a/chrome/browser/supervised_user/supervised_user_url_filter.cc b/chrome/browser/supervised_user/supervised_user_url_filter.cc
+index 64d6569088d1..a3a81d77f0a3 100644
+--- a/chrome/browser/supervised_user/supervised_user_url_filter.cc
++++ b/chrome/browser/supervised_user/supervised_user_url_filter.cc
+@@ -368,7 +368,7 @@ SupervisedUserURLFilter::GetFilteringBehaviorForURL(
+ 
+   // Allow navigations to whitelisted origins (currently families.google.com).
+   static const base::NoDestructor<base::flat_set<GURL>> kWhitelistedOrigins(
+-      {GURL(kFamiliesUrl).GetOrigin()});
++      base::flat_set<GURL>({GURL(kFamiliesUrl).GetOrigin()}));
+   if (base::ContainsKey(*kWhitelistedOrigins, effective_url.GetOrigin()))
+     return ALLOW;
+ 
+diff --git a/content/browser/appcache/appcache_request_handler.cc b/content/browser/appcache/appcache_request_handler.cc
+index 63cc984b4276..ff638ab56571 100644
+--- a/content/browser/appcache/appcache_request_handler.cc
++++ b/content/browser/appcache/appcache_request_handler.cc
+@@ -639,7 +639,7 @@ AppCacheRequestHandler::MaybeCreateSubresourceLoaderParams() {
+ 
+   SubresourceLoaderParams params;
+   params.loader_factory_info = factory_ptr.PassInterface();
+-  return params;
++  return base::Optional<SubresourceLoaderParams>(std::move(params));
+ }
+ 
+ void AppCacheRequestHandler::MaybeCreateSubresourceLoader(
+diff --git a/content/browser/service_worker/service_worker_controllee_request_handler.cc b/content/browser/service_worker/service_worker_controllee_request_handler.cc
+index 2ed0c353cad3..5b09f6d670c4 100644
+--- a/content/browser/service_worker/service_worker_controllee_request_handler.cc
++++ b/content/browser/service_worker/service_worker_controllee_request_handler.cc
+@@ -271,7 +271,7 @@ ServiceWorkerControlleeRequestHandler::MaybeCreateSubresourceLoaderParams() {
+   controller_info->object_info = provider_host_->GetOrCreateServiceWorkerHandle(
+       provider_host_->controller());
+   params.controller_service_worker_info = std::move(controller_info);
+-  return params;
++  return base::Optional<SubresourceLoaderParams>(std::move(params));
+ }
+ 
+ void ServiceWorkerControlleeRequestHandler::PrepareForMainResource(
+diff --git a/device/fido/device_response_converter.cc b/device/fido/device_response_converter.cc
+index 050ff2fc5d10..6fdf85c840ee 100644
+--- a/device/fido/device_response_converter.cc
++++ b/device/fido/device_response_converter.cc
+@@ -121,7 +121,7 @@ base::Optional<AuthenticatorGetAssertionResponse> ReadCTAPGetAssertionResponse(
+     response.SetNumCredentials(it->second.GetUnsigned());
+   }
+ 
+-  return response;
++  return std::move(response);
+ }
+ 
+ base::Optional<AuthenticatorGetInfoResponse> ReadCTAPGetInfoResponse(
+@@ -241,7 +241,7 @@ base::Optional<AuthenticatorGetInfoResponse> ReadCTAPGetInfoResponse(
+     response.SetPinProtocols(std::move(supported_pin_protocols));
+   }
+ 
+-  return response;
++  return std::move(response);
+ }
+ 
+ }  // namespace device
+-- 
+2.16.3
+

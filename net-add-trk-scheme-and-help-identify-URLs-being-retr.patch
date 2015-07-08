@@ -1,7 +1,7 @@
-From e28b6f3825d3db42d6fcfa9e84946a48f7374f9f Mon Sep 17 00:00:00 2001
+From 64f3d9744e16263b3d5a4fd10c5a2e2e57b469b9 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
-Subject: [PATCH 42/64] net: add "trk:" scheme and help identify URLs being
+Subject: [PATCH 38/58] net: add "trk:" scheme and help identify URLs being
  retrieved
 
 The Chromium codebase has left us with a number of suspect URLs, and
@@ -28,7 +28,7 @@ most of the URL that get loaded pass through here. The trk: prefix is
 stripped and processing continues with the inner URL.
 ---
  chrome/BUILD.gn                                    |  2 +
- chrome/app/chrome_main.cc                          | 20 ++++++++
+ chrome/app/chrome_main.cc                          | 17 +++++++
  .../chrome_autocomplete_scheme_classifier.cc       |  1 +
  chrome/browser/history/history_utils.cc            |  1 +
  chrome/browser/ui/browser_navigator.cc             |  8 +++
@@ -49,7 +49,7 @@ stripped and processing continues with the inner URL.
  url/gurl.h                                         |  5 ++
  url/url_constants.cc                               |  1 +
  url/url_constants.h                                |  1 +
- 22 files changed, 278 insertions(+), 4 deletions(-)
+ 22 files changed, 275 insertions(+), 4 deletions(-)
  create mode 100644 iridium/BUILD.gn
  create mode 100644 iridium/trkbar.cpp
  create mode 100644 iridium/trkbar.h
@@ -57,18 +57,18 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index cf36e40ee542..b09dff10e932 100644
+index fbcf20cd0411..23cb2d910b1b 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -258,6 +258,7 @@ if (!is_android && !is_mac) {
+@@ -249,6 +249,7 @@ if (!is_android && !is_mac) {
          deps += [
            # On Linux, link the dependencies (libraries) that make up actual
            # Chromium functionality directly into the executable.
 +          "//iridium:trknotify",
            ":browser_dependencies",
            ":child_dependencies",
-           ":manpage",
-@@ -508,6 +509,7 @@ if (is_win) {
+ 
+@@ -497,6 +498,7 @@ if (is_win) {
          "//content/public/app:child",
          "//content/public/common:service_names",
          "//headless:headless_shell_child_lib",
@@ -77,7 +77,7 @@ index cf36e40ee542..b09dff10e932 100644
        ]
  
 diff --git a/chrome/app/chrome_main.cc b/chrome/app/chrome_main.cc
-index e05f30380d9d..69d1077b8178 100644
+index 9ff589299bff..293757f6ebf9 100644
 --- a/chrome/app/chrome_main.cc
 +++ b/chrome/app/chrome_main.cc
 @@ -15,6 +15,10 @@
@@ -89,9 +89,9 @@ index e05f30380d9d..69d1077b8178 100644
 +#	include "iridium/trknotify.h"
 +#endif
  
- #if BUILDFLAG(ENABLE_PACKAGE_MASH_SERVICES)
- #include "services/service_manager/runner/common/client_util.h"
-@@ -47,6 +51,19 @@ int ChromeMain(int argc, const char** argv);
+ #if defined(OS_MACOSX)
+ #include "chrome/app/chrome_main_mac.h"
+@@ -43,6 +47,19 @@ int ChromeMain(int argc, const char** argv);
  }
  #endif
  
@@ -111,16 +111,6 @@ index e05f30380d9d..69d1077b8178 100644
  #if defined(OS_WIN)
  DLLEXPORT int __cdecl ChromeMain(HINSTANCE instance,
                                   sandbox::SandboxInterfaceInfo* sandbox_info,
-@@ -119,6 +136,9 @@ int ChromeMain(int argc, const char** argv) {
-   }
- #endif  // BUILDFLAG(ENABLE_PACKAGE_MASH_SERVICES)
- 
-+#if !defined(CHROME_MULTIPLE_DLL_CHILD)
-+  net::trace_urlreq_cb = &trace_url_request;
-+#endif
-   int rv = content::ContentMain(params);
- 
-   return rv;
 diff --git a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc b/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
 index e356d0f12753..8c54fbfc64c3 100644
 --- a/chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.cc
@@ -146,10 +136,10 @@ index 8bf6a91e67cd..57dd5e1fb5c0 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme))
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index 0dd889e0e6cf..138a80f66c5c 100644
+index edd0e2e5fc05..1aae8c0da293 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
-@@ -635,6 +635,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
+@@ -705,6 +705,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
      return stripped_url.is_valid() &&
          IsURLAllowedInIncognito(stripped_url, browser_context);
    }
@@ -165,10 +155,10 @@ index 0dd889e0e6cf..138a80f66c5c 100644
    // chrome://extensions is on the list because it redirects to
    // chrome://settings.
 diff --git a/chrome/browser/ui/singleton_tabs.cc b/chrome/browser/ui/singleton_tabs.cc
-index d956fdb2f9b2..ceb3da71e125 100644
+index 6019fb0006a7..1594fcdcb0ec 100644
 --- a/chrome/browser/ui/singleton_tabs.cc
 +++ b/chrome/browser/ui/singleton_tabs.cc
-@@ -99,7 +99,8 @@ int GetIndexOfSingletonTab(NavigateParams* params) {
+@@ -101,7 +101,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
  
      // Skip view-source tabs. This is needed because RewriteURLIfNecessary
      // removes the "view-source:" scheme which leads to incorrect matching.
@@ -179,22 +169,22 @@ index d956fdb2f9b2..ceb3da71e125 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index 398cee4f1dde..5bb82cb6179b 100644
+index 2a996972987c..d4cf8d3d5512 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
-@@ -147,6 +147,7 @@ class InfoBarDelegate {
-     VR_SERVICES_UPGRADE_ANDROID = 74,
-     READER_MODE_INFOBAR_ANDROID = 75,
-     VR_FEEDBACK_INFOBAR_ANDROID = 76,
+@@ -149,6 +149,7 @@ class InfoBarDelegate {
+     SURVEY_INFOBAR_ANDROID = 78,
+     NEAR_OOM_INFOBAR_ANDROID = 79,
+     INSTALLABLE_AMBIENT_BADGE_INFOBAR_DELEGATE = 80,
 +    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
    };
  
    // Describes navigation events, used to decide whether infobars should be
 diff --git a/components/omnibox/browser/autocomplete_input.cc b/components/omnibox/browser/autocomplete_input.cc
-index 24951584f5fd..f063f9327be6 100644
+index 43fc0dc783d8..8ce7fefa1c41 100644
 --- a/components/omnibox/browser/autocomplete_input.cc
 +++ b/components/omnibox/browser/autocomplete_input.cc
-@@ -432,7 +432,8 @@ void AutocompleteInput::ParseForEmphasizeComponents(
+@@ -487,7 +487,8 @@ void AutocompleteInput::ParseForEmphasizeComponents(
    int after_scheme_and_colon = parts.scheme.end() + 1;
    // For the view-source scheme, we should emphasize the scheme and host of the
    // URL qualified by the view-source prefix.
@@ -204,7 +194,7 @@ index 24951584f5fd..f063f9327be6 100644
        (static_cast<int>(text.length()) > after_scheme_and_colon)) {
      // Obtain the URL prefixed by view-source and parse it.
      base::string16 real_url(text.substr(after_scheme_and_colon));
-@@ -499,9 +500,10 @@ int AutocompleteInput::NumNonHostComponents(const url::Parsed& parts) {
+@@ -556,9 +557,10 @@ int AutocompleteInput::NumNonHostComponents(const url::Parsed& parts) {
  bool AutocompleteInput::HasHTTPScheme(const base::string16& input) {
    std::string utf8_input(base::UTF16ToUTF8(input));
    url::Component scheme;
@@ -214,16 +204,16 @@ index 24951584f5fd..f063f9327be6 100644
 +  else if (url::FindAndCompareScheme(utf8_input, kViewSourceScheme, &scheme))
      utf8_input.erase(0, scheme.end() + 1);
 -  }
-   return url::FindAndCompareScheme(utf8_input, url::kHttpScheme, NULL);
+   return url::FindAndCompareScheme(utf8_input, url::kHttpScheme, nullptr);
  }
  
 diff --git a/content/browser/browser_url_handler_impl.cc b/content/browser/browser_url_handler_impl.cc
-index feef0ca919a3..32df036a2d02 100644
+index ef78ddd5e26b..8a1c8c900493 100644
 --- a/content/browser/browser_url_handler_impl.cc
 +++ b/content/browser/browser_url_handler_impl.cc
-@@ -13,9 +13,28 @@
- #include "content/public/browser/content_browser_client.h"
+@@ -14,9 +14,28 @@
  #include "content/public/common/url_constants.h"
+ #include "content/public/common/url_utils.h"
  #include "url/gurl.h"
 +#include "net/url_request/url_request.h"
  
@@ -250,7 +240,7 @@ index feef0ca919a3..32df036a2d02 100644
  // Handles rewriting view-source URLs for what we'll actually load.
  static bool HandleViewSource(GURL* url, BrowserContext* browser_context) {
    if (url->SchemeIs(kViewSourceScheme)) {
-@@ -99,6 +118,7 @@ BrowserURLHandlerImpl::BrowserURLHandlerImpl() :
+@@ -100,6 +119,7 @@ BrowserURLHandlerImpl::BrowserURLHandlerImpl() :
    AddHandlerPair(&HandleViewSource, &ReverseViewSource);
  
    GetContentClient()->browser()->BrowserURLHandlerCreated(this);
@@ -259,13 +249,13 @@ index feef0ca919a3..32df036a2d02 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index 53dbb689cb9e..05a497a31e0c 100644
+index 51e217a963a4..12f46f5c4467 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -353,6 +353,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -348,6 +348,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+   RegisterPseudoScheme(url::kAboutScheme);
+   RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
-   RegisterPseudoScheme(url::kHttpSuboriginScheme);
-   RegisterPseudoScheme(url::kHttpsSuboriginScheme);
 +  RegisterPseudoScheme(url::kTraceScheme);
  }
  
@@ -467,10 +457,10 @@ index 000000000000..3c58d22a4426
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index a66d192b678b..14b9e5386218 100644
+index 323d0db76470..050219c786f4 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
-@@ -48,6 +48,8 @@ using std::string;
+@@ -53,6 +53,8 @@ using std::string;
  
  namespace net {
  
@@ -478,8 +468,8 @@ index a66d192b678b..14b9e5386218 100644
 +
  namespace {
  
- // Max number of http redirects to follow.  Same number as gecko.
-@@ -593,6 +595,10 @@ URLRequest::URLRequest(const GURL& url,
+ // TODO(battre): Delete this, see http://crbug.com/89321:
+@@ -581,6 +583,10 @@ URLRequest::URLRequest(const GURL& url,
    // Sanity check out environment.
    DCHECK(base::ThreadTaskRunnerHandle::IsSet());
  
@@ -487,14 +477,14 @@ index a66d192b678b..14b9e5386218 100644
 +		(*trace_urlreq_cb)("URLRequest", url);
 +	if (url.scheme() == url::kTraceScheme)
 +		url_chain_[0] = url.strip_trk();
-   context->InsertURLRequest(this);
+   context->url_requests()->insert(this);
    net_log_.BeginEvent(
        NetLogEventType::REQUEST_ALIVE,
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index ae6bba1cdfa7..4f07a567b182 100644
+index c0fc8aeee535..056e1bf29ecd 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -894,6 +894,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
+@@ -927,6 +927,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -504,22 +494,22 @@ index ae6bba1cdfa7..4f07a567b182 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index 16ac295edabf..451a2ef77b0b 100644
+index 1c3ff046ce0b..c5fc2f3acc84 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -20513,6 +20513,7 @@ uploading your change for review.  These are checked by presubmit scripts.
-   <int value="74" label="VR_SERVICES_UPGRADE_ANDROID"/>
-   <int value="75" label="READER_MODE_INFOBAR_ANDROID"/>
-   <int value="76" label="VR_FEEDBACK_INFOBAR_ANDROID"/>
+@@ -22864,6 +22864,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
+   <int value="78" label="SURVEY_INFOBAR_ANDROID"/>
+   <int value="79" label="NEAR_OOM_INFOBAR_ANDROID"/>
+   <int value="80" label="INSTALLABLE_AMBIENT_BADGE_INFOBAR_DELEGATE"/>
 +  <int value="9001" label="TRACKING_ALERT_INFOBAR_DELEGATE"/>
  </enum>
  
  <enum name="InfoBarResponse">
 diff --git a/url/gurl.cc b/url/gurl.cc
-index dbf09b8150fc..3d51225790c8 100644
+index cec69c7cc494..c100164d7d52 100644
 --- a/url/gurl.cc
 +++ b/url/gurl.cc
-@@ -540,6 +540,41 @@ size_t GURL::EstimateMemoryUsage() const {
+@@ -470,6 +470,41 @@ size_t GURL::EstimateMemoryUsage() const {
           (parsed_.inner_parsed() ? sizeof(url::Parsed) : 0);
  }
  
@@ -562,10 +552,10 @@ index dbf09b8150fc..3d51225790c8 100644
    return out << url.possibly_invalid_spec();
  }
 diff --git a/url/gurl.h b/url/gurl.h
-index 2d9940b73a42..f04685873e25 100644
+index 96ea8645da69..429a480672d7 100644
 --- a/url/gurl.h
 +++ b/url/gurl.h
-@@ -433,6 +433,9 @@ class URL_EXPORT GURL {
+@@ -425,6 +425,9 @@ class URL_EXPORT GURL {
    // See base/trace_event/memory_usage_estimator.h for more info.
    size_t EstimateMemoryUsage() const;
  
@@ -575,7 +565,7 @@ index 2d9940b73a42..f04685873e25 100644
   private:
    // Variant of the string parsing constructor that allows the caller to elect
    // retain trailing whitespace, if any, on the passed URL spec, but only if
-@@ -477,6 +480,8 @@ class URL_EXPORT GURL {
+@@ -469,6 +472,8 @@ class URL_EXPORT GURL {
  
  // Stream operator so GURL can be used in assertion statements.
  URL_EXPORT std::ostream& operator<<(std::ostream& out, const GURL& url);
@@ -585,7 +575,7 @@ index 2d9940b73a42..f04685873e25 100644
  URL_EXPORT bool operator==(const GURL& x, const GURL& y);
  URL_EXPORT bool operator!=(const GURL& x, const GURL& y);
 diff --git a/url/url_constants.cc b/url/url_constants.cc
-index 37fc82c1c450..4c02cf465930 100644
+index 110c6a7b22d0..8f276729c4ae 100644
 --- a/url/url_constants.cc
 +++ b/url/url_constants.cc
 @@ -24,6 +24,7 @@ const char kHttpScheme[] = "http";
@@ -597,7 +587,7 @@ index 37fc82c1c450..4c02cf465930 100644
  const char kWssScheme[] = "wss";
  
 diff --git a/url/url_constants.h b/url/url_constants.h
-index 7e5cb53face9..c5bd1990d014 100644
+index e06af29979f2..7517e1c5f340 100644
 --- a/url/url_constants.h
 +++ b/url/url_constants.h
 @@ -30,6 +30,7 @@ URL_EXPORT extern const char kHttpScheme[];
@@ -609,5 +599,5 @@ index 7e5cb53face9..c5bd1990d014 100644
  URL_EXPORT extern const char kWssScheme[];
  
 -- 
-2.15.0
+2.16.3
 

@@ -1,16 +1,13 @@
 build-remove-calling-untrusted-hooks.patch
-build-DEPS-pick-an-existing-webrtc-commit.patch
 build-select-default-toolchain.patch
+doc-add-note-to-self-on-build-procedure.patch
 build-import-openSUSE-chromium-last-commit-position-.patch
-build-import-openSUSE-gcc60-fixes.diff.patch
-build-cure-some-warnings.patch
 build-import-openSUSE-fix_building_widevinecdm_with_.patch
-build-import-openSUSE-fix-gn-bootstrap.diff.patch
+build-import-openSUSE-chromium-gcc7.patch.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
 browser-ui-disable-warning-about-missing-API-keys.patch
-mime_util-force-text-x-suse-ymp-to-be-downloaded.patch
 autofill-disable-autofill-download-manager.patch
 prefs-disable-Use-a-web-service-to-help-resolve-navi.patch
 prefs-disable-Use-a-prediction-service-to-help-compl.patch
@@ -37,7 +34,6 @@ updater-disable-auto-update.patch
 plugins-use-cached-copy-of-plugin-description-list-a.patch
 Remove-EV-certificates.patch
 src-add-comments-for-evil-looking-code.patch
-spellchecker-flag-downloading-dictionary-from-Google.patch
 google-cloud-messaging-disable-experiment-status-che.patch
 net-add-trk-scheme-and-help-identify-URLs-being-retr.patch
 updater-disable-updater-pings.patch
@@ -46,7 +42,6 @@ safe_browsing-disable-reporting-of-safebrowsing-over.patch
 safe_browsing-support-trk-prefix.patch
 safe_browsing-disable-cookie-transmission.patch
 promo-disable-Google-promotion-fetching.patch
-hotword-disable-at-build-time-by-default.patch
 google_now-disable-this.patch
 search-show-blank-tab-for-new-tab-page.patch
 Make-default-welcome-page-be-blank.patch
@@ -56,9 +51,8 @@ battery_status_service-disable-more-privacy-nightmar.patch
 translate-disable-fetching-of-translate-languages-fr.patch
 build-use-Wl-no-keep-memory.patch
 icons-iridium-icons.patch
-common-set-Iridium-version-and-change-User-Agent-acc.patch
 first_run-barf-if-metrics_reporting-is-activated.patch
 all-add-trk-prefixes-to-possibly-evil-connections.patch
-doc-add-README.md-for-github.patch
 Disable-smooth-scrolling-on-Linux.patch
-doc-add-note-to-self-on-build-procedure.patch
+doc-add-README.md-for-github.patch
+common-set-Iridium-version-and-change-User-Agent-acc.patch

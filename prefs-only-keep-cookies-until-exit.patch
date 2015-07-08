@@ -1,7 +1,7 @@
-From 538dbc7d32f0e74d8aa04d62b0d081ce32d1b6e5 Mon Sep 17 00:00:00 2001
+From fcf2bcf6f3e65dab4240ee1457631511f6e65445 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:25:47 +0200
-Subject: [PATCH 24/64] prefs: only keep cookies until exit
+Subject: [PATCH 21/58] prefs: only keep cookies until exit
 
 Out with all those tracking cookies!
 ---
@@ -9,10 +9,10 @@ Out with all those tracking cookies!
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/content_settings/core/browser/content_settings_registry.cc b/components/content_settings/core/browser/content_settings_registry.cc
-index fe84151f52dd..f303447b3415 100644
+index c19ffd0ed5c3..63af5ff0700b 100644
 --- a/components/content_settings/core/browser/content_settings_registry.cc
 +++ b/components/content_settings/core/browser/content_settings_registry.cc
-@@ -118,7 +118,7 @@ void ContentSettingsRegistry::Init() {
+@@ -117,7 +117,7 @@ void ContentSettingsRegistry::Init() {
    // WARNING: The string names of the permissions passed in below are used to
    // generate preference names and should never be changed!
  
@@ -22,5 +22,5 @@ index fe84151f52dd..f303447b3415 100644
             WhitelistedSchemes(kChromeUIScheme, kChromeDevToolsScheme),
             ValidSettings(CONTENT_SETTING_ALLOW, CONTENT_SETTING_BLOCK,
 -- 
-2.15.0
+2.16.3
 

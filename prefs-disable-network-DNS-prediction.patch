@@ -1,7 +1,7 @@
-From 4dc09cd459036942b65113477ecb60c55238f4d3 Mon Sep 17 00:00:00 2001
+From 93cd3d6c9045bb480aa01d2636410710c5aea903 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:20:11 +0200
-Subject: [PATCH 18/64] prefs: disable network/DNS prediction
+Subject: [PATCH 15/58] prefs: disable network/DNS prediction
 
 Stop wasting my bandwidth (however little), and also don't tell others
 what I am about to visit.
@@ -36,5 +36,5 @@ index 651248390f50..4c55a198b4fe 100644
  
  enum class NetworkPredictionStatus {
 -- 
-2.15.0
+2.16.3
 

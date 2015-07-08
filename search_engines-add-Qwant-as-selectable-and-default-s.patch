@@ -1,7 +1,7 @@
-From 66f1760533d8bebdbbbb0da1a175e76d6a2f5180 Mon Sep 17 00:00:00 2001
+From 03eac4b16a5ea67756d6752e6ee95a407c64582c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 15:27:37 +0200
-Subject: [PATCH 27/64] search_engines: add Qwant as selectable and default
+Subject: [PATCH 24/58] search_engines: add Qwant as selectable and default
  search engine
 
 ---
@@ -11,7 +11,7 @@ Subject: [PATCH 27/64] search_engines: add Qwant as selectable and default
  3 files changed, 119 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index a0e443dcfd31..7995a5072332 100644
+index 78c2a211e70e..3b5d9117953a 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
 @@ -38,6 +38,15 @@
@@ -43,10 +43,10 @@ index 02f6b1612621..d61a4b8bb7a2 100644
  };
  
 diff --git a/components/search_engines/template_url_prepopulate_data.cc b/components/search_engines/template_url_prepopulate_data.cc
-index a7da2d430abf..23c14db61a39 100644
+index d287c4f0d611..2282e130bbfa 100644
 --- a/components/search_engines/template_url_prepopulate_data.cc
 +++ b/components/search_engines/template_url_prepopulate_data.cc
-@@ -50,549 +50,549 @@ namespace {
+@@ -51,549 +51,549 @@ namespace {
  
  // Default (for countries with no better engine set)
  const PrepopulatedEngine* const engines_default[] = {
@@ -706,5 +706,5 @@ index a7da2d430abf..23c14db61a39 100644
      &yahoo_cl, &yahoo_co, &yahoo_de, &yahoo_dk, &yahoo_es, &yahoo_fi, &yahoo_fr,
      &yahoo_gr, &yahoo_hk, &yahoo_id, &yahoo_in, &yahoo_jp, &yahoo_maktoob,
 -- 
-2.15.0
+2.16.3
 

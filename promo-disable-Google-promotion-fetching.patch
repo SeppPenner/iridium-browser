@@ -1,7 +1,7 @@
-From 98992f7453a480895918110fd6b2157cd757dc22 Mon Sep 17 00:00:00 2001
+From 9d13ea30dd8a50d9995546e1fbf1601adeafebf8 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 9 Nov 2014 01:54:27 +0100
-Subject: [PATCH 48/64] promo: disable Google promotion fetching
+Subject: [PATCH 44/58] promo: disable Google promotion fetching
 
 Documentation is scarce, and sprinkled with misleading acronyms.
 NTP is not NTP, for example. FWIW:
@@ -21,10 +21,10 @@ References: https://github.com/iridium-browser/iridium-browser/issues/33
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/chrome/browser/signin/signin_promo.cc b/chrome/browser/signin/signin_promo.cc
-index 4dd2f6541adf..e0ce4b1f86ef 100644
+index 4c7f522cdc9f..80c0fde4ca62 100644
 --- a/chrome/browser/signin/signin_promo.cc
 +++ b/chrome/browser/signin/signin_promo.cc
-@@ -84,6 +84,7 @@ namespace signin {
+@@ -130,6 +130,7 @@ namespace signin {
  
  bool ShouldShowPromoAtStartup(Profile* profile, bool is_new_profile) {
    DCHECK(profile);
@@ -32,7 +32,7 @@ index 4dd2f6541adf..e0ce4b1f86ef 100644
  
    // Don't show if the profile is an incognito.
    if (profile->IsOffTheRecord())
-@@ -328,8 +329,8 @@ void ForceWebBasedSigninFlowForTesting(bool force) {
+@@ -383,8 +384,8 @@ void ForceWebBasedSigninFlowForTesting(bool force) {
  void RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterIntegerPref(prefs::kSignInPromoStartupCount, 0);
@@ -41,8 +41,8 @@ index 4dd2f6541adf..e0ce4b1f86ef 100644
 +  registry->RegisterBooleanPref(prefs::kSignInPromoUserSkipped, true);
 +  registry->RegisterBooleanPref(prefs::kSignInPromoShowOnFirstRunAllowed, false);
    registry->RegisterBooleanPref(prefs::kSignInPromoShowNTPBubble, false);
+   registry->RegisterIntegerPref(prefs::kDiceSigninUserMenuPromoCount, 0);
  }
- 
 -- 
-2.15.0
+2.16.3
 

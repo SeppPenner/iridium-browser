@@ -1,7 +1,7 @@
-From ea141717ca9a2703afc134988715b18616bfdf05 Mon Sep 17 00:00:00 2001
+From 51a0c38b5c09fda0cf053b532f21459027f1b2a6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 23 Apr 2017 21:49:42 +0200
-Subject: [PATCH 04/64] build: import openSUSE
+Subject: [PATCH 04/58] build: import openSUSE
  chromium-last-commit-position-r0.patch
 
 ---
@@ -10,10 +10,10 @@ Subject: [PATCH 04/64] build: import openSUSE
  2 files changed, 7 deletions(-)
 
 diff --git a/tools/gn/BUILD.gn b/tools/gn/BUILD.gn
-index ecd84acd60f3..f392778fa4d5 100644
+index 31e249367955..9e1b252e6eb9 100644
 --- a/tools/gn/BUILD.gn
 +++ b/tools/gn/BUILD.gn
-@@ -268,7 +268,6 @@ executable("gn") {
+@@ -269,7 +269,6 @@ executable("gn") {
  
    deps = [
      ":gn_lib",
@@ -22,10 +22,10 @@ index ecd84acd60f3..f392778fa4d5 100644
      "//build/config:exe_and_shlib_deps",
      "//build/win:default_exe_manifest",
 diff --git a/tools/gn/gn_main.cc b/tools/gn/gn_main.cc
-index 245270ee52d0..75df27af1218 100644
+index 4d51158e7d16..e9ef84866c0d 100644
 --- a/tools/gn/gn_main.cc
 +++ b/tools/gn/gn_main.cc
-@@ -12,13 +12,7 @@
+@@ -19,13 +19,7 @@
  #include "tools/gn/standard_out.h"
  #include "tools/gn/switches.h"
  
@@ -40,5 +40,5 @@ index 245270ee52d0..75df27af1218 100644
  namespace {
  
 -- 
-2.15.0
+2.16.3
 

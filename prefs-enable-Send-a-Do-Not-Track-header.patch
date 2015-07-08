@@ -1,7 +1,7 @@
-From a4ec5e39c29d7a0c57bb46b8978d0b0f9b23ebf4 Mon Sep 17 00:00:00 2001
+From 05294fae8da96199438ad58908ff30704701bd94 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 17/64] prefs: enable "Send a Do-Not-Track header"
+Subject: [PATCH 14/58] prefs: enable "Send a Do-Not-Track header"
 
 Set enable_do_not_track to true by default.
 
@@ -23,10 +23,10 @@ OPT-OUT.]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 978db3500449..3ed02ec2394d 100644
+index e9f33ea19f34..aafc82168cdb 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -73,7 +73,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -76,7 +76,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterDictionaryPref(prefs::kAppWindowPlacement);
    registry->RegisterBooleanPref(
        prefs::kEnableDoNotTrack,
@@ -36,5 +36,5 @@ index 978db3500449..3ed02ec2394d 100644
  #if !defined(OS_CHROMEOS) && !defined(OS_ANDROID)
    registry->RegisterBooleanPref(prefs::kPrintPreviewUseSystemDefaultPrinter,
 -- 
-2.15.0
+2.16.3
 

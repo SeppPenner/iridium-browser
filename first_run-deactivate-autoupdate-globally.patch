@@ -1,7 +1,7 @@
-From ee41759b7529ebc8b4940e4840bc7170e9adc30f Mon Sep 17 00:00:00 2001
+From e31285402eeb3f62d3554c2fa1dc3e1fbd60ad79 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:12:43 +0200
-Subject: [PATCH 30/64] first_run: deactivate autoupdate globally
+Subject: [PATCH 27/58] first_run: deactivate autoupdate globally
 
 We currently do not have any update service infrastructure in place
 (i.e. on our webserver), and sending update requests to Google also
@@ -14,10 +14,10 @@ turn it back on.
  1 file changed, 3 insertions(+)
 
 diff --git a/chrome/browser/extensions/extension_system_impl.cc b/chrome/browser/extensions/extension_system_impl.cc
-index 927855c03aa0..4980c04fc77c 100644
+index 1078828659da..381659ac248f 100644
 --- a/chrome/browser/extensions/extension_system_impl.cc
 +++ b/chrome/browser/extensions/extension_system_impl.cc
-@@ -206,6 +206,9 @@ void ExtensionSystemImpl::Shared::Init(bool extensions_enabled) {
+@@ -208,6 +208,9 @@ void ExtensionSystemImpl::Shared::Init(bool extensions_enabled) {
  
    bool autoupdate_enabled = !profile_->IsGuestSession() &&
                              !profile_->IsSystemProfile();
@@ -28,5 +28,5 @@ index 927855c03aa0..4980c04fc77c 100644
    if (!extensions_enabled ||
        chromeos::ProfileHelper::IsLockScreenAppProfile(profile_)) {
 -- 
-2.15.0
+2.16.3
 

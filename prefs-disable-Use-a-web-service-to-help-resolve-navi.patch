@@ -1,7 +1,7 @@
-From c5660f737e1d8abbef6d4463a4dadb5e33ecde71 Mon Sep 17 00:00:00 2001
+From 9b41784ae5d08a0c71693153b1bb02328663db93 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:35:12 +0200
-Subject: [PATCH 15/64] prefs: disable "Use a web service to help resolve
+Subject: [PATCH 12/58] prefs: disable "Use a web service to help resolve
  navigation errors"
 
 This goes towards reducing promiscuous outbound requests to
@@ -14,7 +14,7 @@ Set alternate_error_pages to be disabled by default.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/navigation_correction_tab_observer.cc b/chrome/browser/ui/navigation_correction_tab_observer.cc
-index 887d681de38c..60eea93f7a33 100644
+index 30d5d79f0790..93fa54c6f5d6 100644
 --- a/chrome/browser/ui/navigation_correction_tab_observer.cc
 +++ b/chrome/browser/ui/navigation_correction_tab_observer.cc
 @@ -58,7 +58,7 @@ NavigationCorrectionTabObserver::~NavigationCorrectionTabObserver() {
@@ -27,5 +27,5 @@ index 887d681de38c..60eea93f7a33 100644
  }
  
 -- 
-2.15.0
+2.16.3
 

@@ -16,6 +16,7 @@ if [ ! -e series ]; then
 	echo "Refusing to operate due to lack of \"series\" file (safety measure)."
 	exit 1
 fi
+git clean -dfx
 rm -fv ./*.patch series
 git format-patch "$1..$2" || exit 1
 ls -1 *.patch | perl -lpe 's{^\d+-}{}' >series

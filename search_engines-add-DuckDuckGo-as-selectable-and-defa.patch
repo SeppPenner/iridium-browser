@@ -1,7 +1,7 @@
-From 98252b6b9e803b999de0dc4d4b47f53ae1831b27 Mon Sep 17 00:00:00 2001
+From d2bd882ca4567d7bfc7a0213f4c61b39f910f933 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 19 Oct 2014 14:49:10 +0200
-Subject: [PATCH 26/64] search_engines: add DuckDuckGo as selectable and
+Subject: [PATCH 23/58] search_engines: add DuckDuckGo as selectable and
  default search engine
 
 There is a lot of code pertaining to DefaultSearchEngine,
@@ -17,7 +17,7 @@ prepending &duckduckgo yields the desired result, for now at least.
  3 files changed, 121 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index 212a8167d93c..a0e443dcfd31 100644
+index 5127a1a1f286..78c2a211e70e 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
 @@ -38,6 +38,17 @@
@@ -51,10 +51,10 @@ index c19dd0e91cf9..02f6b1612621 100644
  };
  
 diff --git a/components/search_engines/template_url_prepopulate_data.cc b/components/search_engines/template_url_prepopulate_data.cc
-index 4a6eb92dedfe..a7da2d430abf 100644
+index 0c686f6ebda2..d287c4f0d611 100644
 --- a/components/search_engines/template_url_prepopulate_data.cc
 +++ b/components/search_engines/template_url_prepopulate_data.cc
-@@ -50,548 +50,548 @@ namespace {
+@@ -51,548 +51,548 @@ namespace {
  
  // Default (for countries with no better engine set)
  const PrepopulatedEngine* const engines_default[] = {
@@ -713,5 +713,5 @@ index 4a6eb92dedfe..a7da2d430abf 100644
      &yahoo, &yahoo_ar, &yahoo_at, &yahoo_au, &yahoo_br, &yahoo_ca, &yahoo_ch,
      &yahoo_cl, &yahoo_co, &yahoo_de, &yahoo_dk, &yahoo_es, &yahoo_fi, &yahoo_fr,
 -- 
-2.15.0
+2.16.3
 
