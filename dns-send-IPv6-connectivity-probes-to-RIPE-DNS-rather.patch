@@ -1,7 +1,7 @@
-From b268de11f20b2188d529363c08af94406e72c972 Mon Sep 17 00:00:00 2001
+From 83aee258bfe4925a5c1d751a57af1d9c06795ce4 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
-Subject: [PATCH 11/60] dns: send IPv6 connectivity probes to RIPE DNS rather
+Subject: [PATCH 14/62] dns: send IPv6 connectivity probes to RIPE DNS rather
  than Google
 
 Short of disabling the code (we may do that in a subsequent patch
@@ -11,7 +11,7 @@ anyway), avoid sending to Google.
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/net/dns/host_resolver_manager.cc b/net/dns/host_resolver_manager.cc
-index e8dea46e2a0d1..f57048171c472 100644
+index 25e2bcf004c3a..093a38ed629d5 100644
 --- a/net/dns/host_resolver_manager.cc
 +++ b/net/dns/host_resolver_manager.cc
 @@ -123,10 +123,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
@@ -29,5 +29,5 @@ index e8dea46e2a0d1..f57048171c472 100644
  enum DnsResolveStatus {
    RESOLVE_STATUS_DNS_SUCCESS = 0,
 -- 
-2.23.0
+2.25.0
 

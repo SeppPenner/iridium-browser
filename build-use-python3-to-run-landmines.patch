@@ -1,17 +1,17 @@
-From bc7fa5043648d9fbffeb72ab118d028b6063d673 Mon Sep 17 00:00:00 2001
+From b569cb9f2d59940a1173fe64454488107d2afc7a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 6 Nov 2019 13:58:02 +0100
-Subject: [PATCH 03/60] build: use python3 to run landmines
+Subject: [PATCH 03/62] build: use python3 to run landmines
 
 ---
  DEPS | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/DEPS b/DEPS
-index 8d6fe3ecb5188..9e102292a90e5 100644
+index f0cef385cded4..5a2f88d4318ad 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -2972,7 +2972,7 @@ hooks = [
+@@ -3060,7 +3060,7 @@ hooks = [
      'name': 'landmines',
      'pattern': '.',
      'action': [
@@ -21,5 +21,5 @@ index 8d6fe3ecb5188..9e102292a90e5 100644
      ],
    },
 -- 
-2.23.0
+2.25.0
 

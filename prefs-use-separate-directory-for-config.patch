@@ -1,7 +1,7 @@
-From 389220cd0a261c1627d00fc3918bd63451885b12 Mon Sep 17 00:00:00 2001
+From b35e4289437f00920fbf83c21244a05ad7814ec6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 8 Nov 2014 21:40:49 +0100
-Subject: [PATCH 30/60] prefs: use separate directory for config
+Subject: [PATCH 33/62] prefs: use separate directory for config
 
 Do not overwrite an existing Chromium configuration.
 ---
@@ -22,5 +22,5 @@ index b81cd35ffe4d1..037c8d6f6c0ca 100644
    return true;
  }
 -- 
-2.23.0
+2.25.0
 

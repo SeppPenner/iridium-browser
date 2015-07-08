@@ -1,7 +1,7 @@
-From d58d50b4465c4c4c6b25d5543d255ad700f9ea90 Mon Sep 17 00:00:00 2001
+From 8528d9d28c28cd151a5d5d67752eac7aa530b627 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 20 Dec 2015 11:12:00 +0100
-Subject: [PATCH 51/60] build: use -Wl,--no-keep-memory
+Subject: [PATCH 54/62] build: use -Wl,--no-keep-memory
 
 ---
  chrome/BUILD.gn        | 1 +
@@ -9,17 +9,17 @@ Subject: [PATCH 51/60] build: use -Wl,--no-keep-memory
  2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 173396fbcb7b2..e8c953a5c7911 100644
+index 53400be4926ee..1e0c9c569ba56 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -285,6 +285,7 @@ if (!is_android && !is_mac) {
-         ]
+@@ -288,6 +288,7 @@ if (!is_android && !is_mac) {
+       ]
  
-         ldflags = []
-+        ldflags += [ "-Wl,--no-keep-memory" ]
+       ldflags = []
++      ldflags += [ "-Wl,--no-keep-memory" ]
  
-         # Chrome OS debug builds for arm need to pass --long-plt to the linker.
-         # See https://bugs.chromium.org/p/chromium/issues/detail?id=583532
+       # Chrome OS debug builds for arm need to pass --long-plt to the linker.
+       # See https://bugs.chromium.org/p/chromium/issues/detail?id=583532
 diff --git a/sandbox/linux/BUILD.gn b/sandbox/linux/BUILD.gn
 index a94ec6d25ad56..bd62cf4d32db6 100644
 --- a/sandbox/linux/BUILD.gn
@@ -34,5 +34,5 @@ index a94ec6d25ad56..bd62cf4d32db6 100644
  }
  
 -- 
-2.23.0
+2.25.0
 

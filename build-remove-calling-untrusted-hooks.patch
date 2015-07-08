@@ -1,7 +1,7 @@
-From 0c847d13892405e675c0c9f9e0ff560b05fea05d Mon Sep 17 00:00:00 2001
+From 52f879e23b94576a2c54bc3329d406f8d545f154 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/60] build: remove calling untrusted hooks
+Subject: [PATCH 01/62] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
@@ -10,7 +10,7 @@ sysroot.
  1 file changed, 4 insertions(+), 200 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index ec3c6070a99c6..8d6fe3ecb5188 100644
+index dd9be412cc604..f0cef385cded4 100644
 --- a/DEPS
 +++ b/DEPS
 @@ -75,7 +75,7 @@ vars = {
@@ -33,7 +33,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
  
    # By default, do not check out WebKit for iOS, as it is not needed unless
    # running against ToT WebKit rather than system WebKit. This can be overridden
-@@ -568,24 +568,6 @@ deps = {
+@@ -588,24 +588,6 @@ deps = {
    'src/net/third_party/quiche/src':
      Var('quiche_git') + '/quiche.git' + '@' +  Var('quiche_revision'),
  
@@ -58,7 +58,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    # SPIRV-Cross is in third_party/spirv-cross/spirv-cross instead of
    # third_party/spirv-cross/src  because its header files are at the root of
    # the repository and dependencies include them like so:
-@@ -3054,49 +3036,6 @@ hooks = [
+@@ -3141,49 +3123,6 @@ hooks = [
          'sync', '--extract',
      ],
    },
@@ -108,7 +108,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    {
      # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
      'name': 'ciopfs_linux',
-@@ -3124,43 +3063,6 @@ hooks = [
+@@ -3211,43 +3150,6 @@ hooks = [
      'condition': 'checkout_mac',
      'action': ['python', 'src/build/mac_toolchain.py'],
    },
@@ -152,7 +152,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    {
      # Mac doesn't use lld so it's not included in the default clang bundle
      # there.  lld is however needed in win and Fuchsia cross builds, so
-@@ -3220,18 +3122,6 @@ hooks = [
+@@ -3307,18 +3209,6 @@ hooks = [
                  '-s', 'src/buildtools/mac/clang-format.sha1',
      ],
    },
@@ -171,7 +171,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    # Pull rc binaries using checked-in hashes.
    {
      'name': 'rc_win',
-@@ -3257,29 +3147,6 @@ hooks = [
+@@ -3344,29 +3234,6 @@ hooks = [
                  '-s', 'src/build/toolchain/win/rc/mac/rc.sha1',
      ],
    },
@@ -201,7 +201,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    # Pull order files for the win/clang build.
    {
      'name': 'orderfiles_win',
-@@ -3324,57 +3191,8 @@ hooks = [
+@@ -3411,57 +3278,8 @@ hooks = [
                  'src/third_party/apache-win32',
      ],
    },
@@ -259,7 +259,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    {
      'name': 'node_mac',
      'pattern': '.',
-@@ -3468,20 +3286,6 @@ hooks = [
+@@ -3555,20 +3373,6 @@ hooks = [
      ],
    },
  
@@ -280,7 +280,7 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
    # Pull down Android RenderTest goldens
    {
      'name': 'Fetch Android RenderTest goldens',
-@@ -3495,7 +3299,7 @@ hooks = [
+@@ -3582,7 +3386,7 @@ hooks = [
    {
      'name': 'Fetch Android AFDO profile',
      'pattern': '.',
@@ -290,5 +290,5 @@ index ec3c6070a99c6..8d6fe3ecb5188 100644
                  'src/tools/download_cros_provided_profile.py',
                  '--newest_state=src/chrome/android/profiles/newest.txt',
 -- 
-2.23.0
+2.25.0
 

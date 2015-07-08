@@ -1,7 +1,7 @@
-From 17cc212d160b4ac7364617225c58d41e1ee595fe Mon Sep 17 00:00:00 2001
+From c815ae2ed4ea08646cd41cceb7b3bf0ab2dea1a1 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 52/60] icons: iridium icons
+Subject: [PATCH 55/62] icons: iridium icons
 
 ---
  .../app/theme/chromium/product_logo_128.png   | Bin 8366 -> 7826 bytes
@@ -1723,7 +1723,7 @@ zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
 diff --git a/chrome/browser/resources/local_ntp/doodles.css b/chrome/browser/resources/local_ntp/doodles.css
-index 885619db2c1c0..0ec0437ce4370 100644
+index ca9a379de2dc3..0b3e4a574907a 100644
 --- a/chrome/browser/resources/local_ntp/doodles.css
 +++ b/chrome/browser/resources/local_ntp/doodles.css
 @@ -70,7 +70,7 @@
@@ -2131,10 +2131,10 @@ index 0000000000000..45d8e586f93c3
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index c368d5d694bc4..ead77480ef0f7 100644
+index a0289216e29e4..2b238c06ed6ea 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
-@@ -73,7 +73,7 @@ without changes to the corresponding grd file. -->
+@@ -75,7 +75,7 @@ without changes to the corresponding grd file. -->
        <include name="IDR_WEBUI_IMAGES_ERROR_BADGE"
                 file="images/error_badge.svg" type="BINDATA" compress="gzip" />
        <include name="IDR_WEBUI_IMAGES_GOOGLE_LOGO"
@@ -2144,5 +2144,5 @@ index c368d5d694bc4..ead77480ef0f7 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.23.0
+2.25.0
 

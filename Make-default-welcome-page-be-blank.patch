@@ -1,7 +1,7 @@
-From 8d472ea3a37b9aa7ecee59a4a894571cff1d34ae Mon Sep 17 00:00:00 2001
+From a6f57a7d37546cc2bd4b7b36c9677a5ff154a158 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 08:45:52 +0200
-Subject: [PATCH 46/60] Make default welcome page be blank
+Subject: [PATCH 49/62] Make default welcome page be blank
 
 Because replacing kChromeUIWelcomeURL with about:blank leads the
 browser to load some broken URL instead.
@@ -10,7 +10,7 @@ browser to load some broken URL instead.
  1 file changed, 22 deletions(-)
 
 diff --git a/chrome/browser/resources/welcome/welcome.html b/chrome/browser/resources/welcome/welcome.html
-index e2a37c5b0a11e..e69de29bb2d1d 100644
+index 88145e7cae916..e69de29bb2d1d 100644
 --- a/chrome/browser/resources/welcome/welcome.html
 +++ b/chrome/browser/resources/welcome/welcome.html
 @@ -1,22 +0,0 @@
@@ -19,7 +19,7 @@ index e2a37c5b0a11e..e69de29bb2d1d 100644
 -  <head>
 -    <meta charset="utf-8">
 -    <title>$i18n{headerText}</title>
--    <link rel="import" href="welcome_app.html">
+-    <script type="module" src="welcome_app.js"></script>
 -    <link rel="stylesheet" href="chrome://resources/css/md_colors.css">
 -    <link rel="stylesheet" href="chrome://resources/css/text_defaults_md.css">
 -  </head>
@@ -32,10 +32,10 @@ index e2a37c5b0a11e..e69de29bb2d1d 100644
 -      }
 -    </style>
 -    <welcome-app></welcome-app>
--    <script src="/welcome.js"></script>
+-    <script type="module" src="welcome.js"></script>
 -    <link rel="stylesheet" href="chrome://welcome/welcome.css">
 -  </body>
 -</html>
 -- 
-2.23.0
+2.25.0
 

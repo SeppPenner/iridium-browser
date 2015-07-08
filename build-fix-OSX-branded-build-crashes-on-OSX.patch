@@ -1,7 +1,7 @@
-From e9b52d68dcd0af2bb9f6c6d42ba82796e7bf92d9 Mon Sep 17 00:00:00 2001
+From d6fdfd9b240a2f97019f1b8201e473703cc521e9 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 32/60] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 35/62] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -31,7 +31,7 @@ index 26918a105cd1a..9aae3f6603039 100644
  MAC_CREATOR_CODE=Cr24
  MAC_TEAM_ID=
 diff --git a/chrome/common/chrome_constants.cc b/chrome/common/chrome_constants.cc
-index fabb52265857b..9dfd91ca4301b 100644
+index dbfe0a800de4d..ac0225c49209e 100644
 --- a/chrome/common/chrome_constants.cc
 +++ b/chrome/common/chrome_constants.cc
 @@ -11,11 +11,11 @@
@@ -49,5 +49,5 @@ index fabb52265857b..9dfd91ca4301b 100644
  #error Unknown branding
  #endif
 -- 
-2.23.0
+2.25.0
 

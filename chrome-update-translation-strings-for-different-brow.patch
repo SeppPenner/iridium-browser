@@ -1,13 +1,13 @@
-From 924c729f0e9a4f7714e3640ff0a33a2617f23b60 Mon Sep 17 00:00:00 2001
+From 92f15ca4cf0778a5e24bb2552ee7639e41f8fa30 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 7 Nov 2019 15:54:07 +0100
-Subject: [PATCH 60/60] chrome: update translation strings for different
+Subject: [PATCH 61/62] chrome: update translation strings for different
  browser name(s)
 
 ---
  chrome/app/settings_chromium_strings.grdp |  64 +++---
- chrome/app/settings_strings.grdp          | 266 +++++++++++-----------
- 2 files changed, 165 insertions(+), 165 deletions(-)
+ chrome/app/settings_strings.grdp          | 262 +++++++++++-----------
+ 2 files changed, 163 insertions(+), 163 deletions(-)
 
 diff --git a/chrome/app/settings_chromium_strings.grdp b/chrome/app/settings_chromium_strings.grdp
 index 262da5dc17491..989adbd0ee720 100644
@@ -189,18 +189,9 @@ index 262da5dc17491..989adbd0ee720 100644
    </message>
  </grit-part>
 diff --git a/chrome/app/settings_strings.grdp b/chrome/app/settings_strings.grdp
-index 24a03e8858af2..9eed61fb5866f 100644
+index 2bfef2d0c90a9..011b9abb25586 100644
 --- a/chrome/app/settings_strings.grdp
 +++ b/chrome/app/settings_strings.grdp
-@@ -26,7 +26,7 @@
-     Version <ph name="PRODUCT_VERSION">$1<ex>15.0.865.0</ex></ph> (<ph name="PRODUCT_CHANNEL">$2<ex>Developer Build</ex></ph>) <ph name="PRODUCT_MODIFIER">$3</ph> <ph name="PRODUCT_VERSION_BITS">$4</ph>
-   </message>
-   <if expr="chromeos">
--    <message name="IDS_SETTINGS_ABOUT_PAGE_DETAILED_BUILD_INFO" desc="Label describing the section that shows detailed information about the current Chrome build.">
-+    <message name="IDS_SETTINGS_ABOUT_PAGE_DETAILED_BUILD_INFO" desc="Label describing the section that shows detailed information about the current Iridium build.">
-       Detailed build information
-     </message>
-     <message name="IDS_SETTINGS_ABOUT_PAGE_ARC_VERSION" desc="Label for ARC version">
 @@ -69,7 +69,7 @@
        Powerwash for added security
      </message>
@@ -286,7 +277,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_ANDROID_APPS_MANAGE_APPS" desc="Label for launching Android apps settings.">
        Manage Android preferences
-@@ -709,10 +709,10 @@
+@@ -712,10 +712,10 @@
      <message name="IDS_SETTINGS_ANDROID_APPS_DISABLE_DIALOG_TITLE" desc="Title of the confirmation dialog for disabling android apps.">
        Remove Android apps?
      </message>
@@ -299,7 +290,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        <ph name="LINE_BREAKS1">&lt;br&gt;&lt;br&gt;</ph>
        Content you’ve purchased such as movies, TV shows, music, books, or other in-app purchases may also be deleted.
        <ph name="LINE_BREAKS2">&lt;br&gt;&lt;br&gt;</ph>
-@@ -776,8 +776,8 @@
+@@ -779,8 +779,8 @@
        Reset to default
      </message>
    </if>
@@ -310,7 +301,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_SHOW_HOME_BUTTON" desc="Label for the checkbox which enables or disables showing the home button in the toolbar.">
      Show home button
-@@ -798,7 +798,7 @@
+@@ -801,7 +801,7 @@
      <message name="IDS_SETTINGS_TABS_TO_LINKS_PREF" desc="The documentation string of the 'Tabs to Links' preference">
        Pressing Tab on a webpage highlights links, as well as form fields
      </message>
@@ -319,7 +310,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Show warning before quitting with ⌘Q
      </message>
    </if>
-@@ -820,16 +820,16 @@
+@@ -823,16 +823,16 @@
      Search settings
    </message>
    <message name="IDS_SETTINGS_SEARCH_NO_RESULTS_HELP" desc="Help text for a search that has no results.">
@@ -339,7 +330,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Relaunch
      </message>
    </if>
-@@ -1029,22 +1029,22 @@
+@@ -1026,22 +1026,22 @@
    <message name="IDS_SETTINGS_PASSWORDS_MANAGE_PASSWORDS" desc="Shown in the passwords section of settings. Descriptive text to inform that passwords can be accessed online. Has a link.">
      View and manage saved passwords in your <ph name="BEGIN_LINK">&lt;a is="action-link" href="$1" target="_blank"&gt;</ph>Google Account<ph name="END_LINK">&lt;/a&gt;</ph>
    </message>
@@ -367,7 +358,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Exporting passwords...
    </message>
    <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TITLE" desc="The title to a dialog, which is shown if exporting passwords to a folder has failed.">
-@@ -1056,7 +1056,7 @@
+@@ -1053,7 +1053,7 @@
    <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TIP_ENOUGH_SPACE" desc="Message that is shown when exporting passwords has failed. This is part of a list of things the user can try to resolve the problem. This advice implies that there isn't enough space on the disk for the new file to be written.">
      Make sure there is enough space on your device
    </message>
@@ -376,7 +367,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Export your passwords to another folder
    </message>
    <message name="IDS_SETTINGS_PASSWORD_ROW_MORE_ACTIONS" desc="The ARIA (accessibility) message for the More Actions button, which sits in every row of the password list. It opens a menu with a list of actions, which apply to the username-password pair on this row.">
-@@ -1072,7 +1072,7 @@
+@@ -1069,7 +1069,7 @@
      <message name="IDS_SETTINGS_DEFAULT_BROWSER" desc="Name of the Default Browser page, which allows users to set which browser will open .html files within the OS.">
        Default browser
      </message>
@@ -407,7 +398,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_PRINTING_CUPS_PRINTER_ADDED_NATIVE_PRINTERS_NOT_ALLOWED_MESSAGE" desc="The message shown when the user is prevented from configuring printers due to an enterprise policy.">
        Printer configuration is handled by the administrator.
-@@ -1939,22 +1939,22 @@
+@@ -1942,22 +1942,22 @@
        Smart Lock
      </message>
      <message name="IDS_SETTINGS_EASY_UNLOCK_SETUP_INTRO" desc="The text to show in Easy Unlock section to introduce the feature.">
@@ -434,7 +425,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_EASY_UNLOCK_TURN_OFF_OFFLINE_TITLE" desc="The title text on the Easy unlock turn off dialog when Easy unlock could not be turned off because the device is offline.">
        Please connect to a network
-@@ -1972,7 +1972,7 @@
+@@ -1975,7 +1975,7 @@
        Use Smart Lock to sign in to your Google Account
      </message>
      <message name="IDS_SETTINGS_EASY_UNLOCK_PROXIMITY_THRESHOLD_LABEL" desc="The text on the Easy unlock settings page indicating how close the phone should be for unlock to work.">
@@ -443,7 +434,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_EASY_UNLOCK_PROXIMITY_THRESHOLD_VERY_CLOSE" desc="The text on the Easy unlock settings page indicating the phone should be very close for the unlock to work.">
        Very close
-@@ -1989,10 +1989,10 @@
+@@ -1992,10 +1992,10 @@
      <message name="IDS_SETTINGS_EASY_UNLOCK_OPTIONS" desc="Heading for options for the Smart Lock feature.">
        Smart Lock options
      </message>
@@ -456,7 +447,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Unlock device and sign in to Google Account
      </message>
    </if>
-@@ -2928,20 +2928,20 @@
+@@ -2935,20 +2935,20 @@
    <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION" desc="The section title of 'Protects you and your device from dangerous sites'">
      Safe Browsing (protects you and your device from dangerous sites)
    </message>
@@ -481,7 +472,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_SPELLING_PREF_UNIFIED_CONSENT" desc="The documentation string of the 'Use Spelling' preference">
      Enhanced spell check
-@@ -2952,8 +2952,8 @@
+@@ -2959,8 +2959,8 @@
    <message name="IDS_SETTINGS_ENABLE_LOGGING_DIAGNOSTIC_AND_USAGE_DATA" desc="The label of the checkbox to enable/disable diagnostic and user metrics logging">
      Automatically send diagnostic and usage data to Google
    </message>
@@ -492,7 +483,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_ENABLE_LOGGING_DESC_UNIFIED_CONSENT" desc="The description of the checkbox to enable/disable crash and user metrics logging">
      Automatically sends usage statistics and crash reports to Google
-@@ -2991,7 +2991,7 @@
+@@ -2998,7 +2998,7 @@
    <message name="IDS_SETTINGS_SITE_SETTINGS" desc="Text of the button that takes a user to the enhanced settings page thats allows users to modify site settings. Also the title of that settings page.">
      Site Settings
    </message>
@@ -501,7 +492,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Control what information websites can use and what content they can show you
    </message>
    <message name="IDS_SETTINGS_CLEAR_DATA" desc="Text for clear browsing data button in Privacy options in the tabbed UI">
-@@ -3011,7 +3011,7 @@
+@@ -3018,7 +3018,7 @@
    </message>
  
    <!-- Reset Settings Page -->
@@ -510,7 +501,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Reset settings
    </message>
    <message name="IDS_SETTINGS_RESET_SETTINGS_TRIGGER" desc="The label describing the 'reset profile setting' feature">
-@@ -3020,33 +3020,33 @@
+@@ -3027,33 +3027,33 @@
    <message name="IDS_SETTINGS_RESET_AUTOMATED_DIALOG_TITLE" desc="The title of the dialog informing the user that automated resetting of some settings occurred.">
      Some settings were reset
    </message>
@@ -552,7 +543,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_FACTORY_RESET_WARNING" desc="Warning text in the 'Factory Reset' window">
        A restart is required before your device can be reset with Powerwash.
-@@ -3123,7 +3123,7 @@
+@@ -3133,7 +3133,7 @@
    <message name="IDS_SETTINGS_SEARCH_ENGINES_REMOVE_FROM_LIST" desc="Label for a button that removes a search engine from the list of search engines">
      Remove from list
    </message>
@@ -561,7 +552,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Manage
    </message>
  
-@@ -3276,8 +3276,8 @@
+@@ -3292,8 +3292,8 @@
    <message name="IDS_SETTINGS_SITE_SETTINGS_PDF_DOCUMENTS" desc="Label for the PDF documents site settings.">
      PDF documents
    </message>
@@ -572,7 +563,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_SITE_SETTINGS_POPUPS" desc="Label for the pop-ups and redirects site settings.">
      Pop-ups and redirects
-@@ -3411,7 +3411,7 @@
+@@ -3427,7 +3427,7 @@
      Block sites from running Flash (recommended)
    </message>
    <message name="IDS_SETTINGS_SITE_SETTINGS_FLASH_PERMISSIONS_ARE_EPHEMERAL" desc="The notice that Flash permissions are ephemeral, at the top of the Flash settings page.">
@@ -581,7 +572,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_SITE_SETTINGS_ALLOW_RECENTLY_CLOSED_SITES" desc="The allow label for background sync in site settings.">
      Allow recently closed sites to finish sending and receiving data
-@@ -3549,7 +3549,7 @@
+@@ -3565,7 +3565,7 @@
    <message name="IDS_SETTINGS_SITE_SETTINGS_SOURCE_DRM_DISABLED" desc="A label shown when the protected content / protected media identifier permission on the Site Details page is disabled because the user has turned off using unique identifiers to access protected content.">
      To change this setting, first <ph name="BEGIN_LINK">&lt;a target="_blank" href="$1"&gt;</ph>turn on identifiers<ph name="END_LINK">&lt;/a&gt;</ph>
    </message>
@@ -590,7 +581,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Site shows intrusive or misleading ads
    </message>
    <message name="IDS_SETTINGS_SITE_SETTINGS_ADS_BLOCK_NOT_BLACKLISTED_SINGULAR" desc="A subtitle for the ‘Ads’ setting, shown if user chooses to Block ads. ‘Block’ refers to the blocking of ads.">
-@@ -3678,8 +3678,8 @@
+@@ -3697,8 +3697,8 @@
    <message name="IDS_SETTINGS_SITE_NO_SITES_ADDED" desc="Explanation for not showing a list of site exceptions">
      No sites added
    </message>
@@ -601,7 +592,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_SITE_SETTINGS_EMPTY_ALL_SITES_PAGE" desc="Explanation shown when there are no sites that have appeared yet on the All Sites page.">
      Sites you visit will appear here
-@@ -3720,7 +3720,7 @@
+@@ -3739,7 +3739,7 @@
    </message>
    <if expr="chromeos">
      <message name="IDS_SETTINGS_ANDROID_SMS_NOTE" desc="Special note shown below Messages for Android entry in notification permissions to indicate use in ChromeOS Multidevice features.">
@@ -610,7 +601,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
    </if>
  
-@@ -3805,7 +3805,7 @@
+@@ -3824,7 +3824,7 @@
    </message>
  
    <!-- Sync / People Page -->
@@ -619,7 +610,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      People
    </message>
    <message name="IDS_SETTINGS_PEOPLE_MANAGE_OTHER_PEOPLE" desc="Label for the button that opens the multi-profile user manager.">
-@@ -3814,7 +3814,7 @@
+@@ -3833,7 +3833,7 @@
    <message name="IDS_SETTINGS_CHANGE_PICTURE_PROFILE_PHOTO" desc="The text on the Google profile photo of the user.">
      Google Profile photo
    </message>
@@ -628,16 +619,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Sign out
    </message>
  
-@@ -3901,7 +3901,7 @@
-       Add account
-     </message>
-     <message name="IDS_SETTINGS_ACCOUNT_MANAGER_DESCRIPTION" desc="Description of the Account Manager Settings page. Shown just below the title of the page.">
--      Manage your signed-in Google Accounts. Websites, apps, and extensions in Chrome and Google Play may use these accounts to customize your experience, depending on permissions.
-+      Manage your signed-in Google Accounts. Websites, apps, and extensions in Iridium and Google Play may use these accounts to customize your experience, depending on permissions.
-     </message>
-     <message name="IDS_SETTINGS_ACCOUNT_MANAGER_LIST_HEADER" desc="List header for Account List in Account Manager Settings page.">
-       Accounts
-@@ -4051,7 +4051,7 @@
+@@ -4079,7 +4079,7 @@
        Sign in
      </message>
      <message name="IDS_SETTINGS_PEOPLE_SIGN_IN_PROMPT" desc="The text displayed to prompt users to sign in to chrome.">
@@ -646,7 +628,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_PEOPLE_SYNC_ANOTHER_ACCOUNT" desc="The label for the button that lets the user choose another account to sync with.">
        Use another account
-@@ -4068,10 +4068,10 @@
+@@ -4096,10 +4096,10 @@
      <message name="IDS_SETTINGS_PEOPLE_SYNC_PAUSED" desc="The label informing the user that sync is currently paused.">
        Sync is paused
      </message>
@@ -659,7 +641,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Edit person
      </message>
      <message name="IDS_SETTINGS_PROFILE_SHORTCUT_TOGGLE_LABEL" desc="Label of the toggle that creates or removes a desktop shortcut for the profile.">
-@@ -4097,16 +4097,16 @@
+@@ -4125,16 +4125,16 @@
    <message name="IDS_SETTINGS_SYNC_OVERVIEW" desc="The message that appears in the options dialog when sync has not been set up by the user.">
      Sign in to get your bookmarks, history, passwords, and other settings on all your devices. You'll also automatically be signed in to your Google services.
    </message>
@@ -680,7 +662,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      Show profile stats
    </message>
    <message name="IDS_SETTINGS_SYNC_DISCONNECT_DELETE_PROFILE" desc="The text to display by the checkbox asking user whether to also delete profile when stopping sync.">
-@@ -4206,11 +4206,11 @@
+@@ -4234,11 +4234,11 @@
    <message name="IDS_SETTINGS_USER_EVENTS_CHECKBOX_TEXT" desc="Description text for the checkbox which enables or disables recording user events.">
      Uses content on sites you visit, plus browser activity and interactions, for personalization
    </message>
@@ -695,7 +677,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
    </message>
    <message name="IDS_SETTINGS_EXISTING_PASSPHRASE_TITLE" desc="Title for the section where the user enters the passphrase.">
      Encryption options
-@@ -4499,7 +4499,7 @@
+@@ -4533,7 +4533,7 @@
      <message name="IDS_SETTINGS_KEYBOARD_KEY_SEARCH" desc="In Device Settings, the label and dropdown list item for the Search key.">
        Search
      </message>
@@ -704,7 +686,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Launcher
      </message>
      <message name="IDS_SETTINGS_KEYBOARD_KEY_LEFT_CTRL" desc="In Device Settings, the label and dropdown list item for the Ctrl key.">
-@@ -4886,41 +4886,41 @@
+@@ -4908,41 +4908,41 @@
      <message name="IDS_SETTINGS_SYSTEM" desc="Title of the system settings.">
        System
      </message>
@@ -759,7 +741,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Verify
      </message>
      <message name="IDS_SETTINGS_MULTIDEVICE_ENABLED" desc="Text to tell user multidevice features are turned on">
-@@ -4929,29 +4929,29 @@
+@@ -4951,29 +4951,29 @@
      <message name="IDS_SETTINGS_MULTIDEVICE_DISABLED" desc="Text to tell user multidevice features are turned off">
        Disabled
      </message>
@@ -799,9 +781,9 @@ index 24a03e8858af2..9eed61fb5866f 100644
 +    <message name="IDS_SETTINGS_MULTIDEVICE_FORGET_DEVICE_DIALOG_MESSAGE" desc="Text of a dialog that lets the user choose if their Iridiumbook should forget their phone. This means they will no longer have access to multidevice features.">
 +      Disconnect your phone from your <ph name="DEVICE_TYPE">$1<ex>Iridiumbook</ex></ph>. They will no longer connect automatically.
      </message>
-   </if>
- 
-@@ -4963,41 +4963,41 @@
+     <message name="IDS_SETTINGS_MULTIDEVICE_FORGET_THIS_DEVICE_DISCONNECT" desc="Text for the button that lets the user choose if their Chromebook should forget their phone. This means they will no longer have access to multidevice features.">
+       Disconnect
+@@ -4988,41 +4988,41 @@
      Change Password
    </message>
  
@@ -854,7 +836,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
      </message>
      <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_NO_INTERNET_CONNECTION" desc="Body of error message that could appear during the cleanup of harmful software. Imperative instruction to user. This message will only appear on Windows desktop/laptop computers. Imperative.">
        Connect to a network and try again
-@@ -5005,55 +5005,55 @@
+@@ -5030,55 +5030,55 @@
      <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_PERMISSIONS_NEEDED" desc="Body of error message that could appear during the cleanup of harmful software. Imperative. ">
        Click Try Again, and accept the prompt on your computer
      </message>
@@ -927,7 +909,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        To finish removing harmful software, restart your computer
      </message>
      <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_SCANNING" desc="Message displayed after the user clicks the 'Find' button to find harmful software. Ellipses indicate that the operation is in process.">
-@@ -5068,7 +5068,7 @@
+@@ -5093,7 +5093,7 @@
      <message name="IDS_SETTINGS_RESET_CLEANUP_LOGS_PERMISSION_PREF" desc="A checkbox label for the 'Report harmful software removal details' preference.">
        Report details to Google about harmful software, system settings, and processes that were found on your computer during this cleanup
      </message>
@@ -936,7 +918,7 @@ index 24a03e8858af2..9eed61fb5866f 100644
        Cleanup is currently unavailable
      </message>
      <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_CLEANUP_UNAVAILABLE" desc="Body of error message that could appear during the cleanup of harmful software. Imperative instruction to user. This message will only appear on Windows desktop/laptop computers.">
-@@ -5083,8 +5083,8 @@
+@@ -5108,8 +5108,8 @@
      </message>
      <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE" desc="The subtitle shown in the subpage for incompatible applications.">
        {NUM_APPLICATIONS, plural,
@@ -948,5 +930,5 @@ index 24a03e8858af2..9eed61fb5866f 100644
      <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE_NO_ADMIN_RIGHTS" desc="The subtitle shown in the subpage for incompatible applications, when the user does not have administrator rights. This means that these users are incapable of updating or removing incompatible applications by themselves.">
        {NUM_APPLICATIONS, plural,
 -- 
-2.23.0
+2.25.0
 

@@ -1,7 +1,7 @@
-From f634b500fa3c8a868f6f89d98a4dff4c2b1bbbbc Mon Sep 17 00:00:00 2001
+From 2fe63aa2c862ed42523fb7f3c76a44cac69dece4 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 1 Oct 2016 11:23:40 +0200
-Subject: [PATCH 53/60] first_run: barf if metrics_reporting is activated
+Subject: [PATCH 56/62] first_run: barf if metrics_reporting is activated
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -39,5 +39,5 @@ index db313b4d05f58..1c3e483549c6e 100644
        g_browser_process->local_state(),
        is_opt_in ? metrics::EnableMetricsDefault::OPT_IN
 -- 
-2.23.0
+2.25.0
 

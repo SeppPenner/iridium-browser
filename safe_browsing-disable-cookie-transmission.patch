@@ -1,7 +1,7 @@
-From 662cc8fb68bb2fd91d35839d315ff362cdadf254 Mon Sep 17 00:00:00 2001
+From a1fc104a31a45ac26b9508a7caeb8113a9cb2f52 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 44/60] safe_browsing: disable cookie transmission
+Subject: [PATCH 47/62] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
@@ -37,10 +37,10 @@ index 453cd94fa569e..7a95432d441ed 100644
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-index dc15294111b36..c34476e631038 100644
+index e099bfcfa3000..96d6cb24d51cd 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request_base.cc
-@@ -596,7 +596,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
+@@ -610,7 +610,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -75,5 +75,5 @@ index 0abc641a88f9e..a3042f29d5bb8 100644
    current_load_ = network::SimpleURLLoader::Create(std::move(resource_request),
                                                     traffic_annotation);
 -- 
-2.23.0
+2.25.0
 

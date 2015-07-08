@@ -1,52 +1,43 @@
-From a7730b08b0474aaa8e6e0b05228cdaaba4a4734d Mon Sep 17 00:00:00 2001
+From dc7387d15700eac162dfc9a04e15349f4874e304 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 57/60] common: set Iridium version and change User-Agent
- accordingly
+Subject: [PATCH 62/62] common: set Iridium version / User-Agent
 
-Reduced version number:
-We do not use @BUILD@ or @PATCH@, in particular not in the User-Agent
-string.
-
-As for the user agent, continue providing Chrome/* for possible
-compatibility checks by the browser and/or websites, since we
-really are still Chromium.
-
-Note to self:
-Update "Chromium/*" in UA string when updating chrome/version.
 ---
  chrome/VERSION                                            | 8 ++++----
- components/version_info/version_info.cc                   | 2 +-
+ components/version_info/version_info.cc                   | 4 +++-
  components/version_info/version_info_values.h.version     | 2 +-
  content/common/user_agent.cc                              | 2 ++
  extensions/shell/common/version.h.in                      | 2 +-
  tools/metrics/histograms/extract_histograms.py            | 2 +-
  .../histograms/generate_expired_histograms_array.py       | 4 ++--
- 7 files changed, 12 insertions(+), 10 deletions(-)
+ 7 files changed, 14 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 4327edd56870d..cfa70417dcc41 100644
+index 0e6def740cf49..08308b793be24 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=78
+-MAJOR=79
 -MINOR=0
--BUILD=3904
--PATCH=87
-+MAJOR=2019
-+MINOR=11
+-BUILD=3945
+-PATCH=130
++MAJOR=2020
++MINOR=01
 +BUILD=79
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
-index 57cf7a7fef9de..9cfa190ec58cf 100644
+index 57cf7a7fef9de..ee19030f0ee87 100644
 --- a/components/version_info/version_info.cc
 +++ b/components/version_info/version_info.cc
-@@ -16,7 +16,7 @@
+@@ -16,7 +16,9 @@
  namespace version_info {
  
  std::string GetProductNameAndVersionForUserAgent() {
 -  return "Chrome/" + GetVersionNumber();
-+  return "Iridium/" + GetVersionNumber();
++  /* Currently, the Iridium install base is so small that it would make us rather identifiable if we had our own tag. */
++  return "Chrome/79.0.3945.130";
++//  return "Iridium/" + GetVersionNumber();
  }
  
  std::string GetProductName() {
@@ -64,10 +55,10 @@ index 6232e359ef20f..3cf4fee096c06 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index 65083a0955142..2e831ff981b8f 100644
+index 37e72394997a0..6be4dd967a8be 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -196,6 +196,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -200,6 +200,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
@@ -90,10 +81,10 @@ index c4627fe512a1b..bf7d27484e997 100644
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
 diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
-index 40d1f573085dc..9ce9eb681e711 100644
+index 003314f980836..fd4ca0699949b 100644
 --- a/tools/metrics/histograms/extract_histograms.py
 +++ b/tools/metrics/histograms/extract_histograms.py
-@@ -73,7 +73,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
+@@ -79,7 +79,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
      'Base histogram. Use suffixes of this histogram instead.')
  
  EXPIRY_DATE_PATTERN = "%Y-%m-%d"
@@ -103,7 +94,7 @@ index 40d1f573085dc..9ce9eb681e711 100644
  
  class Error(Exception):
 diff --git a/tools/metrics/histograms/generate_expired_histograms_array.py b/tools/metrics/histograms/generate_expired_histograms_array.py
-index be99d8aade632..d41f690cb8d58 100755
+index 423f9e2d0a0c7..ae67ef294abb3 100755
 --- a/tools/metrics/histograms/generate_expired_histograms_array.py
 +++ b/tools/metrics/histograms/generate_expired_histograms_array.py
 @@ -15,8 +15,8 @@ import extract_histograms
@@ -118,5 +109,5 @@ index be99d8aade632..d41f690cb8d58 100755
  _SCRIPT_NAME = "generate_expired_histograms_array.py"
  _HASH_DATATYPE = "uint64_t"
 -- 
-2.23.0
+2.25.0
 

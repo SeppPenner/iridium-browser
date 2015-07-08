@@ -1,25 +1,25 @@
-From b94c19f3a4be99e362f5fccd3c315cf3a83d2ace Mon Sep 17 00:00:00 2001
+From aef2783f60a3e5cbc96b6621a2c4fd6389cf17fa Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 11:44:46 +0200
-Subject: [PATCH 59/60] prefs: disable signinallowed by default
+Subject: [PATCH 60/62] prefs: disable signinallowed by default
 
 ---
  .../signin/internal/identity_manager/primary_account_manager.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/signin/internal/identity_manager/primary_account_manager.cc b/components/signin/internal/identity_manager/primary_account_manager.cc
-index 91105525fcc7a..ca5c044ed6b48 100644
+index b96c001854207..d6f698daf7bc9 100644
 --- a/components/signin/internal/identity_manager/primary_account_manager.cc
 +++ b/components/signin/internal/identity_manager/primary_account_manager.cc
-@@ -58,7 +58,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
-                                std::string());
+@@ -56,7 +56,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
+   registry->RegisterBooleanPref(prefs::kGoogleServicesConsentedToSync, false);
    registry->RegisterBooleanPref(prefs::kAutologinEnabled, true);
    registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
 -  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
 +  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
+ }
  
-   // Deprecated prefs: will be removed in a future release.
 -- 
-2.23.0
+2.25.0
 

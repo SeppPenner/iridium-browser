@@ -1,7 +1,7 @@
-From 6ccd264eb87b65460c8dee2283daebb19c3be14f Mon Sep 17 00:00:00 2001
+From 12101f13f80121e700d222091c82f7d0ff7d8a69 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
-Subject: [PATCH 21/60] cloud-print: disable in prefs and component loader
+Subject: [PATCH 24/62] cloud-print: disable in prefs and component loader
 
 Cloud Print should normally be autodisabled if no printers are shared.
 But maybe that is not enough(?) Probably also needs to gain a checkbox
@@ -16,10 +16,10 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 927eececde9bf..43a088cc4a333 100644
+index 76129e19fe3fc..baef43000ace3 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -446,9 +446,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
+@@ -445,9 +445,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
  #else  // defined(OS_CHROMEOS)
    DCHECK(!skip_session_components);
  #if BUILDFLAG(ENABLE_PRINTING)
@@ -32,10 +32,10 @@ index 927eececde9bf..43a088cc4a333 100644
  #endif  // defined(OS_CHROMEOS)
  
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 233951466101e..95ecf7b830e6a 100644
+index bfbcbb30d0bb7..7a39b6506cb12 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -70,7 +70,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -71,7 +71,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
@@ -60,5 +60,5 @@ index 4b2a6a713f2aa..3002e439d17f4 100644
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
 -- 
-2.23.0
+2.25.0
 
