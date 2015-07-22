@@ -618,7 +618,7 @@ void CheckClientDownloadRequestBase::SendRequest() {
   auto resource_request = std::make_unique<network::ResourceRequest>();
   resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
   resource_request->method = "POST";
-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
+  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
 
   if (!access_token_.empty()) {
     resource_request->headers.SetHeader(
