@@ -241,7 +241,7 @@ void PPAPIDownloadRequest::SendRequest() {
                               this, traffic_annotation);
   data_use_measurement::DataUseUserData::AttachToFetcher(
       fetcher_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
-  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
+  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SEND_COOKIES | net::LOAD_DO_NOT_SAVE_COOKIES);
   fetcher_->SetAutomaticallyRetryOn5xx(false);
   fetcher_->SetRequestContext(service_->request_context_getter_.get());
   fetcher_->SetUploadData("application/octet-stream",
