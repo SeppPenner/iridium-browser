@@ -163,7 +163,7 @@ void ChromeCleanerFetcher::OnTemporaryDirectoryCreated(bool success) {
 
   data_use_measurement::DataUseUserData::AttachToFetcher(
       url_fetcher_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
-  url_fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
+  url_fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES);
   url_fetcher_->SetMaxRetriesOn5xx(3);
   url_fetcher_->SaveResponseToFileAtPath(temp_file_, blocking_task_runner_);
   url_fetcher_->SetRequestContext(g_browser_process->system_request_context());

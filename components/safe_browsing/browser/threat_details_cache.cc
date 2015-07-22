@@ -119,7 +119,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
   // Only from cache, and don't save cookies.
   current_fetch_->SetLoadFlags(net::LOAD_ONLY_FROM_CACHE |
                                net::LOAD_SKIP_CACHE_VALIDATION |
-                               net::LOAD_DO_NOT_SAVE_COOKIES);
+                               net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES);
   current_fetch_->SetAutomaticallyRetryOn5xx(false);  // No retries.
   current_fetch_->Start();  // OnURLFetchComplete will be called when done.
 }
