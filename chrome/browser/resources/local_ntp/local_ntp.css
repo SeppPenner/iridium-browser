@@ -71,7 +71,7 @@ body.hide-fakebox-logo #fakebox {
 }
 
 #logo-default {
-  background-image: url(../../../../ui/webui/resources/images/google_logo.svg);
+  background-image: url(../../../../ui/webui/resources/images/iridium_text.svg);
   background-repeat: no-repeat;
   bottom: 0;
   height: 92px;
@@ -83,7 +83,7 @@ body.hide-fakebox-logo #fakebox {
 
 body.alternate-logo #logo-default {
   -webkit-mask-image:
-      url(../../../../ui/webui/resources/images/google_logo.svg);
+      url(../../../../ui/webui/resources/images/iridium_text.svg);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: 100%;
   background: #eee;
