@@ -202,10 +202,10 @@ void PasswordManager::RegisterProfilePrefs(
   registry->RegisterBooleanPref(prefs::kBlacklistedCredentialsNormalized,
                                 false);
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableService, true,
+      prefs::kCredentialsEnableService, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableAutosignin, true,
+      prefs::kCredentialsEnableAutosignin, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
   registry->RegisterStringPref(prefs::kSyncPasswordHash, std::string(),
                                PrefRegistry::NO_REGISTRATION_FLAGS);
