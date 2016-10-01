@@ -19,6 +19,7 @@
 #include "components/metrics/metrics_reporting_default_state.h"
 #include "components/prefs/pref_service.h"
 #include "components/startup_metric_utils/browser/startup_metric_utils.h"
+#include <cstdio>
 
 namespace first_run {
 namespace internal {
@@ -33,6 +34,9 @@ void DoPostImportPlatformSpecificTasks(Profile* profile) {
   if (internal::IsOrganicFirstRun() && !local_state_file_exists) {
     if (ShowFirstRunDialog(profile)) {
       bool is_opt_in = first_run::IsMetricsReportingOptIn();
+      if (is_opt_in) {
+        fprintf(stderr, "*** metrics_reporting = 1\n");
+      }
       metrics::RecordMetricsReportingDefaultState(
           g_browser_process->local_state(),
           is_opt_in ? metrics::EnableMetricsDefault::OPT_IN
