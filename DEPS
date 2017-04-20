@@ -17,16 +17,14 @@ vars = {
     'bbedc54bc5cfdf16fdb979babb6b5a635049e740',
   'checkout_configuration':
     'default',
-  'checkout_instrumented_libraries':
-    'checkout_linux and checkout_configuration == "default"',
+  'checkout_instrumented_libraries': False,
   'checkout_libaom': True,
-  'checkout_nacl': True,
+  'checkout_nacl': False,
   'checkout_oculus_sdk':
     'checkout_src_internal and checkout_win',
   'checkout_src_internal': False,
   'checkout_telemetry_dependencies': False,
-  'checkout_traffic_annotation_tools':
-    'checkout_configuration == "default"',
+  'checkout_traffic_annotation_tools': False,
   'chromium_git':
     'https://chromium.googlesource.com',
   'devtools_node_modules_revision':
@@ -646,105 +644,6 @@ hooks = [
   {
     'action': [
       'python',
-      'src/build/download_nacl_toolchains.py',
-      '--mode',
-      'nacl_core_sdk',
-      'sync',
-      '--extract'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'nacltools',
-    'condition':
-      'checkout_nacl'
-  },
-  {
-    'action': [
-      'python',
-      'src/build/linux/sysroot_scripts/install-sysroot.py',
-      '--arch=arm'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'sysroot_arm',
-    'condition':
-      'checkout_linux and checkout_arm'
-  },
-  {
-    'action': [
-      'python',
-      'src/build/linux/sysroot_scripts/install-sysroot.py',
-      '--arch=arm64'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'sysroot_arm64',
-    'condition':
-      'checkout_linux and checkout_arm64'
-  },
-  {
-    'action': [
-      'python',
-      'src/build/linux/sysroot_scripts/install-sysroot.py',
-      '--arch=x86'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'sysroot_x86',
-    'condition':
-      'checkout_linux and (checkout_x86 or checkout_x64)'
-  },
-  {
-    'action': [
-      'python',
-      'src/build/linux/sysroot_scripts/install-sysroot.py',
-      '--arch=mips'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'sysroot_mips',
-    'condition':
-      'checkout_linux and checkout_mips'
-  },
-  {
-    'action': [
-      'python',
-      'src/build/linux/sysroot_scripts/install-sysroot.py',
-      '--arch=x64'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'sysroot_x64',
-    'condition':
-      'checkout_linux and checkout_x64'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
-      'chromium-browser-clang/ciopfs',
-      '-s',
-      'src/build/ciopfs.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'ciopfs_linux',
-    'condition':
-      'checkout_win and host_os == "linux"'
-  },
-  {
-    'action': [
-      'python',
       'src/build/vs_toolchain.py',
       'update',
       '--force'
@@ -767,28 +666,6 @@ hooks = [
       'mac_toolchain',
     'condition':
       'checkout_ios or checkout_mac'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/binutils/download.py'
-    ],
-    'pattern':
-      'src/third_party/binutils',
-    'name':
-      'binutils',
-    'condition':
-      'host_os == "linux"'
-  },
-  {
-    'action': [
-      'python',
-      'src/tools/clang/scripts/update.py'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'clang'
   },
   {
     'action': [
@@ -888,24 +765,6 @@ hooks = [
       '--no_resume',
       '--no_auth',
       '--bucket',
-      'chromium-gn',
-      '-s',
-      'src/buildtools/linux64/gn.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'gn_linux64',
-    'condition':
-      'host_os == "linux"'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
       'chromium-clang-format',
       '-s',
       'src/buildtools/win/clang-format.exe.sha1'
@@ -942,24 +801,6 @@ hooks = [
       '--no_resume',
       '--no_auth',
       '--bucket',
-      'chromium-clang-format',
-      '-s',
-      'src/buildtools/linux64/clang-format.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'clang_format_linux',
-    'condition':
-      'host_os == "linux"'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
       'chromium-browser-clang/rc',
       '-s',
       'src/build/toolchain/win/rc/win/rc.exe.sha1'
@@ -988,42 +829,6 @@ hooks = [
       'rc_mac',
     'condition':
       'checkout_win and host_os == "mac"'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
-      'chromium-browser-clang/rc',
-      '-s',
-      'src/build/toolchain/win/rc/linux64/rc.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'rc_linux',
-    'condition':
-      'checkout_win and host_os == "linux"'
-  },
-  {
-    'action': [
-      'download_from_google_storage',
-      '--no_resume',
-      '--extract',
-      '--no_auth',
-      '--bucket',
-      'chromium-fonts',
-      '-s',
-      'src/third_party/content_shell_fonts/content_shell_test_fonts.tar.gz.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'content_shell_fonts',
-    'condition':
-      'checkout_linux or (checkout_android or checkout_fuchsia)'
   },
   {
     'action': [
@@ -1078,24 +883,6 @@ hooks = [
       'luci-go_mac',
     'condition':
       'host_os == "mac"'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
-      'chromium-luci',
-      '-d',
-      'src/tools/luci-go/linux64'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'luci-go_linux',
-    'condition':
-      'host_os == "linux"'
   },
   {
     'action': [
@@ -1168,42 +955,6 @@ hooks = [
       'msan_no_origins',
     'condition':
       'checkout_instrumented_libraries'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '-u',
-      '--bucket',
-      'v8-wasm-fuzzer',
-      '-s',
-      'src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'wasm_fuzzer'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--extract',
-      '--no_auth',
-      '--bucket',
-      'chromium-nodejs/8.9.1',
-      '-s',
-      'src/third_party/node/linux/node-linux-x64.tar.gz.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'node_linux64',
-    'condition':
-      'host_os == "linux"'
   },
   {
     'action': [
@@ -1338,23 +1089,6 @@ hooks = [
   {
     'action': [
       'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--num_threads=4',
-      '--bucket',
-      'chromium-binary-patching',
-      '-d',
-      'src/chrome/installer/zucchini/testdata'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'zucchini_testdata'
-  },
-  {
-    'action': [
-      'python',
       'src/build/cipd/clobber_cipd_root.py',
       '--root',
       '.'
@@ -1403,24 +1137,6 @@ hooks = [
       'sdkextras',
     'condition':
       'checkout_android'
-  },
-  {
-    'action': [
-      'python',
-      'src/third_party/depot_tools/download_from_google_storage.py',
-      '--no_resume',
-      '--no_auth',
-      '--bucket',
-      'chromium-android-tools/checkstyle',
-      '-s',
-      'src/third_party/checkstyle/checkstyle-8.0-all.jar.sha1'
-    ],
-    'pattern':
-      '.',
-    'name':
-      'checkstyle',
-    'condition':
-      'checkout_android or checkout_linux'
   },
   {
     'action': [
