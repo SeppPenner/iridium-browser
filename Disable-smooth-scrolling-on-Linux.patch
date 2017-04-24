@@ -1,7 +1,7 @@
-From 040c7598f022449a52024d82fefb0685dc0aae90 Mon Sep 17 00:00:00 2001
+From 71dcce4f8689f59dde7238ec174af31a9cdb04c3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 16:11:53 +0200
-Subject: [PATCH 60/60] Disable smooth scrolling on Linux
+Subject: [PATCH 66/66] Disable smooth scrolling on Linux
 
 Smooth scrolling (while using mousewheel or arrow keys) is a really
 dumb idea. Text naturally appears as a blur while it moves, and the
@@ -16,10 +16,10 @@ setting.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/ui/gfx/animation/animation.cc b/ui/gfx/animation/animation.cc
-index 4bc1b248aa77..bc6e8671eb88 100644
+index 469b5260ce00..f0e8dc1781d0 100644
 --- a/ui/gfx/animation/animation.cc
 +++ b/ui/gfx/animation/animation.cc
-@@ -100,7 +100,7 @@ bool Animation::ShouldRenderRichAnimation() {
+@@ -112,7 +112,7 @@ bool Animation::ShouldRenderRichAnimationImpl() {
  // static
  bool Animation::ScrollAnimationsEnabledBySystem() {
    // Defined in platform specific files for Windows and OSX.
@@ -29,5 +29,5 @@ index 4bc1b248aa77..bc6e8671eb88 100644
  #endif
  
 -- 
-2.12.2
+2.14.2
 

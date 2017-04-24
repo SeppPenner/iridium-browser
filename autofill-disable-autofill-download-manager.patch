@@ -1,7 +1,7 @@
-From 97946d5729a61da5b70670dc4716067b61cde589 Mon Sep 17 00:00:00 2001
+From 444c9f86d7abde7eab10438407d571168d873988 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 11/60] autofill: disable autofill download manager
+Subject: [PATCH 17/66] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -10,10 +10,10 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index 07084c52be49..036f0f2cd3c7 100644
+index 8d7d72588f46..b972d1b466e9 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -85,7 +85,7 @@ std::string RequestTypeToString(AutofillDownloadManager::RequestType type) {
+@@ -158,7 +158,7 @@ std::string RequestTypeToString(AutofillDownloadManager::RequestType type) {
  }
  
  GURL GetRequestUrl(AutofillDownloadManager::RequestType request_type) {
@@ -23,10 +23,10 @@ index 07084c52be49..036f0f2cd3c7 100644
  }
  
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index 056793fe09bc..1f6419890bc8 100644
+index 1c46141d75f4..5a6ff51717ac 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -238,9 +238,11 @@ AutofillManager::AutofillManager(
+@@ -256,9 +256,11 @@ AutofillManager::AutofillManager(
        autofill_assistant_(this),
  #endif
        weak_ptr_factory_(this) {
@@ -39,5 +39,5 @@ index 056793fe09bc..1f6419890bc8 100644
    if (personal_data_ && client_)
      personal_data_->OnSyncServiceInitialized(client_->GetSyncService());
 -- 
-2.12.2
+2.14.2
 

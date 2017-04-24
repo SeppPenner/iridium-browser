@@ -1,7 +1,7 @@
-From c761c81fbf0609e256990fd5f99c003fc4c4ee85 Mon Sep 17 00:00:00 2001
+From 3fe1dcc5d4f6b39cc40142af69f94e1bb53f7c5b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 28 Oct 2014 18:45:19 +0100
-Subject: [PATCH 08/60] profile-resetter: do not tick send-settings by default
+Subject: [PATCH 14/66] profile-resetter: do not tick send-settings by default
 
 When the user wishes to reset his preferences, Chromium would suggest
 to send over the old settings to Google. I presume that this is for
@@ -15,18 +15,18 @@ any information.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/resources/options/reset_profile_settings_overlay.html b/chrome/browser/resources/options/reset_profile_settings_overlay.html
-index 504661f7bf58..02bb00c5d7ce 100644
+index 07ba37200bbe..65da0c20b9fc 100644
 --- a/chrome/browser/resources/options/reset_profile_settings_overlay.html
 +++ b/chrome/browser/resources/options/reset_profile_settings_overlay.html
-@@ -26,7 +26,7 @@
+@@ -24,7 +24,7 @@
    <div id="feedback-bar"
        class="gray-bottom-bar checkbox controlled-setting-with-label">
      <label>
 -      <input id="send-settings" type="checkbox" checked>
 +      <input id="send-settings" type="checkbox">
        <span>
-         <span i18n-content="resetProfileSettingsFeedback"></span>
+         <span>$i18n{resetProfileSettingsFeedback}</span>
          <span id="expand-feedback"></span>
 -- 
-2.12.2
+2.14.2
 

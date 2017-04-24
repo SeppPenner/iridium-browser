@@ -1,7 +1,7 @@
-From cc6b3314f01cf5f1ab44f2940d16c6ddb951e875 Mon Sep 17 00:00:00 2001
+From b4008c062550ccf35f8847935409b687d011a026 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 4 Aug 2015 15:15:53 +0200
-Subject: [PATCH 52/60] battery_status_service: disable more privacy nightmares
+Subject: [PATCH 58/66] battery_status_service: disable more privacy nightmares
 
 The W3C Battery Status API[1] has quite a laughable statement:
 
@@ -19,14 +19,14 @@ could be used to identity users[2].
 
 References: https://github.com/iridium-browser/iridium-browser/issues/40
 ---
- device/battery/battery_status_service.cc | 5 +++++
- 1 file changed, 5 insertions(+)
+ services/device/battery/battery_status_service.cc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/device/battery/battery_status_service.cc b/device/battery/battery_status_service.cc
-index cdfec3888956..64c4e7787536 100644
---- a/device/battery/battery_status_service.cc
-+++ b/device/battery/battery_status_service.cc
-@@ -43,6 +43,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
+diff --git a/services/device/battery/battery_status_service.cc b/services/device/battery/battery_status_service.cc
+index 988f20d2a818..273979fabedb 100644
+--- a/services/device/battery/battery_status_service.cc
++++ b/services/device/battery/battery_status_service.cc
+@@ -41,6 +41,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
    if (!battery_fetcher_)
      battery_fetcher_ = BatteryStatusManager::Create(update_callback_);
  
@@ -34,17 +34,14 @@ index cdfec3888956..64c4e7787536 100644
    if (callback_list_.empty()) {
      bool success = battery_fetcher_->StartListeningBatteryChange();
      // On failure pass the default values back.
-@@ -54,6 +55,10 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
+@@ -52,6 +53,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
      // Send recent status to the new callback if already available.
      callback.Run(status_);
    }
-+#else
-+  // Always pass the default values.
-+  callback.Run(BatteryStatus());
 +#endif
  
    return callback_list_.Add(callback);
  }
 -- 
-2.12.2
+2.14.2
 

@@ -1,20 +1,21 @@
-From ece0c65c6f55e7c8182c27be895bebd987e80d6b Mon Sep 17 00:00:00 2001
+From 111564dec2bfa770a2a1e4dd3d41c2c1f2d569c6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 17:03:14 +0200
-Subject: [PATCH 02/60] build: select default toolchain
+Subject: [PATCH 02/66] build: select default toolchain
 
 (Patch used from openSUSE.)
 
-You will need to use
+Starting with this commit, you will need to use:
 
 	export CC=gcc CXX=g++
 	(or clang equivalents)
 
-now or gn bootstrap and ninja will fail with spurious
+(Otherwise, `gn bootstrap` and `ninja` will fail with spurious errors
+such as:)
 
 	-MD: no such file or directory
 
-kind of error. If anyone knows whether gn can do
+If anyone knows whether gn can do
 
 	= getenv("CC") || "gcc"
 
@@ -50,5 +51,5 @@ index 000000000000..052c0b3f305a
 +  }
 +}
 -- 
-2.12.2
+2.14.2
 

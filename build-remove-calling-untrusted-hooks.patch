@@ -1,22 +1,25 @@
-From 5f339e69ea12f4a424bb10dedfe7c894875d03b9 Mon Sep 17 00:00:00 2001
+From e98ee9ab51b6bb94939e78b7f5c3990608becf22 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/60] build: remove calling untrusted hooks
+Subject: [PATCH 01/66] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 446 -------------------------------------------------------------------
- 1 file changed, 446 deletions(-)
+ DEPS | 377 -------------------------------------------------------------------
+ 1 file changed, 377 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index f5dbbf4c8768..0e5c09dd6417 100644
+index 8ff6d99a045f..4774542d34b8 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -352,31 +352,6 @@ hooks = [
-   {
-     'action': [
-       'python',
+@@ -362,73 +362,6 @@ hooks = [
+     'name':
+       'remove_stale_pyc_files'
+   },
+-  {
+-    'action': [
+-      'python',
 -      'src/build/download_nacl_toolchains.py',
 -      '--mode',
 -      'nacl_core_sdk',
@@ -31,24 +34,6 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  {
 -    'action': [
 -      'python',
--      'src/build/android/play_services/update.py',
--      'download'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'sdkextras'
--  },
--  {
--    'action': [
--      'python',
-       'src/build/android/update_deps/update_third_party_deps.py',
-       'download',
-       '-b',
-@@ -662,59 +637,6 @@ hooks = [
-   {
-     'action': [
-       'python',
 -      'src/build/linux/sysroot_scripts/install-sysroot.py',
 -      '--running-as-hook'
 -    ],
@@ -99,17 +84,17 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -    'name':
 -      'clang'
 -  },
+   {
+     'action': [
+       'python',
+@@ -457,316 +390,6 @@ hooks = [
+     'name':
+       'lastchange_skia'
+   },
 -  {
 -    'action': [
 -      'python',
-       'src/build/util/lastchange.py',
-       '-o',
-       'src/build/util/LASTCHANGE'
-@@ -757,272 +679,6 @@ hooks = [
-   },
-   {
-     'action': [
--      'download_from_google_storage',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--no_auth',
@@ -125,7 +110,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=darwin',
 -      '--no_auth',
@@ -141,7 +127,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=linux*',
 -      '--no_auth',
@@ -157,7 +144,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--no_auth',
@@ -173,7 +161,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=darwin',
 -      '--no_auth',
@@ -189,7 +178,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=linux*',
 -      '--no_auth',
@@ -205,55 +195,25 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
--      '--platform=linux*',
+-      '--platform=win32',
 -      '--no_auth',
 -      '--bucket',
--      'chromium-gvr-static-shim',
--      '-s',
--      'src/third_party/gvr-android-sdk/libgvr_shim_static_arm.a.sha1'
+-      'chromium-browser-clang/orderfiles',
+-      '-d',
+-      'src/chrome/build'
 -    ],
 -    'pattern':
--      '\\.sha1',
+-      '.',
 -    'name':
--      'gvr_static_shim_android_arm'
+-      'orderfiles_win'
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
--      '--no_resume',
--      '--platform=linux*',
--      '--no_auth',
--      '--bucket',
--      'chromium-gvr-static-shim',
--      '-s',
--      'src/third_party/gvr-android-sdk/libgvr_shim_static_arm64.a.sha1'
--    ],
--    'pattern':
--      '\\.sha1',
--    'name':
--      'gvr_static_shim_android_arm64'
--  },
--  {
--    'action': [
--      'download_from_google_storage',
--      '--no_resume',
--      '--platform=linux*',
--      '--no_auth',
--      '--bucket',
--      'chromium-gvr-static-shim',
--      '-s',
--      'src/third_party/gvr-android-sdk/common_library.aar.sha1'
--    ],
--    'pattern':
--      '\\.sha1',
--    'name':
--      'gvr_common_aar'
--  },
--  {
--    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--no_auth',
@@ -269,7 +229,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=darwin',
 -      '--no_auth',
@@ -285,7 +246,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=linux*',
 -      '--no_auth',
@@ -301,23 +263,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
--      '--no_resume',
--      '--platform=linux*',
--      '--no_auth',
--      '--bucket',
--      'chromium-eu-strip',
--      '-s',
--      'src/build/linux/bin/eu-strip.sha1'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'eu-strip'
--  },
--  {
--    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--no_auth',
@@ -336,7 +283,7 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -      'python',
 -      'src/build/get_syzygy_binaries.py',
 -      '--output-dir=src/third_party/syzygy/binaries',
--      '--revision=37f2efe2518802e568d2b620309c0c4a939e52f1',
+-      '--revision=190dbfe74c6f5b5913820fa66d9176877924d7c5',
 -      '--overwrite',
 -      '--copy-dia-binaries'
 -    ],
@@ -347,7 +294,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--directory',
@@ -375,50 +323,20 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
-       'python',
-       'src/build/android/download_doclava.py'
-     ],
-@@ -1035,108 +691,6 @@ hooks = [
-     'action': [
-       'download_from_google_storage',
-       '--no_resume',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
+-      '--no_resume',
 -      '--no_auth',
 -      '-u',
 -      '--bucket',
 -      'v8-wasm-fuzzer',
 -      '-s',
--      'src/v8/test/fuzzer/wasm.tar.gz.sha1'
+-      'src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1'
 -    ],
 -    'pattern':
 -      '.',
 -    'name':
 -      'wasm_fuzzer'
--  },
--  {
--    'action': [
--      'download_from_google_storage',
--      '--no_resume',
--      '--no_auth',
--      '-u',
--      '--bucket',
--      'v8-wasm-asmjs-fuzzer',
--      '-s',
--      'src/v8/test/fuzzer/wasm_asmjs.tar.gz.sha1'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'wasm_asmjs_fuzzer'
--  },
--  {
--    'action': [
--      'python',
--      'src/tools/clang_format_merge_driver/install_git_hook.py'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'clang_format_merge_driver'
 -  },
 -  {
 -    'action': [
@@ -432,7 +350,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=linux*',
 -      '--extract',
@@ -449,7 +368,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=darwin',
 -      '--extract',
@@ -466,7 +386,8 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -  },
 -  {
 -    'action': [
--      'download_from_google_storage',
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
 -      '--no_resume',
 -      '--platform=win32',
 -      '--no_auth',
@@ -480,13 +401,9 @@ index f5dbbf4c8768..0e5c09dd6417 100644
 -    'name':
 -      'node_win'
 -  },
--  {
--    'action': [
--      'download_from_google_storage',
--      '--no_resume',
-       '--extract',
-       '--no_auth',
-       '--bucket',
+   {
+     'action': [
+       'python',
 -- 
-2.12.2
+2.14.2
 

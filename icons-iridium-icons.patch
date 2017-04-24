@@ -1,7 +1,7 @@
-From 8590885bb7df36b0bbf3055f8f310e7145bb52a0 Mon Sep 17 00:00:00 2001
+From 037d74dc379499721884cddca5c481fb74349894 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 55/60] icons: iridium icons
+Subject: [PATCH 61/66] icons: iridium icons
 
 ---
  chrome/app/theme/chromium/product_logo_128.png     | Bin 8366 -> 7826 bytes
@@ -1817,7 +1817,7 @@ index 8f6edd09c0d8..36be4faced99 100644
    height: 92px;
    margin: auto;
 diff --git a/chrome/browser/resources/local_ntp/local_ntp.css b/chrome/browser/resources/local_ntp/local_ntp.css
-index 61800071f7c3..ca8a0b38920d 100644
+index 1fa5dbe99ec1..bd0b5112c54e 100644
 --- a/chrome/browser/resources/local_ntp/local_ntp.css
 +++ b/chrome/browser/resources/local_ntp/local_ntp.css
 @@ -29,7 +29,7 @@ body.hide-fakebox-logo #fakebox {
@@ -2225,10 +2225,10 @@ index 000000000000..45d8e586f93c
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index 8c8473fd0c66..323591450335 100644
+index 24f7ea9c0741..04b1c713b775 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
-@@ -187,7 +187,7 @@ without changes to the corresponding grd file. -->
+@@ -190,7 +190,7 @@ without changes to the corresponding grd file. -->
        <include name="IDR_WEBUI_IMAGES_ERROR"
                 file="images/error.svg" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_GOOGLE_LOGO"
@@ -2238,5 +2238,5 @@ index 8c8473fd0c66..323591450335 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.12.2
+2.14.2
 

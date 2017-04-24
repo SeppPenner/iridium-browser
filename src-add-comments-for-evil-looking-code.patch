@@ -1,7 +1,7 @@
-From 6ad90ee82821d63eb7280261caa775964c9d6908 Mon Sep 17 00:00:00 2001
+From e7518f1ee964257c31e3239c3b5c8709f1922cad Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 6 May 2015 14:13:00 +0200
-Subject: [PATCH 36/60] src: add comments for evil-looking code
+Subject: [PATCH 42/66] src: add comments for evil-looking code
 
 A trk:193 alert would show whenever the Omnibar is set to use Google
 as search engine. When it does, it tries to find the most suitable TLD
@@ -14,10 +14,10 @@ can be whitelisted, i.e. have no trk: prefix.
  1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index 0e10272068f8..90e369cb85f9 100644
+index e16f32776049..95257ff1f6fc 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
-@@ -24,10 +24,19 @@
+@@ -25,10 +25,19 @@
  #include "net/url_request/url_request_status.h"
  
  
@@ -39,5 +39,5 @@ index 0e10272068f8..90e369cb85f9 100644
  GoogleURLTracker::GoogleURLTracker(
      std::unique_ptr<GoogleURLTrackerClient> client,
 -- 
-2.12.2
+2.14.2
 

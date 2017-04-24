@@ -1,0 +1,39 @@
+From 8eab4aa22385e8482067aabc8af9601d42b20cfe Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 25 Sep 2017 13:20:23 +0200
+Subject: [PATCH 06/66] build: import openSUSE gcc60-fixes.diff
+
+---
+ base/numerics/safe_math_shared_impl.h | 3 +--
+ build/config/compiler/BUILD.gn        | 1 +
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/base/numerics/safe_math_shared_impl.h b/base/numerics/safe_math_shared_impl.h
+index 99f230ce7e9a..de2415d402f5 100644
+--- a/base/numerics/safe_math_shared_impl.h
++++ b/base/numerics/safe_math_shared_impl.h
+@@ -21,8 +21,7 @@
+ #if !defined(__native_client__) &&                         \
+     ((defined(__clang__) &&                                \
+       ((__clang_major__ > 3) ||                            \
+-       (__clang_major__ == 3 && __clang_minor__ >= 4))) || \
+-     (defined(__GNUC__) && __GNUC__ >= 5))
++       (__clang_major__ == 3 && __clang_minor__ >= 4))))
+ #include "base/numerics/safe_math_clang_gcc_impl.h"
+ #define BASE_HAS_OPTIMIZED_SAFE_MATH (1)
+ #else
+diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
+index b5d6d8fdb443..08befc3aa966 100644
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -453,6 +453,7 @@ config("compiler") {
+     # TODO(thakis): Eventually switch this to c++11 instead,
+     # http://crbug.com/427584
+     cflags_cc += [ "-std=gnu++11" ]
++    cflags_cc += [ "-fno-delete-null-pointer-checks" ]
+   } else if (!is_win && !is_nacl) {
+     # TODO(mcgrathr) - the NaCl GCC toolchain doesn't support either gnu++11
+     # or c++11; we technically don't need this toolchain any more, but there
+-- 
+2.14.2
+
