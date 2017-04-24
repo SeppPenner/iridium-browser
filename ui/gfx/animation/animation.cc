@@ -122,8 +122,7 @@ bool Animation::ShouldRenderRichAnimationImpl() {
 
 // static
 bool Animation::ScrollAnimationsEnabledBySystem() {
-  return true;
-  // Defined in platform specific files for Windows and OSX and Linux.
+	return false;
 }
 
 #if !defined(OS_ANDROID)
