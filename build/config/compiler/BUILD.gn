@@ -474,6 +474,7 @@ config("compiler") {
     } else {
       cflags_cc += [ "-std=gnu++14" ]
     }
+    cflags_cc += [ "-fno-delete-null-pointer-checks" ]
   } else if (!is_win && !is_nacl) {
     if (target_os == "android") {
       cxx11_override = use_cxx11_on_android
