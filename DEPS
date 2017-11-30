@@ -176,7 +176,7 @@ deps = {
   'src/third_party/webgl/src':
     (Var("chromium_git")) + '/external/khronosgroup/webgl.git@559e304b3903548b4f8e0681ba3b1030aa0d29d9',
   'src/third_party/webrtc':
-    (Var("chromium_git")) + '/external/webrtc/trunk/webrtc.git@a2329acf18dc0653106782f63f54675dab9c483e',
+    (Var("chromium_git")) + '/external/webrtc/trunk/webrtc.git@59d92ff1288817c52b13f54871ea42619231cf7a',
   'src/third_party/yasm/source/patched-yasm':
     (Var("chromium_git")) + '/chromium/deps/yasm/patched-yasm.git@b98114e18d8b9b84586b10d24353ab8616d4c5fc',
   'src/tools/gyp':
