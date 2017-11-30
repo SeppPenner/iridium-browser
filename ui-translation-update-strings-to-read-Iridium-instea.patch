@@ -1,25 +1,25 @@
-From ee58565e0b0d3a69497c99bd225f6d740454bfbd Mon Sep 17 00:00:00 2001
+From 4a0bcdd513896c0094ab37b97e25bb56d40c614c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 10 Dec 2014 12:44:49 +0100
-Subject: [PATCH 34/66] ui/translation: update strings to read "Iridium"
+Subject: [PATCH 31/64] ui/translation: update strings to read "Iridium"
  instead
 
 ---
  .../java/strings/android_chrome_strings.grd        |  34 +-
- chrome/app/chromium_strings.grd                    | 422 ++++++++++-----------
+ chrome/app/chromium_strings.grd                    | 418 ++++++++++-----------
  chrome/app/generated_resources.grd                 |  12 +-
  chrome/app/google_chrome_strings.grd               |  10 +-
  chrome/app/settings_google_chrome_strings.grdp     |   8 +-
  chrome/browser/resources/chrome-logo-faded.png     | Bin 896 -> 1267 bytes
  components/components_chromium_strings.grd         |  18 +-
  .../app/strings/ios_google_chrome_strings.grd      |  30 +-
- 8 files changed, 267 insertions(+), 267 deletions(-)
+ 8 files changed, 265 insertions(+), 265 deletions(-)
 
 diff --git a/chrome/android/java/strings/android_chrome_strings.grd b/chrome/android/java/strings/android_chrome_strings.grd
-index 7c844de957ef..9ea285d7b79a 100644
+index e6d626275137..09ccab47a38e 100644
 --- a/chrome/android/java/strings/android_chrome_strings.grd
 +++ b/chrome/android/java/strings/android_chrome_strings.grd
-@@ -268,10 +268,10 @@ CHAR-LIMIT guidelines:
+@@ -274,10 +274,10 @@ CHAR-LIMIT guidelines:
  
        <!-- Sign-in preference -->
        <message name="IDS_SIGN_IN_TO_CHROME" desc="Title for the button to sign in to Chrome using one's Google account. [CHAR-LIMIT=27]">
@@ -32,7 +32,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_SIGN_IN_TO_CHROME_DISABLED_SUMMARY" desc="A descriptive line of text that appears under the 'Sign in to Chrome' option, in Chrome Settings on Android. The text explains why 'Sign in to Chrome' is disabled. 'Administrator' refers to the IT administrator of the company/organization that owns the user’s device.">
            Disabled by the administrator of this device
-@@ -365,7 +365,7 @@ CHAR-LIMIT guidelines:
+@@ -374,7 +374,7 @@ CHAR-LIMIT guidelines:
          Billing address
        </message>
        <message name="IDS_AUTOFILL_DESCRIBE_LOCAL_COPY" desc="Text label that describes a Wallet credit card which has been copied to the local Chrome instance.">
@@ -41,7 +41,7 @@ index 7c844de957ef..9ea285d7b79a 100644
         </message>
  
         <!-- Payment Request section preview strings -->
-@@ -577,10 +577,10 @@ For example, some websites may respond to this request by showing you ads that a
+@@ -618,10 +618,10 @@ For example, some websites may respond to this request by showing you ads that a
          You won’t be signed out of your Google account. Your Google account may have other forms of browsing history at <ph name="BEGIN_LINK">&lt;link&gt;</ph>history.google.com<ph name="END_LINK">&lt;/link&gt;</ph>.
        </message>
        <message name="IDS_CLEAR_BROWSING_DATA_HISTORY_DIALOG_TITLE" desc="Title of a dialog that is shown after the deletion of browsing history finished.">
@@ -54,7 +54,7 @@ index 7c844de957ef..9ea285d7b79a 100644
  
  Your Google account may have other forms of browsing history like searches and activity from other Google services at <ph name="BEGIN_LINK">&lt;link&gt;</ph>history.google.com<ph name="END_LINK">&lt;/link&gt;</ph>.
        </message>
-@@ -929,10 +929,10 @@ Your Google account may have other forms of browsing history like searches and a
+@@ -959,10 +959,10 @@ Your Google account may have other forms of browsing history like searches and a
          Turn on location in <ph name="BEGIN_LINK">&lt;link&gt;</ph>Android Settings<ph name="END_LINK">&lt;/link&gt;</ph>.
        </message>
        <message name="IDS_ANDROID_PERMISSION_OFF_PLURAL" desc="Text at the top of the Website list, explaining to the user that multiple permissions, such as the location service, are turned off. Contains a link to the settings menu to change it.">
@@ -67,7 +67,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_ANDROID_LOCATION_OFF_GLOBALLY" desc="The message to show when Location has been turned off globally in Android. Contains a link to the settings menu to enable location.">
          Location access is <ph name="BEGIN_LINK">&lt;link&gt;</ph>turned off for this device<ph name="END_LINK">&lt;/link&gt;</ph>.
-@@ -979,7 +979,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1009,7 +1009,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Google Translate
        </message>
        <message name="IDS_TRANSLATE_PREFS_DESCRIPTION" desc="Translate preference description">
@@ -76,7 +76,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_TRANSLATE_PREFS_TOAST_DESCRIPTION" desc="Translate settings reset toast when resetting defaults">
          Your translate settings have been reset.
-@@ -1018,7 +1018,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1048,7 +1048,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          since <ph name="date">%1$s<ex>Feb 28</ex></ph>
        </message>
        <message name="IDS_DATA_REDUCTION_DESCRIPTION" desc="Description text for the Data Saver feature.">
@@ -85,17 +85,17 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_DATA_REDUCTION_MENU_ITEM_SUMMARY" desc="Summary text for data reduction menu item.">
          <ph name="PERCENT">%1$s<ex>49%</ex></ph> data savings
-@@ -1030,7 +1030,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
-         Data Used:
+@@ -1060,7 +1060,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+         Data used:
        </message>
        <message name="IDS_DATA_REDUCTION_PROXY_UNREACHABLE_WARN" desc="Warning message shown when Google data reduction proxy servers are not reachable.">
 -        Chrome is unable to reach Google servers for data compression. Your data savings may be limited.
 +        The browser is unable to reach Google servers for data compression. Your data savings may be limited.
        </message>
        <message name="IDS_DATA_REDUCTION_DATA_USAGE_BREAKDOWN_TITLE" desc="Title for the data usage breakdown on the Data Reduction statistics page. The breakdown lists the top ten sites with the greatest amount of data usage or mobile data that was saved.">
-         Data Usage Breakdown
-@@ -1054,7 +1054,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
-         Reset Statistics
+         Data usage breakdown
+@@ -1093,7 +1093,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+         Reset
        </message>
        <message name="IDS_SAFE_BROWSING_DESCRIPTION" desc="Description text for safe browsing">
 -        Chrome’s Safe Browsing system will also be used to detect malicious pages and protect you from phishing, malware, and harmful downloads.
@@ -103,7 +103,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_DATA_REDUCTION_CAVEATS_DESCRIPTION" desc="Description text for usage caveats">
          This feature may interfere with access to premium data services provided by your carrier.
-@@ -1100,10 +1100,10 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1139,10 +1139,10 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Turn on Data Saver
        </message>
        <message name="IDS_DATA_REDUCTION_PROMO_SNACKBAR_TEXT_MB" desc="Text to be displayed in the data reduction promo snackbar that lets the user know they saved a certain amount of data in MB">
@@ -116,7 +116,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_DATA_REDUCTION_PROMO_SNACKBAR_BUTTON" desc="Text to be displayed in the data reduction promo snackbar view button that takes the user to the data reduction settings page">
          View
-@@ -1111,7 +1111,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1150,7 +1150,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
  
        <!-- About Chrome preferences -->
        <message name="IDS_PREFS_ABOUT_CHROME" desc="Title for the About Chrome page. [CHAR-LIMIT=32]">
@@ -125,7 +125,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
        <message name="IDS_LEGAL_INFORMATION_SUMMARY" desc="Summary for legal information" meaning="Android">
          Copyright <ph name="year">%1$d<ex>2014</ex></ph> Google Inc. All rights reserved.
-@@ -1126,7 +1126,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1165,7 +1165,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Operating system
        </message>
        <message name="IDS_DEPRECATION_WARNING" desc="Warning about Chrome updates no longer being supported">
@@ -134,7 +134,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
  
        <!-- Account management UI strings. -->
-@@ -1140,7 +1140,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1179,7 +1179,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Syncing to <ph name="SYNC_ACCOUNT_USER_NAME">%1$s<ex>johndoe@gmail.com</ex></ph>
        </message>
        <message name="IDS_ACCOUNT_MANAGEMENT_SIGN_OUT" desc="Button text for signing out of Chrome">
@@ -143,7 +143,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        </message>
  
        <!-- Child accounts -->
-@@ -1243,7 +1243,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1282,7 +1282,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
          Sign out
        </message>
        <message name="IDS_SIGN_IN_BUTTON" desc="Label for a button to sign in">
@@ -153,7 +153,7 @@ index 7c844de957ef..9ea285d7b79a 100644
        <message name="IDS_SIGN_IN_GETTING_ACCOUNT_MANAGEMENT_POLICY" desc="Title of progress bar dialog for getting management policy">
          Contacting Google…this may take a minute
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
-index ecaf16add883..8de257754a09 100644
+index c8fea6462913..c207a22cf815 100644
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
 @@ -127,13 +127,13 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
@@ -288,7 +288,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <message name="IDS_ACCNAME_TOOLBAR" desc="The accessible name for the application's toolbar.">
          main
-@@ -253,32 +253,32 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -253,29 +253,29 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        <!-- Hung Browser Detector -->
        <if expr="is_win">
          <message name="IDS_BROWSER_HUNGBROWSER_MESSAGE" desc="Content of the dialog box shown when the browser is hung">
@@ -310,10 +310,6 @@ index ecaf16add883..8de257754a09 100644
 -          Please close all Chromium windows and try again.
 +          Please close all browser windows and try again.
          </message>
-         <message name="IDS_UNINSTALL_CLOSE_APP_IMMERSIVE" desc="Message to user when uninstall detects other app instance running, possibly in the Windows 8 immersive mode">
--          Please close all Chromium windows (including those in Windows 8 mode) and try again.
-+          Please close all browser windows (including those in Windows 8 mode) and try again.
-         </message>
          <message name="IDS_UNINSTALL_VERIFY" desc="Message to confirm user wants to uninstall">
 -          Are you sure you want to uninstall Chromium?
 +          Confirm that you want to uninstall the browser.
@@ -330,7 +326,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <if expr="chromeos">
          <message name="IDS_NEW_TAB_CHROME_WELCOME_PAGE_TITLE"
-@@ -289,7 +289,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -286,7 +286,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        <if expr="not chromeos">
          <message name="IDS_NEW_TAB_CHROME_WELCOME_PAGE_TITLE"
                   desc="Title for the hard-coded thumbnail that represents the Google Chrome Welcome page.  This is used on the NTP when there aren't enough thumbnails to show.">
@@ -339,7 +335,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -299,7 +299,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -296,7 +296,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        </if>
        <if expr="not chromeos">
          <message name="IDS_OPTIONS_RELAUNCH_REQUIRED" desc="The message displayed for an option that requires a relaunch to take effect. This appears in a message box if an option is changed that requires a relaunch.">
@@ -348,7 +344,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -309,37 +309,37 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -306,37 +306,37 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        </if>
        <if expr="use_titlecase">
          <message name="IDS_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND" desc="In Title Case: The checkbox in the status tray context menu that controls whether chrome keeps running in the background after the last window is closed">
@@ -394,7 +390,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <message name="IDS_PREFERENCES_UNREADABLE_ERROR" desc="Error displayed on startup when user preferences file can not be read">
  Your preferences can not be read.
-@@ -349,65 +349,65 @@ Some features may be unavailable and changes to preferences won't be saved.
+@@ -346,65 +346,65 @@ Some features may be unavailable and changes to preferences won't be saved.
        <message name="IDS_PREFERENCES_CORRUPT_ERROR" desc="Error displayed on startup when user preferences file can not be read">
  Your preferences file is corrupt or invalid.
  
@@ -477,7 +473,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
          <message name="IDS_INSTALL_INSUFFICIENT_RIGHTS" desc="Error displayed when a non admin user tries to attempt system level install/uninstall.">
            You do not have appropriate rights for system-level install. Try running the installer again as Administrator.
-@@ -418,7 +418,7 @@ Chromium is unable to recover your settings.
+@@ -415,7 +415,7 @@ Chromium is unable to recover your settings.
        </if>
        <!-- Options Dialog -->
        <message name="IDS_OPTIONS_IMPROVE_BROWSING_EXPERIENCE" desc="The text in the options panel that describes how we use web services to improve browsing experience.">
@@ -486,7 +482,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <if expr="is_win">
          <message name="IDS_SHORTCUT_TOOLTIP" desc="Text for the hover-on tooltip for the Chromium shortcuts.">
-@@ -435,7 +435,7 @@ Chromium is unable to recover your settings.
+@@ -432,7 +432,7 @@ Chromium is unable to recover your settings.
          </message>
        </if>
        <message name="IDS_DEFAULT_BROWSER_INFOBAR_SHORT_TEXT" desc="More compact text to show in the default browser query infobar.">
@@ -495,7 +491,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <if expr="chromeos">
          <message name="IDS_SYNC_OVERVIEW" desc="Chrome OS: The message that appears in the options dialog when sync has not been set up by the user.">
-@@ -447,25 +447,25 @@ Chromium is unable to recover your settings.
+@@ -444,99 +444,99 @@ Chromium is unable to recover your settings.
        </if>
        <if expr="not chromeos">
          <message name="IDS_ABOUT_BUTTON" desc="The label for the button to open the about page.">
@@ -524,10 +520,6 @@ index ecaf16add883..8de257754a09 100644
          <message name="IDS_TRY_TOAST_HEADING_SKYPE" desc="Top line of the try-chrome-again dialog">
 -          Chromium lets you click a phone number on the web and call it with Skype!
 +          The browser lets you click a phone number on the web and call it with Skype! Massively evil!
-         </message>
-         <message name="IDS_TRY_TOAST_TRY_OPT" desc="First option radio button on the dialog to try chrome">
-           Try it out, it's already installed
-@@ -478,77 +478,77 @@ Chromium is unable to recover your settings.
          </message>
          <!-- about:conflicts strings -->
          <message name="IDS_CONFLICTS_CHECK_PAGE_TITLE_LONG" desc="The long title on the compatibility page">
@@ -621,7 +613,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -563,7 +563,7 @@ Chromium is unable to recover your settings.
+@@ -551,7 +551,7 @@ Chromium is unable to recover your settings.
        </if>
        <if expr="not chromeos">
          <message name="IDS_UPGRADE_UP_TO_DATE" desc="Status label: Already up to date (Chromium)">
@@ -630,7 +622,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -573,7 +573,7 @@ Chromium is unable to recover your settings.
+@@ -561,7 +561,7 @@ Chromium is unable to recover your settings.
        </if>
        <if expr="not chromeos">
          <message name="IDS_UPGRADE_UPDATING" desc="Status label: Updating Chromium">
@@ -639,7 +631,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -589,78 +589,78 @@ Chromium is unable to recover your settings.
+@@ -577,78 +577,78 @@ Chromium is unable to recover your settings.
  
        <!-- Extension/App install prompt -->
        <message name="IDS_EXTENSION_INLINE_INSTALL_PROMPT_TITLE" desc="Titlebar of the extension or app inline installation prompt window">
@@ -735,7 +727,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -674,80 +674,80 @@ Chromium is unable to recover your settings.
+@@ -662,80 +662,80 @@ Chromium is unable to recover your settings.
  
        <if expr="is_macosx">
          <message name="IDS_APP_MENU_PRODUCT_NAME" desc="The application's short name, used for the Mac's application menu, activity monitor, etc. This should be less than 16 characters. Example: Chrome, not Google Chrome.">
@@ -836,7 +828,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -763,7 +763,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -751,7 +751,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
        <!-- Signin Email Confirmation tab modal dialog -->
        <if expr="not chromeos">
          <message name="IDS_SIGNIN_EMAIL_CONFIRMATION_TITLE" desc="Title of the signin email confirmation tab modal dialog.">
@@ -845,7 +837,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -773,7 +773,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -761,7 +761,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
             Chrome. -->
        <if expr="is_win">
          <message name="IDS_SRT_BUBBLE_TITLE" desc="Text for the title of the software removal tool bubble view.">
@@ -854,7 +846,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -792,16 +792,16 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -780,16 +780,16 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
        <!-- Sync/sign-in error messages -->
        <if expr="not chromeos">
          <message name="IDS_SYNC_PASSPHRASE_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sync error bubble view when the user needs to update their sync passphrase.">
@@ -875,7 +867,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -821,64 +821,64 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -809,64 +809,64 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
  
        <if expr="is_macosx">
          <message name="IDS_OPTIONS_PASSWORDS_MAC_WARNING" desc="The warning for OS X that passwords are shared across profiles in the keychain.">
@@ -954,7 +946,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <if expr="is_win">
          <message name="IDS_APP_SHORTCUTS_SUBDIR_NAME_BETA" desc="Unused in Chromium builds" translateable="false">
-@@ -890,7 +890,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -878,7 +878,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
        <!-- Chrome Conflicts bubble -->
        <if expr="is_win">
          <message name="IDS_OPTIONS_CONFLICTING_MODULE" desc="Shown in a bubble when a conflict has been detected.">
@@ -963,7 +955,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -903,40 +903,40 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -891,33 +891,33 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
  
        <!-- MediaStream capture status tray icon -->
        <message name="IDS_MEDIA_STREAM_STATUS_TRAY_TEXT_AUDIO_AND_VIDEO" desc="Tool tip for the capture status tray icon when microphone and camera are being used">
@@ -1003,15 +995,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-       <!-- Toast experiment. -->
-       <if expr="is_win">
-         <message name="IDS_TRY_TOAST_SET_DEFAULT" desc="Text of the checkbox to make Chromium the default browser">
--          Make Chromium the default browser
-+          Make Iridium the default browser
-         </message>
-       </if>
- 
-@@ -946,7 +946,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -927,7 +927,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
          <message name="IDS_SUPERVISED_USER_CREATED_TEXT" desc="Informative text for the confirmation dialog that appears after a supervised user has been created.">
            To set which websites <ph name="NEW_PROFILE_NAME">$1<ex>New User</ex></ph> can view, you can configure restrictions and settings by visiting <ph name="BEGIN_LINK_1">&lt;a target="_blank" href="$3"&gt;</ph><ph name="DISPLAY_LINK">$4</ph><ph name="END_LINK_1">&lt;/a&gt;</ph>. If you do not change the default settings, <ph name="NEW_PROFILE_NAME">$1<ex>New User</ex></ph> can browse everything on the web.
  
@@ -1020,7 +1004,7 @@ index ecaf16add883..8de257754a09 100644
  <ph name="BEGIN_LINK_2">&lt;a target="_blank" href="https://support.google.com/chrome/?p=ui_supervised_users&amp;hl=[GRITLANGCODE]"&gt;</ph>Learn more<ph name="END_LINK_2">&lt;/a&gt;</ph>
  
  Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</ex></ph> for further instructions.
-@@ -954,62 +954,62 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -935,62 +935,62 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
          <!-- User pod remove sync warning text -->
          <message name="IDS_LOGIN_POD_USER_REMOVE_WARNING_SYNC" desc="Main text shown as a warning when attempting to remove an user.">
@@ -1099,7 +1083,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_NAME_BETA" desc="Unused in Chromium builds" translateable="false">
          </message>
-@@ -1018,7 +1018,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -999,7 +999,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
          <message name="IDS_INBOUND_MDNS_RULE_NAME_DEV" desc="Unused in Chromium builds" translateable="false">
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_DESCRIPTION" desc="The description of the firewall rule allowing inbound mDNS traffic.">
@@ -1108,7 +1092,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_DESCRIPTION_BETA" desc="Unused in Chromium builds" translateable="false">
          </message>
-@@ -1030,10 +1030,10 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1011,10 +1011,10 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
        <if expr="not is_android">
          <message name="IDS_CONTENT_CONTEXT_SPELLING_BUBBLE_TEXT" desc="The text of a bubble that confirms users allows integrating the spelling service of Google to Chrome.">
@@ -1121,7 +1105,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -1060,10 +1060,10 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1041,10 +1041,10 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Update Recommended dialog -->
        <if expr="not chromeos">
          <message name="IDS_UPDATE_RECOMMENDED_DIALOG_TITLE" desc="The window title for the Update Recommended dialog.">
@@ -1134,7 +1118,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
          <message name="IDS_RELAUNCH_AND_UPDATE" desc="The button in the Update Recommended dialog which updates and relaunches Chrome.">
            Relaunch
-@@ -1080,58 +1080,58 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1061,58 +1061,58 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
        <!-- Update bubble -->
        <message name="IDS_REINSTALL_APP" desc="Text for the button the user clicks to reinstall the app.">
@@ -1206,7 +1190,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <message name="IDS_RECOVERY_BUBBLE_TEXT" desc="Text for the chrome recovery bubble view full description.">
          Important security improvements and new features are available in the latest version.
-@@ -1140,14 +1140,14 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1121,14 +1121,14 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Critical Notification bubble -->
        <message name="IDS_CRITICAL_NOTIFICATION_HEADLINE" desc="The headline for the critical notification">
          {SECONDS, plural,
@@ -1225,7 +1209,7 @@ index ecaf16add883..8de257754a09 100644
        </message>
        <message name="IDS_CRITICAL_NOTIFICATION_RESTART" desc="The restart button label">
          OK - Restart now
-@@ -1158,24 +1158,24 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1139,24 +1139,24 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
        <!-- Dialog that asks whether user wants to participate in Safe Browsing Extended Reporting -->
        <message name="IDS_FEEDBACK_SERVICE_DIALOG_TITLE" desc="Title of the dialog asking whether the user wants to upload suspected malicious files for analysis">
@@ -1255,7 +1239,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
        </if>
  
-@@ -1199,32 +1199,32 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1180,32 +1180,32 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Runtime permission strings -->
        <if expr="is_android">
          <message name="IDS_INFOBAR_MISSING_CAMERA_PERMISSION_TEXT" desc="Text shown in an infobar when a website has requested access to the camera capabilities, but Chrome is missing the Android camera permission.">
@@ -1296,7 +1280,7 @@ index ecaf16add883..8de257754a09 100644
          </message>
          <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
            Chromium OS terms
-@@ -1235,40 +1235,40 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1216,40 +1216,40 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <if expr="is_win">
          <message name="IDS_METRO_FLOW_TAB_TITLE"
                   desc="The dialog window title.">
@@ -1347,10 +1331,10 @@ index ecaf16add883..8de257754a09 100644
        </if>
      </messages>
 diff --git a/chrome/app/generated_resources.grd b/chrome/app/generated_resources.grd
-index 3a3ef6994df0..723e8adb712e 100644
+index 7a4995c2608f..34c62dd5bda5 100644
 --- a/chrome/app/generated_resources.grd
 +++ b/chrome/app/generated_resources.grd
-@@ -283,7 +283,7 @@ are declared in build/common.gypi.
+@@ -286,7 +286,7 @@ are declared in build/common.gypi.
          Main menu
        </message>
        <message name="IDS_MD_HISTORY_HISTORY_MENU_ITEM" desc="Label displayed in history sidebar button to display history.">
@@ -1359,7 +1343,7 @@ index 3a3ef6994df0..723e8adb712e 100644
        </message>
        <message name="IDS_MD_HISTORY_NO_SYNCED_RESULTS" desc="Text indicating that there are no synced tabs from other devices.">
          No tabs from other devices
-@@ -292,13 +292,13 @@ are declared in build/common.gypi.
+@@ -295,13 +295,13 @@ are declared in build/common.gypi.
          Tabs from other devices
        </message>
        <message name="IDS_MD_HISTORY_SIGN_IN_BUTTON" desc="Label displayed on a button to let user sign in to Chrome to get synced tab history.">
@@ -1375,7 +1359,7 @@ index 3a3ef6994df0..723e8adb712e 100644
        </message>
        <message name="IDS_MD_HISTORY_MENU_PROMO" desc="Text body of a promotional tooltip that shows up the first time a user runs the Material Design History UI in narrow mode to help find 'Clear Browsing Data' and the side navigation.">
          You can clear your browsing data from this menu
-@@ -1914,10 +1914,10 @@ From <ph name="DOWNLOAD_DOMAIN">$3<ex>example.com</ex></ph>
+@@ -1917,10 +1917,10 @@ From <ph name="DOWNLOAD_DOMAIN">$3<ex>example.com</ex></ph>
            Quit
          </message>
          <message name="IDS_QUIT_WITH_APPS_EXPLANATION" desc="Text displayed in a notification explaining that Chrome will continue running in the background as long as there are Chrome Apps open.">
@@ -1388,7 +1372,7 @@ index 3a3ef6994df0..723e8adb712e 100644
          </message>
          <message name="IDS_QUIT_WITH_APPS_SUPPRESSION_LABEL" desc="Button text to prevent a notification from showing in future.">
            Don't show this again
-@@ -12154,7 +12154,7 @@ read aloud to screenreader users to announce that a completion is available.">
+@@ -11682,7 +11682,7 @@ read aloud to screenreader users to announce that a completion is available.">
          The web browser by Google, for you
        </message>
        <message name="IDS_WELCOME_DESCRIPTION" desc="A message on the welcome page explaining the purpose of signing in.">
@@ -1398,10 +1382,10 @@ index 3a3ef6994df0..723e8adb712e 100644
        <message name="IDS_WELCOME_ACCEPT_BUTTON" desc="A button on the welcome page which accepts the offer to sign in to Chrome.">
          Sign in
 diff --git a/chrome/app/google_chrome_strings.grd b/chrome/app/google_chrome_strings.grd
-index f2d4eff56759..81ad247139ba 100644
+index cce7149b70af..ff7badcc7096 100644
 --- a/chrome/app/google_chrome_strings.grd
 +++ b/chrome/app/google_chrome_strings.grd
-@@ -605,7 +605,7 @@ Google Chrome is unable to recover your settings.
+@@ -598,7 +598,7 @@ Google Chrome is unable to recover your settings.
            sign in to Chrome
          </message>
          <message name="IDS_EXTENSION_INSTALLED_SIGNIN_PROMO_LINK" desc="The first part of the sign-in promo paragraph. This part will be converted to a link and will get more text appended to it (see IDS_EXTENSION_INSTALLED_SIGNIN_PROMO). Keep this text short.">
@@ -1410,7 +1394,7 @@ index f2d4eff56759..81ad247139ba 100644
          </message>
  
          <!-- Extension context menu -->
-@@ -858,19 +858,19 @@ Signing in anyway will merge Chrome information like bookmarks, history, and oth
+@@ -851,19 +851,19 @@ Signing in anyway will merge Chrome information like bookmarks, history, and oth
            </message>
          </if>
          <message name="IDS_APP_LIST_SIGNIN_HEADING" desc="Heading for when the launcher needs to sign in.">
@@ -1435,7 +1419,7 @@ index f2d4eff56759..81ad247139ba 100644
          </if>
        </if>
 diff --git a/chrome/app/settings_google_chrome_strings.grdp b/chrome/app/settings_google_chrome_strings.grdp
-index 3696ba0944e8..c22e220d876c 100644
+index 4c9c731fe320..7ce1cb4789d7 100644
 --- a/chrome/app/settings_google_chrome_strings.grdp
 +++ b/chrome/app/settings_google_chrome_strings.grdp
 @@ -4,10 +4,10 @@
@@ -1451,7 +1435,7 @@ index 3696ba0944e8..c22e220d876c 100644
      </message>
      <message name="IDS_SETTINGS_UPGRADE_UPDATING" desc="Status label: Updating Google Chrome">
        Updating Google Chrome
-@@ -70,10 +70,10 @@
+@@ -73,10 +73,10 @@
  
    <!-- Sync Page -->
    <message name="IDS_SETTINGS_SYNC_SIGNIN" desc="The label that appears on the sync button in the options dialog when sync has not been set up by the user.">
@@ -1671,5 +1655,5 @@ index 90d135a6f508..8d16f3ccee96 100644
        <message name="IDS_IOS_MANAGED_DISCONNECT_DIALOG_INFO" desc="Message explaini ng that signing out of a managed account will clear all the Chrome data.[Length: 200em, may be line wrapped to multiple lines at run time.].">
          You are signing out of an account managed by <ph name="SIGNOUT_MANAGED_DOMAIN">$1<ex>google.com</ex></ph>. This will delete your Chrome data from this device, but your data will remain in your Google account.
 -- 
-2.14.2
+2.15.0
 

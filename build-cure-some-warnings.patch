@@ -1,7 +1,7 @@
-From ff48e78c3f3e52440391e7a07e429226ae1648bb Mon Sep 17 00:00:00 2001
+From 594b38b7be723fa78c7f9b03ead0a97e0c2d57ff Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 25 Sep 2017 20:59:59 +0200
-Subject: [PATCH 09/66] build: cure some warnings
+Subject: [PATCH 06/64] build: cure some warnings
 
 Chromium quality degrades as Google/Chromium.org exclusively
 uses clang....
@@ -28,5 +28,5 @@ index 2f8f3c866382..3b2a9fb6ea17 100644
  class WTF_EXPORT TextCodec {
    WTF_MAKE_NONCOPYABLE(TextCodec);
 -- 
-2.14.2
+2.15.0
 

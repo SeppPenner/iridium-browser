@@ -1,7 +1,7 @@
-From 037d74dc379499721884cddca5c481fb74349894 Mon Sep 17 00:00:00 2001
+From 95d55aeef97f6c238abcccc500067a20c1a587e4 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 61/66] icons: iridium icons
+Subject: [PATCH 58/64] icons: iridium icons
 
 ---
  chrome/app/theme/chromium/product_logo_128.png     | Bin 8366 -> 7826 bytes
@@ -1804,7 +1804,7 @@ zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
 diff --git a/chrome/browser/resources/app_list/start_page.css b/chrome/browser/resources/app_list/start_page.css
-index 8f6edd09c0d8..36be4faced99 100644
+index 3efaef1955a6..398014079a34 100644
 --- a/chrome/browser/resources/app_list/start_page.css
 +++ b/chrome/browser/resources/app_list/start_page.css
 @@ -18,7 +18,7 @@ body {
@@ -1817,21 +1817,21 @@ index 8f6edd09c0d8..36be4faced99 100644
    height: 92px;
    margin: auto;
 diff --git a/chrome/browser/resources/local_ntp/local_ntp.css b/chrome/browser/resources/local_ntp/local_ntp.css
-index 1fa5dbe99ec1..bd0b5112c54e 100644
+index ce120114c427..e6ae5d631b11 100644
 --- a/chrome/browser/resources/local_ntp/local_ntp.css
 +++ b/chrome/browser/resources/local_ntp/local_ntp.css
-@@ -29,7 +29,7 @@ body.hide-fakebox-logo #fakebox {
+@@ -71,7 +71,7 @@ body.hide-fakebox-logo #fakebox {
  }
  
- #logo {
+ #logo-default {
 -  background-image: url(../../../../ui/webui/resources/images/google_logo.svg);
 +  background-image: url(../../../../ui/webui/resources/images/iridium_text.svg);
    background-repeat: no-repeat;
+   bottom: 0;
    height: 92px;
-   margin-bottom: 24px;
-@@ -43,7 +43,7 @@ body.hide-fakebox-logo #fakebox {
+@@ -83,7 +83,7 @@ body.hide-fakebox-logo #fakebox {
  
- body.alternate-logo #logo {
+ body.alternate-logo #logo-default {
    -webkit-mask-image:
 -      url(../../../../ui/webui/resources/images/google_logo.svg);
 +      url(../../../../ui/webui/resources/images/iridium_text.svg);
@@ -2225,7 +2225,7 @@ index 000000000000..45d8e586f93c
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index 24f7ea9c0741..04b1c713b775 100644
+index e8eb478d2a48..1eb830e95457 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
 @@ -190,7 +190,7 @@ without changes to the corresponding grd file. -->
@@ -2238,5 +2238,5 @@ index 24f7ea9c0741..04b1c713b775 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.14.2
+2.15.0
 

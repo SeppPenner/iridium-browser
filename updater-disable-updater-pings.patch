@@ -1,7 +1,7 @@
-From 359f35f85cbe9d8d55932a675d0f5b8982cd0bb4 Mon Sep 17 00:00:00 2001
+From 75dd4d147b8fbeb59f6af42c930e0ef86ff4b87b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 46/66] updater: disable updater pings
+Subject: [PATCH 43/64] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
@@ -64,5 +64,5 @@ index efc46c515a69..d9b1eb4763bd 100644
  }
  
 -- 
-2.14.2
+2.15.0
 

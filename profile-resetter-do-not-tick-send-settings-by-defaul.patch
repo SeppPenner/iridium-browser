@@ -1,7 +1,7 @@
-From 3fe1dcc5d4f6b39cc40142af69f94e1bb53f7c5b Mon Sep 17 00:00:00 2001
+From 8b562c42564edfba94a228d0b6d5aa8d4db156a1 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 28 Oct 2014 18:45:19 +0100
-Subject: [PATCH 14/66] profile-resetter: do not tick send-settings by default
+Subject: [PATCH 11/64] profile-resetter: do not tick send-settings by default
 
 When the user wishes to reset his preferences, Chromium would suggest
 to send over the old settings to Google. I presume that this is for
@@ -11,22 +11,22 @@ to issue a rest.
 Of course, we cannot let that happen by default. Google is not to get
 any information.
 ---
- chrome/browser/resources/options/reset_profile_settings_overlay.html | 2 +-
+ chrome/browser/profile_resetter/reset_report_uploader.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/chrome/browser/resources/options/reset_profile_settings_overlay.html b/chrome/browser/resources/options/reset_profile_settings_overlay.html
-index 07ba37200bbe..65da0c20b9fc 100644
---- a/chrome/browser/resources/options/reset_profile_settings_overlay.html
-+++ b/chrome/browser/resources/options/reset_profile_settings_overlay.html
-@@ -24,7 +24,7 @@
-   <div id="feedback-bar"
-       class="gray-bottom-bar checkbox controlled-setting-with-label">
-     <label>
--      <input id="send-settings" type="checkbox" checked>
-+      <input id="send-settings" type="checkbox">
-       <span>
-         <span>$i18n{resetProfileSettingsFeedback}</span>
-         <span id="expand-feedback"></span>
+diff --git a/chrome/browser/profile_resetter/reset_report_uploader.cc b/chrome/browser/profile_resetter/reset_report_uploader.cc
+index 4c7b445e34be..50c6a00b774b 100644
+--- a/chrome/browser/profile_resetter/reset_report_uploader.cc
++++ b/chrome/browser/profile_resetter/reset_report_uploader.cc
+@@ -18,7 +18,7 @@
+ 
+ namespace {
+ const char kResetReportUrl[] =
+-    "https://sb-ssl.google.com/safebrowsing/clientreport/chrome-reset";
++    "trk:275:about:blank"; //https://sb-ssl.google.com/safebrowsing/clientreport/chrome-reset";
+ 
+ GURL GetClientReportUrl(const std::string& report_url) {
+   GURL url(report_url);
 -- 
-2.14.2
+2.15.0
 

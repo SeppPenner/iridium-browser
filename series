@@ -1,14 +1,11 @@
 build-remove-calling-untrusted-hooks.patch
+build-DEPS-pick-an-existing-webrtc-commit.patch
 build-select-default-toolchain.patch
 build-import-openSUSE-chromium-last-commit-position-.patch
-DEPS-stop-referencing-a-nonexisting-commit.patch
-build-import-openSUSE-fix-gn-bootstrap.diff.patch
 build-import-openSUSE-gcc60-fixes.diff.patch
-build-fix-more-ucontext-stupidity.patch
-build-fix-the-compilation-of-LinkedHashSet-with-GCC.patch
 build-cure-some-warnings.patch
 build-import-openSUSE-fix_building_widevinecdm_with_.patch
-build-import-openSUSE-chromium-atk.patch.patch
+build-import-openSUSE-fix-gn-bootstrap.diff.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
@@ -64,3 +61,4 @@ first_run-barf-if-metrics_reporting-is-activated.patch
 all-add-trk-prefixes-to-possibly-evil-connections.patch
 doc-add-README.md-for-github.patch
 Disable-smooth-scrolling-on-Linux.patch
+doc-add-note-to-self-on-build-procedure.patch

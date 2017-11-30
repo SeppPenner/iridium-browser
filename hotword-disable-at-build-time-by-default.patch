@@ -1,7 +1,7 @@
-From 0d9f2b1c6e6a97ede4b87c02e3c444b28b6d7464 Mon Sep 17 00:00:00 2001
+From 24d601ac085d79449e2e9627fed7b92d6d195db1 Mon Sep 17 00:00:00 2001
 From: amistry <amistry@chromium.org>
 Date: Tue, 9 Jun 2015 12:18:39 -0700
-Subject: [PATCH 52/66] hotword: disable at build time by default
+Subject: [PATCH 49/64] hotword: disable at build time by default
 
 Commit f269d3b548203e217e8c0080c2e22e7ae3efb51e upstream:
 
@@ -24,11 +24,11 @@ Hard-disable hotwording by default even on a build level.
  3 files changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/chrome/browser/BUILD.gn b/chrome/browser/BUILD.gn
-index 6cc5deab9c0c..61716857a3c7 100644
+index 27e5f84cb1f0..3daae302c6c5 100644
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -2249,7 +2249,7 @@ split_static_library("browser") {
-     ]
+@@ -2307,7 +2307,7 @@ split_static_library("browser") {
+     }
    }
  
 -  if (enable_hotwording) {
@@ -37,10 +37,10 @@ index 6cc5deab9c0c..61716857a3c7 100644
    }
  
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 8a5bf7f5e216..6b9d3f0f1efd 100644
+index 09c6aadf2f66..8babfac571b1 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -348,7 +348,7 @@ void ComponentLoader::AddHangoutServicesExtension() {
+@@ -349,7 +349,7 @@ void ComponentLoader::AddHangoutServicesExtension() {
  }
  
  void ComponentLoader::AddHotwordAudioVerificationApp() {
@@ -49,7 +49,7 @@ index 8a5bf7f5e216..6b9d3f0f1efd 100644
    if (HotwordServiceFactory::IsAlwaysOnAvailable()) {
      Add(IDR_HOTWORD_AUDIO_VERIFICATION_MANIFEST,
          base::FilePath(FILE_PATH_LITERAL("hotword_audio_verification")));
-@@ -357,7 +357,7 @@ void ComponentLoader::AddHotwordAudioVerificationApp() {
+@@ -358,7 +358,7 @@ void ComponentLoader::AddHotwordAudioVerificationApp() {
  }
  
  void ComponentLoader::AddHotwordHelperExtension() {
@@ -95,5 +95,5 @@ index e0eb877f234c..2f1b5a97d1d2 100644
  
  TEST_P(HotwordServiceTest, DisableAlwaysOnOnLanguageChange) {
 -- 
-2.14.2
+2.15.0
 

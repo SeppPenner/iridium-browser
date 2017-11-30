@@ -1,16 +1,16 @@
-From e98ee9ab51b6bb94939e78b7f5c3990608becf22 Mon Sep 17 00:00:00 2001
+From ce2f4d7f445af3891e2a8fc6d1e0058fe15b9494 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/66] build: remove calling untrusted hooks
+Subject: [PATCH 01/64] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 377 -------------------------------------------------------------------
- 1 file changed, 377 deletions(-)
+ DEPS | 406 -------------------------------------------------------------------
+ 1 file changed, 406 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index 8ff6d99a045f..4774542d34b8 100644
+index 5fe3e36633f6..b404d70c090d 100644
 --- a/DEPS
 +++ b/DEPS
 @@ -362,73 +362,6 @@ hooks = [
@@ -404,6 +404,42 @@ index 8ff6d99a045f..4774542d34b8 100644
    {
      'action': [
        'python',
+@@ -784,35 +407,6 @@ hooks = [
+     'name':
+       'webui_node_modules'
+   },
+-  {
+-    'action': [
+-      'python',
+-      'src/tools/perf/conditionally_execute',
+-      '--gyp-condition',
+-      'fetch_telemetry_dependencies=1',
+-      'src/third_party/catapult/telemetry/bin/fetch_telemetry_binary_dependencies'
+-    ],
+-    'pattern':
+-      '.',
+-    'name':
+-      'fetch_telemetry_binary_dependencies'
+-  },
+-  {
+-    'action': [
+-      'python',
+-      'src/third_party/depot_tools/download_from_google_storage.py',
+-      '--no_resume',
+-      '--no_auth',
+-      '--bucket',
+-      'chromium-binary-patching',
+-      '-d',
+-      'src/chrome/installer/zucchini/testdata'
+-    ],
+-    'pattern':
+-      '.',
+-    'name':
+-      'zucchini_testdata'
+-  },
+   {
+     'action': [
+       'python',
 -- 
-2.14.2
+2.15.0
 

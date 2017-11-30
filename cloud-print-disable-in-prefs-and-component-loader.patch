@@ -1,7 +1,7 @@
-From f874949ae175d18c2a37c21c9798d8ddf7917d84 Mon Sep 17 00:00:00 2001
+From c5ac56f361cf345e270fa1b14402bbc31571195d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
-Subject: [PATCH 23/66] cloud-print: disable in prefs and component loader
+Subject: [PATCH 20/64] cloud-print: disable in prefs and component loader
 
 Cloud Print should normally be autodisabled if no printers are shared.
 But maybe that is not enough(?) Probably also needs to gain a checkbox
@@ -16,10 +16,10 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 86b03045211a..8a5bf7f5e216 100644
+index 796b0bf956b0..09c6aadf2f66 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -493,9 +493,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
+@@ -494,9 +494,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
          base::FilePath(FILE_PATH_LITERAL("bookmark_manager")));
    }
  #if BUILDFLAG(ENABLE_PRINTING)
@@ -45,7 +45,7 @@ index 3ed02ec2394d..212e8c3324ba 100644
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacement);
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
 diff --git a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-index 6cedb644387f..7d5ee48ae99f 100644
+index 8d043bdcef50..69aa9f42d449 100644
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 +++ b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 @@ -143,10 +143,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(
@@ -60,5 +60,5 @@ index 6cedb644387f..7d5ee48ae99f 100644
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
 -- 
-2.14.2
+2.15.0
 

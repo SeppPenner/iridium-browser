@@ -1,7 +1,7 @@
-From b4008c062550ccf35f8847935409b687d011a026 Mon Sep 17 00:00:00 2001
+From 7b036aedb9792e0b48534dbadbe63b0dcc9b88e6 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 4 Aug 2015 15:15:53 +0200
-Subject: [PATCH 58/66] battery_status_service: disable more privacy nightmares
+Subject: [PATCH 55/64] battery_status_service: disable more privacy nightmares
 
 The W3C Battery Status API[1] has quite a laughable statement:
 
@@ -43,5 +43,5 @@ index 988f20d2a818..273979fabedb 100644
    return callback_list_.Add(callback);
  }
 -- 
-2.14.2
+2.15.0
 

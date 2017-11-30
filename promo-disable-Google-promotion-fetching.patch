@@ -1,7 +1,7 @@
-From 9990f332bbaa27459400de669e8a7911156f1e72 Mon Sep 17 00:00:00 2001
+From 98992f7453a480895918110fd6b2157cd757dc22 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 9 Nov 2014 01:54:27 +0100
-Subject: [PATCH 51/66] promo: disable Google promotion fetching
+Subject: [PATCH 48/64] promo: disable Google promotion fetching
 
 Documentation is scarce, and sprinkled with misleading acronyms.
 NTP is not NTP, for example. FWIW:
@@ -21,7 +21,7 @@ References: https://github.com/iridium-browser/iridium-browser/issues/33
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/chrome/browser/signin/signin_promo.cc b/chrome/browser/signin/signin_promo.cc
-index 968fd3fb0240..3ea6f2c2fc6a 100644
+index 4dd2f6541adf..e0ce4b1f86ef 100644
 --- a/chrome/browser/signin/signin_promo.cc
 +++ b/chrome/browser/signin/signin_promo.cc
 @@ -84,6 +84,7 @@ namespace signin {
@@ -44,5 +44,5 @@ index 968fd3fb0240..3ea6f2c2fc6a 100644
  }
  
 -- 
-2.14.2
+2.15.0
 

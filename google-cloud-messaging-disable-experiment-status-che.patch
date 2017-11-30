@@ -1,7 +1,7 @@
-From eba937d4149165571740c5bc7aacf43ca6a0d11f Mon Sep 17 00:00:00 2001
+From fa79dea36db37e5f5cfaabaf15cb56021ffdeef5 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 1 Jun 2015 17:14:34 +0200
-Subject: [PATCH 44/66] google-cloud-messaging: disable experiment status check
+Subject: [PATCH 41/64] google-cloud-messaging: disable experiment status check
 
 This avoids trk:263 from triggering.
 ---
@@ -9,7 +9,7 @@ This avoids trk:263 from triggering.
  1 file changed, 6 insertions(+)
 
 diff --git a/components/gcm_driver/gcm_channel_status_request.cc b/components/gcm_driver/gcm_channel_status_request.cc
-index b91b4454299a..db2fc6391925 100644
+index 897244794308..415b1ab936d7 100644
 --- a/components/gcm_driver/gcm_channel_status_request.cc
 +++ b/components/gcm_driver/gcm_channel_status_request.cc
 @@ -23,8 +23,10 @@ namespace gcm {
@@ -42,5 +42,5 @@ index b91b4454299a..db2fc6391925 100644
  
  void GCMChannelStatusRequest::OnURLFetchComplete(
 -- 
-2.14.2
+2.15.0
 

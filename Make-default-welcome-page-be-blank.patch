@@ -1,29 +1,30 @@
-From 4c6ca8f9537fd476a6a8c94e791bfbd1fee0bb57 Mon Sep 17 00:00:00 2001
+From 74418dafc85678851aebc031031a84a58d999ddb Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 11:53:30 +0200
-Subject: [PATCH 55/66] Make default welcome page be blank
+Subject: [PATCH 52/64] Make default welcome page be blank
 
 Because replacing kChromeUIWelcomeURL with about:blank leads the
 browser to load some broken URL instead.
 ---
- chrome/browser/resources/welcome/welcome.html      |  40 ---
- chrome/browser/resources/welcome/win10/inline.html | 370 ---------------------
- .../browser/resources/welcome/win10/sectioned.html |  88 -----
- 3 files changed, 498 deletions(-)
+ chrome/browser/resources/welcome/welcome.html      |  42 ---
+ chrome/browser/resources/welcome/win10/inline.html | 372 ---------------------
+ .../browser/resources/welcome/win10/sectioned.html |  90 -----
+ 3 files changed, 504 deletions(-)
 
 diff --git a/chrome/browser/resources/welcome/welcome.html b/chrome/browser/resources/welcome/welcome.html
-index 198ea7df609a..8b137891791f 100644
+index b2b6c1135ec4..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/welcome.html
 +++ b/chrome/browser/resources/welcome/welcome.html
-@@ -1,41 +1 @@
+@@ -1,42 +0,0 @@
 -<!doctype html>
 -<html>
 -<head>
 -  <meta charset="utf-8">
 -  <title>$i18n{headerText}</title>
- 
--  <link rel="import" href="chrome://resources/html/cr.html">
+-
 -  <link rel="import" href="chrome://resources/html/polymer.html">
+-
+-  <link rel="import" href="chrome://resources/html/cr.html">
 -  <link rel="import" href="chrome://resources/html/util.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-button/paper-button.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-styles/color.html">
@@ -58,21 +59,22 @@ index 198ea7df609a..8b137891791f 100644
 -</body>
 -</html>
 diff --git a/chrome/browser/resources/welcome/win10/inline.html b/chrome/browser/resources/welcome/win10/inline.html
-index ff53572fd57d..8b137891791f 100644
+index fa5e6acc3742..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/win10/inline.html
 +++ b/chrome/browser/resources/welcome/win10/inline.html
-@@ -1,371 +1 @@
+@@ -1,372 +0,0 @@
 -<!DOCTYPE html>
 -<html>
 -<head>
 -  <meta charset="utf-8">
 -  <title>$i18n{headerText}</title>
- 
+-
+-  <link rel="import" href="chrome://resources/html/polymer.html">
+-
 -  <link rel="import" href="chrome://resources/cr_elements/icons.html">
 -  <link rel="import" href="chrome://resources/html/cr.html">
 -  <link rel="import" href="chrome://resources/html/action_link.html">
 -  <link rel="import" href="chrome://resources/html/action_link_css.html">
--  <link rel="import" href="chrome://resources/html/polymer.html">
 -  <link rel="import" href="chrome://resources/html/util.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/iron-icon/iron-icon.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-button/paper-button.html">
@@ -434,19 +436,20 @@ index ff53572fd57d..8b137891791f 100644
 -</body>
 -</html>
 diff --git a/chrome/browser/resources/welcome/win10/sectioned.html b/chrome/browser/resources/welcome/win10/sectioned.html
-index 565c0e724f7f..8b137891791f 100644
+index 13b7ff6b059a..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/win10/sectioned.html
 +++ b/chrome/browser/resources/welcome/win10/sectioned.html
-@@ -1,89 +1 @@
+@@ -1,90 +0,0 @@
 -<!DOCTYPE html>
 -<html>
 -<head>
 -  <meta charset="utf-8">
 -  <title>$i18n{headerText}</title>
- 
+-
+-  <link rel="import" href="chrome://resources/html/polymer.html">
+-
 -  <link rel="import" href="chrome://resources/cr_elements/icons.html">
 -  <link rel="import" href="chrome://resources/html/cr.html">
--  <link rel="import" href="chrome://resources/html/polymer.html">
 -  <link rel="import" href="chrome://resources/html/util.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/iron-icon/iron-icon.html">
 -  <link rel="import" href="chrome://resources/polymer/v1_0/paper-button/paper-button.html">
@@ -528,5 +531,5 @@ index 565c0e724f7f..8b137891791f 100644
 -</body>
 -</html>
 -- 
-2.14.2
+2.15.0
 

@@ -1,7 +1,7 @@
-From 772e7c59b26fcd5c6e1945ba99af6004b9c7bd4a Mon Sep 17 00:00:00 2001
+From 076ba75da3b3435d5bf22f3b16e9b39b44ebf19b Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 6 Jul 2015 17:17:20 +0200
-Subject: [PATCH 54/66] search: show blank tab for new tab page
+Subject: [PATCH 51/64] search: show blank tab for new tab page
 
 Avoid loading the search page everytime, just show a blank one instead.
 
@@ -49,5 +49,5 @@ index 22e6a75d843b..c643518b9c39 100644
  
    GURL url;
 -- 
-2.14.2
+2.15.0
 

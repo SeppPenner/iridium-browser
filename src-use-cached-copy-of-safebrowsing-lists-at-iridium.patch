@@ -1,7 +1,7 @@
-From 726ca866cb74a770f289686df94209804706f259 Mon Sep 17 00:00:00 2001
+From 51997fb9d0eb18a674a7edf2e1abd8a739803616 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Jan 2015 13:57:44 +0100
-Subject: [PATCH 36/66] src: use cached copy of safebrowsing lists at
+Subject: [PATCH 33/64] src: use cached copy of safebrowsing lists at
  iridiumbrowser.de
 
 To avoid contacing Google, let the UA use safebrowsing lists hosted at
@@ -12,7 +12,7 @@ regular basis.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_model_loader.cc b/chrome/browser/safe_browsing/client_side_model_loader.cc
-index b07051bc8073..a48cc8f20307 100644
+index c1da0182046b..a74a5b6bc2e8 100644
 --- a/chrome/browser/safe_browsing/client_side_model_loader.cc
 +++ b/chrome/browser/safe_browsing/client_side_model_loader.cc
 @@ -36,7 +36,7 @@ namespace safe_browsing {
@@ -25,5 +25,5 @@ index b07051bc8073..a48cc8f20307 100644
      "client_model_v5%s_variation_%d.pb";
  const char ModelLoader::kClientModelFinchExperiment[] =
 -- 
-2.14.2
+2.15.0
 

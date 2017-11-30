@@ -1,7 +1,7 @@
-From f4262bbe6480902143c3d00bb711f03392583031 Mon Sep 17 00:00:00 2001
+From ee41759b7529ebc8b4940e4840bc7170e9adc30f Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:12:43 +0200
-Subject: [PATCH 33/66] first_run: deactivate autoupdate globally
+Subject: [PATCH 30/64] first_run: deactivate autoupdate globally
 
 We currently do not have any update service infrastructure in place
 (i.e. on our webserver), and sending update requests to Google also
@@ -28,5 +28,5 @@ index 927855c03aa0..4980c04fc77c 100644
    if (!extensions_enabled ||
        chromeos::ProfileHelper::IsLockScreenAppProfile(profile_)) {
 -- 
-2.14.2
+2.15.0
 

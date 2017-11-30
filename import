@@ -9,7 +9,7 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 if [ -z "$2" ]; then
-	echo "Need the iridium revision as second argument."
+	echo "Need the iridium revision (usually a tag) as second argument."
 	exit 1
 fi
 if [ ! -e series ]; then
