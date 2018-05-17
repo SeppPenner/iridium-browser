@@ -1,7 +1,7 @@
-From 137c321c1b3f888f2aa42cca5291590799cf30f2 Mon Sep 17 00:00:00 2001
+From 27f00de53aa14b3c475743801690fdc3c51c1415 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 13/58] prefs: disable "Use a prediction service to help
+Subject: [PATCH 13/59] prefs: disable "Use a prediction service to help
  complete searches..."
 
 This autocomplete service would send search queries as soon as you
@@ -16,7 +16,7 @@ Set suggest_enabled to false by default.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/profiles/profile.cc b/chrome/browser/profiles/profile.cc
-index 53efeb4dcfad..2aa1c68fd67d 100644
+index 2a7f42b22270..bd3d00a43978 100644
 --- a/chrome/browser/profiles/profile.cc
 +++ b/chrome/browser/profiles/profile.cc
 @@ -138,7 +138,7 @@ const char Profile::kNoHostedDomainFound[] = "NO_HOSTED_DOMAIN";

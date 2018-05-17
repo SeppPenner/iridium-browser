@@ -1,20 +1,20 @@
-From 10607238502fdb94601496a05f036369897fd42a Mon Sep 17 00:00:00 2001
+From 7770ba4a1cf5f3e945383734433462b378490065 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/58] build: remove calling untrusted hooks
+Subject: [PATCH 01/59] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 290 +------------------------------------------------------------------
- 1 file changed, 3 insertions(+), 287 deletions(-)
+ DEPS | 238 +------------------------------------------------------------------
+ 1 file changed, 3 insertions(+), 235 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index 53179640f31e..b766a175914d 100644
+index d9d56e2ad8df..9a56e8982062 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -17,16 +17,14 @@ vars = {
-     'bbedc54bc5cfdf16fdb979babb6b5a635049e740',
+@@ -32,16 +32,14 @@ vars = {
+   'checkout_android_sdk_sources': False,
    'checkout_configuration':
      'default',
 -  'checkout_instrumented_libraries':
@@ -32,27 +32,11 @@ index 53179640f31e..b766a175914d 100644
 +  'checkout_traffic_annotation_tools': False,
    'chromium_git':
      'https://chromium.googlesource.com',
-   'devtools_node_modules_revision':
-@@ -643,105 +641,6 @@ hooks = [
-     'name':
-       'remove_stale_pyc_files'
+   'cros_board':
+@@ -1385,71 +1383,6 @@ hooks = [
+     'condition':
+       'checkout_nacl'
    },
--  {
--    'action': [
--      'python',
--      'src/build/download_nacl_toolchains.py',
--      '--mode',
--      'nacl_core_sdk',
--      'sync',
--      '--extract'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'nacltools',
--    'condition':
--      'checkout_nacl'
--  },
 -  {
 -    'action': [
 -      'python',
@@ -118,28 +102,10 @@ index 53179640f31e..b766a175914d 100644
 -    'condition':
 -      'checkout_linux and checkout_x64'
 -  },
--  {
--    'action': [
--      'python',
--      'src/third_party/depot_tools/download_from_google_storage.py',
--      '--no_resume',
--      '--no_auth',
--      '--bucket',
--      'chromium-browser-clang/ciopfs',
--      '-s',
--      'src/build/ciopfs.sha1'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'ciopfs_linux',
--    'condition':
--      'checkout_win and host_os == "linux"'
--  },
    {
      'action': [
        'python',
-@@ -768,28 +667,6 @@ hooks = [
+@@ -1494,28 +1427,6 @@ hooks = [
      'condition':
        'checkout_ios or checkout_mac'
    },
@@ -168,7 +134,7 @@ index 53179640f31e..b766a175914d 100644
    {
      'action': [
        'python',
-@@ -881,24 +758,6 @@ hooks = [
+@@ -1607,24 +1518,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -193,7 +159,7 @@ index 53179640f31e..b766a175914d 100644
    {
      'action': [
        'python',
-@@ -935,24 +794,6 @@ hooks = [
+@@ -1661,24 +1554,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -218,28 +184,10 @@ index 53179640f31e..b766a175914d 100644
    {
      'action': [
        'python',
-@@ -989,42 +830,6 @@ hooks = [
+@@ -1733,24 +1608,6 @@ hooks = [
      'condition':
-       'checkout_win and host_os == "mac"'
+       'checkout_win and host_os == "linux"'
    },
--  {
--    'action': [
--      'python',
--      'src/third_party/depot_tools/download_from_google_storage.py',
--      '--no_resume',
--      '--no_auth',
--      '--bucket',
--      'chromium-browser-clang/rc',
--      '-s',
--      'src/build/toolchain/win/rc/linux64/rc.sha1'
--    ],
--    'pattern':
--      '.',
--    'name':
--      'rc_linux',
--    'condition':
--      'checkout_win and host_os == "linux"'
--  },
 -  {
 -    'action': [
 -      'download_from_google_storage',
@@ -249,19 +197,19 @@ index 53179640f31e..b766a175914d 100644
 -      '--bucket',
 -      'chromium-fonts',
 -      '-s',
--      'src/third_party/content_shell_fonts/content_shell_test_fonts.tar.gz.sha1'
+-      'src/third_party/test_fonts/test_fonts.tar.gz.sha1'
 -    ],
 -    'pattern':
 -      '.',
 -    'name':
--      'content_shell_fonts',
+-      'test_fonts',
 -    'condition':
 -      'checkout_linux or (checkout_android or checkout_fuchsia)'
 -  },
    {
      'action': [
        'python',
-@@ -1079,24 +884,6 @@ hooks = [
+@@ -1805,24 +1662,6 @@ hooks = [
      'condition':
        'host_os == "mac"'
    },
@@ -286,7 +234,7 @@ index 53179640f31e..b766a175914d 100644
    {
      'action': [
        'python',
-@@ -1169,42 +956,6 @@ hooks = [
+@@ -1895,42 +1734,6 @@ hooks = [
      'condition':
        'checkout_instrumented_libraries'
    },
@@ -329,7 +277,7 @@ index 53179640f31e..b766a175914d 100644
    {
      'action': [
        'python',
-@@ -1335,23 +1086,6 @@ hooks = [
+@@ -2061,23 +1864,6 @@ hooks = [
      'condition':
        'host_os == "win" and checkout_traffic_annotation_tools'
    },
@@ -343,7 +291,7 @@ index 53179640f31e..b766a175914d 100644
 -      '--bucket',
 -      'chromium-binary-patching',
 -      '-d',
--      'src/chrome/installer/zucchini/testdata'
+-      'src/components/zucchini/testdata'
 -    ],
 -    'pattern':
 -      '.',
@@ -352,8 +300,8 @@ index 53179640f31e..b766a175914d 100644
 -  },
    {
      'action': [
-       'python',
-@@ -1404,24 +1138,6 @@ hooks = [
+       'src/build/cipd/clobber_cipd_root.py',
+@@ -2116,24 +1902,6 @@ hooks = [
      'condition':
        'checkout_android'
    },

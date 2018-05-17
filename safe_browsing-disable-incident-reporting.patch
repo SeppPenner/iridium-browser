@@ -1,7 +1,7 @@
-From e42091b26890e5f11175d8b6b541abaa382a04f1 Mon Sep 17 00:00:00 2001
+From d125e82b8b53a9f7869720132511e980e8a050c1 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 7 Jul 2015 17:02:09 +0200
-Subject: [PATCH 40/58] safe_browsing: disable incident reporting
+Subject: [PATCH 40/59] safe_browsing: disable incident reporting
 
 Disables the safebrowsing incident reporting where you could upload
 information about a blocked URL to Google (also added a trk prefix to
@@ -15,10 +15,10 @@ the URL so we get notified if this happens again in the future).
  5 files changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc b/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
-index 097f6689b330..dd204dad05a3 100644
+index 03167bae02d4..c0511a954ae8 100644
 --- a/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
 +++ b/chrome/browser/safe_browsing/incident_reporting/incident_report_uploader_impl.cc
-@@ -21,7 +21,7 @@ namespace safe_browsing {
+@@ -22,7 +22,7 @@ namespace safe_browsing {
  namespace {
  
  const char kSbIncidentReportUrl[] =
@@ -28,7 +28,7 @@ index 097f6689b330..dd204dad05a3 100644
  constexpr net::NetworkTrafficAnnotationTag
      kSafeBrowsingIncidentTrafficAnnotation =
 diff --git a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
-index 712e7cca668f..3b557c2cc6ab 100644
+index 57e1df9c63c3..dac0e7ad0ad4 100644
 --- a/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
 +++ b/chrome/browser/safe_browsing/incident_reporting/incident_reporting_service.cc
 @@ -310,11 +310,14 @@ IncidentReportingService::UploadContext::~UploadContext() {
@@ -47,10 +47,10 @@ index 712e7cca668f..3b557c2cc6ab 100644
  
  IncidentReportingService::IncidentReportingService(
 diff --git a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-index 2e65722e04be..8124b64cd9f4 100644
+index aa5c4e491989..5e762b573f4b 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_blocking_page.cc
-@@ -57,8 +57,7 @@ class SafeBrowsingBlockingPageFactoryImpl
+@@ -58,8 +58,7 @@ class SafeBrowsingBlockingPageFactoryImpl
      PrefService* prefs =
          Profile::FromBrowserContext(web_contents->GetBrowserContext())
              ->GetPrefs();
@@ -61,10 +61,10 @@ index 2e65722e04be..8124b64cd9f4 100644
          prefs->GetBoolean(prefs::kSafeBrowsingProceedAnywayDisabled);
  
 diff --git a/chrome/browser/safe_browsing/safe_browsing_service.cc b/chrome/browser/safe_browsing/safe_browsing_service.cc
-index 37d5b0775cad..f55fac932782 100644
+index ffe274dedfdb..472487d73317 100644
 --- a/chrome/browser/safe_browsing/safe_browsing_service.cc
 +++ b/chrome/browser/safe_browsing/safe_browsing_service.cc
-@@ -316,8 +316,10 @@ SafeBrowsingDatabaseManager* SafeBrowsingService::CreateDatabaseManager() {
+@@ -353,8 +353,10 @@ SafeBrowsingDatabaseManager* SafeBrowsingService::CreateDatabaseManager() {
  
  void SafeBrowsingService::RegisterAllDelayedAnalysis() {
  #if defined(FULL_SAFE_BROWSING)

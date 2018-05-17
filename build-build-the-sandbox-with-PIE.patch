@@ -1,7 +1,7 @@
-From 6881f546bed64a278bf51f8c27c6438d1812a590 Mon Sep 17 00:00:00 2001
+From 2eca085cc8c9267a66ecb1bf66d9260cc4cfdc6e Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 29 Jan 2015 10:39:51 +0100
-Subject: [PATCH 32/58] build: build the sandbox with PIE
+Subject: [PATCH 32/59] build: build the sandbox with PIE
 
 (Position Independent Executable.)
 This patch originally from openSUSE, chromium-sandbox-pie.patch.
@@ -10,7 +10,7 @@ This patch originally from openSUSE, chromium-sandbox-pie.patch.
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/sandbox/linux/BUILD.gn b/sandbox/linux/BUILD.gn
-index 207ef460ba53..663b4ee68622 100644
+index 2da57fc99475..58e0c5e5bcfb 100644
 --- a/sandbox/linux/BUILD.gn
 +++ b/sandbox/linux/BUILD.gn
 @@ -313,12 +313,13 @@ if (is_linux) {

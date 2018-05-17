@@ -1,7 +1,7 @@
-From 3ec068a8a6b22fd11b5c6065471a115289d47e90 Mon Sep 17 00:00:00 2001
+From 512cb02f33c78e2ad2fa708083781363332861e9 Mon Sep 17 00:00:00 2001
 From: Simon Eisenmann <simon@struktur.de>
 Date: Mon, 26 Oct 2015 14:18:05 +0100
-Subject: [PATCH 51/58] translate: disable fetching of translate languages from
+Subject: [PATCH 51/59] translate: disable fetching of translate languages from
  server
 
 GH issue #18.

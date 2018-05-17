@@ -1,7 +1,7 @@
-From dff3c2a1a54e6880c14fd2bdceb798df963d43b0 Mon Sep 17 00:00:00 2001
+From 50d536a89393f378adb516afe2afe5c36a2957a3 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 29/58] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 29/59] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------

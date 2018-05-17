@@ -1,7 +1,7 @@
-From c54acaec751c46c04f03d915ab15c410af894857 Mon Sep 17 00:00:00 2001
+From d8d63fd002392d56368736e97dea8f76ecf611c7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
-Subject: [PATCH 17/58] cloud-print: disable in prefs and component loader
+Subject: [PATCH 17/59] cloud-print: disable in prefs and component loader
 
 Cloud Print should normally be autodisabled if no printers are shared.
 But maybe that is not enough(?) Probably also needs to gain a checkbox
@@ -16,7 +16,7 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 9829c085696b..dbac5fe0e5cb 100644
+index a6de22be243a..7add56f0ce32 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
 @@ -481,9 +481,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
@@ -32,10 +32,10 @@ index 9829c085696b..dbac5fe0e5cb 100644
  #endif  // defined(OS_CHROMEOS)
  
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index aafc82168cdb..0c5b14b372bc 100644
+index e27bd182542b..2364c1ba2490 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -69,7 +69,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -74,7 +74,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
@@ -45,7 +45,7 @@ index aafc82168cdb..0c5b14b372bc 100644
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacement);
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
 diff --git a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-index 2c1cb6e35676..0948c4178294 100644
+index 3edcc57d67a5..8ad3f18d8dfe 100644
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 +++ b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 @@ -143,10 +143,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(

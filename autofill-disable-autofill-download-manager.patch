@@ -1,7 +1,7 @@
-From 47c1b9c76730a767d41a08b2d9cb730c83470da3 Mon Sep 17 00:00:00 2001
+From 945f2084560de37c0c69e421df1975c8e7d26429 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 11/58] autofill: disable autofill download manager
+Subject: [PATCH 11/59] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -23,10 +23,10 @@ index 7b1be675a5a1..e8192a0e2e30 100644
  }
  
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index 1b129ef47248..8f12e928c009 100644
+index 8e84e33cc21e..ed652cdfdc5c 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1205,9 +1205,11 @@ AutofillManager::AutofillManager(
+@@ -1255,9 +1255,11 @@ AutofillManager::AutofillManager(
        weak_ptr_factory_(this) {
    DCHECK(driver);
    DCHECK(client_);

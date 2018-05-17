@@ -1,7 +1,7 @@
-From fcf2bcf6f3e65dab4240ee1457631511f6e65445 Mon Sep 17 00:00:00 2001
+From cb8259b7e1c30768e4e03662a2714c3d3520eca9 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:25:47 +0200
-Subject: [PATCH 21/58] prefs: only keep cookies until exit
+Subject: [PATCH 21/59] prefs: only keep cookies until exit
 
 Out with all those tracking cookies!
 ---
@@ -9,7 +9,7 @@ Out with all those tracking cookies!
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components/content_settings/core/browser/content_settings_registry.cc b/components/content_settings/core/browser/content_settings_registry.cc
-index c19ffd0ed5c3..63af5ff0700b 100644
+index 6a0478a2e2da..6dd5a20f431d 100644
 --- a/components/content_settings/core/browser/content_settings_registry.cc
 +++ b/components/content_settings/core/browser/content_settings_registry.cc
 @@ -117,7 +117,7 @@ void ContentSettingsRegistry::Init() {

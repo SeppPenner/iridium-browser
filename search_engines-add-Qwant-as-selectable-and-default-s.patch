@@ -1,7 +1,7 @@
-From 03eac4b16a5ea67756d6752e6ee95a407c64582c Mon Sep 17 00:00:00 2001
+From ac8e94ff592e6d0802dab9db8002f34e5479166c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 15:27:37 +0200
-Subject: [PATCH 24/58] search_engines: add Qwant as selectable and default
+Subject: [PATCH 24/59] search_engines: add Qwant as selectable and default
  search engine
 
 ---
@@ -11,7 +11,7 @@ Subject: [PATCH 24/58] search_engines: add Qwant as selectable and default
  3 files changed, 119 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index 78c2a211e70e..3b5d9117953a 100644
+index 713ba6c9b50d..c4aa46166fd5 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
 @@ -38,6 +38,15 @@

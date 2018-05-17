@@ -1,17 +1,17 @@
-From d6ee9640262136904238c06694e723c8ab31a3f2 Mon Sep 17 00:00:00 2001
+From 1b95808479335ec6491688b64ea1f34e08904fea Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 6 Jul 2015 18:18:03 +0200
-Subject: [PATCH 42/58] safe_browsing: support trk: prefix
+Subject: [PATCH 42/59] safe_browsing: support trk: prefix
 
 ---
  chrome/browser/safe_browsing/protocol_manager.cc | 8 +++++---
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/protocol_manager.cc b/chrome/browser/safe_browsing/protocol_manager.cc
-index f4cdc8eacd3d..9ef0471453ea 100644
+index 37e449c6cf18..a9a7271a60cd 100644
 --- a/chrome/browser/safe_browsing/protocol_manager.cc
 +++ b/chrome/browser/safe_browsing/protocol_manager.cc
-@@ -866,11 +866,13 @@ GURL SafeBrowsingProtocolManager::GetHashUrl(
+@@ -879,11 +879,13 @@ GURL SafeBrowsingProtocolManager::GetHashUrl(
  GURL SafeBrowsingProtocolManager::NextChunkUrl(const std::string& url) const {
    DCHECK_CURRENTLY_ON(content::BrowserThread::IO);
    std::string next_url;

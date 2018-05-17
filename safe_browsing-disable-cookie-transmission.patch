@@ -1,132 +1,120 @@
-From 9b29a61aff4bc13ab117552b93b4193517305e71 Mon Sep 17 00:00:00 2001
+From d5177f8b086478974d6684ecabb696cda2c1e2de Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 43/58] safe_browsing: disable cookie transmission
+Subject: [PATCH 43/59] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
 
 References: https://github.com/iridium-browser/iridium-browser/issues/37
 ---
- .../safe_browsing/client_side_detection_service.cc       |  7 ++++++-
- .../download_protection/check_client_download_request.cc |  2 +-
- .../download_protection/ppapi_download_request.cc        |  2 +-
- chrome/browser/safe_browsing/protocol_manager.cc         | 16 ++++++++++++----
- components/safe_browsing/browser/threat_details_cache.cc |  2 +-
- 5 files changed, 21 insertions(+), 8 deletions(-)
+ chrome/browser/safe_browsing/client_side_detection_service.cc     | 4 ++--
+ .../download_protection/check_client_download_request.cc          | 2 +-
+ .../safe_browsing/download_protection/ppapi_download_request.cc   | 2 +-
+ chrome/browser/safe_browsing/protocol_manager.cc                  | 8 ++++----
+ components/safe_browsing/browser/threat_details_cache.cc          | 1 +
+ 5 files changed, 9 insertions(+), 8 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index cab2f7376e43..b9f8d27ad203 100644
+index 2f1a055e4c4d..d2e55ff45b5d 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -358,7 +358,9 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
-   info->phishing_url = GURL(request->url());
-   client_phishing_reports_[fetcher_ptr] = std::move(info);
- 
--  fetcher_ptr->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  fetcher_ptr->SetLoadFlags(net::LOAD_DO_NOT_SAVE_COOKIES |
-+                            net::LOAD_DO_NOT_SEND_COOKIES |
-+                            net::LOAD_DISABLE_CACHE);
-   fetcher_ptr->SetRequestContext(request_context_getter_.get());
-   fetcher_ptr->SetUploadData("application/octet-stream", request_data);
-   fetcher_ptr->Start();
-@@ -439,6 +441,9 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
-   info->original_url = GURL(request->url());
-   client_malware_reports_[fetcher_ptr] = std::move(info);
- 
-+  fetcher_ptr->SetLoadFlags(net::LOAD_DO_NOT_SAVE_COOKIES |
-+                            net::LOAD_DO_NOT_SEND_COOKIES |
-+                            net::LOAD_DISABLE_CACHE);
-   fetcher_ptr->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-   fetcher_ptr->SetRequestContext(request_context_getter_.get());
-   fetcher_ptr->SetUploadData("application/octet-stream", request_data);
+@@ -348,7 +348,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = GetClientReportUrl(kClientReportPhishingUrl);
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
+                                                  traffic_annotation);
+   loader->AttachStringForUpload(request_data, "application/octet-stream");
+@@ -430,7 +430,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = GetClientReportUrl(kClientReportMalwareUrl);
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
+                                                  traffic_annotation);
+   loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-index 1f3e6d3a7476..658a7e2d778f 100644
+index 49cef0dec182..20dac0b41a8d 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-@@ -1009,7 +1009,7 @@ void CheckClientDownloadRequest::SendRequest() {
-                               net::URLFetcher::POST, this, traffic_annotation);
-   data_use_measurement::DataUseUserData::AttachToFetcher(
-       fetcher_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
--  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES);
-   fetcher_->SetAutomaticallyRetryOn5xx(false);  // Don't retry on error.
-   fetcher_->SetRequestContext(service_->request_context_getter_.get());
-   fetcher_->SetUploadData("application/octet-stream",
+@@ -1008,7 +1008,7 @@ void CheckClientDownloadRequest::SendRequest() {
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   loader_ = network::SimpleURLLoader::Create(std::move(resource_request),
+                                              traffic_annotation);
+   loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-index 5e87d3bea9fc..cb40665d2445 100644
+index fc3696b64a73..d30b5d3bc65a 100644
 --- a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-@@ -241,7 +241,7 @@ void PPAPIDownloadRequest::SendRequest() {
-                               this, traffic_annotation);
-   data_use_measurement::DataUseUserData::AttachToFetcher(
-       fetcher_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
--  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  fetcher_->SetLoadFlags(net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SEND_COOKIES | net::LOAD_DO_NOT_SAVE_COOKIES);
-   fetcher_->SetAutomaticallyRetryOn5xx(false);
-   fetcher_->SetRequestContext(service_->request_context_getter_.get());
-   fetcher_->SetUploadData("application/octet-stream",
+@@ -242,7 +242,7 @@ void PPAPIDownloadRequest::SendRequest() {
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = GetDownloadRequestUrl();
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   loader_ = network::SimpleURLLoader::Create(std::move(resource_request),
+                                              traffic_annotation);
+   loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/chrome/browser/safe_browsing/protocol_manager.cc b/chrome/browser/safe_browsing/protocol_manager.cc
-index 9ef0471453ea..e80b19a599c4 100644
+index a9a7271a60cd..4236a8429d96 100644
 --- a/chrome/browser/safe_browsing/protocol_manager.cc
 +++ b/chrome/browser/safe_browsing/protocol_manager.cc
-@@ -293,7 +293,9 @@ void SafeBrowsingProtocolManager::GetFullHash(
+@@ -282,7 +282,7 @@ void SafeBrowsingProtocolManager::GetFullHash(
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = gethash_url;
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   auto loader_ptr = network::SimpleURLLoader::Create(
+       std::move(resource_request), traffic_annotation);
+   loader_ptr->AttachStringForUpload(FormatGetHash(prefixes), "text/plain");
+@@ -688,7 +688,7 @@ bool SafeBrowsingProtocolManager::IssueBackupUpdateRequest(
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = backup_update_url;
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   request_ = network::SimpleURLLoader::Create(std::move(resource_request),
+                                               traffic_annotation);
+   request_->AttachStringForUpload(update_list_data_, "text/plain");
+@@ -719,7 +719,7 @@ void SafeBrowsingProtocolManager::IssueChunkRequest() {
  
-   const std::string get_hash = FormatGetHash(prefixes);
- 
--  fetcher->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  fetcher->SetLoadFlags(net::LOAD_DISABLE_CACHE |
-+                        net::LOAD_DO_NOT_SAVE_COOKIES |
-+                        net::LOAD_DO_NOT_SEND_COOKIES);
-   fetcher->SetRequestContext(request_context_getter_.get());
-   fetcher->SetUploadData("text/plain", get_hash);
-   fetcher->Start();
-@@ -685,7 +687,9 @@ bool SafeBrowsingProtocolManager::IssueBackupUpdateRequest(
-                               net::URLFetcher::POST, this, traffic_annotation);
-   data_use_measurement::DataUseUserData::AttachToFetcher(
-       request_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
--  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE |
-+                         net::LOAD_DO_NOT_SAVE_COOKIES |
-+                         net::LOAD_DO_NOT_SEND_COOKIES);
-   request_->SetRequestContext(request_context_getter_.get());
-   request_->SetUploadData("text/plain", update_list_data_);
-   request_->Start();
-@@ -714,7 +718,9 @@ void SafeBrowsingProtocolManager::IssueChunkRequest() {
-                                      kChunkBackupRequestTrafficAnnotation);
-   data_use_measurement::DataUseUserData::AttachToFetcher(
-       request_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
--  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE |
-+                         net::LOAD_DO_NOT_SAVE_COOKIES |
-+                         net::LOAD_DO_NOT_SEND_COOKIES);
-   request_->SetRequestContext(request_context_getter_.get());
-   chunk_request_start_ = base::Time::Now();
-   request_->Start();
-@@ -768,7 +774,9 @@ void SafeBrowsingProtocolManager::OnGetChunksComplete(
-                                      kChunkBackupRequestTrafficAnnotation);
-   data_use_measurement::DataUseUserData::AttachToFetcher(
-       request_.get(), data_use_measurement::DataUseUserData::SAFE_BROWSING);
--  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE);
-+  request_->SetLoadFlags(net::LOAD_DISABLE_CACHE |
-+                         net::LOAD_DO_NOT_SAVE_COOKIES |
-+                         net::LOAD_DO_NOT_SEND_COOKIES);
-   request_->SetRequestContext(request_context_getter_.get());
-   request_->SetUploadData("text/plain", update_list_data_);
-   request_->Start();
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = chunk_url;
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SEND_COOKIES | net::LOAD_DO_NOT_SAVE_COOKIES;
+   request_ = network::SimpleURLLoader::Create(
+       std::move(resource_request), kChunkBackupRequestTrafficAnnotation);
+   request_->DownloadToStringOfUnboundedSizeUntilCrashAndDie(
+@@ -777,7 +777,7 @@ void SafeBrowsingProtocolManager::OnGetChunksComplete(
+   auto resource_request = std::make_unique<network::ResourceRequest>();
+   resource_request->url = update_url;
+   resource_request->method = "POST";
+-  resource_request->load_flags = net::LOAD_DISABLE_CACHE;
++  resource_request->load_flags = net::LOAD_DISABLE_CACHE | net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES;
+   request_ = network::SimpleURLLoader::Create(
+       std::move(resource_request), kChunkBackupRequestTrafficAnnotation);
+   request_->AttachStringForUpload(update_list_data_, "text/plain");
 diff --git a/components/safe_browsing/browser/threat_details_cache.cc b/components/safe_browsing/browser/threat_details_cache.cc
-index 8b5ed066b609..7caef515bf6b 100644
+index 5f9d575f413f..b807ad773550 100644
 --- a/components/safe_browsing/browser/threat_details_cache.cc
 +++ b/components/safe_browsing/browser/threat_details_cache.cc
-@@ -119,7 +119,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
+@@ -113,6 +113,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
    // Only from cache, and don't save cookies.
-   current_fetch_->SetLoadFlags(net::LOAD_ONLY_FROM_CACHE |
-                                net::LOAD_SKIP_CACHE_VALIDATION |
--                               net::LOAD_DO_NOT_SAVE_COOKIES);
-+                               net::LOAD_DO_NOT_SAVE_COOKIES | net::LOAD_DO_NOT_SEND_COOKIES);
-   current_fetch_->SetAutomaticallyRetryOn5xx(false);  // No retries.
-   current_fetch_->Start();  // OnURLFetchComplete will be called when done.
- }
+   resource_request->load_flags = net::LOAD_ONLY_FROM_CACHE |
+                                  net::LOAD_SKIP_CACHE_VALIDATION |
++                                 net::LOAD_DO_NOT_SEND_COOKIES |
+                                  net::LOAD_DO_NOT_SAVE_COOKIES;
+   current_load_ = network::SimpleURLLoader::Create(std::move(resource_request),
+                                                    traffic_annotation);
 -- 
 2.16.3
 

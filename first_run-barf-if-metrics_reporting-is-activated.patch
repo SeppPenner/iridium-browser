@@ -1,7 +1,7 @@
-From be2a009deb9f98b0709a0dd8e20d016ff1040cf9 Mon Sep 17 00:00:00 2001
+From 558bb053c9da8759c3360b9cebb866dbf53c25f9 Mon Sep 17 00:00:00 2001
 From: Robert Nagy <robert@openbsd.org>
 Date: Sat, 1 Oct 2016 11:23:40 +0200
-Subject: [PATCH 54/58] first_run: barf if metrics_reporting is activated
+Subject: [PATCH 54/59] first_run: barf if metrics_reporting is activated
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

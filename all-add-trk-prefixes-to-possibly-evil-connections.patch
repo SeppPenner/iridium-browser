@@ -1,7 +1,7 @@
-From eabee19a41f6d27100f2878dd93cc02d4c066037 Mon Sep 17 00:00:00 2001
+From 25d6f14b3b47d8cacc2f113c83f60499b47319bd Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 3 Nov 2014 10:52:56 +0100
-Subject: [PATCH 55/58] all: add trk: prefixes to possibly evil connections
+Subject: [PATCH 55/59] all: add trk: prefixes to possibly evil connections
 
 Prefix URLs to Google services with trk: so that whenever something
 tries to load them, the developer will be informed via printf and
@@ -93,10 +93,10 @@ index f7bde92ac729..b0b6d6508e32 100644
  // A custom extensions::ExternalLoader that the ServicesCustomizationDocument
  // creates and uses to publish OEM default apps to the extensions system.
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-index f4c30871f6a1..7afa6979f48c 100644
+index a7b2aed44f47..67ed8a8ce63f 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-@@ -1129,7 +1129,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGetResourceEntry(
+@@ -1173,7 +1173,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGetResourceEntry(
        SigninManagerFactory::GetForProfile(GetProfile());
    const std::string& account_id = signin_manager->GetAuthenticatedAccountId();
    std::vector<std::string> scopes;
@@ -106,10 +106,10 @@ index f4c30871f6a1..7afa6979f48c 100644
    auth_service_.reset(
        new google_apis::AuthService(oauth2_token_service,
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-index 8a84a10190a3..cfdde9aa6338 100644
+index 07b78955ca4e..11058327d700 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-@@ -65,7 +65,7 @@ namespace {
+@@ -66,7 +66,7 @@ namespace {
  
  using api::file_manager_private::ProfileInfo;
  
@@ -156,10 +156,10 @@ index 66c195242a23..e08eed2c2538 100644
  // Location of the help page for low space warning in the downloads directory.
  const int kDownloadsLowSpaceWarningHelpNumber = 1061547;
 diff --git a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-index 6b95797c9949..faeffff385bb 100644
+index ea1cbebd36ae..2abebd6a6a69 100644
 --- a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
 +++ b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-@@ -27,8 +27,8 @@ namespace {
+@@ -26,8 +26,8 @@ namespace {
  
  const char kGoogleDotCom[] = "google.com";
  constexpr const char* kGoogleGstaticAppIds[] = {
@@ -171,7 +171,7 @@ index 6b95797c9949..faeffff385bb 100644
  // ContainsAppIdByHash returns true iff the SHA-256 hash of one of the
  // elements of |list| equals |hash|.
 diff --git a/chrome/browser/extensions/install_signer.cc b/chrome/browser/extensions/install_signer.cc
-index 7527ef086beb..cf89c1ce876d 100644
+index d9fdf055584c..3462423d4e18 100644
 --- a/chrome/browser/extensions/install_signer.cc
 +++ b/chrome/browser/extensions/install_signer.cc
 @@ -65,7 +65,7 @@ const int kSignatureFormatVersion = 2;
@@ -195,7 +195,7 @@ index 69da54d22388..0cb1638e109f 100644
 +  return GURL("trk:143:https://support.google.com/chrome/?p=ib_nacl");
  }
 diff --git a/chrome/browser/net/predictor.cc b/chrome/browser/net/predictor.cc
-index a5be71e1e918..df5e54cb4702 100644
+index cd006b0ef9e6..7e687a44729e 100644
 --- a/chrome/browser/net/predictor.cc
 +++ b/chrome/browser/net/predictor.cc
 @@ -349,7 +349,7 @@ std::vector<GURL> Predictor::GetPredictedUrlListAtStartup(
@@ -260,10 +260,10 @@ index 59a0f9ad07fd..888e42bb72e9 100644
  }
  
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index b9f8d27ad203..00fd65b0219a 100644
+index d2e55ff45b5d..65a5994a26ac 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -80,9 +80,9 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
+@@ -79,9 +79,9 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
  const int ClientSideDetectionService::kPositiveCacheIntervalMinutes = 30;
  
  const char ClientSideDetectionService::kClientReportPhishingUrl[] =
@@ -274,12 +274,12 @@ index b9f8d27ad203..00fd65b0219a 100644
 +    "trk:149:https://sb-ssl.google.com/safebrowsing/clientreport/malware-check";
  
  struct ClientSideDetectionService::ClientPhishingReportInfo {
-   std::unique_ptr<net::URLFetcher> fetcher;
+   std::unique_ptr<network::SimpleURLLoader> loader;
 diff --git a/chrome/browser/safe_browsing/download_protection/download_feedback.cc b/chrome/browser/safe_browsing/download_protection/download_feedback.cc
-index d6e1b2e23e18..37c1430182f9 100644
+index 3db44bbbc399..26379009ddbf 100644
 --- a/chrome/browser/safe_browsing/download_protection/download_feedback.cc
 +++ b/chrome/browser/safe_browsing/download_protection/download_feedback.cc
-@@ -230,7 +230,7 @@ const int64_t DownloadFeedback::kMaxUploadSize = 50 * 1024 * 1024;
+@@ -231,7 +231,7 @@ const int64_t DownloadFeedback::kMaxUploadSize = 50 * 1024 * 1024;
  
  // static
  const char DownloadFeedback::kSbFeedbackURL[] =
@@ -289,10 +289,10 @@ index d6e1b2e23e18..37c1430182f9 100644
  // static
  DownloadFeedbackFactory* DownloadFeedback::factory_ = nullptr;
 diff --git a/chrome/browser/safe_search_api/safe_search_url_checker.cc b/chrome/browser/safe_search_api/safe_search_url_checker.cc
-index 0011b8bb61f9..94fc2a92317d 100644
+index 9a84593acf36..c2d37e56fd1b 100644
 --- a/chrome/browser/safe_search_api/safe_search_url_checker.cc
 +++ b/chrome/browser/safe_search_api/safe_search_url_checker.cc
-@@ -33,7 +33,7 @@ using net::URLRequestStatus;
+@@ -32,7 +32,7 @@ using net::URLRequestStatus;
  namespace {
  
  const char kSafeSearchApiUrl[] =
@@ -302,23 +302,23 @@ index 0011b8bb61f9..94fc2a92317d 100644
  const char kDataFormat[] = "key=%s&urls=%s";
  
 diff --git a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-index cca9f376dfc4..9bcd585dae57 100644
+index aeb5838a2a99..72a0eeb2c3b7 100644
 --- a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
 +++ b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-@@ -238,7 +238,7 @@ void SpellcheckHunspellDictionary::OnURLFetchComplete(
+@@ -258,7 +258,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
+   DCHECK(!bdict_file.empty());
  
- GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
    static const char kDownloadServerUrl[] =
 -      "https://redirector.gvt1.com/edgedl/chrome/dict/";
 +      "trk:173:https://redirector.gvt1.com/edgedl/chrome/dict/";
-   std::string bdict_file = dictionary_file_.path.BaseName().MaybeAsASCII();
  
-   DCHECK(!bdict_file.empty());
+   return GURL(std::string(kDownloadServerUrl) +
+               base::ToLowerASCII(bdict_file));
 diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index 3b75e6a147c6..a0390f00919e 100644
+index 875eb80ccf48..f4ccccd0c8cc 100644
 --- a/chrome/browser/supervised_user/supervised_user_service.cc
 +++ b/chrome/browser/supervised_user/supervised_user_service.cc
-@@ -103,7 +103,7 @@ namespace {
+@@ -102,7 +102,7 @@ namespace {
  
  // The URL from which to download a host blacklist if no local one exists yet.
  const char kBlacklistURL[] =
@@ -354,7 +354,7 @@ index bf3a8b0a1154..cbd39e479b9b 100644
  
  // The maximum number of ignored bubble we track in the NumLaterPerReinstall
 diff --git a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-index 36cdfcfe8e4d..1069c0374d9c 100644
+index d71fefdb9a43..028a43d4180f 100644
 --- a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 +++ b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 @@ -66,17 +66,17 @@ namespace {
@@ -396,7 +396,7 @@ index b65abdff40e5..673ab5a80e55 100644
  const char kThumbsWhiteListedExtension[] = "khopmbdjffemhegeeobelklnbglcdgfh";
  
 diff --git a/chrome/installer/util/google_chrome_distribution.cc b/chrome/installer/util/google_chrome_distribution.cc
-index 05941744ff43..6547b8be5ae4 100644
+index cbbb0d5a7dc3..ea8c762a97f1 100644
 --- a/chrome/installer/util/google_chrome_distribution.cc
 +++ b/chrome/installer/util/google_chrome_distribution.cc
 @@ -48,7 +48,7 @@ base::string16 LocalizeUrl(const wchar_t* url) {
@@ -409,10 +409,10 @@ index 05941744ff43..6547b8be5ae4 100644
    return LocalizeUrl(kSurveyUrl);
  }
 diff --git a/chromecast/browser/service/cast_service_simple.cc b/chromecast/browser/service/cast_service_simple.cc
-index e1771224e503..89b1b0fe7e91 100644
+index d1a7d8a4c842..872b7bd42e1e 100644
 --- a/chromecast/browser/service/cast_service_simple.cc
 +++ b/chromecast/browser/service/cast_service_simple.cc
-@@ -25,7 +25,7 @@ GURL GetStartupURL() {
+@@ -26,7 +26,7 @@ GURL GetStartupURL() {
    const base::CommandLine::StringVector& args = command_line->GetArgs();
  
    if (args.empty())
@@ -464,7 +464,7 @@ index b08cc6f08781..e23589a65257 100644
  }
  
 diff --git a/components/crash/content/app/breakpad_linux.cc b/components/crash/content/app/breakpad_linux.cc
-index 460f7ac4defa..1f5ccde2679e 100644
+index 1dde47fb6bba..15d6509d16d9 100644
 --- a/components/crash/content/app/breakpad_linux.cc
 +++ b/components/crash/content/app/breakpad_linux.cc
 @@ -87,7 +87,7 @@ namespace breakpad {
@@ -526,7 +526,7 @@ index 052b0597f985..1a06967e57a8 100644
  const char kGCMAccountTrackerName[] = "gcm_account_tracker";
  // Minimum token validity when sending to GCM groups server.
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index 6302db8a9d5f..5d3c69d66e2f 100644
+index e7436af5a658..d4ff48f2b4d2 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
 @@ -35,7 +35,7 @@
@@ -573,7 +573,7 @@ index fce5c31ee101..ed33013d9a93 100644
  
  // Register backoff policy.
 diff --git a/components/invalidation/impl/p2p_invalidator.cc b/components/invalidation/impl/p2p_invalidator.cc
-index 50206abbca90..b9935dfe3293 100644
+index 7578029e0275..afa8615f037a 100644
 --- a/components/invalidation/impl/p2p_invalidator.cc
 +++ b/components/invalidation/impl/p2p_invalidator.cc
 @@ -21,7 +21,7 @@
@@ -631,10 +631,10 @@ index 8cc9b478c2a4..e41def275c47 100644
  const char kBlockedExtensionPrefix[] = "[BLOCKED]";
  
 diff --git a/components/rappor/rappor_service_impl.cc b/components/rappor/rappor_service_impl.cc
-index 363228386178..cc1686aefc6f 100644
+index 7b4c68475beb..65ae544d01d7 100644
 --- a/components/rappor/rappor_service_impl.cc
 +++ b/components/rappor/rappor_service_impl.cc
-@@ -30,7 +30,7 @@ const char kMimeType[] = "application/vnd.chrome.rappor";
+@@ -31,7 +31,7 @@ const char kMimeType[] = "application/vnd.chrome.rappor";
  const char kRapporDailyEventHistogram[] = "Rappor.DailyEvent.IntervalType";
  
  // The rappor server's URL.
@@ -682,7 +682,7 @@ index d97573e63c50..499891816b00 100644
  const char kDefaultInsecureServerUrl[] =
      "http://clientservices.googleapis.com/chrome-variations/seed";
 diff --git a/content/browser/speech/speech_recognition_engine.cc b/content/browser/speech/speech_recognition_engine.cc
-index e273b90874e4..6a5b1c00eaf2 100644
+index 856f9a1df552..38806a064d62 100644
 --- a/content/browser/speech/speech_recognition_engine.cc
 +++ b/content/browser/speech/speech_recognition_engine.cc
 @@ -34,7 +34,7 @@ namespace content {
@@ -695,23 +695,23 @@ index e273b90874e4..6a5b1c00eaf2 100644
  const char kUpstreamUrl[] = "/up?";
  
 diff --git a/content/browser/webauth/authenticator_impl.cc b/content/browser/webauth/authenticator_impl.cc
-index 3c53a60cd041..c2718c145789 100644
+index 08a8a7be4146..be5db7ff691b 100644
 --- a/content/browser/webauth/authenticator_impl.cc
 +++ b/content/browser/webauth/authenticator_impl.cc
-@@ -130,9 +130,9 @@ bool IsAppIdAllowedForOrigin(const GURL& appid, const url::Origin& origin) {
+@@ -150,9 +150,9 @@ bool IsAppIdAllowedForOrigin(const GURL& appid, const url::Origin& origin) {
    // special-case AppIDs. Firefox also does this:
    // https://groups.google.com/forum/#!msg/mozilla.dev.platform/Uiu3fwnA2xw/201ynAiPAQAJ
    const GURL kGstatic1 =
 -      GURL("https://www.gstatic.com/securitykey/origins.json");
 +      GURL("trk:276:https://www.gstatic.com/securitykey/origins.json");
    const GURL kGstatic2 =
--      GURL("https://www.gstatic.com/a/google.com/securitykey/origins.json");
-+      GURL("trk:277:https://www.gstatic.com/a/google.com/securitykey/origins.json");
+-      GURL("https://www.gstatic.com/securitykey/a/google.com/origins.json");
++      GURL("trk:277:https://www.gstatic.com/securitykey/a/google.com/origins.json");
    DCHECK(kGstatic1.is_valid() && kGstatic2.is_valid());
  
    if (origin.DomainIs("google.com") && !appid.has_ref() &&
 diff --git a/content/shell/browser/shell_browser_main_parts.cc b/content/shell/browser/shell_browser_main_parts.cc
-index 48018190e58d..32f969a5f878 100644
+index 4829736cf5ca..8bbea19a8c09 100644
 --- a/content/shell/browser/shell_browser_main_parts.cc
 +++ b/content/shell/browser/shell_browser_main_parts.cc
 @@ -74,7 +74,7 @@ GURL GetStartupURL() {
@@ -769,10 +769,10 @@ index d3d0cd9cc95f..91210c88c596 100644
   // Used to mint uber auth tokens when needed.
  const char kGaiaSid[] = "sid";
 diff --git a/google_apis/gaia/google_service_auth_error.cc b/google_apis/gaia/google_service_auth_error.cc
-index 79f445caf884..afe0bf51a658 100644
+index d28bc258fb97..d4b9170b9a9b 100644
 --- a/google_apis/gaia/google_service_auth_error.cc
 +++ b/google_apis/gaia/google_service_auth_error.cc
-@@ -253,7 +253,7 @@ std::string GoogleServiceAuthError::ToString() const {
+@@ -211,7 +211,7 @@ std::string GoogleServiceAuthError::ToString() const {
      case WEB_LOGIN_REQUIRED:
        return "Less secure apps may not authenticate with this account. "
               "Please visit: "

@@ -1,7 +1,7 @@
-From 8744318b3f47adeb99f12ba7f04a7eb39830b3f9 Mon Sep 17 00:00:00 2001
+From d2dbf6040bc027b0cec787a6edcd8ac1d38c2551 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 53/58] icons: iridium icons
+Subject: [PATCH 53/59] icons: iridium icons
 
 ---
  chrome/app/theme/chromium/product_logo_128.png     | Bin 8366 -> 7826 bytes
@@ -1773,10 +1773,10 @@ zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
 diff --git a/chrome/browser/resources/local_ntp/local_ntp.css b/chrome/browser/resources/local_ntp/local_ntp.css
-index 343afa804b99..ac3cd28b4fa0 100644
+index e2ad0dd91679..438b622e8c00 100644
 --- a/chrome/browser/resources/local_ntp/local_ntp.css
 +++ b/chrome/browser/resources/local_ntp/local_ntp.css
-@@ -150,7 +150,7 @@ body.hide-fakebox-logo #fakebox {
+@@ -144,7 +144,7 @@ body.hide-fakebox-logo #fakebox {
  
  #logo-default,
  #logo-non-white {
@@ -1785,7 +1785,7 @@ index 343afa804b99..ac3cd28b4fa0 100644
    background-repeat: no-repeat;
    bottom: var(--logo-margin-bottom);
    height: 92px;
-@@ -162,7 +162,7 @@ body.hide-fakebox-logo #fakebox {
+@@ -156,7 +156,7 @@ body.hide-fakebox-logo #fakebox {
  body.alternate-logo #logo-default,
  body.alternate-logo #logo-non-white {
    -webkit-mask-image:

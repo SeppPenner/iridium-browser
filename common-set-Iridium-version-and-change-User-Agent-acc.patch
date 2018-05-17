@@ -1,7 +1,7 @@
-From 3b8e65f975ed21c72bc90e486b4e8ad7770ea749 Mon Sep 17 00:00:00 2001
+From 2439db9161d593907bfd24ff2a4389d39343e8ae Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 58/58] common: set Iridium version and change User-Agent
+Subject: [PATCH 58/59] common: set Iridium version and change User-Agent
  accordingly
 
 Reduced version number:
@@ -15,31 +15,33 @@ really are still Chromium.
 Note to self:
 Update "Chromium/*" in UA string when updating chrome/version.
 ---
- chrome/VERSION                                        | 8 ++++----
- components/version_info/version_info.cc               | 2 +-
- components/version_info/version_info_values.h.version | 2 +-
- content/common/user_agent.cc                          | 2 ++
- extensions/shell/common/version.h.in                  | 2 +-
- 5 files changed, 9 insertions(+), 7 deletions(-)
+ chrome/VERSION                                                | 8 ++++----
+ components/version_info/version_info.cc                       | 2 +-
+ components/version_info/version_info_values.h.version         | 2 +-
+ content/common/user_agent.cc                                  | 2 ++
+ extensions/shell/common/version.h.in                          | 2 +-
+ tools/metrics/histograms/extract_histograms.py                | 2 +-
+ tools/metrics/histograms/generate_expired_histograms_array.py | 4 ++--
+ 7 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 09267a8f1c1b..a53077ea7228 100644
+index b687adf4088a..ee0c983531da 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=66
+-MAJOR=67
 -MINOR=0
--BUILD=3359
--PATCH=130
+-BUILD=3396
+-PATCH=40
 +MAJOR=2018
-+MINOR=4
-+BUILD=66
++MINOR=5
++BUILD=67
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
-index 0b28f1523900..695c22584d51 100644
+index f378da9a6857..d30c8b6149a6 100644
 --- a/components/version_info/version_info.cc
 +++ b/components/version_info/version_info.cc
-@@ -14,7 +14,7 @@
+@@ -13,7 +13,7 @@
  namespace version_info {
  
  std::string GetProductNameAndVersionForUserAgent() {
@@ -62,7 +64,7 @@ index 6232e359ef20..3cf4fee096c0 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index b071e6ba90d6..83b9bc894f06 100644
+index b071e6ba90d6..5e251dd07a77 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
 @@ -187,6 +187,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
@@ -70,7 +72,7 @@ index b071e6ba90d6..83b9bc894f06 100644
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/66.0.3359.130");
++	base::StringAppendF(&user_agent, " Chrome/67.0.3396.40");
    return user_agent;
  }
  
@@ -87,6 +89,34 @@ index c4627fe512a1..bf7d27484e99 100644
  #define LAST_CHANGE "@LASTCHANGE@"
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
+diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
+index c18e4ab126a9..3eae82d2ff3a 100644
+--- a/tools/metrics/histograms/extract_histograms.py
++++ b/tools/metrics/histograms/extract_histograms.py
+@@ -69,7 +69,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
+     'Base histogram. Use suffixes of this histogram instead.')
+ 
+ EXPIRY_DATE_PATTERN = "%Y-%m-%d"
+-EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,3}\Z')
++EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,4}\Z')
+ 
+ class Error(Exception):
+   pass
+diff --git a/tools/metrics/histograms/generate_expired_histograms_array.py b/tools/metrics/histograms/generate_expired_histograms_array.py
+index bbf283f96f80..ee96a6fbf822 100755
+--- a/tools/metrics/histograms/generate_expired_histograms_array.py
++++ b/tools/metrics/histograms/generate_expired_histograms_array.py
+@@ -15,8 +15,8 @@ import extract_histograms
+ import merge_xml
+ 
+ _DATE_FILE_RE = re.compile(r".*MAJOR_BRANCH_DATE=(.+).*")
+-_CURRENT_MILESTONE_RE = re.compile(r"MAJOR=([0-9]{2,3})\n")
+-_MILESTONE_EXPIRY_RE = re.compile(r"\AM([0-9]{2,3})")
++_CURRENT_MILESTONE_RE = re.compile(r"MAJOR=([0-9]{2,4})\n")
++_MILESTONE_EXPIRY_RE = re.compile(r"\AM([0-9]{2,4})")
+ 
+ _SCRIPT_NAME = "generate_expired_histograms_array.py"
+ _HASH_DATATYPE = "uint64_t"
 -- 
 2.16.3
 

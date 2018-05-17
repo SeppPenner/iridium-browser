@@ -1,7 +1,7 @@
-From 78b1847dd7885145757d6b806da17bd24f0186bc Mon Sep 17 00:00:00 2001
+From f33523af06857280644a14c29f64c61e35d0568a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 11:53:30 +0200
-Subject: [PATCH 47/58] Make default welcome page be blank
+Subject: [PATCH 47/59] Make default welcome page be blank
 
 Because replacing kChromeUIWelcomeURL with about:blank leads the
 browser to load some broken URL instead.
