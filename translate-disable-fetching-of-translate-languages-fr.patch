@@ -1,7 +1,7 @@
-From 686c17d778937f6e512c25a22e9984caff7e11b9 Mon Sep 17 00:00:00 2001
+From f3aa2066094c9cae2f3fb51d4867aa115bc60ddd Mon Sep 17 00:00:00 2001
 From: Simon Eisenmann <simon@struktur.de>
 Date: Mon, 26 Oct 2015 14:18:05 +0100
-Subject: [PATCH 52/59] translate: disable fetching of translate languages from
+Subject: [PATCH 49/60] translate: disable fetching of translate languages from
  server
 
 GH issue #18.
@@ -10,7 +10,7 @@ GH issue #18.
  1 file changed, 2 insertions(+)
 
 diff --git a/components/translate/core/browser/translate_language_list.cc b/components/translate/core/browser/translate_language_list.cc
-index 1fdd0c4c38d5..09c0eadf2d37 100644
+index e6016abb0dc7..713600181d3b 100644
 --- a/components/translate/core/browser/translate_language_list.cc
 +++ b/components/translate/core/browser/translate_language_list.cc
 @@ -207,6 +207,7 @@ GURL TranslateLanguageList::TranslateLanguageUrl() {

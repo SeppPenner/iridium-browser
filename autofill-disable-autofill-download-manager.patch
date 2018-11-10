@@ -1,7 +1,7 @@
-From 45d8d8a8f01f81fdf3422653c0bc5660df023fff Mon Sep 17 00:00:00 2001
+From e9c4161890bc694812257d4cc5600638c4b1d516 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 14/59] autofill: disable autofill download manager
+Subject: [PATCH 11/60] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -10,10 +10,10 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index 1903d2e6ea21..a18e3fbe2797 100644
+index f6d37a513cc1..03147ad7afc1 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -73,7 +73,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
+@@ -80,7 +80,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
  };
  
  const char kDefaultAutofillServerURL[] =
@@ -23,10 +23,10 @@ index 1903d2e6ea21..a18e3fbe2797 100644
  // Returns the base URL for the autofill server.
  GURL GetAutofillServerURL() {
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index a83084e922b4..ebe95a78ff4c 100644
+index f2506032efdf..a0a773e9a779 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1150,9 +1150,11 @@ AutofillManager::AutofillManager(
+@@ -1168,9 +1168,11 @@ AutofillManager::AutofillManager(
        weak_ptr_factory_(this) {
    DCHECK(driver);
    DCHECK(client_);

@@ -1,7 +1,7 @@
-From 4cc18a792e5ec81066acb1d226aeb2557bdb4d5a Mon Sep 17 00:00:00 2001
+From a4303b353a2bd33a5bfa46f16bd07dc47d278bc5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 15:27:37 +0200
-Subject: [PATCH 27/59] search_engines: add Qwant as selectable and default
+Subject: [PATCH 24/60] search_engines: add Qwant as selectable and default
  search engine
 
 ---

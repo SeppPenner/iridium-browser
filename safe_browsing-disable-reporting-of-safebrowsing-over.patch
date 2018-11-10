@@ -1,7 +1,7 @@
-From 296f8c3ff9abd3fc2cac4996946f722b29fac240 Mon Sep 17 00:00:00 2001
+From 1af89642b3f52ff304ea6e04b09618de31f3e9c3 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 7 Jul 2015 18:28:46 +0200
-Subject: [PATCH 44/59] safe_browsing: disable reporting of safebrowsing
+Subject: [PATCH 41/60] safe_browsing: disable reporting of safebrowsing
  override
 
 Disables reporting of the safebrowsing override, i.e. the report sent
@@ -12,7 +12,7 @@ This prevents trk:148 (phishing) and trk:149 (malware).
  1 file changed, 12 insertions(+)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 8d5c97c78af4..aa8b6d9f1f70 100644
+index d7a05441b26b..2d5d93ae4d83 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
 @@ -64,11 +64,13 @@ enum MalwareReportTypes {

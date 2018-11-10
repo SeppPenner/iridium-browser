@@ -1,7 +1,7 @@
-From 309eecad0b8e7ab98a52c9d22d305b2963a2508c Mon Sep 17 00:00:00 2001
+From 85a517ba18a965e88b9b9916485e506af249d207 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 32/59] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 29/60] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -9,7 +9,7 @@ Subject: [PATCH 32/59] build: fix OSX branded build crashes on OSX
  2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/chrome/app/theme/chromium/BRANDING b/chrome/app/theme/chromium/BRANDING
-index 4167796dd60f..60aa7590cc0b 100644
+index 17a3178419b9..60aa7590cc0b 100644
 --- a/chrome/app/theme/chromium/BRANDING
 +++ b/chrome/app/theme/chromium/BRANDING
 @@ -1,10 +1,10 @@
@@ -19,7 +19,7 @@ index 4167796dd60f..60aa7590cc0b 100644
 -PRODUCT_SHORTNAME=Chromium
 -PRODUCT_INSTALLER_FULLNAME=Chromium Installer
 -PRODUCT_INSTALLER_SHORTNAME=Chromium Installer
--COPYRIGHT=Copyright 2017 The Chromium Authors. All rights reserved.
+-COPYRIGHT=Copyright 2018 The Chromium Authors. All rights reserved.
 +COMPANY_FULLNAME=The browser authors
 +COMPANY_SHORTNAME=The browser authors
 +PRODUCT_FULLNAME=Iridium

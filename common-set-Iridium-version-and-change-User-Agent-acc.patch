@@ -1,7 +1,7 @@
-From 705b1d196a4639245b3ffce2c0808accbf009e30 Mon Sep 17 00:00:00 2001
+From dc0d71e2b8f9dc78709abd8be0dc75aa4f0aebb2 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 59/59] common: set Iridium version and change User-Agent
+Subject: [PATCH 56/60] common: set Iridium version and change User-Agent
  accordingly
 
 Reduced version number:
@@ -25,17 +25,17 @@ Update "Chromium/*" in UA string when updating chrome/version.
  7 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 4be16ad904c5..f6cd88c5260f 100644
+index 3248f1ae9104..99639d9efce1 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=70
+-MAJOR=71
 -MINOR=0
--BUILD=3538
--PATCH=77
+-BUILD=3578
+-PATCH=30
 +MAJOR=2018
 +MINOR=11
-+BUILD=70
++BUILD=71
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
 index f378da9a6857..d30c8b6149a6 100644
@@ -64,15 +64,15 @@ index 6232e359ef20..3cf4fee096c0 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index cf3b6df7b1a0..fb646392a39e 100644
+index 0ceb7311a0f6..21c0121ef6e5 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -188,6 +188,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -191,6 +191,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/70.0.0.0");
++	base::StringAppendF(&user_agent, " Chrome/71.0.0.0");
    return user_agent;
  }
  

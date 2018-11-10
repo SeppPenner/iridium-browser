@@ -1,7 +1,7 @@
-From ccf941b8a186588ccc696ad94d9c13a1a9956b34 Mon Sep 17 00:00:00 2001
+From ead8c309c4d07e8b8e16a7fafaf98991bd35f1d1 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 19 Oct 2018 00:40:37 +0200
-Subject: [PATCH 05/59] build: import openSUSE chromium-gcc8-alignof.patch
+Subject: [PATCH 04/60] build: import openSUSE chromium-gcc8-alignof.patch
 
 ---
  mojo/public/c/system/macros.h | 8 +++++++-

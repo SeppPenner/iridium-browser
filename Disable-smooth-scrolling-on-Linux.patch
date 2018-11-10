@@ -1,7 +1,7 @@
-From 03761a3863e43d83236933efb375dc77afcae964 Mon Sep 17 00:00:00 2001
+From fb30f4a296e3dda5958a9eab68d8c2370efaa5da Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 16:11:53 +0200
-Subject: [PATCH 57/59] Disable smooth scrolling on Linux
+Subject: [PATCH 54/60] Disable smooth scrolling on Linux
 
 Smooth scrolling (while using mousewheel or arrow keys) is a really
 dumb idea. Text naturally appears as a blur while it moves, and the

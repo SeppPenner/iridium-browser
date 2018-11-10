@@ -1,7 +1,7 @@
-From ebb822e554ddf7766b825059edbf6f10c5c34d79 Mon Sep 17 00:00:00 2001
+From 3d88841d81bc64af3638fa96c7ef48344c3ddc7b Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 45/59] safe_browsing: disable cookie transmission
+Subject: [PATCH 42/60] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
@@ -15,7 +15,7 @@ References: https://github.com/iridium-browser/iridium-browser/issues/37
  4 files changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index aa8b6d9f1f70..7293192fcdb0 100644
+index 2d5d93ae4d83..700f2b10ec47 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
 @@ -358,7 +358,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
@@ -37,10 +37,10 @@ index aa8b6d9f1f70..7293192fcdb0 100644
                                                   traffic_annotation);
    loader->AttachStringForUpload(request_data, "application/octet-stream");
 diff --git a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-index f5aaff83c87a..cfc195cd7d8b 100644
+index d1413bb1db9c..892ad0a127bb 100644
 --- a/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/check_client_download_request.cc
-@@ -1075,7 +1075,7 @@ void CheckClientDownloadRequest::SendRequest() {
+@@ -1067,7 +1067,7 @@ void CheckClientDownloadRequest::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = PPAPIDownloadRequest::GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -50,10 +50,10 @@ index f5aaff83c87a..cfc195cd7d8b 100644
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-index 88f67363710b..c96f46820353 100644
+index 2ca4ae9b41db..e8ce237a449b 100644
 --- a/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
 +++ b/chrome/browser/safe_browsing/download_protection/ppapi_download_request.cc
-@@ -248,7 +248,7 @@ void PPAPIDownloadRequest::SendRequest() {
+@@ -250,7 +250,7 @@ void PPAPIDownloadRequest::SendRequest() {
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = GetDownloadRequestUrl();
    resource_request->method = "POST";
@@ -63,10 +63,10 @@ index 88f67363710b..c96f46820353 100644
                                               traffic_annotation);
    loader_->AttachStringForUpload(client_download_request_data_,
 diff --git a/components/safe_browsing/browser/threat_details_cache.cc b/components/safe_browsing/browser/threat_details_cache.cc
-index d8ee18a7c471..b18c1de4281e 100644
+index 005d11268c32..4a269f289308 100644
 --- a/components/safe_browsing/browser/threat_details_cache.cc
 +++ b/components/safe_browsing/browser/threat_details_cache.cc
-@@ -113,6 +113,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
+@@ -115,6 +115,7 @@ void ThreatDetailsCacheCollector::OpenEntry() {
    // Only from cache, and don't save cookies.
    resource_request->load_flags = net::LOAD_ONLY_FROM_CACHE |
                                   net::LOAD_SKIP_CACHE_VALIDATION |

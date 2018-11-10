@@ -1,7 +1,7 @@
-From f2c6e9ee00443e3e7a62b50c411ffed8b349e293 Mon Sep 17 00:00:00 2001
+From b737a55ec744741e9a9b059021bef887b49d30e6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 54/59] icons: iridium icons
+Subject: [PATCH 51/60] icons: iridium icons
 
 ---
  .../app/theme/chromium/product_logo_128.png   | Bin 8366 -> 7826 bytes
@@ -1773,10 +1773,10 @@ zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
 diff --git a/chrome/browser/resources/local_ntp/local_ntp.css b/chrome/browser/resources/local_ntp/local_ntp.css
-index 383e99b0d637..320b13cf9f23 100644
+index 1f94939fc9b6..6eb779877edb 100644
 --- a/chrome/browser/resources/local_ntp/local_ntp.css
 +++ b/chrome/browser/resources/local_ntp/local_ntp.css
-@@ -157,7 +157,7 @@ body.hide-fakebox #fakebox {
+@@ -161,7 +161,7 @@ body.hide-fakebox #fakebox {
  
  #logo-default,
  #logo-non-white {
@@ -1785,7 +1785,7 @@ index 383e99b0d637..320b13cf9f23 100644
    background-repeat: no-repeat;
    bottom: var(--logo-margin-bottom);
    height: 92px;
-@@ -169,7 +169,7 @@ body.hide-fakebox #fakebox {
+@@ -173,7 +173,7 @@ body.hide-fakebox #fakebox {
  body.alternate-logo #logo-default,
  body.alternate-logo #logo-non-white {
    -webkit-mask-image:
@@ -2181,7 +2181,7 @@ index 000000000000..45d8e586f93c
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index a24f4983bf47..be366868ebfa 100644
+index a2b2e2d14bcf..668647ccfc4b 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
 @@ -187,7 +187,7 @@ without changes to the corresponding grd file. -->

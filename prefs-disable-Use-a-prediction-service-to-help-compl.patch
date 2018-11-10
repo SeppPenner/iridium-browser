@@ -1,7 +1,7 @@
-From c6145a70f8eaef0cf8131beb6e0182183a0c0359 Mon Sep 17 00:00:00 2001
+From 31e311c3080a445522ec6011c737efb294de6a8b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 16/59] prefs: disable "Use a prediction service to help
+Subject: [PATCH 13/60] prefs: disable "Use a prediction service to help
  complete searches..."
 
 This autocomplete service would send search queries as soon as you

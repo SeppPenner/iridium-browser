@@ -1,7 +1,7 @@
-From 4f4f4961eb32970877b9b1a85ab797dd14f6398c Mon Sep 17 00:00:00 2001
+From e57539ae17c0e452fd9fe88f0953b27fd3e4dbb1 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 30 Oct 2018 14:57:24 +0100
-Subject: [PATCH 08/59] build: gcc-8: disambiguate SnapContainerData type spec
+Subject: [PATCH 05/60] build: gcc-8: disambiguate SnapContainerData type spec
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -28,15 +28,15 @@ In file included from ../../third_party/blink/renderer/platform/graphics/paint/s
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.h b/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.h
-index 2bd206ee9600..e33679871e38 100644
+index 35f833733e6c..5c5545b54076 100644
 --- a/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.h
 +++ b/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.h
-@@ -99,7 +99,7 @@ class PLATFORM_EXPORT ScrollPaintPropertyNode
+@@ -105,7 +105,7 @@ class PLATFORM_EXPORT ScrollPaintPropertyNode
      return state_.overscroll_behavior.y;
    }
  
--  base::Optional<SnapContainerData> SnapContainerData() const {
-+  base::Optional<cc::SnapContainerData> SnapContainerData() const {
+-  base::Optional<SnapContainerData> GetSnapContainerData() const {
++  base::Optional<cc::SnapContainerData> GetSnapContainerData() const {
      return state_.snap_container_data;
    }
  

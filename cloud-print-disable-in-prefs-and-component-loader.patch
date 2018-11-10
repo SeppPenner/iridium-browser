@@ -1,7 +1,7 @@
-From 79934f0789330524615917a38a986fdbf4792052 Mon Sep 17 00:00:00 2001
+From 7bcacca214b1de0d9f300f0f1bb3a1419d4c70a3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
-Subject: [PATCH 20/59] cloud-print: disable in prefs and component loader
+Subject: [PATCH 17/60] cloud-print: disable in prefs and component loader
 
 Cloud Print should normally be autodisabled if no printers are shared.
 But maybe that is not enough(?) Probably also needs to gain a checkbox
@@ -16,10 +16,10 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index fd8812837986..ba47ebcf6b0f 100644
+index c5bcc93a9be0..df1dd97648b8 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -468,9 +468,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
+@@ -464,9 +464,11 @@ void ComponentLoader::AddDefaultComponentExtensions(
  #else  // defined(OS_CHROMEOS)
    DCHECK(!skip_session_components);
  #if BUILDFLAG(ENABLE_PRINTING)
@@ -32,7 +32,7 @@ index fd8812837986..ba47ebcf6b0f 100644
  #endif  // defined(OS_CHROMEOS)
  
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index bef6315d763b..d9ff112a4d58 100644
+index eab631779f7d..691af893f164 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
 @@ -72,7 +72,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
@@ -45,10 +45,10 @@ index bef6315d763b..d9ff112a4d58 100644
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
    registry->RegisterDictionaryPref(prefs::kAppWindowPlacement);
 diff --git a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-index 3edcc57d67a5..8ad3f18d8dfe 100644
+index 187bee04cb49..d3d0eeb58d57 100644
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
 +++ b/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
-@@ -143,10 +143,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(
+@@ -127,10 +127,6 @@ void LocalDiscoveryUI::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(
        prefs::kLocalDiscoveryNotificationsEnabled,

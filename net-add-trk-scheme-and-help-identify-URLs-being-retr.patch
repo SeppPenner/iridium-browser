@@ -1,7 +1,7 @@
-From 41ed3045b95617376cfa00da7a4047d3e2ffc4ed Mon Sep 17 00:00:00 2001
+From 865b5dd012bc5de8e6bbb8d9b1c024486af65448 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
-Subject: [PATCH 41/59] net: add "trk:" scheme and help identify URLs being
+Subject: [PATCH 38/60] net: add "trk:" scheme and help identify URLs being
  retrieved
 
 The Chromium codebase has left us with a number of suspect URLs, and
@@ -28,20 +28,20 @@ most of the URL that get loaded pass through here. The trk: prefix is
 stripped and processing continues with the inner URL.
 ---
  chrome/BUILD.gn                               |  2 +
- chrome/app/chrome_main.cc                     | 17 ++++++
+ chrome/app/chrome_main.cc                     | 17 +++++
  .../chrome_autocomplete_scheme_classifier.cc  |  1 +
  chrome/browser/history/history_utils.cc       |  1 +
  chrome/browser/ui/browser_navigator.cc        |  8 +++
  chrome/browser/ui/singleton_tabs.cc           |  3 +-
  components/infobars/core/infobar_delegate.h   |  1 +
  .../omnibox/browser/autocomplete_input.cc     |  8 ++-
- content/browser/browser_url_handler_impl.cc   | 20 +++++++
+ content/browser/browser_url_handler_impl.cc   | 20 ++++++
  .../child_process_security_policy_impl.cc     |  1 +
  iridium/BUILD.gn                              |  9 +++
  iridium/trkbar.cpp                            | 45 ++++++++++++++
- iridium/trkbar.h                              | 33 +++++++++++
- iridium/trknotify.cpp                         | 59 +++++++++++++++++++
- iridium/trknotify.h                           | 20 +++++++
+ iridium/trkbar.h                              | 33 ++++++++++
+ iridium/trknotify.cpp                         | 62 +++++++++++++++++++
+ iridium/trknotify.h                           | 20 ++++++
  net/url_request/url_request.cc                |  6 ++
  net/url_request/url_request.h                 |  2 +
  tools/metrics/histograms/enums.xml            |  1 +
@@ -49,7 +49,7 @@ stripped and processing continues with the inner URL.
  url/gurl.h                                    |  5 ++
  url/url_constants.cc                          |  1 +
  url/url_constants.h                           |  1 +
- 22 files changed, 275 insertions(+), 4 deletions(-)
+ 22 files changed, 278 insertions(+), 4 deletions(-)
  create mode 100644 iridium/BUILD.gn
  create mode 100644 iridium/trkbar.cpp
  create mode 100644 iridium/trkbar.h
@@ -57,10 +57,10 @@ stripped and processing continues with the inner URL.
  create mode 100644 iridium/trknotify.h
 
 diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
-index 4865a69fe984..82793a2fea58 100644
+index abbab2664254..e98df9b1d21c 100644
 --- a/chrome/BUILD.gn
 +++ b/chrome/BUILD.gn
-@@ -252,6 +252,7 @@ if (!is_android && !is_mac) {
+@@ -255,6 +255,7 @@ if (!is_android && !is_mac) {
          deps += [
            # On Linux, link the dependencies (libraries) that make up actual
            # Chromium functionality directly into the executable.
@@ -77,7 +77,7 @@ index 4865a69fe984..82793a2fea58 100644
        ]
  
 diff --git a/chrome/app/chrome_main.cc b/chrome/app/chrome_main.cc
-index 9ff589299bff..293757f6ebf9 100644
+index 6847811bdbda..515fcda5e170 100644
 --- a/chrome/app/chrome_main.cc
 +++ b/chrome/app/chrome_main.cc
 @@ -15,6 +15,10 @@
@@ -136,10 +136,10 @@ index 4cfbd05e5bc3..8164d2408bc4 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme))
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index 7d3ebdaa0c75..27f3ddafb437 100644
+index 39061bccecca..22742083c65d 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
-@@ -708,6 +708,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
+@@ -710,6 +710,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
      return stripped_url.is_valid() &&
          IsURLAllowedInIncognito(stripped_url, browser_context);
    }
@@ -169,13 +169,13 @@ index 18b45d13262a..c8ca682aa3d0 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index f4080993c259..843188260b74 100644
+index 51f3fb6e0b51..a7b4ad60e5ae 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
-@@ -155,6 +155,7 @@ class InfoBarDelegate {
-     BLOATED_RENDERER_INFOBAR_DELEGATE = 84,
+@@ -156,6 +156,7 @@ class InfoBarDelegate {
      SUPERVISED_USERS_DEPRECATED_INFOBAR_DELEGATE = 85,
      NEAR_OOM_REDUCTION_INFOBAR_ANDROID = 86,
+     LITE_PAGE_PREVIEWS_INFOBAR = 87,
 +    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
    };
  
@@ -249,10 +249,10 @@ index ef78ddd5e26b..8a1c8c900493 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index bd757e4fdefb..b5baccc1974a 100644
+index 323f85836c33..39b15458b34b 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -396,6 +396,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -397,6 +397,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
    RegisterPseudoScheme(url::kAboutScheme);
    RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
@@ -367,10 +367,10 @@ index 000000000000..b251feca039b
 +#endif /* IRIDIUM_TRKBAR_H */
 diff --git a/iridium/trknotify.cpp b/iridium/trknotify.cpp
 new file mode 100644
-index 000000000000..f01fd02b013d
+index 000000000000..0475ced7dedc
 --- /dev/null
 +++ b/iridium/trknotify.cpp
-@@ -0,0 +1,59 @@
+@@ -0,0 +1,62 @@
 +/*
 + * Copyright 2015 The Iridium Authors.
 + *
@@ -381,11 +381,14 @@ index 000000000000..f01fd02b013d
 +#ifdef __linux__
 +#	include <unistd.h>
 +#endif
++#include "base/task/post_task.h"
++#include "base/task/task_traits.h"
 +#include "chrome/browser/infobars/infobar_service.h"
 +#include "chrome/browser/ui/browser.h"
 +#include "chrome/browser/ui/browser_finder.h"
 +#include "chrome/browser/ui/tabs/tab_strip_model.h"
 +#include "content/public/browser/browser_thread.h"
++#include "content/public/browser/browser_task_traits.h"
 +#include "url/url_constants.h"
 +#include "iridium/trkbar.h"
 +#include "iridium/trknotify.h"
@@ -425,7 +428,7 @@ index 000000000000..f01fd02b013d
 +
 +void trace_url_request(const std::string &caller, const GURL &url)
 +{
-+	content::BrowserThread::PostTask(content::BrowserThread::UI, FROM_HERE,
++	base::PostTaskWithTraits(FROM_HERE, {content::BrowserThread::UI},
 +		base::Bind(&__trace_url_request, caller, url));
 +}
 +
@@ -457,7 +460,7 @@ index 000000000000..3c58d22a4426
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index 397941220d4e..6a70dd3c4862 100644
+index ef2c226d7e46..f8b8f3cfce9a 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
 @@ -55,6 +55,8 @@ using std::string;
@@ -481,10 +484,10 @@ index 397941220d4e..6a70dd3c4862 100644
    net_log_.BeginEvent(
        NetLogEventType::REQUEST_ALIVE,
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index a64498d1786c..f063f27510a3 100644
+index e6efafc6a973..a09ddf8915f1 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -971,6 +971,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
+@@ -963,6 +963,8 @@ class NET_EXPORT URLRequest : public base::SupportsUserData {
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -494,10 +497,10 @@ index a64498d1786c..f063f27510a3 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/enums.xml b/tools/metrics/histograms/enums.xml
-index 63d9a3ec825e..87a2c1f00f62 100644
+index a22f82e13cf2..355984da2f66 100644
 --- a/tools/metrics/histograms/enums.xml
 +++ b/tools/metrics/histograms/enums.xml
-@@ -25028,6 +25028,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
+@@ -25660,6 +25660,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
    <int value="83" label="AR_CORE_UPGRADE_ANDROID"/>
    <int value="84" label="BLOATED_RENDERER_INFOBAR_DELEGATE"/>
    <int value="85" label="SUPERVISED_USERS_DEPRECATED_INFOBAR_DELEGATE"/>
