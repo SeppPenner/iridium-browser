@@ -1,7 +1,7 @@
-From 85a517ba18a965e88b9b9916485e506af249d207 Mon Sep 17 00:00:00 2001
+From 1f1534fa70ee04a38a4de0767e1e0d63f092e0e3 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 29/60] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 28/58] build: fix OSX branded build crashes on OSX
 
 ---
  chrome/app/theme/chromium/BRANDING | 14 +++++++-------
@@ -9,7 +9,7 @@ Subject: [PATCH 29/60] build: fix OSX branded build crashes on OSX
  2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/chrome/app/theme/chromium/BRANDING b/chrome/app/theme/chromium/BRANDING
-index 17a3178419b9..60aa7590cc0b 100644
+index 26918a105cd1..9aae3f660303 100644
 --- a/chrome/app/theme/chromium/BRANDING
 +++ b/chrome/app/theme/chromium/BRANDING
 @@ -1,10 +1,10 @@
@@ -19,14 +19,14 @@ index 17a3178419b9..60aa7590cc0b 100644
 -PRODUCT_SHORTNAME=Chromium
 -PRODUCT_INSTALLER_FULLNAME=Chromium Installer
 -PRODUCT_INSTALLER_SHORTNAME=Chromium Installer
--COPYRIGHT=Copyright 2018 The Chromium Authors. All rights reserved.
+-COPYRIGHT=Copyright 2019 The Chromium Authors. All rights reserved.
 +COMPANY_FULLNAME=The browser authors
 +COMPANY_SHORTNAME=The browser authors
 +PRODUCT_FULLNAME=Iridium
 +PRODUCT_SHORTNAME=Iridium
 +PRODUCT_INSTALLER_FULLNAME=Iridium Installer
 +PRODUCT_INSTALLER_SHORTNAME=Iridium Installer
-+COPYRIGHT=Copyright 2018 The browser authors. All rights reserved.
++COPYRIGHT=Copyright 2019 The browser authors. All rights reserved.
  MAC_BUNDLE_ID=org.chromium.Chromium
  MAC_CREATOR_CODE=Cr24
  MAC_TEAM_ID=
@@ -49,5 +49,5 @@ index 38f30f6ecd6c..09e264f93162 100644
  #error Unknown branding
  #endif
 -- 
-2.19.1
+2.21.0
 

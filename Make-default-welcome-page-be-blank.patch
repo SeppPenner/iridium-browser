@@ -1,7 +1,7 @@
-From be458c89f44321443ffcaf0ccd523036380dbf9e Mon Sep 17 00:00:00 2001
+From 1f4e2a53bc9a6801d77887832846f51c54851013 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 24 Apr 2017 11:53:30 +0200
-Subject: [PATCH 45/60] Make default welcome page be blank
+Subject: [PATCH 44/58] Make default welcome page be blank
 
 Because replacing kChromeUIWelcomeURL with about:blank leads the
 browser to load some broken URL instead.
@@ -11,12 +11,12 @@ browser to load some broken URL instead.
  2 files changed, 587 deletions(-)
 
 diff --git a/chrome/browser/resources/welcome/welcome.html b/chrome/browser/resources/welcome/welcome.html
-index 21edb2619aa7..e69de29bb2d1 100644
+index 98400529043c..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/welcome.html
 +++ b/chrome/browser/resources/welcome/welcome.html
 @@ -1,231 +0,0 @@
 -<!doctype html>
--<html>
+-<html dir="$i18n{textdirection}" lang="$i18n{language}">
 -<head>
 -  <meta charset="utf-8">
 -  <title>$i18n{headerText}</title>
@@ -247,12 +247,12 @@ index 21edb2619aa7..e69de29bb2d1 100644
 -</body>
 -</html>
 diff --git a/chrome/browser/resources/welcome/welcome_win10.html b/chrome/browser/resources/welcome/welcome_win10.html
-index f021f1ac326e..e69de29bb2d1 100644
+index 8b7f82aa32f7..e69de29bb2d1 100644
 --- a/chrome/browser/resources/welcome/welcome_win10.html
 +++ b/chrome/browser/resources/welcome/welcome_win10.html
 @@ -1,356 +0,0 @@
 -<!DOCTYPE html>
--<html>
+-<html dir="$i18n{textdirection}" lang="$i18n{language}">
 -<head>
 -  <meta charset="utf-8">
 -  <title>$i18n{headerText}</title>
@@ -608,5 +608,5 @@ index f021f1ac326e..e69de29bb2d1 100644
 -</body>
 -</html>
 -- 
-2.19.1
+2.21.0
 

@@ -1,22 +1,22 @@
-From 0d1e489fb848b8e44861469a228a726ac6f79b06 Mon Sep 17 00:00:00 2001
+From cbe24089c12462375e15fe875633a6ed40f5c87a Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 10 Dec 2014 12:44:49 +0100
-Subject: [PATCH 28/60] ui/translation: update strings to read "Iridium"
+Subject: [PATCH 27/58] ui/translation: update strings to read "Iridium"
  instead
 
 ---
  .../java/strings/android_chrome_strings.grd   |  28 +-
- chrome/app/chromium_strings.grd               | 444 +++++++++---------
+ chrome/app/chromium_strings.grd               | 436 +++++++++---------
  chrome/app/generated_resources.grd            |  12 +-
  chrome/app/google_chrome_strings.grd          |   8 +-
  .../app/settings_google_chrome_strings.grdp   |   8 +-
  .../browser/resources/chrome-logo-faded.png   | Bin 896 -> 1267 bytes
  components/components_chromium_strings.grd    |  18 +-
- .../app/strings/ios_google_chrome_strings.grd |  26 +-
- 8 files changed, 272 insertions(+), 272 deletions(-)
+ .../app/strings/ios_google_chrome_strings.grd |  24 +-
+ 8 files changed, 267 insertions(+), 267 deletions(-)
 
 diff --git a/chrome/android/java/strings/android_chrome_strings.grd b/chrome/android/java/strings/android_chrome_strings.grd
-index 075b57ba2b42..b1ffd5e1eb9e 100644
+index cb556e1bfc07..5ecdc597fed0 100644
 --- a/chrome/android/java/strings/android_chrome_strings.grd
 +++ b/chrome/android/java/strings/android_chrome_strings.grd
 @@ -301,13 +301,13 @@ CHAR-LIMIT guidelines:
@@ -41,10 +41,10 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
        <message name="IDS_AUTOFILL_DESCRIBE_LOCAL_COPY" desc="Text label that describes a Wallet credit card which has been copied to the local Chrome instance.">
 -         Copied to Chrome
 +         Copied to browser
-        </message>
+       </message>
  
         <!-- Payment Request section preview strings -->
-@@ -732,10 +732,10 @@ For example, some websites may respond to this request by showing you ads that a
+@@ -726,10 +726,10 @@ For example, some websites may respond to this request by showing you ads that a
          Clear history, cookies, site data, cache…
        </message>
        <message name="IDS_CLEAR_BROWSING_DATA_HISTORY_DIALOG_TITLE" desc="Title of a dialog that is shown after the deletion of browsing history finished.">
@@ -57,7 +57,7 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
  
  Your Google account may have other forms of browsing history like searches and activity from other Google services at <ph name="BEGIN_LINK">&lt;link&gt;</ph>myactivity.google.com<ph name="END_LINK">&lt;/link&gt;</ph>.
        </message>
-@@ -1144,10 +1144,10 @@ Your Google account may have other forms of browsing history like searches and a
+@@ -1150,10 +1150,10 @@ Your Google account may have other forms of browsing history like searches and a
          Location access
        </message>
        <message name="IDS_ANDROID_PERMISSION_OFF_PLURAL" desc="Text at the top of the Website list, explaining to the user that multiple permissions, such as the location service, are turned off. Contains a link to the settings menu to change it.">
@@ -68,9 +68,9 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
 -        Turn on permission for Chrome in <ph name="BEGIN_LINK">&lt;link&gt;</ph>Android Settings<ph name="END_LINK">&lt;/link&gt;</ph>.
 +        Turn on permission for the browser in <ph name="BEGIN_LINK">&lt;link&gt;</ph>Android Settings<ph name="END_LINK">&lt;/link&gt;</ph>.
        </message>
-       <message name="IDS_ANDROID_LOCATION_OFF_GLOBALLY" desc="The message to show when Location has been turned off globally in Android. Contains a link to the settings menu to enable location.">
-         Location access is off for this device. Turn it on in <ph name="BEGIN_LINK">&lt;link&gt;</ph>Android Settings<ph name="END_LINK">&lt;/link&gt;</ph>.
-@@ -1194,7 +1194,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+       <message name="IDS_ANDROID_PERMISSION_ALSO_OFF" desc="The message to show when a permission needs to be turned on not just in Chrome, but also in Android settings.">
+         You also need to turn this permission on for Chrome. See <ph name="BEGIN_LINK">&lt;link&gt;</ph>Android Settings<ph name="END_LINK">&lt;/link&gt;</ph> for details.
+@@ -1192,7 +1192,7 @@ Your Google account may have other forms of browsing history like searches and a
          Google Translate
        </message>
        <message name="IDS_TRANSLATE_PREFS_DESCRIPTION" desc="Translate preference description">
@@ -79,16 +79,16 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
        </message>
        <message name="IDS_TRANSLATE_PREFS_TOAST_DESCRIPTION" desc="Translate settings reset toast when resetting defaults">
          Your translate settings have been reset.
-@@ -1236,7 +1236,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
-         Use up to 60% less data and speed up the web.
+@@ -1243,7 +1243,7 @@ Your Google account may have other forms of browsing history like searches and a
+          In Lite mode, Chrome loads pages faster and uses up to 60 percent less data.
        </message>
        <message name="IDS_DATA_REDUCTION_DESCRIPTION" desc="Text descripting how the Data Saver feature works. Seen only before the user has enabled the feature.">
 -        When Data Saver is turned on, Chrome uses Google servers to speed up and compress page loads. On especially slow pages, Data Saver rewrites the page to load only the essential content. Data Saver does not optimize pages loaded in Incognito mode.
 +        When Data Saver is turned on, the browser uses Google servers to speed up and compress page loads. On especially slow pages, Data Saver rewrites the page to load only the essential content. Data Saver does not optimize pages loaded in Incognito mode.
        </message>
-       <message name="IDS_DATA_REDUCTION_MENU_ITEM_SUMMARY" desc="Summary text for data reduction menu item.">
-         <ph name="PERCENT">%1$s<ex>49%</ex></ph> data savings
-@@ -1334,10 +1334,10 @@ To obtain new licenses, connect to the internet and play your downloaded content
+       <message name="IDS_DATA_REDUCTION_DESCRIPTION_LITE_MODE" desc="Text describing how the Lite mode feature works. Seen only before the user has enabled the feature.">
+         When Lite mode is on, Chrome uses Google servers to make pages load faster. Lite mode rewrites very slow pages to load only essential content. Lite mode does not apply to Incognito tabs.
+@@ -1371,10 +1371,10 @@ Your Google account may have other forms of browsing history like searches and a
          Turn on Data Saver
        </message>
        <message name="IDS_DATA_REDUCTION_PROMO_SNACKBAR_TEXT_MB" desc="Text to be displayed in the data reduction promo snackbar that lets the user know they saved a certain amount of data in MB">
@@ -101,7 +101,7 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
        </message>
        <message name="IDS_DATA_REDUCTION_PROMO_SNACKBAR_BUTTON" desc="Text to be displayed in the data reduction promo snackbar view button that takes the user to the data reduction settings page">
          View
-@@ -1398,7 +1398,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1435,7 +1435,7 @@ Your Google account may have other forms of browsing history like searches and a
  
        <!-- About Chrome preferences -->
        <message name="IDS_PREFS_ABOUT_CHROME" desc="Title for the About Chrome page. [CHAR-LIMIT=32]">
@@ -110,7 +110,7 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
        </message>
        <message name="IDS_LEGAL_INFORMATION_SUMMARY" desc="Summary for legal information" meaning="Android">
          Copyright <ph name="year">%1$d<ex>2014</ex></ph> Google Inc. All rights reserved.
-@@ -1413,7 +1413,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1450,7 +1450,7 @@ Your Google account may have other forms of browsing history like searches and a
          Operating system
        </message>
        <message name="IDS_DEPRECATION_WARNING" desc="Warning about Chrome updates no longer being supported">
@@ -119,7 +119,7 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
        </message>
  
        <!-- Account management UI strings. -->
-@@ -1430,7 +1430,7 @@ To obtain new licenses, connect to the internet and play your downloaded content
+@@ -1467,7 +1467,7 @@ Your Google account may have other forms of browsing history like searches and a
          Sync off for <ph name="SYNC_ACCOUNT_USER_NAME">%1$s<ex>johndoe@gmail.com</ex></ph>
        </message>
        <message name="IDS_ACCOUNT_MANAGEMENT_SIGN_OUT" desc="Button text for signing out of Chrome">
@@ -129,7 +129,7 @@ index 075b57ba2b42..b1ffd5e1eb9e 100644
  
        <!-- Child accounts -->
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
-index 94c19ef5d7e2..72b6abc3f15a 100644
+index dc34de77c97c..e7306c00aef0 100644
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
 @@ -127,13 +127,13 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
@@ -546,14 +546,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -514,83 +514,83 @@ Chromium is unable to recover your settings.
- 
-       <!-- Extension/App install prompt -->
-       <message name="IDS_EXTENSION_INLINE_INSTALL_PROMPT_TITLE" desc="Titlebar of the extension or app inline installation prompt window">
--        Add to Chromium
-+        Add to browser
-       </message>
- 
+@@ -516,10 +516,10 @@ Chromium is unable to recover your settings.
        <if expr="enable_extensions">
          <!-- Extension installed bubble -->
          <message name="IDS_EXTENSION_INSTALLED_HEADING" desc="Title of the extension-installed bubble. Instructs that the extension was installed.">
@@ -565,6 +558,8 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
 +          sign in to browser/Google
          </message>
  
+         <!-- Extension uninstall prompt -->
+@@ -530,48 +530,48 @@ Chromium is unable to recover your settings.
          <!-- Extension context menu -->
          <if expr="not use_titlecase">
            <message name="IDS_EXTENSIONS_HIDE_BUTTON_IN_MENU" desc="The extension context menu item to hide the button in the application menu (sentence case).">
@@ -622,6 +617,10 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
 +        Customize and control the browser. Update is available.
        </message>
  
+       <message name="IDS_APPMENU_TOOLTIP_ALERT" desc="The tooltip to show for the browser menu when a non-update alert is displayed">
+@@ -579,23 +579,23 @@ Chromium is unable to recover your settings.
+       </message>
+ 
        <message name="IDS_OPEN_IN_CHROME" desc="The text label of the Open in Chrome menu item for the Hosted App app menu">
 -        &amp;Open in Chromium
 +        &amp;Open in browser
@@ -648,7 +647,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -604,99 +604,99 @@ Chromium is unable to recover your settings.
+@@ -609,90 +609,90 @@ Chromium is unable to recover your settings.
  
        <if expr="is_macosx">
          <message name="IDS_APP_MENU_PRODUCT_NAME" desc="The application's short name, used for the Mac's application menu, activity monitor, etc. This should be less than 16 characters. Example: Chrome, not Google Chrome.">
@@ -753,17 +752,6 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
  
-       <if expr="toolkit_views">
-         <message name="IDS_ENTERPRISE_FORCE_SIGNOUT_EXPLANATION" desc="Text of the reason to sign out">
--          Authentication certificate failed. Please sign in to Chromium again as <ph name="USER_NAME">$1<ex>pat@example.com</ex></ph> or contact your administrator for more information. <ph name="ADDITIONAL_EXPLANATION">$2</ph>
-+          Authentication certificate failed. Please sign in to Iridium again as <ph name="USER_NAME">$1<ex>pat@example.com</ex></ph> or contact your administrator for more information. <ph name="ADDITIONAL_EXPLANATION">$2</ph>
-         </message>
-         <message name="IDS_ENTERPRISE_FORCE_SIGNOUT_EXPLANATION_WITHOUT_USER_NAME" desc="Text of the reason to sign out when there is no valid email address">
--          Authentication certificate failed. Please sign in to Chromium again or contact your administrator for more information. <ph name="ADDITIONAL_EXPLANATION">$2</ph>
-+          Authentication certificate failed. Please sign in to Iridium again or contact your administrator for more information. <ph name="ADDITIONAL_EXPLANATION">$2</ph>
-         </message>
-       </if>
- 
        <!-- Signin Email Confirmation tab modal dialog -->
        <if expr="not chromeos">
          <message name="IDS_SIGNIN_EMAIL_CONFIRMATION_TITLE" desc="Title of the signin email confirmation tab modal dialog.">
@@ -772,12 +760,12 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
  
-@@ -705,23 +705,23 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -701,23 +701,23 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
                   omitting them brings up a hash collision error. -->
        <if expr="is_win">
          <message name="IDS_CHROME_CLEANUP_PROMPT_EXPLANATION" desc="Description in the Chrome Cleanup dialog that Chromium browser shows when unwanted software, like ad injectors or software that changes the user's settings without their knowledge, is found on the user's computer. Appears under the title asking 'Remove harmful software?' Actor is Chromium; we are asking, Do you want Chromium to remove harmful software? 'it' is harmful software. User has the option of clicking 'Remove' to proceed with a cleanup, or 'Details' to see more details. The description is also shown on the Chrome Cleanup section of the Settings page, under 'Remove harmful software' title. Preferrably, the translation for this string should parallel IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_CURRENTLY_REMOVING.">
--          There's harmful software on your computer. Chromium can remove it and restore your settings to make your browser work normally again.
-+          There's harmful software on your computer. The browser can remove it and restore your settings to make your browser work normally again.
+-          There's harmful software on your computer. Chromium can remove it, restore your settings, and disable extensions to make your browser work normally again.
++          There's harmful software on your computer. The browser can remove it, restore your settings, and disable extensions to make your browser work normally again.
          </message>
        </if>
  
@@ -801,7 +789,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
        <if expr="chromeos">
-@@ -740,56 +740,56 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -739,49 +739,49 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
        </if>
  
        <message name="IDS_AUTOFILL_DIALOG_SAVE_LOCALLY_CHECKBOX" desc="Checkbox that controls whether info the user types into the autofill dialog is saved by chrome.">
@@ -816,14 +804,6 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
 -        Copied to Chromium
 +        Copied to browser
        </message>
- 
-       <!-- Chrome OS keyboard overlay-->
-       <if expr="chromeos">
-         <message name="IDS_KEYBOARD_OVERLAY_SHOW_WRENCH_MENU" desc="The text in the keyboard overlay to explain the shortcut that opens the main Chrome menu.">
--          Show Chromium menu
-+          Show browser menu
-         </message>
-       </if>
  
        <!-- App list -->
        <if expr="enable_app_list">
@@ -870,7 +850,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
        </message>
        <if expr="is_win">
          <message name="IDS_APP_SHORTCUTS_SUBDIR_NAME_BETA" desc="Unused in Chromium builds" translateable="false">
-@@ -807,26 +807,26 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -799,26 +799,26 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
  
        <!-- MediaStream capture status tray icon -->
        <message name="IDS_MEDIA_STREAM_STATUS_TRAY_TEXT_AUDIO_AND_VIDEO" desc="Tool tip for the capture status tray icon when microphone and camera are being used">
@@ -902,7 +882,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
  
-@@ -836,7 +836,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
+@@ -828,7 +828,7 @@ Signing in anyway will merge Chromium information like bookmarks, history, and o
          <message name="IDS_SUPERVISED_USER_CREATED_TEXT" desc="Informative text for the confirmation dialog that appears after a supervised user has been created.">
            To set which websites <ph name="NEW_PROFILE_NAME">$1<ex>New User</ex></ph> can view, you can configure restrictions and settings by visiting <ph name="BEGIN_LINK_1">&lt;a target="_blank" href="$3"&gt;</ph><ph name="DISPLAY_LINK">$4</ph><ph name="END_LINK_1">&lt;/a&gt;</ph>. If you do not change the default settings, <ph name="NEW_PROFILE_NAME">$1<ex>New User</ex></ph> can browse everything on the web.
  
@@ -911,12 +891,12 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
  <ph name="BEGIN_LINK_2">&lt;a target="_blank" href="https://support.google.com/chrome/?p=ui_supervised_users&amp;hl=[GRITLANGCODE]"&gt;</ph>Learn more<ph name="END_LINK_2">&lt;/a&gt;</ph>
  
  Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</ex></ph> for further instructions.
-@@ -849,62 +849,62 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -841,62 +841,62 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
          <!-- User pod remove sync warning text -->
          <message name="IDS_LOGIN_POD_USER_REMOVE_WARNING_SYNC" desc="Main text shown as a warning when attempting to remove an user.">
--          This person's browsing data will be deleted from this device. To recover the data, sign in to Chrome as $2.
-+          This person's browsing data will be deleted from this device. To recover the data, sign in to the browser as $2.
+-          This person's browsing data will be deleted from this device. To recover the data, sign in to Chromium as <ph name="USER_EMAIL">$2<ex>foo@example.com</ex></ph>.
++          This person's browsing data will be deleted from this device. To recover the data, sign in to the browser as <ph name="USER_EMAIL">$2<ex>foo@example.com</ex></ph>.
          </message>
  
          <!-- Tutorial -->
@@ -990,7 +970,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_NAME_BETA" desc="Unused in Chromium builds" translateable="false">
          </message>
-@@ -913,7 +913,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -905,7 +905,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
          <message name="IDS_INBOUND_MDNS_RULE_NAME_DEV" desc="Unused in Chromium builds" translateable="false">
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_DESCRIPTION" desc="The description of the firewall rule allowing inbound mDNS traffic.">
@@ -999,9 +979,9 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_INBOUND_MDNS_RULE_DESCRIPTION_BETA" desc="Unused in Chromium builds" translateable="false">
          </message>
-@@ -925,39 +925,39 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
- 
-       <if expr="not is_android">
+@@ -920,39 +920,39 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+           Chromium can recognize images and text in an image by sending page images to Google servers, allowing you to better understand page content.
+         </message>
          <message name="IDS_CONTENT_CONTEXT_SPELLING_BUBBLE_TEXT" desc="The text of a bubble that confirms users allows integrating the spelling service of Google to Chrome.">
 -          Chromium can provide smarter spell-checking by sending what you type in the browser to Google servers, allowing you to use the same spell-checking technology used by Google search.
 +          The browser could provide smarter spell-checking by sending what you type to Google servers, allowing you to use the same spell-checking technology used by Google search.
@@ -1047,7 +1027,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_RELAUNCH_AND_UPDATE" desc="The button in the Update Recommended dialog which updates and relaunches Chrome.">
            Relaunch
-@@ -977,58 +977,58 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -972,58 +972,58 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
  
        <!-- Update bubble -->
        <message name="IDS_REINSTALL_APP" desc="Text for the button the user clicks to reinstall the app.">
@@ -1119,7 +1099,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
        <message name="IDS_RECOVERY_BUBBLE_TEXT" desc="Text for the chrome recovery bubble view full description.">
-@@ -1038,33 +1038,33 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1033,33 +1033,33 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Critical Notification bubble -->
        <message name="IDS_CRITICAL_NOTIFICATION_TITLE" desc="The title for a bubble that appears when there is a critical update and Chromium must restart to install it. It counts down from # seconds and then Chromium automatically restarts.">
          {SECONDS, plural,
@@ -1129,12 +1109,12 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
 +         other {The browser will restart in # seconds}}
        </message>
        <message name="IDS_CRITICAL_NOTIFICATION_TITLE_ALTERNATE" desc="The title for a bubble that appears when there is a critical update and Chromium must restart to install it. The title was previously countng down to an automatic restart and now it has finished. Will only be seen if a web page stops the shutdown process.">
--        You should restart Chromium now.
-+        You should restart the browser now.
+-        You should restart Chromium now
++        You should restart the browser now
        </message>
        <message name="IDS_CRITICAL_NOTIFICATION_TEXT" desc="Explanation text for the bubble that appears when there is a critical update and Chromium must restart to install it.">
--        A special security update for Chromium was just applied; you should restart now for it to take effect (we'll restore your tabs).
-+        A special security update for Iridium was just applied; you should restart now for it to take effect (we will restore your tabs).
+-        A special security update for Chromium was just applied. Restart now and we'll restore your tabs.
++        A special security update for the browser was just applied. Restart now and we'll restore your tabs.
        </message>
  
        <!-- Dialog that asks whether user wants to participate in Safe Browsing Extended Reporting -->
@@ -1161,7 +1141,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
  
-@@ -1088,32 +1088,32 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1083,32 +1083,32 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Runtime permission strings -->
        <if expr="is_android">
          <message name="IDS_INFOBAR_MISSING_CAMERA_PERMISSION_TEXT" desc="Text shown in an infobar when a website has requested access to the camera capabilities, but Chrome is missing the Android camera permission.">
@@ -1201,7 +1181,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
  
-@@ -1127,13 +1127,13 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1122,13 +1122,13 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- OOBE -->
        <if expr="chromeos">
          <message name="IDS_INSTALLING_UPDATE" desc="Label shown on the updates installation screen during OOBE">
@@ -1218,7 +1198,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
            Chromium OS terms
-@@ -1144,21 +1144,21 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1139,21 +1139,21 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <if expr="is_win">
          <message name="IDS_METRO_FLOW_TAB_TITLE"
                   desc="The dialog window title.">
@@ -1244,7 +1224,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_DICE_WELCOME_SECOND_HEADER" desc="A second message which will appear as the header on the Welcome UI if the user has never run Chrome before.">
            Web browsing with Google smarts
-@@ -1167,26 +1167,26 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1162,26 +1162,26 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
            Not now
          </message>
          <message name="IDS_DICE_WELCOME_DESCRIPTION" desc="A message on the welcome page explaining the purpose of signing in.">
@@ -1277,7 +1257,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
          <message name="IDS_WIN10_WELCOME_CLICK_SWITCH_ANYWAY" desc="An instruction asking the user to click on the &quot;Switch anyway&quot; button. It's possible that the button doesn't appear for the user, hence the &quot;if it appears&quot;. The bold portion of this message must match IDS_WIN10_WELCOME_SWITCH_ANYWAY_LABEL.">
            Click <ph name="BEGIN_BOLD">&lt;strong&gt;</ph>Switch anyway<ph name="END_BOLD">&lt;/strong&gt;</ph>, if it appears
-@@ -1196,7 +1196,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1191,7 +1191,7 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
        <!-- Native notifications for Windows 10 -->
        <if expr="is_win">
          <message name="IDS_WIN_NOTIFICATION_SETTINGS_CONTEXT_MENU_ITEM_NAME" desc="The name of the button in Windows Notification Center which leads to Chrome notification settings.">
@@ -1286,7 +1266,7 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          </message>
        </if>
        <!-- Relaunch notification bubble and dialog. -->
-@@ -1205,36 +1205,36 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+@@ -1200,36 +1200,36 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
            <then>
              <message name="IDS_RELAUNCH_RECOMMENDED_TITLE" desc="The title of a dialog that tells users that a browser relaunch is recommended for an update available for some number of days.">
                {0, plural,
@@ -1337,8 +1317,8 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
              </message>
            </then>
            <else>
-@@ -1277,13 +1277,13 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
-       <!-- Chroium launch blocking dialog. -->
+@@ -1272,13 +1272,13 @@ Please check your email at <ph name="ACCOUNT_EMAIL">$2<ex>jane.doe@example.com</
+       <!-- Chromium launch blocking dialog. -->
        <if expr="not is_android and not chromeos">
           <message name="IDS_ENTERPRISE_STARTUP_CLOUD_POLICY_ENROLLMENT_TOOLTIP" desc="The information message of Chromium launch blocking dialog for machine level user cloud policy enrollment.">
 -          Launching Chromium...
@@ -1355,10 +1335,10 @@ index 94c19ef5d7e2..72b6abc3f15a 100644
          <message name="IDS_ENTERPRISE_STARTUP_CANCEL_BUTTON" desc="The text of cancel button of Chromium launch blocking dialog.">
            Close
 diff --git a/chrome/app/generated_resources.grd b/chrome/app/generated_resources.grd
-index e1aa088c0bbf..8c6cab69e86d 100644
+index 1e5a91092af1..39f833568deb 100644
 --- a/chrome/app/generated_resources.grd
 +++ b/chrome/app/generated_resources.grd
-@@ -293,7 +293,7 @@ are declared in tools/grit/grit_rule.gni.
+@@ -296,7 +296,7 @@ are declared in tools/grit/grit_rule.gni.
          Main menu
        </message>
        <message name="IDS_MD_HISTORY_HISTORY_MENU_ITEM" desc="Label displayed in history sidebar button to display history.">
@@ -1367,7 +1347,7 @@ index e1aa088c0bbf..8c6cab69e86d 100644
        </message>
        <message name="IDS_MD_HISTORY_NO_SYNCED_RESULTS" desc="Text indicating that there are no synced tabs from other devices.">
          No tabs from other devices
-@@ -302,13 +302,13 @@ are declared in tools/grit/grit_rule.gni.
+@@ -305,13 +305,13 @@ are declared in tools/grit/grit_rule.gni.
          Tabs from other devices
        </message>
        <message name="IDS_MD_HISTORY_SIGN_IN_BUTTON" desc="Label displayed on a button to let user sign in to Chrome to get synced tab history.">
@@ -1383,7 +1363,7 @@ index e1aa088c0bbf..8c6cab69e86d 100644
        </message>
        <message name="IDS_MD_HISTORY_MENU_PROMO" desc="Text body of a promotional tooltip that shows up the first time a user runs the Material Design History UI in narrow mode to help find 'Clear Browsing Data' and the side navigation.">
          You can clear your browsing data from this menu
-@@ -1952,10 +1952,10 @@ are declared in tools/grit/grit_rule.gni.
+@@ -2014,10 +2014,10 @@ are declared in tools/grit/grit_rule.gni.
            Quit
          </message>
          <message name="IDS_QUIT_WITH_APPS_EXPLANATION" desc="Text displayed in a notification explaining that Chrome will continue running in the background as long as there are Chrome Apps open.">
@@ -1396,7 +1376,7 @@ index e1aa088c0bbf..8c6cab69e86d 100644
          </message>
          <message name="IDS_QUIT_WITH_APPS_SUPPRESSION_LABEL" desc="Button text to prevent a notification from showing in future.">
            Don't show this again
-@@ -8918,7 +8918,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
+@@ -8947,7 +8947,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
          The web browser by Google, for you
        </message>
        <message name="IDS_WELCOME_DESCRIPTION" desc="A message on the welcome page explaining the purpose of signing in.">
@@ -1406,10 +1386,10 @@ index e1aa088c0bbf..8c6cab69e86d 100644
        <message name="IDS_WELCOME_ACCEPT_BUTTON" desc="A button on the welcome page which accepts the offer to sign in to Chrome.">
          Sign in
 diff --git a/chrome/app/google_chrome_strings.grd b/chrome/app/google_chrome_strings.grd
-index 2c84959bd371..a79ce0366b30 100644
+index 6fd110c689c3..05e4ca286e6b 100644
 --- a/chrome/app/google_chrome_strings.grd
 +++ b/chrome/app/google_chrome_strings.grd
-@@ -776,19 +776,19 @@ Signing in anyway will merge Chrome information like bookmarks, history, and oth
+@@ -768,19 +768,19 @@ Signing in anyway will merge Chrome information like bookmarks, history, and oth
            </message>
          </if>
          <message name="IDS_APP_LIST_SIGNIN_HEADING" desc="Heading for when the launcher needs to sign in.">
@@ -1434,7 +1414,7 @@ index 2c84959bd371..a79ce0366b30 100644
          </if>
        </if>
 diff --git a/chrome/app/settings_google_chrome_strings.grdp b/chrome/app/settings_google_chrome_strings.grdp
-index 165633010c05..c2299f22cb72 100644
+index 8dca4b1360a1..96973db6e0db 100644
 --- a/chrome/app/settings_google_chrome_strings.grdp
 +++ b/chrome/app/settings_google_chrome_strings.grdp
 @@ -4,10 +4,10 @@
@@ -1450,7 +1430,7 @@ index 165633010c05..c2299f22cb72 100644
      </message>
      <message name="IDS_SETTINGS_UPGRADE_UPDATING" desc="Status label: Updating Google Chrome">
        Updating Google Chrome
-@@ -96,10 +96,10 @@
+@@ -90,10 +90,10 @@
  
    <!-- Sync Page -->
    <message name="IDS_SETTINGS_SYNC_SIGNIN" desc="The label that appears on the sync button in the options dialog when sync has not been set up by the user.">
@@ -1592,7 +1572,7 @@ index cb8023831f5a..7e8bec0fbe4f 100644
      </messages>
    </release>
 diff --git a/ios/chrome/app/strings/ios_google_chrome_strings.grd b/ios/chrome/app/strings/ios_google_chrome_strings.grd
-index 9d5c55049e17..76d083128cac 100644
+index fa8e517a7fdb..7c9efbfc1c34 100644
 --- a/ios/chrome/app/strings/ios_google_chrome_strings.grd
 +++ b/ios/chrome/app/strings/ios_google_chrome_strings.grd
 @@ -126,7 +126,7 @@ locale.  The strings in this file are specific to iOS.
@@ -1616,10 +1596,6 @@ index 9d5c55049e17..76d083128cac 100644
 @@ -147,23 +147,23 @@ locale.  The strings in this file are specific to iOS.
          Get Google smarts in Chrome
        </message>
-       <message name="IDS_IOS_APP_RATING_PROMO_STRING" desc="Text displayed for the rate this app promo. [iOS only]">
--        Enjoying Chrome? <ph name="BEGIN_LINK"><ex>BEGIN_LINK</ex>BEGIN_LINK</ph>Rate this app<ph name="END_LINK"><ex>END_LINK</ex>END_LINK</ph>
-+        Like it? <ph name="BEGIN_LINK"><ex>BEGIN_LINK</ex>BEGIN_LINK</ph>Rate this app<ph name="END_LINK"><ex>END_LINK</ex>END_LINK</ph>
-       </message>
        <message name="IDS_IOS_AUTOFILL_DESCRIBE_LOCAL_COPY" desc="Text label that describes a Wallet credit card which has been copied to the local Chrome instance. Title case. [Length: 20em] [iOS only]">
 -        Copied to Chrome
 +        Copied to browser
@@ -1640,18 +1616,13 @@ index 9d5c55049e17..76d083128cac 100644
 -        Cleared Chrome data
 +        Cleared browser data
        </message>
-       <message name="IDS_IOS_CONSENT_BUMP_PERSONALIZATION_MESSAGE" desc="Title for the Consent Bump personalization menu, presented when the user wants more informations and control over the sync personalization [iOS only]">
-         The settings that control sync, personalization, and other Google services in Chrome have changed. This may affect your current settings.
-@@ -172,7 +172,7 @@ locale.  The strings in this file are specific to iOS.
-         You can customize this anytime in Chrome Settings
-       </message>
        <message name="IDS_IOS_DISCONNECT_DIALOG_TITLE" desc="The title of the disconnect dialog [Length: 30em].">
 -        Sign out of Chrome?
 +        Sign out?
        </message>
        <message name="IDS_IOS_FACE_ID_USAGE_DESCRIPTION" desc="Specifies the reason for using the device's Face ID capabilities.">
          Chrome uses Face ID to ensure authorized access to your passwords.
-@@ -181,7 +181,7 @@ locale.  The strings in this file are specific to iOS.
+@@ -172,7 +172,7 @@ locale.  The strings in this file are specific to iOS.
        By using this application, you agree to Chrome’s <ph name="BEGIN_LINK_TOS">BEGIN_LINK_TOS</ph>Terms of Service<ph name="END_LINK_TOS">END_LINK_TOS</ph> and <ph name="BEGIN_LINK_PRIVACY">BEGIN_LINK_PRIVACY</ph>Privacy Notice<ph name="END_LINK_PRIVACY">END_LINK_PRIVACY</ph>.
        </message>
        <message name="IDS_IOS_FIRSTRUN_NEW_OPT_IN_LABEL" desc="User metrics opt-in label [Length: 80em] [iOS only]">
@@ -1660,16 +1631,14 @@ index 9d5c55049e17..76d083128cac 100644
        </message>
        <message name="IDS_IOS_FIRSTRUN_TERMS_TITLE" desc="Title for the Terms of Service page shown to user on First Run. [Length: 30em]">
          Google Chrome Terms of Service
-@@ -190,7 +190,7 @@ locale.  The strings in this file are specific to iOS.
+@@ -181,19 +181,19 @@ locale.  The strings in this file are specific to iOS.
          Google Chrome Privacy Notice
        </message>
        <message name="IDS_IOS_FIRSTRUN_WELCOME_TO_CHROME" desc="Title on the Welcome to Chrome screen presented to the user on First Run. [iOS only]">
 -        Welcome to Chrome
 +        Welcome to Iridium
        </message>
-       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_NON_PERSONALIZED_SERVICES_DETAIL" desc="Section detail text for the list of all the non-personalized features to enable/disable in the settings. Related to 'Non-personalized Services'. [iOS only]">
-         Communicates with Google to improve browsing and Chrome
-@@ -199,13 +199,13 @@ locale.  The strings in this file are specific to iOS.
+       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_TEXT" desc="Feature title in the settings for the user enable or disable. Related with 'Automatically sends usage statistics and crash reports to Google'. [iOS only]">
          Help improve Chrome's features and performance
        </message>
        <message name="IDS_IOS_LOCATION_AUTHORIZATION_ALERT" desc="Specifies the reason for sending the user's location to Google [Length: unlimited] [iOS only].">
@@ -1687,5 +1656,5 @@ index 9d5c55049e17..76d083128cac 100644
        <message name="IDS_IOS_LONG_PRESS_TOOLBAR_IPH_PROMOTION_VOICE_OVER" desc="Text to be read by VoiceOver when the LongPress Toolbar Tip is presented to the user. Read by Text-to-Speech.">
          Chrome tip. For more tab options, press and hold the Show Tabs button in the toolbar, which is at the bottom or top of your screen.
 -- 
-2.19.1
+2.21.0
 

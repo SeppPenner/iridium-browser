@@ -1,8 +1,7 @@
 build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
 doc-add-note-to-self-on-build-procedure.patch
-build-import-openSUSE-chromium-gcc8-alignof.patch.patch
-build-gcc-8-disambiguate-SnapContainerData-type-spec.patch
+Import-openSUSE-s-chromium-gcc.patch.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
@@ -56,5 +55,4 @@ doc-add-README.md-for-github.patch
 common-set-Iridium-version-and-change-User-Agent-acc.patch
 components-disable-subdomain-stripping.patch
 prefs-disable-signinallowed-by-default.patch
-build-work-around-gcc-bug-86997.patch
 treewide-fix-google-shitcode-without-returns.patch

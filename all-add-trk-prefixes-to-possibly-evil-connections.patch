@@ -1,7 +1,7 @@
-From a95ce3d69f9397427df283de43e7d02ebf388854 Mon Sep 17 00:00:00 2001
+From 3ec775ab2fff398eaf71c364420e963423c34ead Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 3 Nov 2014 10:52:56 +0100
-Subject: [PATCH 53/60] all: add trk: prefixes to possibly evil connections
+Subject: [PATCH 52/58] all: add trk: prefixes to possibly evil connections
 
 Prefix URLs to Google services with trk: so that whenever something
 tries to load them, the developer will be informed via printf and
@@ -15,7 +15,6 @@ by default.
  .../customization/customization_document.cc    |  2 +-
  .../file_manager/private_api_drive.cc          |  2 +-
  .../file_manager/private_api_misc.cc           |  2 +-
- .../file_manager/private_api_strings.cc        | 12 ++++++------
  .../cryptotoken_private_api.cc                 |  4 ++--
  chrome/browser/extensions/install_signer.cc    |  2 +-
  .../browser/nacl_host/nacl_infobar_delegate.cc |  2 +-
@@ -55,7 +54,6 @@ by default.
  content/browser/webauth/authenticator_impl.cc  |  4 ++--
  .../shell/browser/shell_browser_main_parts.cc  |  2 +-
  google_apis/gaia/gaia_constants.cc             | 18 +++++++++---------
- google_apis/gaia/google_service_auth_error.cc  |  2 +-
  google_apis/gcm/engine/gservices_settings.cc   |  6 +++---
  .../notifier/base/gaia_token_pre_xmpp_auth.cc  |  2 +-
  remoting/base/breakpad_mac.mm                  |  2 +-
@@ -64,7 +62,7 @@ by default.
  remoting/webapp/crd/manifest.json.jinja2       |  2 +-
  rlz/lib/lib_values.cc                          |  2 +-
  ui/views/examples/webview_example.cc           |  2 +-
- 53 files changed, 88 insertions(+), 87 deletions(-)
+ 51 files changed, 81 insertions(+), 80 deletions(-)
 
 diff --git a/build/mac/tweak_info_plist.py b/build/mac/tweak_info_plist.py
 index 9ea794b1517f..8c22fc375dce 100755
@@ -93,12 +91,12 @@ index 1c60d717b544..6e3e23dccf62 100644
  // A custom extensions::ExternalLoader that the ServicesCustomizationDocument
  // creates and uses to publish OEM default apps to the extensions system.
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-index c7f75c3dba9c..ca1b98667e61 100644
+index 3ab989a414d5..6b3ddb7e1067 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-@@ -1663,7 +1663,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
-       SigninManagerFactory::GetForProfile(GetProfile());
-   const std::string& account_id = signin_manager->GetAuthenticatedAccountId();
+@@ -1639,7 +1639,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
+       IdentityManagerFactory::GetForProfile(GetProfile());
+   const std::string& account_id = identity_manager->GetPrimaryAccountId();
    std::vector<std::string> scopes;
 -  scopes.emplace_back("https://www.googleapis.com/auth/drive.readonly");
 +  scopes.emplace_back("trk:208:https://www.googleapis.com/auth/drive.readonly");
@@ -106,7 +104,7 @@ index c7f75c3dba9c..ca1b98667e61 100644
    scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory =
        content::BrowserContext::GetDefaultStoragePartition(GetProfile())
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-index c6bcb426b45c..2c71b7912054 100644
+index fca554ec04bb..64ba5aeb9ed6 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 @@ -77,7 +77,7 @@ namespace {
@@ -118,48 +116,11 @@ index c6bcb426b45c..2c71b7912054 100644
  
  // Obtains the current app window.
  AppWindow* GetCurrentAppWindow(UIThreadExtensionFunction* function) {
-diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
-index 75a0736df948..69db3b3eb84b 100644
---- a/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
-+++ b/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
-@@ -24,26 +24,26 @@ namespace {
- 
- // Location of the page to buy more storage for Google Drive.
- const char kGoogleDriveBuyStorageUrl[] =
--    "https://www.google.com/settings/storage";
-+    "trk:210:https://www.google.com/settings/storage";
- 
- // Location of the overview page about Google Drive.
- const char kGoogleDriveOverviewUrl[] =
--    "https://support.google.com/chromebook/?p=filemanager_drive";
-+    "trk:210:https://support.google.com/chromebook/?p=filemanager_drive";
- 
- // Location of Google drive redeem page.
- const char kGoogleDriveRedeemUrl[] =
--    "http://www.google.com/intl/en/chrome/devices/goodies.html"
-+    "trk:211:http://www.google.com/intl/en/chrome/devices/goodies.html"
-     "?utm_source=filesapp&utm_medium=banner&utm_campaign=gsg";
- 
- // Location of Google Drive specific help.
- const char kGoogleDriveHelpUrl[] =
--    "https://support.google.com/chromebook/?p=filemanager_drivehelp";
-+    "trk:212:https://support.google.com/chromebook/?p=filemanager_drivehelp";
- 
- // Location of Google Drive root.
--const char kGoogleDriveRootUrl[] = "https://drive.google.com";
-+const char kGoogleDriveRootUrl[] = "trk:213:https://drive.google.com";
- 
- // Printf format
--const char kHelpURLFormat[] = "https://support.google.com/chromebook/answer/%d";
-+const char kHelpURLFormat[] = "trk:214:https://support.google.com/chromebook/answer/%d";
- 
- // Location of the help page for low space warning in the downloads directory.
- const int kDownloadsLowSpaceWarningHelpNumber = 1061547;
 diff --git a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-index d4b2f5d60c5f..55001711bce8 100644
+index 45f8aebac811..d7ee52e27365 100644
 --- a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
 +++ b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-@@ -46,8 +46,8 @@ enum class U2FAttestationPromptResult {
+@@ -47,8 +47,8 @@ enum class U2FAttestationPromptResult {
  
  const char kGoogleDotCom[] = "google.com";
  constexpr const char* kGoogleGstaticAppIds[] = {
@@ -171,7 +132,7 @@ index d4b2f5d60c5f..55001711bce8 100644
  // ContainsAppIdByHash returns true iff the SHA-256 hash of one of the
  // elements of |list| equals |hash|.
 diff --git a/chrome/browser/extensions/install_signer.cc b/chrome/browser/extensions/install_signer.cc
-index 6341caf6541d..33d3ecc47bda 100644
+index 57125cb6d88d..8e344231e293 100644
 --- a/chrome/browser/extensions/install_signer.cc
 +++ b/chrome/browser/extensions/install_signer.cc
 @@ -65,7 +65,7 @@ const int kSignatureFormatVersion = 2;
@@ -208,10 +169,10 @@ index 36939839fa5f..8a6111827c14 100644
  
  ProfileAvatarDownloader::ProfileAvatarDownloader(
 diff --git a/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js b/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
-index 6f3cdcba7be6..65654a8b08c2 100644
+index 86f961899930..9c56561a3cd5 100644
 --- a/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
 +++ b/chrome/browser/resources/chromeos/chromevox/chromevox/background/prefs.js
-@@ -84,9 +84,9 @@ cvox.ChromeVoxPrefs.DEFAULT_PREFS = {
+@@ -85,9 +85,9 @@ cvox.ChromeVoxPrefs.DEFAULT_PREFS = {
    'position': '{}',
    'siteSpecificEnhancements': true,
    'siteSpecificScriptBase':
@@ -247,7 +208,7 @@ index 59a0f9ad07fd..888e42bb72e9 100644
  }
  
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 700f2b10ec47..1334b94c0309 100644
+index f6697aca0544..e7b570267bc6 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
 @@ -81,9 +81,9 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
@@ -289,10 +250,10 @@ index 5259be40f207..524a2ccbd7fc 100644
    return GURL(std::string(kDownloadServerUrl) +
                base::ToLowerASCII(bdict_file));
 diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index b2625451afd8..0a68bcb29694 100644
+index 1d3d3cdf23fd..9dda87f0dd7e 100644
 --- a/chrome/browser/supervised_user/supervised_user_service.cc
 +++ b/chrome/browser/supervised_user/supervised_user_service.cc
-@@ -81,7 +81,7 @@ namespace {
+@@ -82,7 +82,7 @@ namespace {
  
  // The URL from which to download a host blacklist if no local one exists yet.
  const char kBlacklistURL[] =
@@ -328,7 +289,7 @@ index f5d3be5bc957..cf0ff4a582af 100644
  
  // The maximum number of ignored bubble we track in the NumLaterPerReinstall
 diff --git a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-index b99f2360879e..b72a62f5b234 100644
+index 74d9bc8a12cb..7630f973a103 100644
 --- a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 +++ b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 @@ -67,17 +67,17 @@ namespace {
@@ -354,10 +315,10 @@ index b99f2360879e..b72a62f5b234 100644
  
  SkColor GetThemeColor(const ui::ThemeProvider& tp, int id) {
 diff --git a/chrome/common/extensions/chrome_extensions_client.cc b/chrome/common/extensions/chrome_extensions_client.cc
-index 299f60cbc7ef..f56ca5a5f754 100644
+index 5ffa260617e9..5c610522625f 100644
 --- a/chrome/common/extensions/chrome_extensions_client.cc
 +++ b/chrome/common/extensions/chrome_extensions_client.cc
-@@ -43,9 +43,9 @@ namespace {
+@@ -45,9 +45,9 @@ namespace {
  
  // TODO(battre): Delete the HTTP URL once the blacklist is downloaded via HTTPS.
  const char kExtensionBlocklistUrlPrefix[] =
@@ -383,7 +344,7 @@ index 138006545a52..29fbff07d31f 100644
  }
  
 diff --git a/chromecast/browser/service/cast_service_simple.cc b/chromecast/browser/service/cast_service_simple.cc
-index 863e95315e3a..e52e9897ad29 100644
+index 04037b06ff11..6d09db17b187 100644
 --- a/chromecast/browser/service/cast_service_simple.cc
 +++ b/chromecast/browser/service/cast_service_simple.cc
 @@ -27,7 +27,7 @@ GURL GetStartupURL() {
@@ -396,7 +357,7 @@ index 863e95315e3a..e52e9897ad29 100644
    GURL url(args[0]);
    if (url.is_valid() && url.has_scheme())
 diff --git a/chromeos/geolocation/simple_geolocation_provider.cc b/chromeos/geolocation/simple_geolocation_provider.cc
-index 14fd85fb6659..8ccd4e7ba91f 100644
+index 63f6b01cdcdc..0e1e4b8ef06d 100644
 --- a/chromeos/geolocation/simple_geolocation_provider.cc
 +++ b/chromeos/geolocation/simple_geolocation_provider.cc
 @@ -20,7 +20,7 @@ namespace chromeos {
@@ -451,7 +412,7 @@ index a7378204ffaa..eaf817697dc5 100644
  
  bool g_is_crash_reporter_enabled = false;
 diff --git a/components/drive/service/drive_api_service.cc b/components/drive/service/drive_api_service.cc
-index 7d37d95edb42..3f728dd1b6b2 100644
+index 8cd55eec4a3c..cdd00bfe6877 100644
 --- a/components/drive/service/drive_api_service.cc
 +++ b/components/drive/service/drive_api_service.cc
 @@ -74,9 +74,9 @@ namespace drive {
@@ -467,7 +428,7 @@ index 7d37d95edb42..3f728dd1b6b2 100644
  
  // Mime type to create a directory.
 diff --git a/components/feedback/feedback_uploader.cc b/components/feedback/feedback_uploader.cc
-index 7b536c084418..f303e076c5f1 100644
+index 20e3caed1c18..3a76356707b7 100644
 --- a/components/feedback/feedback_uploader.cc
 +++ b/components/feedback/feedback_uploader.cc
 @@ -26,7 +26,7 @@ constexpr base::FilePath::CharType kFeedbackReportPath[] =
@@ -480,7 +441,7 @@ index 7b536c084418..f303e076c5f1 100644
  constexpr char kProtoBufMimeType[] = "application/x-protobuf";
  
 diff --git a/components/gcm_driver/gcm_account_tracker.cc b/components/gcm_driver/gcm_account_tracker.cc
-index b85bfc6d2107..c79081232aa1 100644
+index b1bc99656e6b..0a10c7e261f9 100644
 --- a/components/gcm_driver/gcm_account_tracker.cc
 +++ b/components/gcm_driver/gcm_account_tracker.cc
 @@ -25,9 +25,9 @@ namespace gcm {
@@ -509,7 +470,7 @@ index d66190375b6e..e044742211bd 100644
  /* trk:193 */    "https://www.google.com/searchdomaincheck?format=domain&type=chrome";
  const base::Feature GoogleURLTracker::kNoSearchDomainCheck{
 diff --git a/components/history/core/browser/web_history_service.cc b/components/history/core/browser/web_history_service.cc
-index ecd48e62fc21..47ad8895d586 100644
+index 21e8fa0a7750..43648dd34141 100644
 --- a/components/history/core/browser/web_history_service.cc
 +++ b/components/history/core/browser/web_history_service.cc
 @@ -41,13 +41,13 @@ namespace history {
@@ -569,10 +530,10 @@ index f60d33bfa162..d768d60b8178 100644
  const char kNewMetricsServerUrlInsecure[] =
      "http://clientservices.googleapis.com/uma/v2";
 diff --git a/components/password_manager/core/browser/password_store.cc b/components/password_manager/core/browser/password_store.cc
-index 14fef30f8f93..c9046f24a381 100644
+index f7bcf270f700..78fbaf6ec606 100644
 --- a/components/password_manager/core/browser/password_store.cc
 +++ b/components/password_manager/core/browser/password_store.cc
-@@ -224,10 +224,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
+@@ -228,10 +228,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
    // TODO(mdm): actually delete them at some point, say M24 or so.
    base::Time ignore_logins_cutoff;  // the null time
    if (form.scheme == PasswordForm::SCHEME_HTML &&
@@ -588,7 +549,7 @@ index 14fef30f8f93..c9046f24a381 100644
          { 2012, 1, 0, 1, 0, 0, 0, 0 };  // 00:00 Jan 1 2012
      base::Time out_time;
 diff --git a/components/policy/core/common/policy_loader_win.cc b/components/policy/core/common/policy_loader_win.cc
-index 7fc507cec069..662edd975ca2 100644
+index af0b6d84fc88..f6166180d36e 100644
 --- a/components/policy/core/common/policy_loader_win.cc
 +++ b/components/policy/core/common/policy_loader_win.cc
 @@ -57,7 +57,7 @@ const char kKeyThirdParty[] = "3rdparty";
@@ -627,7 +588,7 @@ index 0871c75ee19b..926a6ebb8ea4 100644
  std::string BuildResponse(bool is_porn) {
    base::DictionaryValue dict;
 diff --git a/components/safe_search_api/url_checker.cc b/components/safe_search_api/url_checker.cc
-index c36b32219fcd..f5aa51be9cc7 100644
+index 42fc599ff1a0..e90818c43f06 100644
 --- a/components/safe_search_api/url_checker.cc
 +++ b/components/safe_search_api/url_checker.cc
 @@ -32,7 +32,7 @@ namespace safe_search_api {
@@ -640,19 +601,19 @@ index c36b32219fcd..f5aa51be9cc7 100644
  const char kDataFormat[] = "key=%s&urls=%s&region_code=%s";
  
 diff --git a/components/translate/core/browser/translate_url_fetcher.cc b/components/translate/core/browser/translate_url_fetcher.cc
-index 9dae29174d5f..53a4237a855b 100644
+index 254e0ab249a9..432fccdc64d2 100644
 --- a/components/translate/core/browser/translate_url_fetcher.cc
 +++ b/components/translate/core/browser/translate_url_fetcher.cc
 @@ -100,6 +100,7 @@ bool TranslateURLFetcher::Request(const GURL& url,
    if (!extra_request_header_.empty())
-     resource_request->headers.AddHeadersFromString(extra_request_header_);
+     resource_request->headers.AddHeaderFromString(extra_request_header_);
  
 +  fprintf(stderr, "translator: fetching something from %s\n", url_.spec().c_str());
    simple_loader_ =
        variations::CreateSimpleURLLoaderWithVariationsHeadersUnknownSignedIn(
            std::move(resource_request),
 diff --git a/components/translate/core/common/translate_util.cc b/components/translate/core/common/translate_util.cc
-index 6e1ec09ce1fc..a413be58f3fd 100644
+index 87e7a2059a7b..e961e066d907 100644
 --- a/components/translate/core/common/translate_util.cc
 +++ b/components/translate/core/common/translate_util.cc
 @@ -57,7 +57,7 @@ const LanguageCodePair kLanguageCodeChineseCompatiblePairs[] = {
@@ -663,7 +624,7 @@ index 6e1ec09ce1fc..a413be58f3fd 100644
 +const char kSecurityOrigin[] = "trk:220:https://translate.googleapis.com/";
  
  void ToTranslateLanguageSynonym(std::string* language) {
-   for (size_t i = 0; i < arraysize(kLanguageCodeSimilitudes); ++i) {
+   for (size_t i = 0; i < base::size(kLanguageCodeSimilitudes); ++i) {
 diff --git a/components/variations/variations_url_constants.cc b/components/variations/variations_url_constants.cc
 index d97573e63c50..499891816b00 100644
 --- a/components/variations/variations_url_constants.cc
@@ -691,10 +652,10 @@ index 3bb628ae218b..99644d748275 100644
  const char kUpstreamUrl[] = "/up?";
  
 diff --git a/content/browser/webauth/authenticator_impl.cc b/content/browser/webauth/authenticator_impl.cc
-index 0bbb8c099e20..45cacfcf44d9 100644
+index da770a5e7c2f..f3ede649712e 100644
 --- a/content/browser/webauth/authenticator_impl.cc
 +++ b/content/browser/webauth/authenticator_impl.cc
-@@ -188,9 +188,9 @@ bool IsAppIdAllowedForOrigin(const GURL& appid, const url::Origin& origin) {
+@@ -236,9 +236,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
    // special-case AppIDs. Firefox also does this:
    // https://groups.google.com/forum/#!msg/mozilla.dev.platform/Uiu3fwnA2xw/201ynAiPAQAJ
    const GURL kGstatic1 =
@@ -705,9 +666,9 @@ index 0bbb8c099e20..45cacfcf44d9 100644
 +      GURL("trk:277:https://www.gstatic.com/securitykey/a/google.com/origins.json");
    DCHECK(kGstatic1.is_valid() && kGstatic2.is_valid());
  
-   if (origin.DomainIs("google.com") && !appid.has_ref() &&
+   if (origin.DomainIs("google.com") && !appid_url.has_ref() &&
 diff --git a/content/shell/browser/shell_browser_main_parts.cc b/content/shell/browser/shell_browser_main_parts.cc
-index 5dac9b3f005e..700f4402c282 100644
+index 10f1b0c979a5..d026612104cf 100644
 --- a/content/shell/browser/shell_browser_main_parts.cc
 +++ b/content/shell/browser/shell_browser_main_parts.cc
 @@ -74,7 +74,7 @@ GURL GetStartupURL() {
@@ -764,21 +725,8 @@ index d3d0cd9cc95f..91210c88c596 100644
  
   // Used to mint uber auth tokens when needed.
  const char kGaiaSid[] = "sid";
-diff --git a/google_apis/gaia/google_service_auth_error.cc b/google_apis/gaia/google_service_auth_error.cc
-index 3feba3cf9c4d..b6a7ba2674a3 100644
---- a/google_apis/gaia/google_service_auth_error.cc
-+++ b/google_apis/gaia/google_service_auth_error.cc
-@@ -212,7 +212,7 @@ std::string GoogleServiceAuthError::ToString() const {
-     case WEB_LOGIN_REQUIRED:
-       return "Less secure apps may not authenticate with this account. "
-              "Please visit: "
--             "https://www.google.com/settings/security/lesssecureapps";
-+             "trk:180:https://www.google.com/settings/security/lesssecureapps";
-     default:
-       NOTREACHED();
-       return std::string();
 diff --git a/google_apis/gcm/engine/gservices_settings.cc b/google_apis/gcm/engine/gservices_settings.cc
-index d66e576c8c38..81c8ec8e57fc 100644
+index d5fef7f50c8d..9d16e16641a3 100644
 --- a/google_apis/gcm/engine/gservices_settings.cc
 +++ b/google_apis/gcm/engine/gservices_settings.cc
 @@ -29,18 +29,18 @@ const char kRegistrationURLKey[] = "gcm_registration_url";
@@ -804,18 +752,18 @@ index d66e576c8c38..81c8ec8e57fc 100644
  
  std::string MakeMCSEndpoint(const std::string& mcs_hostname, int port) {
 diff --git a/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc b/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
-index 44192bf58b25..ed2fca30bf6c 100644
+index d5f274a67ebd..656d88839cd8 100644
 --- a/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
 +++ b/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
-@@ -33,7 +33,7 @@ class GaiaCookieMechanism : public buzz::SaslCookieMechanism {
+@@ -33,7 +33,7 @@ class GaiaCookieMechanism : public jingle_xmpp::SaslCookieMechanism {
      // These attributes are necessary for working with non-gmail gaia
      // accounts.
      const std::string NS_GOOGLE_AUTH_PROTOCOL(
 -        "http://www.google.com/talk/protocol/auth");
 +        "trk:179:http://www.google.com/talk/protocol/auth");
-     const buzz::QName QN_GOOGLE_ALLOW_GENERATED_JID_XMPP_LOGIN(
+     const jingle_xmpp::QName QN_GOOGLE_ALLOW_GENERATED_JID_XMPP_LOGIN(
          NS_GOOGLE_AUTH_PROTOCOL, "allow-generated-jid");
-     const buzz::QName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT(
+     const jingle_xmpp::QName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT(
 diff --git a/remoting/base/breakpad_mac.mm b/remoting/base/breakpad_mac.mm
 index 3cd6ef3154f4..1590926c33df 100644
 --- a/remoting/base/breakpad_mac.mm
@@ -830,7 +778,7 @@ index 3cd6ef3154f4..1590926c33df 100644
    }
  
 diff --git a/remoting/protocol/jingle_messages.cc b/remoting/protocol/jingle_messages.cc
-index a6390090bc2e..5cd67e335482 100644
+index f0ecfd24d006..34b8e18643b3 100644
 --- a/remoting/protocol/jingle_messages.cc
 +++ b/remoting/protocol/jingle_messages.cc
 @@ -25,7 +25,7 @@ const char kJabberNamespace[] = "jabber:client";
@@ -882,7 +830,7 @@ index d9cfbbe1480a..4c6cee0e30ef 100644
  
  // Ping times in 100-nanosecond intervals.
 diff --git a/ui/views/examples/webview_example.cc b/ui/views/examples/webview_example.cc
-index f23b646fd551..4f6f355aa8cf 100644
+index 3910b8760b1e..6791b97d123e 100644
 --- a/ui/views/examples/webview_example.cc
 +++ b/ui/views/examples/webview_example.cc
 @@ -27,7 +27,7 @@ void WebViewExample::CreateExampleView(View* container) {
@@ -895,5 +843,5 @@ index f23b646fd551..4f6f355aa8cf 100644
  }
  
 -- 
-2.19.1
+2.21.0
 

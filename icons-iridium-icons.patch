@@ -1,7 +1,7 @@
-From b737a55ec744741e9a9b059021bef887b49d30e6 Mon Sep 17 00:00:00 2001
+From 0d4350eadea70fb72bcfed70860dba28d0dc2de3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 51/60] icons: iridium icons
+Subject: [PATCH 50/58] icons: iridium icons
 
 ---
  .../app/theme/chromium/product_logo_128.png   | Bin 8366 -> 7826 bytes
@@ -15,12 +15,14 @@ Subject: [PATCH 51/60] icons: iridium icons
  .../chromium/product_logo_32.png              | Bin 1551 -> 1902 bytes
  .../chromium/product_logo_16.png              | Bin 1551 -> 1902 bytes
  .../chromium/product_logo_32.png              | Bin 3634 -> 3846 bytes
- .../browser/resources/local_ntp/local_ntp.css |   4 +-
+ .../browser/resources/local_ntp/doodles.css   |   2 +-
+ .../welcome/dice_welcome/welcome.css          |   2 +-
+ chrome/browser/resources/welcome/welcome.css  |   2 +-
  .../default_100_percent/common/sadplugin.png  | Bin 238 -> 448 bytes
  .../default_200_percent/common/sadplugin.png  | Bin 321 -> 431 bytes
  ui/webui/resources/images/iridium_text.svg    | 336 ++++++++++++++++++
  ui/webui/resources/webui_resources.grd        |   2 +-
- 16 files changed, 339 insertions(+), 3 deletions(-)
+ 18 files changed, 340 insertions(+), 4 deletions(-)
  create mode 100644 ui/webui/resources/images/iridium_text.svg
 
 diff --git a/chrome/app/theme/chromium/product_logo_128.png b/chrome/app/theme/chromium/product_logo_128.png
@@ -1772,11 +1774,11 @@ zib<NBbVSL96a!U-RMt5fvE3n}mxh7a=+yk#3>E(ZY~{AWzZ1Ou_|7lRTb_$qUJlI2
 zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
-diff --git a/chrome/browser/resources/local_ntp/local_ntp.css b/chrome/browser/resources/local_ntp/local_ntp.css
-index 1f94939fc9b6..6eb779877edb 100644
---- a/chrome/browser/resources/local_ntp/local_ntp.css
-+++ b/chrome/browser/resources/local_ntp/local_ntp.css
-@@ -161,7 +161,7 @@ body.hide-fakebox #fakebox {
+diff --git a/chrome/browser/resources/local_ntp/doodles.css b/chrome/browser/resources/local_ntp/doodles.css
+index 6e70f2b5e406..ad943c33e8ef 100644
+--- a/chrome/browser/resources/local_ntp/doodles.css
++++ b/chrome/browser/resources/local_ntp/doodles.css
+@@ -57,7 +57,7 @@
  
  #logo-default,
  #logo-non-white {
@@ -1785,15 +1787,32 @@ index 1f94939fc9b6..6eb779877edb 100644
    background-repeat: no-repeat;
    bottom: var(--logo-margin-bottom);
    height: 92px;
-@@ -173,7 +173,7 @@ body.hide-fakebox #fakebox {
- body.alternate-logo #logo-default,
- body.alternate-logo #logo-non-white {
-   -webkit-mask-image:
--      url(../../../../ui/webui/resources/images/google_logo.svg);
-+      url(../../../../ui/webui/resources/images/iridium_text.svg);
+diff --git a/chrome/browser/resources/welcome/dice_welcome/welcome.css b/chrome/browser/resources/welcome/dice_welcome/welcome.css
+index 07febed0c409..b6da71328452 100644
+--- a/chrome/browser/resources/welcome/dice_welcome/welcome.css
++++ b/chrome/browser/resources/welcome/dice_welcome/welcome.css
+@@ -15,7 +15,7 @@ body {
+ }
+ 
+ .watermark {
+-  -webkit-mask-image: url(chrome://resources/images/google_logo.svg);
++  -webkit-mask-image: url(chrome://resources/images/iridium_text.svg);
    -webkit-mask-repeat: no-repeat;
    -webkit-mask-size: 100%;
-   background: #eee;
+   animation: fadeIn 1s cubic-bezier(0, 0, .2, 1) both;
+diff --git a/chrome/browser/resources/welcome/welcome.css b/chrome/browser/resources/welcome/welcome.css
+index d859a2ec5400..4c769d1e3e5c 100644
+--- a/chrome/browser/resources/welcome/welcome.css
++++ b/chrome/browser/resources/welcome/welcome.css
+@@ -16,7 +16,7 @@ body {
+ }
+ 
+ .watermark {
+-  -webkit-mask-image: url(chrome://resources/images/google_logo.svg);
++  -webkit-mask-image: url(chrome://resources/images/iridium_text.svg);
+   -webkit-mask-repeat: no-repeat;
+   -webkit-mask-size: 100%;
+   animation: fadeIn 1s cubic-bezier(0, 0, .2, 1) both;
 diff --git a/chrome/renderer/resources/default_100_percent/common/sadplugin.png b/chrome/renderer/resources/default_100_percent/common/sadplugin.png
 index 9ad1225ac67146e719a3b6d6ab223c0c51d7227a..a2299dd496c83cf6a2a1fee1325b9a3d951db624 100644
 GIT binary patch
@@ -2181,12 +2200,12 @@ index 000000000000..45d8e586f93c
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index a2b2e2d14bcf..668647ccfc4b 100644
+index 8cb513fdb459..8d7aed5b012d 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
-@@ -187,7 +187,7 @@ without changes to the corresponding grd file. -->
-       <include name="IDR_WEBUI_IMAGES_ERROR"
-                file="images/error.svg" type="BINDATA" compress="gzip" />
+@@ -191,7 +191,7 @@ without changes to the corresponding grd file. -->
+       <include name="IDR_WEBUI_IMAGES_ERROR_BADGE"
+                file="images/error_badge.svg" type="BINDATA" compress="gzip" />
        <include name="IDR_WEBUI_IMAGES_GOOGLE_LOGO"
 -               file="images/google_logo.svg" type="BINDATA" compress="gzip" />
 +               file="images/iridium_text.svg" type="BINDATA" />
@@ -2194,5 +2213,5 @@ index a2b2e2d14bcf..668647ccfc4b 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.19.1
+2.21.0
 

@@ -1,7 +1,7 @@
-From 39b766dd85761a7384af520ba66e8c90da67678b Mon Sep 17 00:00:00 2001
+From 5076378d93517b79343cc6651d9d64d3efc04732 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 30 Nov 2017 15:56:12 +0100
-Subject: [PATCH 03/60] doc: add note to self on build procedure
+Subject: [PATCH 03/58] doc: add note to self on build procedure
 
 ---
  BUILD-IRID.txt | 25 +++++++++++++++++++++++++
@@ -10,7 +10,7 @@ Subject: [PATCH 03/60] doc: add note to self on build procedure
 
 diff --git a/BUILD-IRID.txt b/BUILD-IRID.txt
 new file mode 100644
-index 000000000000..333d6dc84cae
+index 000000000000..4c2b6389bfe8
 --- /dev/null
 +++ b/BUILD-IRID.txt
 @@ -0,0 +1,25 @@
@@ -35,10 +35,10 @@ index 000000000000..333d6dc84cae
 +
 +
 +5.
-+out/Release/gn gen '--args= custom_toolchain="./toolchain:default" linux_use_bundled_binutils=false use_custom_libcxx=false is_debug=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 remove_webcore_debug_symbols=true use_kerberos=true enable_vr=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="tcmalloc" fieldtrial_testing_like_official_build=true use_gold=true use_lld=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_system_harfbuzz=true use_system_freetype=true enable_hangout_services_extension=true enable_vulkan=false is_clang=false proprietary_codecs=true ffmpeg_branding="Chrome"' out/Release
++gn gen '--args= custom_toolchain="./toolchain:default" linux_use_bundled_binutils=false use_custom_libcxx=false is_debug=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 remove_webcore_debug_symbols=true use_kerberos=true enable_vr=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="tcmalloc" fieldtrial_testing_like_official_build=true use_gold=true use_lld=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_system_harfbuzz=true use_system_freetype=true enable_hangout_services_extension=true enable_vulkan=false is_clang=false proprietary_codecs=true ffmpeg_branding="Chrome"' out/Release
 +
 +6.
 +ninja -C out/Release chrome chrome_sandbox chromedriver
 -- 
-2.19.1
+2.21.0
 

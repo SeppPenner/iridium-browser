@@ -1,7 +1,7 @@
-From dc0d71e2b8f9dc78709abd8be0dc75aa4f0aebb2 Mon Sep 17 00:00:00 2001
+From 02312fd5f761e636bfba29ee088ccdeacfaef941 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 56/60] common: set Iridium version and change User-Agent
+Subject: [PATCH 55/58] common: set Iridium version and change User-Agent
  accordingly
 
 Reduced version number:
@@ -25,17 +25,17 @@ Update "Chromium/*" in UA string when updating chrome/version.
  7 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 3248f1ae9104..99639d9efce1 100644
+index 4666df6dc74d..f95a75bcbda4 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=71
+-MAJOR=73
 -MINOR=0
--BUILD=3578
--PATCH=30
-+MAJOR=2018
-+MINOR=11
-+BUILD=71
+-BUILD=3683
+-PATCH=103
++MAJOR=2019
++MINOR=04
++BUILD=73
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
 index f378da9a6857..d30c8b6149a6 100644
@@ -64,15 +64,15 @@ index 6232e359ef20..3cf4fee096c0 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index 0ceb7311a0f6..21c0121ef6e5 100644
+index 544ccc3a4a50..9683c6ce84bb 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -191,6 +191,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -195,6 +195,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/71.0.0.0");
++	base::StringAppendF(&user_agent, " Chrome/73.0.0.0");
    return user_agent;
  }
  
@@ -90,7 +90,7 @@ index c4627fe512a1..bf7d27484e99 100644
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
 diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
-index c18e4ab126a9..3eae82d2ff3a 100644
+index 549a166f68b4..4e00cd0df08c 100644
 --- a/tools/metrics/histograms/extract_histograms.py
 +++ b/tools/metrics/histograms/extract_histograms.py
 @@ -69,7 +69,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
@@ -103,7 +103,7 @@ index c18e4ab126a9..3eae82d2ff3a 100644
  class Error(Exception):
    pass
 diff --git a/tools/metrics/histograms/generate_expired_histograms_array.py b/tools/metrics/histograms/generate_expired_histograms_array.py
-index bbf283f96f80..ee96a6fbf822 100755
+index a1222473634d..ecca047bdd5a 100755
 --- a/tools/metrics/histograms/generate_expired_histograms_array.py
 +++ b/tools/metrics/histograms/generate_expired_histograms_array.py
 @@ -15,8 +15,8 @@ import extract_histograms
@@ -118,5 +118,5 @@ index bbf283f96f80..ee96a6fbf822 100755
  _SCRIPT_NAME = "generate_expired_histograms_array.py"
  _HASH_DATATYPE = "uint64_t"
 -- 
-2.19.1
+2.21.0
 

@@ -1,7 +1,7 @@
-From e9c4161890bc694812257d4cc5600638c4b1d516 Mon Sep 17 00:00:00 2001
+From b72749b9ba6aa6e76777920f8f5a643f405da87c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 11/60] autofill: disable autofill download manager
+Subject: [PATCH 10/58] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -10,34 +10,36 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index f6d37a513cc1..03147ad7afc1 100644
+index adeb0145dd79..1bb57679b0af 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -80,7 +80,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
+@@ -83,7 +83,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
  };
  
  const char kDefaultAutofillServerURL[] =
 -    "https://clients1.google.com/tbproxy/af/";
 +    "trk:158:https://clients1.google.com/tbproxy/af/";
  
- // Returns the base URL for the autofill server.
- GURL GetAutofillServerURL() {
+ // Header for API key.
+ constexpr char kGoogApiKey[] = "X-Goog-Api-Key";
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index f2506032efdf..a0a773e9a779 100644
+index 95dcd22455cf..9abef350550b 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1168,9 +1168,11 @@ AutofillManager::AutofillManager(
+@@ -1287,11 +1287,13 @@ AutofillManager::AutofillManager(
        weak_ptr_factory_(this) {
    DCHECK(driver);
    DCHECK(client_);
 +#if 0
    if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
-     download_manager_.reset(new AutofillDownloadManager(driver, this));
+     version_info::Channel channel = client_->GetChannel();
+     download_manager_.reset(
+         new AutofillDownloadManager(driver, this, GetAPIKeyForUrl(channel)));
    }
 +#endif
    CountryNames::SetLocaleString(app_locale_);
-   if (personal_data_ && client_)
-     personal_data_->OnSyncServiceInitialized(client_->GetSyncService());
+   // Since we want Downstream to still work in incognito, only overwrite the
+   // PDM's sync service if this is not an incognito AutofillManager. However, if
 -- 
-2.19.1
+2.21.0
 

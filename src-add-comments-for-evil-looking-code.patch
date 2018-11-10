@@ -1,7 +1,7 @@
-From f515b1e179057caef936f23c981caee39ac0ee31 Mon Sep 17 00:00:00 2001
+From fde92ca288d1a5b19f2ebfe542652dee4b2a93c5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 6 May 2015 14:13:00 +0200
-Subject: [PATCH 36/60] src: add comments for evil-looking code
+Subject: [PATCH 35/58] src: add comments for evil-looking code
 
 A trk:193 alert would show whenever the Omnibar is set to use Google
 as search engine. When it does, it tries to find the most suitable TLD
@@ -39,5 +39,5 @@ index 818d050761b2..d66190375b6e 100644
      "NoSearchDomainCheck", base::FEATURE_DISABLED_BY_DEFAULT};
  
 -- 
-2.19.1
+2.21.0
 

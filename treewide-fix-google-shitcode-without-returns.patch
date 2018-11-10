@@ -1,7 +1,7 @@
-From 66fcb5e66f1eebc8d29ba62ee85de2d96c98d40e Mon Sep 17 00:00:00 2001
+From 32c5395c2a9abc2832fa7cbffcd92e3ea412fb47 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 10 Nov 2018 15:54:48 +0100
-Subject: [PATCH 60/60] treewide: fix google shitcode without returns
+Subject: [PATCH 58/58] treewide: fix google shitcode without returns
 
 rpmlint exits non-zero:
 
@@ -35,42 +35,39 @@ rpmlint exits non-zero:
 [12111s] E: iridium-browser no-return-in-nonvoid-function ./../../third_party/blink/renderer/modules/accessibility/ax_layout_object.cc:1302
 [12111s] E: iridium-browser no-return-in-nonvoid-function ./../../ui/gfx/skia_vector_animation.cc:166
 ---
- base/bind_internal.h                                        | 1 +
- .../background_fetch/background_fetch_download_client.cc    | 1 +
- chrome/browser/chrome_browser_main.cc                       | 1 +
- chrome/browser/download/offline_item_model.cc               | 1 +
- chrome/browser/download/offline_item_utils.cc               | 1 +
- .../browser/media/webrtc/media_stream_capture_indicator.cc  | 1 +
- chrome/browser/resource_coordinator/tab_lifecycle_unit.cc   | 2 ++
- chrome/browser/signin/chrome_signin_client.cc               | 1 +
- .../browser/ui/autofill/save_card_bubble_controller_impl.cc | 1 +
- .../ui/views/autofill/autofill_popup_view_native_views.cc   | 2 ++
- .../ui/views/autofill/local_card_migration_dialog_view.cc   | 6 ++++++
- chrome/browser/ui/webui/discards/discards_ui.cc             | 1 +
- chrome/browser/ui/webui/media/media_engagement_ui.cc        | 1 +
- .../autofill/core/browser/autofill_external_delegate.cc     | 1 +
- components/autofill/core/browser/autofill_manager.cc        | 1 +
- components/previews/content/previews_hints.cc               | 1 +
- components/signin/core/browser/about_signin_internals.cc    | 1 +
- .../signin/core/browser/profile_oauth2_token_service.cc     | 1 +
- content/browser/media/audio_output_stream_broker.cc         | 1 +
- .../stream/media_stream_constraints_util_video_device.cc    | 2 ++
- extensions/browser/url_loader_factory_manager.cc            | 1 +
- gin/v8_isolate_memory_dump_provider.cc                      | 2 ++
- media/base/decode_status.cc                                 | 1 +
- media/blink/webmediaplayer_impl.cc                          | 1 +
- media/filters/decoder_stream.cc                             | 1 +
- services/network/public/cpp/cors/cors.cc                    | 3 +++
- services/network/public/cpp/host_resolver_mojom_traits.cc   | 4 ++++
- .../blink/renderer/core/layout/layout_flexible_box.cc       | 2 ++
- .../renderer/modules/accessibility/ax_layout_object.cc      | 1 +
- .../blink/renderer/platform/heap/heap_stats_collector.h     | 1 +
- third_party/blink/renderer/platform/wtf/casting.h           | 1 +
- ui/gfx/skia_vector_animation.cc                             | 1 +
- 32 files changed, 47 insertions(+)
+ base/bind_internal.h                                         | 1 +
+ .../background_fetch/background_fetch_download_client.cc     | 1 +
+ chrome/browser/download/offline_item_model.cc                | 1 +
+ chrome/browser/download/offline_item_utils.cc                | 1 +
+ .../browser/media/webrtc/media_stream_capture_indicator.cc   | 1 +
+ chrome/browser/resource_coordinator/tab_lifecycle_unit.cc    | 2 ++
+ .../browser/ui/autofill/save_card_bubble_controller_impl.cc  | 1 +
+ .../ui/views/autofill/local_card_migration_dialog_view.cc    | 5 +++++
+ chrome/browser/ui/webui/discards/discards_ui.cc              | 1 +
+ chrome/browser/ui/webui/media/media_engagement_ui.cc         | 1 +
+ .../autofill/core/browser/autofill_external_delegate.cc      | 1 +
+ components/autofill/core/browser/autofill_manager.cc         | 1 +
+ components/previews/content/previews_hints.cc                | 1 +
+ components/signin/core/browser/about_signin_internals.cc     | 1 +
+ .../signin/core/browser/profile_oauth2_token_service.cc      | 1 +
+ content/browser/media/audio_output_stream_broker.cc          | 1 +
+ .../stream/media_stream_constraints_util_video_device.cc     | 2 ++
+ extensions/browser/url_loader_factory_manager.cc             | 1 +
+ gin/v8_isolate_memory_dump_provider.cc                       | 2 ++
+ media/base/decode_status.cc                                  | 1 +
+ media/blink/webmediaplayer_impl.cc                           | 1 +
+ media/filters/decoder_stream.cc                              | 1 +
+ services/network/public/cpp/cors/cors.cc                     | 3 +++
+ services/network/public/cpp/host_resolver_mojom_traits.cc    | 4 ++++
+ .../blink/renderer/core/layout/layout_flexible_box.cc        | 2 ++
+ .../blink/renderer/modules/accessibility/ax_layout_object.cc | 1 +
+ .../blink/renderer/platform/heap/heap_stats_collector.h      | 1 +
+ third_party/blink/renderer/platform/wtf/casting.h            | 1 +
+ ui/gfx/skia_vector_animation.cc                              | 1 +
+ 29 files changed, 42 insertions(+)
 
 diff --git a/base/bind_internal.h b/base/bind_internal.h
-index aff03a634785..cbaebde17cdb 100644
+index d8f574a4b335..ec0f46c19138 100644
 --- a/base/bind_internal.h
 +++ b/base/bind_internal.h
 @@ -749,6 +749,7 @@ bool QueryCancellationTraitsImpl(BindStateBase::CancellationQueryMode mode,
@@ -82,7 +79,7 @@ index aff03a634785..cbaebde17cdb 100644
  
  // Relays |base| to corresponding CallbackCancellationTraits<>::Run(). Returns
 diff --git a/chrome/browser/background_fetch/background_fetch_download_client.cc b/chrome/browser/background_fetch/background_fetch_download_client.cc
-index 27cbf6d17ff5..40c2c378d333 100644
+index 69b75b6fdef7..12b62f9b530a 100644
 --- a/chrome/browser/background_fetch/background_fetch_download_client.cc
 +++ b/chrome/browser/background_fetch/background_fetch_download_client.cc
 @@ -37,6 +37,7 @@ BackgroundFetchFailureReason ToBackgroundFetchFailureReason(
@@ -93,18 +90,6 @@ index 27cbf6d17ff5..40c2c378d333 100644
  }
  
  }  // namespace
-diff --git a/chrome/browser/chrome_browser_main.cc b/chrome/browser/chrome_browser_main.cc
-index f99b9e26bfff..51473c7339ec 100644
---- a/chrome/browser/chrome_browser_main.cc
-+++ b/chrome/browser/chrome_browser_main.cc
-@@ -750,6 +750,7 @@ bool WaitUntilMachineLevelUserCloudPolicyEnrollmentFinished(
- #else
-   return true;
- #endif
-+  return true;
- }
- 
- // Sets up the ThreadProfiler for the browser process, runs it, and returns the
 diff --git a/chrome/browser/download/offline_item_model.cc b/chrome/browser/download/offline_item_model.cc
 index a7387fed4e3a..d84e73a42923 100644
 --- a/chrome/browser/download/offline_item_model.cc
@@ -118,22 +103,22 @@ index a7387fed4e3a..d84e73a42923 100644
  
  bool OfflineItemModel::IsPaused() const {
 diff --git a/chrome/browser/download/offline_item_utils.cc b/chrome/browser/download/offline_item_utils.cc
-index 7a1fb4a4b897..c555a740cd25 100644
+index d9fce380427a..ada6af050d3a 100644
 --- a/chrome/browser/download/offline_item_utils.cc
 +++ b/chrome/browser/download/offline_item_utils.cc
-@@ -200,6 +200,7 @@ FailState OfflineItemUtils::ConvertDownloadInterruptReasonToFailState(
-     case download::DOWNLOAD_INTERRUPT_REASON_NONE:
-       return FailState::NO_FAILURE;
+@@ -173,6 +173,7 @@ OfflineItemUtils::ConvertFailStateToDownloadInterruptReason(
+ #include "components/download/public/common/download_interrupt_reason_values.h"
+ #undef INTERRUPT_REASON
    }
 +  return FailState::NO_FAILURE;
  }
  
  // static
 diff --git a/chrome/browser/media/webrtc/media_stream_capture_indicator.cc b/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
-index bb2aecf307dc..51192d048c50 100644
+index cc3c5f847223..bd30edd9b8e9 100644
 --- a/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
 +++ b/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
-@@ -243,6 +243,7 @@ int& MediaStreamCaptureIndicator::WebContentsDeviceUsage::GetStreamCount(
+@@ -252,6 +252,7 @@ int& MediaStreamCaptureIndicator::WebContentsDeviceUsage::GetStreamCount(
        NOTREACHED();
        return video_stream_count_;
    }
@@ -142,10 +127,10 @@ index bb2aecf307dc..51192d048c50 100644
  
  MediaStreamCaptureIndicator::MediaStreamCaptureIndicator() {}
 diff --git a/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc b/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
-index 6a58aadfe4bb..73881699a371 100644
+index 0bc6cc017d4c..c76c2866b505 100644
 --- a/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
 +++ b/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
-@@ -156,6 +156,7 @@ bool IsValidStateChange(LifecycleUnitState from,
+@@ -159,6 +159,7 @@ bool IsValidStateChange(LifecycleUnitState from,
        }
      }
    }
@@ -153,7 +138,7 @@ index 6a58aadfe4bb..73881699a371 100644
  }
  
  StateChangeReason DiscardReasonToStateChangeReason(
-@@ -168,6 +169,7 @@ StateChangeReason DiscardReasonToStateChangeReason(
+@@ -171,6 +172,7 @@ StateChangeReason DiscardReasonToStateChangeReason(
      case LifecycleUnitDiscardReason::URGENT:
        return StateChangeReason::SYSTEM_MEMORY_PRESSURE;
    }
@@ -161,23 +146,11 @@ index 6a58aadfe4bb..73881699a371 100644
  }
  
  struct FeatureUsageEntry {
-diff --git a/chrome/browser/signin/chrome_signin_client.cc b/chrome/browser/signin/chrome_signin_client.cc
-index e20f0ecc520d..1fbf867645b4 100644
---- a/chrome/browser/signin/chrome_signin_client.cc
-+++ b/chrome/browser/signin/chrome_signin_client.cc
-@@ -106,6 +106,7 @@ SigninClient::SignoutDecision IsSignoutAllowed(
-       NOTREACHED();
-       return SigninClient::SignoutDecision::DISALLOW_SIGNOUT;
-   }
-+  return SigninClient::SignoutDecision::ALLOW_SIGNOUT;
- }
- }  // namespace
- 
 diff --git a/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc b/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
-index 291909441b60..3d6c980d54bf 100644
+index f6e005a3b1dd..165484e58595 100644
 --- a/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
 +++ b/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
-@@ -223,6 +223,7 @@ base::string16 SaveCardBubbleControllerImpl::GetWindowTitle() const {
+@@ -234,6 +234,7 @@ base::string16 SaveCardBubbleControllerImpl::GetWindowTitle() const {
        NOTREACHED();
        return base::string16();
    }
@@ -185,63 +158,35 @@ index 291909441b60..3d6c980d54bf 100644
  }
  
  base::string16 SaveCardBubbleControllerImpl::GetExplanatoryMessage() const {
-diff --git a/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc b/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
-index 8c2109597f31..0f5d73b4041a 100644
---- a/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
-+++ b/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
-@@ -105,6 +105,7 @@ PopupItemLayoutType GetLayoutType(int frontend_id) {
-           return PopupItemLayoutType::kTrailingIcon;
-       }
-   }
-+  return PopupItemLayoutType::kTrailingIcon;
- }
- 
- // Container view that holds one child view and limits its width to the
-@@ -568,6 +569,7 @@ bool AutofillPopupSuggestionView::ShouldUseCustomFontWeightForPrimaryInfo(
-       *font_weight = gfx::Font::Weight::BOLD;
-       return true;
-   }
-+  return false;
- }
- 
- AutofillPopupSuggestionView::AutofillPopupSuggestionView(
 diff --git a/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc b/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
-index a2598338aa65..84439a9bd988 100644
+index 6bfc3a5ab609..52cf606854f9 100644
 --- a/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
 +++ b/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
-@@ -139,6 +139,7 @@ bool LocalCardMigrationDialogView::Accept() {
-     case LocalCardMigrationDialogState::kActionRequired:
+@@ -417,6 +417,7 @@ bool LocalCardMigrationDialogView::Accept() {
+       controller_->OnDoneButtonClicked();
        return true;
    }
 +  return false;
  }
  
  bool LocalCardMigrationDialogView::Cancel() {
-@@ -151,6 +152,7 @@ bool LocalCardMigrationDialogView::Cancel() {
+@@ -429,6 +430,7 @@ bool LocalCardMigrationDialogView::Cancel() {
        controller_->OnViewCardsButtonClicked();
        return true;
    }
 +  return false;
  }
  
- void LocalCardMigrationDialogView::OnWidgetClosing(views::Widget* widget) {
-@@ -287,6 +289,7 @@ base::string16 LocalCardMigrationDialogView::GetDialogTitle() const {
-       return l10n_util::GetStringUTF16(
-           IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_TITLE_FIX);
+ bool LocalCardMigrationDialogView::Close() {
+@@ -492,6 +494,7 @@ void LocalCardMigrationDialogView::ConstructView() {
+   } else {
+     AddChildView(CreateFeedbackContentView(controller_, this).release());
    }
 +  return {};
  }
  
- base::string16 LocalCardMigrationDialogView::GetDialogInstruction() const {
-@@ -303,6 +306,7 @@ base::string16 LocalCardMigrationDialogView::GetDialogInstruction() const {
-       return l10n_util::GetStringUTF16(
-           IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_MESSAGE_FIX);
-   }
-+  return {};
- }
- 
- int LocalCardMigrationDialogView::GetHeaderImageId() const {
-@@ -319,6 +323,7 @@ base::string16 LocalCardMigrationDialogView::GetOkButtonLabel() const {
+ base::string16 LocalCardMigrationDialogView::GetOkButtonLabel() const {
+@@ -504,6 +507,7 @@ base::string16 LocalCardMigrationDialogView::GetOkButtonLabel() const {
        return l10n_util::GetStringUTF16(
            IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_BUTTON_LABEL_DONE);
    }
@@ -249,7 +194,7 @@ index a2598338aa65..84439a9bd988 100644
  }
  
  base::string16 LocalCardMigrationDialogView::GetCancelButtonLabel() const {
-@@ -331,6 +336,7 @@ base::string16 LocalCardMigrationDialogView::GetCancelButtonLabel() const {
+@@ -516,6 +520,7 @@ base::string16 LocalCardMigrationDialogView::GetCancelButtonLabel() const {
        return l10n_util::GetStringUTF16(
            IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_BUTTON_LABEL_VIEW_CARDS);
    }
@@ -258,7 +203,7 @@ index a2598338aa65..84439a9bd988 100644
  
  LocalCardMigrationDialog* CreateLocalCardMigrationDialogView(
 diff --git a/chrome/browser/ui/webui/discards/discards_ui.cc b/chrome/browser/ui/webui/discards/discards_ui.cc
-index 8717e81f8211..a3b0761fc31c 100644
+index 443409953613..694253c85d66 100644
 --- a/chrome/browser/ui/webui/discards/discards_ui.cc
 +++ b/chrome/browser/ui/webui/discards/discards_ui.cc
 @@ -61,6 +61,7 @@ mojom::LifecycleUnitVisibility GetLifecycleUnitVisibility(
@@ -270,10 +215,10 @@ index 8717e81f8211..a3b0761fc31c 100644
  
  resource_coordinator::LifecycleUnit* GetLifecycleUnitById(int32_t id) {
 diff --git a/chrome/browser/ui/webui/media/media_engagement_ui.cc b/chrome/browser/ui/webui/media/media_engagement_ui.cc
-index 4a8a58c2d0ce..5bbac16731ed 100644
+index ff5f4edc4aec..69a593e2e679 100644
 --- a/chrome/browser/ui/webui/media/media_engagement_ui.cc
 +++ b/chrome/browser/ui/webui/media/media_engagement_ui.cc
-@@ -100,6 +100,7 @@ class MediaEngagementScoreDetailsProviderImpl
+@@ -98,6 +98,7 @@ class MediaEngagementScoreDetailsProviderImpl
        case content::AutoplayPolicy::kDocumentUserActivationRequired:
          return "document-user-activation-required";
      }
@@ -282,10 +227,10 @@ index 4a8a58c2d0ce..5bbac16731ed 100644
  
    const std::string GetPreloadVersion() {
 diff --git a/components/autofill/core/browser/autofill_external_delegate.cc b/components/autofill/core/browser/autofill_external_delegate.cc
-index 33184ca396f4..eb58d95c7c4f 100644
+index 2f40e6d19118..e2c05893ad39 100644
 --- a/components/autofill/core/browser/autofill_external_delegate.cc
 +++ b/components/autofill/core/browser/autofill_external_delegate.cc
-@@ -445,6 +445,7 @@ base::string16 AutofillExternalDelegate::GetSettingsSuggestionValue()
+@@ -442,6 +442,7 @@ base::string16 AutofillExternalDelegate::GetSettingsSuggestionValue()
        NOTREACHED();
        return base::string16();
    }
@@ -294,10 +239,10 @@ index 33184ca396f4..eb58d95c7c4f 100644
  
  }  // namespace autofill
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index a0a773e9a779..f8e402fbc6d1 100644
+index 9abef350550b..73cbe0f19812 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -258,6 +258,7 @@ PopupType AutofillManager::GetPopupType(const FormData& form,
+@@ -277,6 +277,7 @@ PopupType AutofillManager::GetPopupType(const FormData& form,
      default:
        NOTREACHED();
    }
@@ -306,22 +251,22 @@ index a0a773e9a779..f8e402fbc6d1 100644
  
  bool AutofillManager::ShouldShowCreditCardSigninPromo(
 diff --git a/components/previews/content/previews_hints.cc b/components/previews/content/previews_hints.cc
-index 41c353f249a8..5ca88edd1309 100644
+index c6b31fd24943..378809b24c16 100644
 --- a/components/previews/content/previews_hints.cc
 +++ b/components/previews/content/previews_hints.cc
-@@ -124,6 +124,7 @@ ConvertProtoOptimizationTypeToPreviewsOptimizationType(
+@@ -123,6 +123,7 @@ base::Optional<PreviewsType> ConvertProtoOptimizationTypeToPreviewsType(
      case optimization_guide::proto::LITE_PAGE_REDIRECT:
        return PreviewsType::LITE_PAGE_REDIRECT;
    }
 +  return base::nullopt;
  }
  
- // Returns whether any features using page hints are enabled.
+ net::EffectiveConnectionType ConvertProtoEffectiveConnectionType(
 diff --git a/components/signin/core/browser/about_signin_internals.cc b/components/signin/core/browser/about_signin_internals.cc
-index b5ceb2792f1f..a4eb41b2a914 100644
+index ad8dd0679f85..512434a10b5e 100644
 --- a/components/signin/core/browser/about_signin_internals.cc
 +++ b/components/signin/core/browser/about_signin_internals.cc
-@@ -540,6 +540,7 @@ std::string AboutSigninInternals::RefreshTokenEvent::GetTypeAsString() const {
+@@ -550,6 +550,7 @@ std::string AboutSigninInternals::RefreshTokenEvent::GetTypeAsString() const {
      case AboutSigninInternals::RefreshTokenEventType::kAllTokensLoaded:
        return "Loaded";
    }
@@ -330,10 +275,10 @@ index b5ceb2792f1f..a4eb41b2a914 100644
  
  AboutSigninInternals::SigninStatus::SigninStatus()
 diff --git a/components/signin/core/browser/profile_oauth2_token_service.cc b/components/signin/core/browser/profile_oauth2_token_service.cc
-index e840a3bf9652..4c034f2299b6 100644
+index 50fb83dd5ce3..e0870200df17 100644
 --- a/components/signin/core/browser/profile_oauth2_token_service.cc
 +++ b/components/signin/core/browser/profile_oauth2_token_service.cc
-@@ -122,6 +122,7 @@ bool ProfileOAuth2TokenService::HasLoadCredentialsFinishedWithNoErrors() {
+@@ -220,6 +220,7 @@ bool ProfileOAuth2TokenService::HasLoadCredentialsFinishedWithNoErrors() {
        // Load credentials finished with success.
        return true;
    }
@@ -354,10 +299,10 @@ index 2ee519d96de1..a26146489303 100644
  
  }  // namespace
 diff --git a/content/renderer/media/stream/media_stream_constraints_util_video_device.cc b/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
-index 8be1cee60421..6142f7f233cc 100644
+index 7ee21280953c..e9f06633af11 100644
 --- a/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
 +++ b/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
-@@ -740,6 +740,7 @@ blink::WebMediaStreamTrack::DisplayCaptureSurfaceType ToWebDisplaySurface(
+@@ -555,6 +555,7 @@ blink::WebMediaStreamTrack::DisplayCaptureSurfaceType ToWebDisplaySurface(
      case media::mojom::DisplayCaptureSurfaceType::BROWSER:
        return blink::WebMediaStreamTrack::DisplayCaptureSurfaceType::kBrowser;
    }
@@ -365,7 +310,7 @@ index 8be1cee60421..6142f7f233cc 100644
  }
  
  blink::WebMediaStreamTrack::CursorCaptureType ToWebCursorCaptureType(
-@@ -752,6 +753,7 @@ blink::WebMediaStreamTrack::CursorCaptureType ToWebCursorCaptureType(
+@@ -567,6 +568,7 @@ blink::WebMediaStreamTrack::CursorCaptureType ToWebCursorCaptureType(
      case media::mojom::CursorCaptureType::MOTION:
        return blink::WebMediaStreamTrack::CursorCaptureType::kMotion;
    }
@@ -374,10 +319,10 @@ index 8be1cee60421..6142f7f233cc 100644
  
  VideoDeviceCaptureCapabilities::VideoDeviceCaptureCapabilities() = default;
 diff --git a/extensions/browser/url_loader_factory_manager.cc b/extensions/browser/url_loader_factory_manager.cc
-index eb8bd9c495fa..1aa7fa4691b8 100644
+index 5b8fc1fc6e17..3c660ef1ca7d 100644
 --- a/extensions/browser/url_loader_factory_manager.cc
 +++ b/extensions/browser/url_loader_factory_manager.cc
-@@ -65,6 +65,7 @@ bool IsSpecialURLLoaderFactoryRequired(const Extension& extension,
+@@ -331,6 +331,7 @@ bool IsSpecialURLLoaderFactoryRequired(const Extension& extension,
      case FactoryUser::kExtensionProcess:
        return DoExtensionPermissionsCoverCorsOrCorbRelatedOrigins(extension);
    }
@@ -418,10 +363,10 @@ index 110696fd9414..57a1872c905f 100644
  
  std::ostream& operator<<(std::ostream& os, const DecodeStatus& status) {
 diff --git a/media/blink/webmediaplayer_impl.cc b/media/blink/webmediaplayer_impl.cc
-index 70d506014a58..5fae6a8b6f98 100644
+index 442800b8a207..f352d49ad97d 100644
 --- a/media/blink/webmediaplayer_impl.cc
 +++ b/media/blink/webmediaplayer_impl.cc
-@@ -197,6 +197,7 @@ EncryptionMode DetermineEncryptionMode(
+@@ -200,6 +200,7 @@ EncryptionMode DetermineEncryptionMode(
      case EncryptionScheme::CIPHER_MODE_AES_CBC:
        return EncryptionMode::kCbcs;
    }
@@ -430,7 +375,7 @@ index 70d506014a58..5fae6a8b6f98 100644
  
  #if BUILDFLAG(ENABLE_FFMPEG)
 diff --git a/media/filters/decoder_stream.cc b/media/filters/decoder_stream.cc
-index 062ad30a4f61..735d3b212b15 100644
+index 1659fcc6ae4e..c098ba684cb2 100644
 --- a/media/filters/decoder_stream.cc
 +++ b/media/filters/decoder_stream.cc
 @@ -90,6 +90,7 @@ const char* GetStatusString(typename DecoderStream<StreamType>::Status status) {
@@ -442,18 +387,18 @@ index 062ad30a4f61..735d3b212b15 100644
  
  template <DemuxerStream::Type StreamType>
 diff --git a/services/network/public/cpp/cors/cors.cc b/services/network/public/cpp/cors/cors.cc
-index 9e99fa3fb4d0..8a268e83a84b 100644
+index 88ebef77664e..fdc4eee98e83 100644
 --- a/services/network/public/cpp/cors/cors.cc
 +++ b/services/network/public/cpp/cors/cors.cc
-@@ -538,6 +538,7 @@ bool IsCORSSameOriginResponseType(mojom::FetchResponseType type) {
+@@ -540,6 +540,7 @@ bool IsCorsSameOriginResponseType(mojom::FetchResponseType type) {
      case mojom::FetchResponseType::kOpaqueRedirect:
        return false;
    }
 +  return false;
  }
  
- bool IsCORSCrossOriginResponseType(mojom::FetchResponseType type) {
-@@ -551,6 +552,7 @@ bool IsCORSCrossOriginResponseType(mojom::FetchResponseType type) {
+ bool IsCorsCrossOriginResponseType(mojom::FetchResponseType type) {
+@@ -553,6 +554,7 @@ bool IsCorsCrossOriginResponseType(mojom::FetchResponseType type) {
      case mojom::FetchResponseType::kOpaqueRedirect:
        return true;
    }
@@ -461,7 +406,7 @@ index 9e99fa3fb4d0..8a268e83a84b 100644
  }
  
  bool CalculateCredentialsFlag(mojom::FetchCredentialsMode credentials_mode,
-@@ -568,6 +570,7 @@ bool CalculateCredentialsFlag(mojom::FetchCredentialsMode credentials_mode,
+@@ -570,6 +572,7 @@ bool CalculateCredentialsFlag(mojom::FetchCredentialsMode credentials_mode,
      case network::mojom::FetchCredentialsMode::kInclude:
        return true;
    }
@@ -470,26 +415,26 @@ index 9e99fa3fb4d0..8a268e83a84b 100644
  
  }  // namespace cors
 diff --git a/services/network/public/cpp/host_resolver_mojom_traits.cc b/services/network/public/cpp/host_resolver_mojom_traits.cc
-index 0364c3e0d837..b4b3a9ba9b82 100644
+index 424cba438717..cf87f72e248c 100644
 --- a/services/network/public/cpp/host_resolver_mojom_traits.cc
 +++ b/services/network/public/cpp/host_resolver_mojom_traits.cc
-@@ -21,6 +21,7 @@ ResolveHostParameters::DnsQueryType EnumTraits<
-     case net::HostResolver::DnsQueryType::AAAA:
-       return ResolveHostParameters::DnsQueryType::AAAA;
+@@ -233,6 +233,7 @@ DnsQueryType EnumTraits<DnsQueryType, net::DnsQueryType>::ToMojom(
+     case net::DnsQueryType::SRV:
+       return DnsQueryType::SRV;
    }
 +  return ResolveHostParameters::DnsQueryType::UNSPECIFIED;
  }
  
  // static
-@@ -39,6 +40,7 @@ bool EnumTraits<ResolveHostParameters::DnsQueryType,
-       *output = net::HostResolver::DnsQueryType::AAAA;
+@@ -259,6 +260,7 @@ bool EnumTraits<DnsQueryType, net::DnsQueryType>::FromMojom(
+       *output = net::DnsQueryType::SRV;
        return true;
    }
 +  return false;
  }
  
  // static
-@@ -55,6 +57,7 @@ EnumTraits<ResolveHostParameters::Source, net::HostResolverSource>::ToMojom(
+@@ -275,6 +277,7 @@ EnumTraits<ResolveHostParameters::Source, net::HostResolverSource>::ToMojom(
      case net::HostResolverSource::MULTICAST_DNS:
        return ResolveHostParameters::Source::MULTICAST_DNS;
    }
@@ -497,19 +442,19 @@ index 0364c3e0d837..b4b3a9ba9b82 100644
  }
  
  // static
-@@ -75,6 +78,7 @@ bool EnumTraits<ResolveHostParameters::Source, net::HostResolverSource>::
+@@ -295,6 +298,7 @@ bool EnumTraits<ResolveHostParameters::Source, net::HostResolverSource>::
        *output = net::HostResolverSource::MULTICAST_DNS;
        return true;
    }
 +  return false;
  }
  
- }  // namespace mojo
+ // static
 diff --git a/third_party/blink/renderer/core/layout/layout_flexible_box.cc b/third_party/blink/renderer/core/layout/layout_flexible_box.cc
-index 6fdc8c13018d..12af66743ef2 100644
+index 42fcaab49c56..59a99c0b65f0 100644
 --- a/third_party/blink/renderer/core/layout/layout_flexible_box.cc
 +++ b/third_party/blink/renderer/core/layout/layout_flexible_box.cc
-@@ -594,6 +594,7 @@ LayoutUnit LayoutFlexibleBox::FlowAwareContentInsetBefore() const {
+@@ -641,6 +641,7 @@ LayoutUnit LayoutFlexibleBox::FlowAwareContentInsetBefore() const {
        return ContentInsetRight();
    }
    NOTREACHED();
@@ -517,7 +462,7 @@ index 6fdc8c13018d..12af66743ef2 100644
  }
  
  DISABLE_CFI_PERF
-@@ -609,6 +610,7 @@ LayoutUnit LayoutFlexibleBox::FlowAwareContentInsetAfter() const {
+@@ -656,6 +657,7 @@ LayoutUnit LayoutFlexibleBox::FlowAwareContentInsetAfter() const {
        return ContentLeft();
    }
    NOTREACHED();
@@ -526,10 +471,10 @@ index 6fdc8c13018d..12af66743ef2 100644
  
  LayoutUnit LayoutFlexibleBox::CrossAxisScrollbarExtent() const {
 diff --git a/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc b/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
-index c61588ea1d9c..1fee78a0a2ab 100644
+index 8d0e93e1715d..edbd3dd1de59 100644
 --- a/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
 +++ b/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
-@@ -1299,6 +1299,7 @@ ax::mojom::TextPosition AXLayoutObject::GetTextPosition() const {
+@@ -1238,6 +1238,7 @@ ax::mojom::TextPosition AXLayoutObject::GetTextPosition() const {
      case EVerticalAlign::kSuper:
        return ax::mojom::TextPosition::kSuperscript;
    }
@@ -538,7 +483,7 @@ index c61588ea1d9c..1fee78a0a2ab 100644
  
  int AXLayoutObject::TextLength() const {
 diff --git a/third_party/blink/renderer/platform/heap/heap_stats_collector.h b/third_party/blink/renderer/platform/heap/heap_stats_collector.h
-index 05680bbd4d9a..487deaab7508 100644
+index 2e8880d4ae43..50ba1eb4280c 100644
 --- a/third_party/blink/renderer/platform/heap/heap_stats_collector.h
 +++ b/third_party/blink/renderer/platform/heap/heap_stats_collector.h
 @@ -95,6 +95,7 @@ class PLATFORM_EXPORT ThreadHeapStatsCollector {
@@ -562,10 +507,10 @@ index ee2873f573b0..162b4f5a75ff 100644
  };
  
 diff --git a/ui/gfx/skia_vector_animation.cc b/ui/gfx/skia_vector_animation.cc
-index 8e16dc9dcc63..f03e3ea7efe3 100644
+index b2e0f7f9bdf8..89986eef6254 100644
 --- a/ui/gfx/skia_vector_animation.cc
 +++ b/ui/gfx/skia_vector_animation.cc
-@@ -163,6 +163,7 @@ float SkiaVectorAnimation::GetCurrentProgress() const {
+@@ -164,6 +164,7 @@ float SkiaVectorAnimation::GetCurrentProgress() const {
        DCHECK(timer_control_);
        return timer_control_->GetNormalizedCurrentCycleProgress();
    }
@@ -574,5 +519,5 @@ index 8e16dc9dcc63..f03e3ea7efe3 100644
  
  void SkiaVectorAnimation::Paint(gfx::Canvas* canvas,
 -- 
-2.19.1
+2.21.0
 

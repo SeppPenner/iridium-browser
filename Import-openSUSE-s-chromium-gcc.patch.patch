@@ -1,0 +1,448 @@
+From 76fe1663e8a5ac98a788fd93f3e488e9d78b5ede Mon Sep 17 00:00:00 2001
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+Date: Thu, 7 Feb 2019 22:55:37 +0000
+Subject: [PATCH 04/58] Import openSUSE's chromium-gcc.patch
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+allocator shim: Swap ALIGN_LINKAGE and SHIM_ALWAYS_EXPORT's positions
+
+This fixes the GCC build. GCC seems to be stricter with the position of the
+linkage specification, so just swap the terms to prevent an error that looks
+like:
+
+In file included from ../../base/allocator/allocator_shim.cc:333:
+../../base/allocator/allocator_shim_override_cpp_symbols.h:39:30: error: expected unqualified-id before string constant
+ #define ALIGN_LINKAGE extern "C"
+                              ^~~
+../../base/allocator/allocator_shim_override_cpp_symbols.h:99:20: note: in expansion of macro ‘ALIGN_LINKAGE’
+ SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW(std::size_t size,
+                    ^~~~~~~~~~~~~
+
+Bug: 819294
+Change-Id: I0aa16ea88cead42e83796a1c86afad8b447ddc50
+Reviewed-on: https://chromium-review.googlesource.com/c/1458256
+Auto-Submit: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+Reviewed-by: Thomas Anderson <thomasanderson@chromium.org>
+Reviewed-by: Primiano Tucci <primiano@chromium.org>
+Commit-Queue: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+Cr-Commit-Position: refs/heads/master@{#630084}
+---
+ .../allocator_shim_override_cpp_symbols.h     | 20 ++++++++--------
+ .../providers/cast/cast_activity_manager.cc   |  2 +-
+ .../providers/cast/cast_activity_manager.h    |  2 +-
+ .../ui/views/extensions/extension_popup.cc    |  1 -
+ .../ui/views/extensions/extension_popup.h     |  1 +
+ .../toolbar/extension_toolbar_menu_view.h     |  2 +-
+ content/public/browser/desktop_media_id.h     |  8 +++----
+ .../webrequest_action.cc                      | 24 +++++++++----------
+ media/learning/common/labelled_example.cc     |  3 ++-
+ media/learning/common/labelled_example.h      |  2 +-
+ media/learning/common/value.cc                |  6 +++++
+ media/learning/common/value.h                 |  4 ++++
+ .../quic/platform/impl/quic_flags_impl.cc     |  5 ++--
+ .../canvas2d/base_rendering_context_2d.cc     | 10 ++++----
+ ui/gfx/color_utils.cc                         |  2 +-
+ 15 files changed, 52 insertions(+), 40 deletions(-)
+
+diff --git a/base/allocator/allocator_shim_override_cpp_symbols.h b/base/allocator/allocator_shim_override_cpp_symbols.h
+index 1228f5e33d28..01d25b7f6437 100644
+--- a/base/allocator/allocator_shim_override_cpp_symbols.h
++++ b/base/allocator/allocator_shim_override_cpp_symbols.h
+@@ -96,57 +96,57 @@ SHIM_ALWAYS_EXPORT void operator delete[](void* p, size_t) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW(std::size_t size,
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void* ALIGN_NEW(std::size_t size,
+                                                  ALIGN_VAL_T alignment) {
+   return ShimCppAlignedNew(size, static_cast<size_t>(alignment));
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW_NOTHROW(
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void* ALIGN_NEW_NOTHROW(
+     std::size_t size,
+     ALIGN_VAL_T alignment,
+     const std::nothrow_t&) __THROW {
+   return ShimCppAlignedNew(size, static_cast<size_t>(alignment));
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void ALIGN_DEL(void* p, ALIGN_VAL_T) __THROW {
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void ALIGN_DEL(void* p, ALIGN_VAL_T) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void ALIGN_DEL_SIZED(void* p,
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void ALIGN_DEL_SIZED(void* p,
+                                                       std::size_t size,
+                                                       ALIGN_VAL_T) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void
+ ALIGN_DEL_NOTHROW(void* p, ALIGN_VAL_T, const std::nothrow_t&) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW_ARR(std::size_t size,
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void* ALIGN_NEW_ARR(std::size_t size,
+                                                      ALIGN_VAL_T alignment) {
+   return ShimCppAlignedNew(size, static_cast<size_t>(alignment));
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW_ARR_NOTHROW(
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void* ALIGN_NEW_ARR_NOTHROW(
+     std::size_t size,
+     ALIGN_VAL_T alignment,
+     const std::nothrow_t&) __THROW {
+   return ShimCppAlignedNew(size, static_cast<size_t>(alignment));
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void ALIGN_DEL_ARR(void* p,
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void ALIGN_DEL_ARR(void* p,
+                                                     ALIGN_VAL_T) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void ALIGN_DEL_ARR_SIZED(void* p,
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void ALIGN_DEL_ARR_SIZED(void* p,
+                                                           std::size_t size,
+                                                           ALIGN_VAL_T) __THROW {
+   ShimCppDelete(p);
+ }
+ 
+-SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void
++ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void
+ ALIGN_DEL_ARR_NOTHROW(void* p, ALIGN_VAL_T, const std::nothrow_t&) __THROW {
+   ShimCppDelete(p);
+ }
+diff --git a/chrome/browser/media/router/providers/cast/cast_activity_manager.cc b/chrome/browser/media/router/providers/cast/cast_activity_manager.cc
+index 5c72abe4f08d..5e30c24d2279 100644
+--- a/chrome/browser/media/router/providers/cast/cast_activity_manager.cc
++++ b/chrome/browser/media/router/providers/cast/cast_activity_manager.cc
+@@ -803,7 +803,7 @@ CastActivityManager::DoLaunchSessionParams::DoLaunchSessionParams(
+       callback(std::move(callback)) {}
+ 
+ CastActivityManager::DoLaunchSessionParams::DoLaunchSessionParams(
+-    DoLaunchSessionParams&& other) noexcept = default;
++    DoLaunchSessionParams&& other) = default;
+ 
+ CastActivityManager::DoLaunchSessionParams::~DoLaunchSessionParams() = default;
+ 
+diff --git a/chrome/browser/media/router/providers/cast/cast_activity_manager.h b/chrome/browser/media/router/providers/cast/cast_activity_manager.h
+index 325bffc725ee..08fe0ccca603 100644
+--- a/chrome/browser/media/router/providers/cast/cast_activity_manager.h
++++ b/chrome/browser/media/router/providers/cast/cast_activity_manager.h
+@@ -295,7 +295,7 @@ class CastActivityManager : public cast_channel::CastMessageHandler::Observer,
+         const url::Origin& origin,
+         int tab_id,
+         mojom::MediaRouteProvider::CreateRouteCallback callback);
+-    DoLaunchSessionParams(DoLaunchSessionParams&& other) noexcept;
++    DoLaunchSessionParams(DoLaunchSessionParams&& other);
+     ~DoLaunchSessionParams();
+     DoLaunchSessionParams& operator=(DoLaunchSessionParams&&) = delete;
+ 
+diff --git a/chrome/browser/ui/views/extensions/extension_popup.cc b/chrome/browser/ui/views/extensions/extension_popup.cc
+index 80b5a17eb84f..656640e21e58 100644
+--- a/chrome/browser/ui/views/extensions/extension_popup.cc
++++ b/chrome/browser/ui/views/extensions/extension_popup.cc
+@@ -8,7 +8,6 @@
+ #include "chrome/browser/devtools/devtools_window.h"
+ #include "chrome/browser/extensions/extension_view_host.h"
+ #include "chrome/browser/ui/browser.h"
+-#include "chrome/browser/ui/tabs/tab_strip_model.h"
+ #include "content/public/browser/devtools_agent_host.h"
+ #include "content/public/browser/notification_details.h"
+ #include "content/public/browser/notification_source.h"
+diff --git a/chrome/browser/ui/views/extensions/extension_popup.h b/chrome/browser/ui/views/extensions/extension_popup.h
+index ae8853766e15..ab007fe09e9a 100644
+--- a/chrome/browser/ui/views/extensions/extension_popup.h
++++ b/chrome/browser/ui/views/extensions/extension_popup.h
+@@ -9,6 +9,7 @@
+ #include "base/compiler_specific.h"
+ #include "base/macros.h"
+ #include "base/scoped_observer.h"
++#include "chrome/browser/ui/tabs/tab_strip_model.h"
+ #include "chrome/browser/ui/tabs/tab_strip_model_observer.h"
+ #include "chrome/browser/ui/views/extensions/extension_view_views.h"
+ #include "content/public/browser/devtools_agent_host_observer.h"
+diff --git a/chrome/browser/ui/views/toolbar/extension_toolbar_menu_view.h b/chrome/browser/ui/views/toolbar/extension_toolbar_menu_view.h
+index d9814594270a..f5fee9f4fbe7 100644
+--- a/chrome/browser/ui/views/toolbar/extension_toolbar_menu_view.h
++++ b/chrome/browser/ui/views/toolbar/extension_toolbar_menu_view.h
+@@ -8,6 +8,7 @@
+ #include "base/macros.h"
+ #include "base/memory/weak_ptr.h"
+ #include "base/scoped_observer.h"
++#include "chrome/browser/ui/toolbar/toolbar_actions_bar.h"
+ #include "chrome/browser/ui/toolbar/toolbar_actions_bar_observer.h"
+ #include "chrome/browser/ui/views/toolbar/app_menu_observer.h"
+ #include "ui/views/controls/scroll_view.h"
+@@ -15,7 +16,6 @@
+ class AppMenu;
+ class Browser;
+ class BrowserActionsContainer;
+-class ToolbarActionsBar;
+ 
+ namespace views {
+ class MenuItemView;
+diff --git a/content/public/browser/desktop_media_id.h b/content/public/browser/desktop_media_id.h
+index cb93bc5875b3..86d2e29ba963 100644
+--- a/content/public/browser/desktop_media_id.h
++++ b/content/public/browser/desktop_media_id.h
+@@ -41,16 +41,16 @@ struct CONTENT_EXPORT DesktopMediaID {
+   static aura::Window* GetAuraWindowById(const DesktopMediaID& id);
+ #endif  // defined(USE_AURA)
+ 
+-  constexpr DesktopMediaID() = default;
++  DesktopMediaID() = default;
+ 
+-  constexpr DesktopMediaID(Type type, Id id) : type(type), id(id) {}
++  DesktopMediaID(Type type, Id id) : type(type), id(id) {}
+ 
+-  constexpr DesktopMediaID(Type type,
++  DesktopMediaID(Type type,
+                            Id id,
+                            WebContentsMediaCaptureId web_contents_id)
+       : type(type), id(id), web_contents_id(web_contents_id) {}
+ 
+-  constexpr DesktopMediaID(Type type, Id id, bool audio_share)
++  DesktopMediaID(Type type, Id id, bool audio_share)
+       : type(type), id(id), audio_share(audio_share) {}
+ 
+   // Operators so that DesktopMediaID can be used with STL containers.
+diff --git a/extensions/browser/api/declarative_webrequest/webrequest_action.cc b/extensions/browser/api/declarative_webrequest/webrequest_action.cc
+index 1961231c071a..146bc338f1d7 100644
+--- a/extensions/browser/api/declarative_webrequest/webrequest_action.cc
++++ b/extensions/browser/api/declarative_webrequest/webrequest_action.cc
+@@ -578,7 +578,7 @@ base::Optional<EventResponseDelta> WebRequestCancelAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.cancel = true;
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -613,7 +613,7 @@ base::Optional<EventResponseDelta> WebRequestRedirectAction::CreateDelta(
+     return base::nullopt;
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.new_url = redirect_url_;
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -642,7 +642,7 @@ WebRequestRedirectToTransparentImageAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.new_url = GURL(kTransparentImageUrl);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -671,7 +671,7 @@ WebRequestRedirectToEmptyDocumentAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.new_url = GURL(kEmptyDocumentUrl);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -773,7 +773,7 @@ base::Optional<EventResponseDelta> WebRequestRedirectByRegExAction::CreateDelta(
+ 
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.new_url = GURL(new_url);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -813,7 +813,7 @@ WebRequestSetRequestHeaderAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.modified_request_headers.SetHeader(name_, value_);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -851,7 +851,7 @@ WebRequestRemoveRequestHeaderAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.deleted_request_headers.push_back(name_);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -900,7 +900,7 @@ WebRequestAddResponseHeaderAction::CreateDelta(
+ 
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.added_response_headers.push_back(make_pair(name_, value_));
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -954,7 +954,7 @@ WebRequestRemoveResponseHeaderAction::CreateDelta(
+       continue;
+     result.deleted_response_headers.push_back(make_pair(name_, current_value));
+   }
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -1039,7 +1039,7 @@ base::Optional<EventResponseDelta> WebRequestRequestCookieAction::CreateDelta(
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.request_cookie_modifications.push_back(
+       request_cookie_modification_.Clone());
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -1087,7 +1087,7 @@ base::Optional<EventResponseDelta> WebRequestResponseCookieAction::CreateDelta(
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.response_cookie_modifications.push_back(
+       response_cookie_modification_.Clone());
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ //
+@@ -1127,7 +1127,7 @@ WebRequestSendMessageToExtensionAction::CreateDelta(
+   CHECK(request_data.stage & stages());
+   EventResponseDelta result(extension_id, extension_install_time);
+   result.messages_to_extension.insert(message_);
+-  return result;
++  return base::make_optional(std::move(result));
+ }
+ 
+ }  // namespace extensions
+diff --git a/media/learning/common/labelled_example.cc b/media/learning/common/labelled_example.cc
+index 6c8cb7d345d7..1a0c1a7ceaf1 100644
+--- a/media/learning/common/labelled_example.cc
++++ b/media/learning/common/labelled_example.cc
+@@ -59,7 +59,8 @@ bool LabelledExample::operator<(const LabelledExample& rhs) const {
+ LabelledExample& LabelledExample::operator=(const LabelledExample& rhs) =
+     default;
+ 
+-LabelledExample& LabelledExample::operator=(LabelledExample&& rhs) = default;
++LabelledExample& LabelledExample::operator=(LabelledExample&& rhs) noexcept =
++    default;
+ 
+ TrainingData::TrainingData() = default;
+ 
+diff --git a/media/learning/common/labelled_example.h b/media/learning/common/labelled_example.h
+index ee89586f5eb9..5e5a59e7c879 100644
+--- a/media/learning/common/labelled_example.h
++++ b/media/learning/common/labelled_example.h
+@@ -40,7 +40,7 @@ struct COMPONENT_EXPORT(LEARNING_COMMON) LabelledExample {
+   bool operator<(const LabelledExample& rhs) const;
+ 
+   LabelledExample& operator=(const LabelledExample& rhs);
+-  LabelledExample& operator=(LabelledExample&& rhs);
++  LabelledExample& operator=(LabelledExample&& rhs) noexcept;
+ 
+   // Observed feature values.
+   // Note that to interpret these values, you probably need to have the
+diff --git a/media/learning/common/value.cc b/media/learning/common/value.cc
+index 9c9395c25d4e..12ea399d24c3 100644
+--- a/media/learning/common/value.cc
++++ b/media/learning/common/value.cc
+@@ -23,6 +23,12 @@ Value::Value(const std::string& x) : value_(base::PersistentHash(x)) {}
+ 
+ Value::Value(const Value& other) : value_(other.value_) {}
+ 
++Value::Value(Value&& rhs) noexcept = default;
++
++Value& Value::operator=(const Value& rhs) = default;
++
++Value& Value::operator=(Value&& rhs) noexcept = default;
++
+ bool Value::operator==(const Value& rhs) const {
+   return value_ == rhs.value_;
+ }
+diff --git a/media/learning/common/value.h b/media/learning/common/value.h
+index 0e64da961f34..62f4953f691c 100644
+--- a/media/learning/common/value.h
++++ b/media/learning/common/value.h
+@@ -38,6 +38,10 @@ class COMPONENT_EXPORT(LEARNING_COMMON) Value {
+   explicit Value(const std::string& x);
+ 
+   Value(const Value& other);
++  Value(Value&&) noexcept;
++
++  Value& operator=(const Value&);
++  Value& operator=(Value&&) noexcept;
+ 
+   bool operator==(const Value& rhs) const;
+   bool operator!=(const Value& rhs) const;
+diff --git a/net/third_party/quic/platform/impl/quic_flags_impl.cc b/net/third_party/quic/platform/impl/quic_flags_impl.cc
+index 5e6962d1e770..3fa45fc6892d 100644
+--- a/net/third_party/quic/platform/impl/quic_flags_impl.cc
++++ b/net/third_party/quic/platform/impl/quic_flags_impl.cc
+@@ -5,6 +5,7 @@
+ #include "net/third_party/quic/platform/impl/quic_flags_impl.h"
+ 
+ #include <algorithm>
++#include <initializer_list>
+ #include <iostream>
+ #include <set>
+ 
+@@ -153,9 +154,9 @@ std::string QuicFlagRegistry::GetHelp() const {
+ template <>
+ bool TypedQuicFlagHelper<bool>::SetFlag(const std::string& s) const {
+   static const base::NoDestructor<std::set<std::string>> kTrueValues(
+-      {"", "1", "t", "true", "y", "yes"});
++      std::initializer_list<std::string>({"", "1", "t", "true", "y", "yes"}));
+   static const base::NoDestructor<std::set<std::string>> kFalseValues(
+-      {"0", "f", "false", "n", "no"});
++      std::initializer_list<std::string>({"0", "f", "false", "n", "no"}));
+   if (kTrueValues->find(base::ToLowerASCII(s)) != kTrueValues->end()) {
+     *flag_ = true;
+     return true;
+diff --git a/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc b/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+index d9fa696c9a9d..34a8a202bfd3 100644
+--- a/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
++++ b/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+@@ -1769,12 +1769,12 @@ void BaseRenderingContext2D::putImageData(ImageData* data,
+       CanvasColorParams(ColorParams().ColorSpace(), PixelFormat(), kNonOpaque);
+   if (data_color_params.NeedsColorConversion(context_color_params) ||
+       PixelFormat() == kF16CanvasPixelFormat) {
+-    base::CheckedNumeric<size_t> data_length = data->Size().Area();
+-    data_length *= context_color_params.BytesPerPixel();
+-    if (!data_length.IsValid())
++    size_t data_length;
++    if (!base::CheckMul(data->Size().Area(),
++                        context_color_params.BytesPerPixel())
++             .AssignIfValid(&data_length))
+       return;
+-    std::unique_ptr<uint8_t[]> converted_pixels(
+-        new uint8_t[data_length.ValueOrDie()]);
++    std::unique_ptr<uint8_t[]> converted_pixels(new uint8_t[data_length]);
+     if (data->ImageDataInCanvasColorSettings(
+             ColorParams().ColorSpace(), PixelFormat(), converted_pixels.get(),
+             kRGBAColorType)) {
+diff --git a/ui/gfx/color_utils.cc b/ui/gfx/color_utils.cc
+index c868cd54bac3..92ba1407d594 100644
+--- a/ui/gfx/color_utils.cc
++++ b/ui/gfx/color_utils.cc
+@@ -431,7 +431,7 @@ SkColor SetDarkestColorForTesting(SkColor color) {
+   // GetContrastRatio(kWhiteLuminance, g_luminance_midpoint).  The formula below
+   // can be verified by plugging it into how GetContrastRatio() operates.
+   g_luminance_midpoint =
+-      std::sqrtf((dark_luminance + 0.05f) * (kWhiteLuminance + 0.05f)) - 0.05f;
++      std::sqrt((dark_luminance + 0.05f) * (kWhiteLuminance + 0.05f)) - 0.05f;
+ 
+   return previous_darkest_color;
+ }
+-- 
+2.21.0
+

@@ -1,7 +1,7 @@
-From 2d712280fd8dde3d492913ef64f343d0ccbe23ec Mon Sep 17 00:00:00 2001
+From 9fb9b72f176990f72ae729bbfb9fc286b2f2ad3e Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <bauch@struktur.de>
 Date: Tue, 9 Dec 2014 17:19:41 +0100
-Subject: [PATCH 09/60] browser-ui: disable warning about missing API keys
+Subject: [PATCH 08/58] browser-ui: disable warning about missing API keys
 
 We do not want to use the services anyway ;)
 ---
@@ -21,5 +21,5 @@ index f7af1a5abfdc..641a55d998ef 100644
        std::unique_ptr<ConfirmInfoBarDelegate>(
            new GoogleApiKeysInfoBarDelegate())));
 -- 
-2.19.1
+2.21.0
 

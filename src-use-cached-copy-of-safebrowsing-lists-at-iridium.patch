@@ -1,7 +1,7 @@
-From 43dc693380aae2ccc60af90200d48a481592fff9 Mon Sep 17 00:00:00 2001
+From 771d57a444f8d03113d86097fb4278de158d37b6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Jan 2015 13:57:44 +0100
-Subject: [PATCH 30/60] src: use cached copy of safebrowsing lists at
+Subject: [PATCH 29/58] src: use cached copy of safebrowsing lists at
  iridiumbrowser.de
 
 To avoid contacing Google, let the UA use safebrowsing lists hosted at
@@ -25,5 +25,5 @@ index 15fb0165acb6..f59f150ed3bf 100644
      "client_model_v5%s_variation_%d.pb";
  const char ModelLoader::kClientModelFinchExperiment[] =
 -- 
-2.19.1
+2.21.0
 
