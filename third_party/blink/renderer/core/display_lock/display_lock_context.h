@@ -75,7 +75,7 @@ class CORE_EXPORT DisplayLockContext final
     DISALLOW_NEW();
 
    public:
-    ScopedForcedUpdate(ScopedForcedUpdate&&) noexcept;
+    ScopedForcedUpdate(ScopedForcedUpdate&&);
     ~ScopedForcedUpdate();
 
    private:

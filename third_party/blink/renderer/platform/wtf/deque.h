@@ -64,8 +64,8 @@ class Deque {
   Deque();
   Deque(const Deque&);
   Deque& operator=(const Deque&);
-  Deque(Deque&&) noexcept;
-  Deque& operator=(Deque&&) noexcept;
+  Deque(Deque&&);
+  Deque& operator=(Deque&&);
   ~Deque();
 
   void FinalizeGarbageCollectedObject() { NOTREACHED(); }
@@ -342,14 +342,14 @@ Deque<T, inlineCapacity, Allocator>::operator=(const Deque& other) {
 }
 
 template <typename T, wtf_size_t inlineCapacity, typename Allocator>
-inline Deque<T, inlineCapacity, Allocator>::Deque(Deque&& other) noexcept
+inline Deque<T, inlineCapacity, Allocator>::Deque(Deque&& other)
     : start_(0), end_(0) {
   Swap(other);
 }
 
 template <typename T, wtf_size_t inlineCapacity, typename Allocator>
 inline Deque<T, inlineCapacity, Allocator>&
-Deque<T, inlineCapacity, Allocator>::operator=(Deque&& other) noexcept {
+Deque<T, inlineCapacity, Allocator>::operator=(Deque&& other) {
   Swap(other);
   return *this;
 }

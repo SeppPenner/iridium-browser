@@ -68,7 +68,7 @@ class WTF_EXPORT ArrayBufferContents {
           deleter_(deleter),
           deleter_info_(deleter_info) {}
     // Move constructor
-    DataHandle(DataHandle&& other) noexcept { *this = std::move(other); }
+    DataHandle(DataHandle&& other) { *this = std::move(other); }
     ~DataHandle() {
       if (!data_)
         return;
