@@ -85,7 +85,7 @@ base::FilePath PlatformCrashpadInitialization(
     GetPlatformCrashpadAnnotations(&process_annotations);
 
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-    std::string url = "https://clients2.google.com/cr/report";
+    std::string url = "trk:309:https://clients2.google.com/cr/report";
 #else
     std::string url;
 #endif

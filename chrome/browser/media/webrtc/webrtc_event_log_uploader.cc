@@ -123,7 +123,7 @@ void OnURLLoadUploadProgress(uint64_t current, uint64_t total) {
 }  // namespace
 
 const char WebRtcEventLogUploaderImpl::kUploadURL[] =
-    "https://clients2.google.com/cr/report";
+    "trk:300:https://clients2.google.com/cr/report";
 
 std::unique_ptr<WebRtcEventLogUploader>
 WebRtcEventLogUploaderImpl::Factory::Create(const WebRtcLogFileInfo& log_file,
