@@ -58,7 +58,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
                                std::string());
   registry->RegisterBooleanPref(prefs::kAutologinEnabled, true);
   registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
-  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
+  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
   registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
 
   // Deprecated prefs: will be removed in a future release.
