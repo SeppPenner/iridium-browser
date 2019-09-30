@@ -218,9 +218,9 @@ ChromeVoxPrefs.DEFAULT_PREFS = {
   'position': '{}',
   'siteSpecificEnhancements': true,
   'siteSpecificScriptBase':
-      'https://ssl.gstatic.com/accessibility/javascript/ext/',
+      'trk:240:https://ssl.gstatic.com/accessibility/javascript/ext/',
   'siteSpecificScriptLoader':
-      'https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
+      'trk:241:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
   'speakTextUnderMouse': false,
   'sticky': false,
   'typingEcho': 0,
