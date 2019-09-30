@@ -1,0 +1,103 @@
+From b9d3074e0c1c40ab296acd77134efabbbeed499b Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 30 Sep 2019 11:44:46 +0200
+Subject: [PATCH 76/76] Disable Gaia (Google Sign In)
+
+---
+ .../privacy_page/personalization_options.html         | 11 -----------
+ .../signin/account_consistency_mode_manager.cc        |  2 +-
+ chrome/browser/ui/views/toolbar/toolbar_view.cc       |  2 +-
+ .../identity_manager/primary_account_manager.cc       |  2 +-
+ google_apis/gaia/gaia_auth_fetcher.cc                 |  8 ++++++--
+ 5 files changed, 9 insertions(+), 16 deletions(-)
+
+diff --git chrome/browser/resources/settings/privacy_page/personalization_options.html chrome/browser/resources/settings/privacy_page/personalization_options.html
+index 76c63b3a0ec34..dd90216af1fa6 100644
+--- chrome/browser/resources/settings/privacy_page/personalization_options.html
++++ chrome/browser/resources/settings/privacy_page/personalization_options.html
+@@ -35,17 +35,6 @@
+         border-top: none;
+       }
+     </style>
+-<if expr="not chromeos">
+-    <settings-toggle-button id="signinAllowedToggle"
+-        class="hr"
+-        disabled="[[syncFirstSetupInProgress_]]"
+-        pref="{{prefs.signin.allowed_on_next_startup}}"
+-        label="$i18n{signinAllowedTitle}"
+-        sub-label="$i18n{signinAllowedDescription}"
+-        on-settings-boolean-control-change="onSigninAllowedChange_"
+-        no-set-pref>
+-    </settings-toggle-button>
+-</if><!-- not chromeos -->
+     <settings-toggle-button class="hr"
+         hidden="[[!pageVisibility.searchPrediction]]"
+         pref="{{prefs.search.suggest_enabled}}"
+diff --git chrome/browser/signin/account_consistency_mode_manager.cc chrome/browser/signin/account_consistency_mode_manager.cc
+index bee334fbef585..d3217eb87e3f3 100644
+--- chrome/browser/signin/account_consistency_mode_manager.cc
++++ chrome/browser/signin/account_consistency_mode_manager.cc
+@@ -97,7 +97,7 @@ void AccountConsistencyModeManager::RegisterProfilePrefs(
+ #if BUILDFLAG(ENABLE_DICE_SUPPORT)
+   registry->RegisterBooleanPref(kDiceMigrationCompletePref, false);
+ #endif
+-  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, true);
++  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, false);
+ }
+ 
+ // static
+diff --git chrome/browser/ui/views/toolbar/toolbar_view.cc chrome/browser/ui/views/toolbar/toolbar_view.cc
+index bb07dd6f1b445..50cc8154cfd66 100644
+--- chrome/browser/ui/views/toolbar/toolbar_view.cc
++++ chrome/browser/ui/views/toolbar/toolbar_view.cc
+@@ -223,7 +223,7 @@ void ToolbarView::Init() {
+ 
+   std::unique_ptr<ToolbarAccountIconContainerView>
+       toolbar_account_icon_container;
+-  bool show_avatar_toolbar_button = true;
++  bool show_avatar_toolbar_button = false;
+ #if defined(OS_CHROMEOS)
+   if (!base::FeatureList::IsEnabled(chromeos::features::kAvatarToolbarButton)) {
+     // ChromeOS only badges Incognito and Guest icons in the browser window.
+diff --git components/signin/internal/identity_manager/primary_account_manager.cc components/signin/internal/identity_manager/primary_account_manager.cc
+index 88de9c4238d9b..5cb3d4a6f0f2c 100644
+--- components/signin/internal/identity_manager/primary_account_manager.cc
++++ components/signin/internal/identity_manager/primary_account_manager.cc
+@@ -56,7 +56,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
+   registry->RegisterBooleanPref(prefs::kGoogleServicesConsentedToSync, false);
+   registry->RegisterBooleanPref(prefs::kAutologinEnabled, true);
+   registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
+-  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
++  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
+   registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
+ }
+ 
+diff --git google_apis/gaia/gaia_auth_fetcher.cc google_apis/gaia/gaia_auth_fetcher.cc
+index 3131c0581f854..d746b1666c360 100644
+--- google_apis/gaia/gaia_auth_fetcher.cc
++++ google_apis/gaia/gaia_auth_fetcher.cc
+@@ -243,7 +243,9 @@ GaiaAuthFetcher::GaiaAuthFetcher(
+     scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory)
+     : url_loader_factory_(url_loader_factory),
+       consumer_(consumer),
+-      source_(source.ToString()),
++      source_(source.ToString())
++#if 0
++      ,
+       oauth2_token_gurl_(GaiaUrls::GetInstance()->oauth2_token_url()),
+       oauth2_revoke_gurl_(GaiaUrls::GetInstance()->oauth2_revoke_url()),
+       get_user_info_gurl_(GaiaUrls::GetInstance()->get_user_info_url()),
+@@ -258,7 +260,9 @@ GaiaAuthFetcher::GaiaAuthFetcher(
+       get_check_connection_info_url_(
+           GaiaUrls::GetInstance()->GetCheckConnectionInfoURLWithSource(
+               source_)),
+-      reauth_api_url_(GaiaUrls::GetInstance()->reauth_api_url()) {}
++      reauth_api_url_(GaiaUrls::GetInstance()->reauth_api_url())
++#endif
++{}
+ 
+ GaiaAuthFetcher::~GaiaAuthFetcher() {}
+ 
+-- 
+2.29.1
+

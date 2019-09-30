@@ -1,7 +1,7 @@
-From af7af58a8cfc3ff3327ee2e34bd67f9855114b29 Mon Sep 17 00:00:00 2001
+From 2ee470a6c8704212beea32a833e3764cf8461ed3 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 61/61] common: set Iridium version / User-Agent
+Subject: [PATCH 74/76] common: set Iridium version / User-Agent
 
 ---
  chrome/VERSION                                            | 8 ++++----
@@ -13,38 +13,38 @@ Subject: [PATCH 61/61] common: set Iridium version / User-Agent
  .../histograms/generate_expired_histograms_array.py       | 4 ++--
  7 files changed, 14 insertions(+), 10 deletions(-)
 
-diff --git a/chrome/VERSION b/chrome/VERSION
-index 877fb3c871cd0..83033a80b49ed 100644
---- a/chrome/VERSION
-+++ b/chrome/VERSION
+diff --git chrome/VERSION chrome/VERSION
+index 78d3c53293990..51b782c3e752e 100644
+--- chrome/VERSION
++++ chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=81
+-MAJOR=85
 -MINOR=0
--BUILD=4044
--PATCH=92
+-BUILD=4183
+-PATCH=83
 +MAJOR=2020
-+MINOR=04
-+BUILD=81
++MINOR=11
++BUILD=85
 +PATCH=0
-diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
-index 57cf7a7fef9de..b0f99859c3180 100644
---- a/components/version_info/version_info.cc
-+++ b/components/version_info/version_info.cc
-@@ -16,7 +16,9 @@
+diff --git components/version_info/version_info.cc components/version_info/version_info.cc
+index 4d71b1b6dd2fb..47a8f4767ae92 100644
+--- components/version_info/version_info.cc
++++ components/version_info/version_info.cc
+@@ -17,7 +17,9 @@
  namespace version_info {
  
  std::string GetProductNameAndVersionForUserAgent() {
 -  return "Chrome/" + GetVersionNumber();
 +  /* Currently, the Iridium install base is so small that it would make us rather identifiable if we had our own tag. */
-+	return "Chrome/80.0.3987.116";
++	return "Chrome/85.0.4183.83";
 +//  return "Iridium/" + GetVersionNumber();
  }
  
  std::string GetProductName() {
-diff --git a/components/version_info/version_info_values.h.version b/components/version_info/version_info_values.h.version
+diff --git components/version_info/version_info_values.h.version components/version_info/version_info_values.h.version
 index 6232e359ef20f..3cf4fee096c06 100644
---- a/components/version_info/version_info_values.h.version
-+++ b/components/version_info/version_info_values.h.version
+--- components/version_info/version_info_values.h.version
++++ components/version_info/version_info_values.h.version
 @@ -6,7 +6,7 @@
  #define COMPONENTS_VERSION_INFO_VERSION_INFO_VALUES_H_
  
@@ -54,11 +54,11 @@ index 6232e359ef20f..3cf4fee096c06 100644
  #define LAST_CHANGE "@LASTCHANGE@"
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
-diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index e7d9a7c8ec97d..867fc414dac17 100644
---- a/content/common/user_agent.cc
-+++ b/content/common/user_agent.cc
-@@ -222,6 +222,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+diff --git content/common/user_agent.cc content/common/user_agent.cc
+index 80d658a190626..2932c0740cf3c 100644
+--- content/common/user_agent.cc
++++ content/common/user_agent.cc
+@@ -290,6 +290,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
@@ -67,10 +67,10 @@ index e7d9a7c8ec97d..867fc414dac17 100644
    return user_agent;
  }
  
-diff --git a/extensions/shell/common/version.h.in b/extensions/shell/common/version.h.in
+diff --git extensions/shell/common/version.h.in extensions/shell/common/version.h.in
 index c4627fe512a1b..bf7d27484e997 100644
---- a/extensions/shell/common/version.h.in
-+++ b/extensions/shell/common/version.h.in
+--- extensions/shell/common/version.h.in
++++ extensions/shell/common/version.h.in
 @@ -7,7 +7,7 @@
  #ifndef EXTENSIONS_SHELL_COMMON_VERSION_H_
  #define EXTENSIONS_SHELL_COMMON_VERSION_H_
@@ -80,10 +80,10 @@ index c4627fe512a1b..bf7d27484e997 100644
  #define LAST_CHANGE "@LASTCHANGE@"
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
-diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
-index 00a2a6e9993e2..0ba59764edede 100644
---- a/tools/metrics/histograms/extract_histograms.py
-+++ b/tools/metrics/histograms/extract_histograms.py
+diff --git tools/metrics/histograms/extract_histograms.py tools/metrics/histograms/extract_histograms.py
+index 7af6cf4d95884..1f90ac22fee57 100644
+--- tools/metrics/histograms/extract_histograms.py
++++ tools/metrics/histograms/extract_histograms.py
 @@ -80,7 +80,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
      'Base histogram. Use suffixes of this histogram instead.')
  
@@ -93,10 +93,10 @@ index 00a2a6e9993e2..0ba59764edede 100644
  
  
  _ELEMENT_NODE = xml.dom.minidom.Node.ELEMENT_NODE
-diff --git a/tools/metrics/histograms/generate_expired_histograms_array.py b/tools/metrics/histograms/generate_expired_histograms_array.py
+diff --git tools/metrics/histograms/generate_expired_histograms_array.py tools/metrics/histograms/generate_expired_histograms_array.py
 index 423f9e2d0a0c7..ae67ef294abb3 100755
---- a/tools/metrics/histograms/generate_expired_histograms_array.py
-+++ b/tools/metrics/histograms/generate_expired_histograms_array.py
+--- tools/metrics/histograms/generate_expired_histograms_array.py
++++ tools/metrics/histograms/generate_expired_histograms_array.py
 @@ -15,8 +15,8 @@ import extract_histograms
  import merge_xml
  
@@ -109,5 +109,5 @@ index 423f9e2d0a0c7..ae67ef294abb3 100755
  _SCRIPT_NAME = "generate_expired_histograms_array.py"
  _HASH_DATATYPE = "uint64_t"
 -- 
-2.26.0
+2.29.1
 

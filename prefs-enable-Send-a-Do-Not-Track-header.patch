@@ -1,7 +1,7 @@
-From 60eb227c37e89d51c65f2093519fcdabe42373ab Mon Sep 17 00:00:00 2001
+From 60f0264dd6669b4bc5bdce46933e68ba3cdbe034 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 21/61] prefs: enable "Send a Do-Not-Track header"
+Subject: [PATCH 40/76] prefs: enable "Send a Do-Not-Track header"
 
 Set enable_do_not_track to true by default.
 
@@ -22,11 +22,11 @@ OPT-OUT.]
  chrome/browser/ui/browser_ui_prefs.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index a8070d77b86c2..80cbd03e449d8 100644
---- a/chrome/browser/ui/browser_ui_prefs.cc
-+++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -76,7 +76,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+diff --git chrome/browser/ui/browser_ui_prefs.cc chrome/browser/ui/browser_ui_prefs.cc
+index 84658e5679417..6d2cd347879c9 100644
+--- chrome/browser/ui/browser_ui_prefs.cc
++++ chrome/browser/ui/browser_ui_prefs.cc
+@@ -80,7 +80,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterDictionaryPref(prefs::kBrowserWindowPlacementPopup);
    registry->RegisterDictionaryPref(prefs::kAppWindowPlacement);
    registry->RegisterBooleanPref(
@@ -36,5 +36,5 @@ index a8070d77b86c2..80cbd03e449d8 100644
  #if !defined(OS_CHROMEOS) && !defined(OS_ANDROID)
    registry->RegisterBooleanPref(prefs::kPrintPreviewUseSystemDefaultPrinter,
 -- 
-2.26.0
+2.29.1
 

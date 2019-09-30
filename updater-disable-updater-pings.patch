@@ -1,7 +1,7 @@
-From 9f7a396b69e79689042c059a434d7c76ab4958fb Mon Sep 17 00:00:00 2001
+From 85aa90c2c53c0bca4cfb1850e53964cf941ba3f2 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 43/61] updater: disable updater pings
+Subject: [PATCH 61/76] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
@@ -11,10 +11,10 @@ Chromium would still send background requests. Kill it.
  components/component_updater/configurator_impl.cc             | 3 ++-
  2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/components/component_updater/component_updater_url_constants.cc b/components/component_updater/component_updater_url_constants.cc
+diff --git components/component_updater/component_updater_url_constants.cc components/component_updater/component_updater_url_constants.cc
 index 42bf2c4b96de5..d8d709482b5a2 100644
---- a/components/component_updater/component_updater_url_constants.cc
-+++ b/components/component_updater/component_updater_url_constants.cc
+--- components/component_updater/component_updater_url_constants.cc
++++ components/component_updater/component_updater_url_constants.cc
 @@ -15,9 +15,9 @@ namespace component_updater {
  // The value of |kDefaultUrlSource| can be overridden with
  // --component-updater=url-source=someurl.
@@ -27,10 +27,10 @@ index 42bf2c4b96de5..d8d709482b5a2 100644
 +    "trk:171:http://update.googleapis.com/service/update2/json";
  
  }  // namespace component_updater
-diff --git a/components/component_updater/configurator_impl.cc b/components/component_updater/configurator_impl.cc
-index d809633f00778..12ac97d7498c3 100644
---- a/components/component_updater/configurator_impl.cc
-+++ b/components/component_updater/configurator_impl.cc
+diff --git components/component_updater/configurator_impl.cc components/component_updater/configurator_impl.cc
+index 5066fb240e0ec..40d60de5bbeb4 100644
+--- components/component_updater/configurator_impl.cc
++++ components/component_updater/configurator_impl.cc
 @@ -42,7 +42,7 @@ ConfiguratorImpl::ConfiguratorImpl(
      : background_downloads_enabled_(config_policy.BackgroundDownloadsEnabled()),
        deltas_enabled_(config_policy.DeltaUpdatesEnabled()),
@@ -49,5 +49,5 @@ index d809633f00778..12ac97d7498c3 100644
    std::vector<GURL> urls{GURL(kUpdaterJSONDefaultUrl),
                           GURL(kUpdaterJSONFallbackUrl)};
 -- 
-2.26.0
+2.29.1
 

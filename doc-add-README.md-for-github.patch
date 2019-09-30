@@ -1,17 +1,17 @@
-From fe2c5c75d259eeaff19857eeb1ac4028290284d3 Mon Sep 17 00:00:00 2001
+From 12e0c00738a657b4e356d23ffdca7c8e164509b7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 14:30:46 +0200
-Subject: [PATCH 04/61] doc: add README.md for github
+Subject: [PATCH 05/76] doc: add README.md for github
 
 ---
- README.md | 47 ++++++++++++++++++++++++++++++++++++++++-------
- 1 file changed, 40 insertions(+), 7 deletions(-)
+ README.md | 50 +++++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 39 insertions(+), 11 deletions(-)
 
-diff --git a/README.md b/README.md
-index 865f9a7bad300..eb13fe0af896f 100644
---- a/README.md
-+++ b/README.md
-@@ -1,11 +1,44 @@
+diff --git README.md README.md
+index b6b57e5fc75ea..94390ba92f6df 100644
+--- README.md
++++ README.md
+@@ -1,16 +1,44 @@
 -# ![Logo](chrome/app/theme/chromium/product_logo_64.png) Chromium
 +Iridium Browser
 +==============================
@@ -29,7 +29,11 @@ index 865f9a7bad300..eb13fe0af896f 100644
 -Learn how to [Get Around the Chromium Source Code Directory Structure
 -](https://www.chromium.org/developers/how-tos/getting-around-the-chrome-source-code).
 +The repository is at [https://github.com/iridium-browser/iridium-browser/](https://github.com/iridium-browser/iridium-browser/).
-+
+ 
+-For historical reasons, there are some small top level directories. Now the
+-guidance is that new top level directories are for product (e.g. Chrome,
+-Android WebView, Ash). Even if these products have multiple executables, the
+-code should be in subdirectories of the product.
 +The easy way to build from source is to re-use the mechanisms of one's Linux distribution, that is, their build environment and description for chromium, and replacing the source tarball by the one from [https://dl.iridiumbrowser.de/source/](https://dl.iridiumbrowser.de/source/).
 +
 +For the more adventurous, there is a 10-step(-ish) guide to build from git:
@@ -38,7 +42,7 @@ index 865f9a7bad300..eb13fe0af896f 100644
 +
 +2. Issue command: `gclient sync` (this utility comes from depot_tools). For gclient, you need to have python 2(!) and python2-virtualenv. The sync command will not necessary complete successfully due to webrtc.
 +
-+3. Download matching WebRTC code. Google populates the Chromium `DEPS` file with a commit hash for WebRTC that not always a branch head which, as a result, is not downloaded by `gclient sync`. Therefore, you have to fetch the data manually:
++3. Download WebRTC if gclient did not do it for you. Google populates the Chromium `DEPS` file with a commit hash for WebRTC, and if there is no branch head which is exactly equal to the hash, `gclient sync` barfs about it. Then, you have to fetch the data manually:
 +
 +	pushd third_party/webrtc/
 +	git ls-remote origin | grep 0b2302e5e0418b6716fbc0b3927874fd3a842caf
@@ -62,7 +66,7 @@ index 865f9a7bad300..eb13fe0af896f 100644
 +
 +## Reporting bugs and issues
 +
-+Please use the [Iridium Browser tracker](https://github.com/iridium-browser/iridium-browser/issues) on GitHub to report your findings or to add feature requests.
++Use the [Iridium Browser tracker](https://github.com/iridium-browser/iridium-browser/issues) on GitHub to report your findings or to add feature requests.
 -- 
-2.26.0
+2.29.1
 

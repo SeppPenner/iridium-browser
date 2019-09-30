@@ -1,0 +1,56 @@
+From 3861ff3cddacac6e86186ab5c987cbd7d15e63c8 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:36:48 +0200
+Subject: [PATCH 11/76] SUSE chromium-system-libusb.patch
+
+---
+ build/linux/unbundle/libusb.gn           | 24 ++++++++++++++++++++++++
+ build/linux/unbundle/replace_gn_files.py |  1 +
+ 2 files changed, 25 insertions(+)
+ create mode 100644 build/linux/unbundle/libusb.gn
+
+diff --git build/linux/unbundle/libusb.gn build/linux/unbundle/libusb.gn
+new file mode 100644
+index 0000000000000..9f56f092d1374
+--- /dev/null
++++ build/linux/unbundle/libusb.gn
+@@ -0,0 +1,24 @@
++# Copyright 2016 The Chromium Authors. All rights reserved.
++# Use of this source code is governed by a BSD-style license that can be
++# found in the LICENSE file.
++
++import("//build/config/linux/pkg_config.gni")
++import("//build/shim_headers.gni")
++
++pkg_config("system_libusb") {
++  packages = [ "libusb-1.0" ]
++}
++
++shim_headers("libusb_shim") {
++  root_path = "src/libusb"
++  headers = [
++    "libusb.h",
++  ]
++}
++
++source_set("libusb") {
++  deps = [
++    ":libusb_shim",
++  ]
++  public_configs = [ ":system_libusb" ]
++}
+diff --git build/linux/unbundle/replace_gn_files.py build/linux/unbundle/replace_gn_files.py
+index d4d07f23d9909..51cef31a94bad 100755
+--- build/linux/unbundle/replace_gn_files.py
++++ build/linux/unbundle/replace_gn_files.py
+@@ -27,6 +27,7 @@ REPLACEMENTS = {
+   'libevent': 'base/third_party/libevent/BUILD.gn',
+   'libjpeg': 'third_party/libjpeg.gni',
+   'libpng': 'third_party/libpng/BUILD.gn',
++  'libusb': 'third_party/libusb/BUILD.gn',
+   'libvpx': 'third_party/libvpx/BUILD.gn',
+   'libwebp': 'third_party/libwebp/BUILD.gn',
+   'libxml': 'third_party/libxml/BUILD.gn',
+-- 
+2.29.1
+

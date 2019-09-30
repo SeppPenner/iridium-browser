@@ -1,7 +1,7 @@
-From 44a60344937b2722a79b309ae14f49886e8d94c7 Mon Sep 17 00:00:00 2001
+From 1e858b0a9699a28769d4bcc308bcbfb9e92c9571 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 30 Oct 2014 22:04:24 +0100
-Subject: [PATCH 32/61] prefs: disable translation service
+Subject: [PATCH 51/76] prefs: disable translation service
 
 When translation is enabled, the translation manager will request a
 list of supported languages from translate.googleapis.com.
@@ -12,11 +12,11 @@ instead to request translations via Google.
  chrome/browser/ui/browser_ui_prefs.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 306c8aa8a0536..e22b7b8d17169 100644
---- a/chrome/browser/ui/browser_ui_prefs.cc
-+++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -67,7 +67,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+diff --git chrome/browser/ui/browser_ui_prefs.cc chrome/browser/ui/browser_ui_prefs.cc
+index f5fa27bde0b74..69ed049d96fa4 100644
+--- chrome/browser/ui/browser_ui_prefs.cc
++++ chrome/browser/ui/browser_ui_prefs.cc
+@@ -71,7 +71,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(prefs::kWebAppCreateInAppsMenu, true);
    registry->RegisterBooleanPref(prefs::kWebAppCreateInQuickLaunchBar, true);
    registry->RegisterBooleanPref(
@@ -26,5 +26,5 @@ index 306c8aa8a0536..e22b7b8d17169 100644
    registry->RegisterStringPref(prefs::kCloudPrintEmail, std::string());
    registry->RegisterBooleanPref(prefs::kCloudPrintProxyEnabled, true);
 -- 
-2.26.0
+2.29.1
 

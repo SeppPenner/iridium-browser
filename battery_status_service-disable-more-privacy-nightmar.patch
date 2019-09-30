@@ -1,7 +1,7 @@
-From 2f0d40faea80a31f66ae66635183d2552a178541 Mon Sep 17 00:00:00 2001
+From 7a611ceaf7f0f587e9c6da82771b9b6a9f117000 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 4 Aug 2015 15:15:53 +0200
-Subject: [PATCH 51/61] battery_status_service: disable more privacy nightmares
+Subject: [PATCH 67/76] battery_status_service: disable more privacy nightmares
 
 The W3C Battery Status API[1] has quite a laughable statement:
 
@@ -22,10 +22,10 @@ References: https://github.com/iridium-browser/iridium-browser/issues/40
  services/device/battery/battery_status_service.cc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/services/device/battery/battery_status_service.cc b/services/device/battery/battery_status_service.cc
+diff --git services/device/battery/battery_status_service.cc services/device/battery/battery_status_service.cc
 index 67f6c9f7136e9..7389bd097990a 100644
---- a/services/device/battery/battery_status_service.cc
-+++ b/services/device/battery/battery_status_service.cc
+--- services/device/battery/battery_status_service.cc
++++ services/device/battery/battery_status_service.cc
 @@ -43,6 +43,7 @@ BatteryStatusService::AddCallback(const BatteryUpdateCallback& callback) {
    if (!battery_fetcher_)
      battery_fetcher_ = BatteryStatusManager::Create(update_callback_);
@@ -43,5 +43,5 @@ index 67f6c9f7136e9..7389bd097990a 100644
    return callback_list_.Add(callback);
  }
 -- 
-2.26.0
+2.29.1
 

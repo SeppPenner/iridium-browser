@@ -1,0 +1,28 @@
+From ebf99172a9670f120869a5331fb9a88183d67278 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 24 May 2020 08:15:38 +0200
+Subject: [PATCH 06/76] SUSE chromium-libusb_interrupt_event_handler.patch
+
+---
+ services/device/usb/usb_context.cc | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git services/device/usb/usb_context.cc services/device/usb/usb_context.cc
+index 304be8f14ae39..9e8b82b107f81 100644
+--- services/device/usb/usb_context.cc
++++ services/device/usb/usb_context.cc
+@@ -58,7 +58,11 @@ void UsbContext::UsbEventHandler::Run() {
+ 
+ void UsbContext::UsbEventHandler::Stop() {
+   base::subtle::Release_Store(&running_, 0);
++#ifdef LIBUSB_API_VERSION >= 0x01000105
++  libusb_interrupt_event_handler(context_);
++#else
+   libusb_interrupt_handle_event(context_);
++#endif
+ }
+ 
+ UsbContext::UsbContext(PlatformUsbContext context) : context_(context) {
+-- 
+2.29.1
+

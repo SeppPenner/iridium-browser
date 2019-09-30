@@ -1,0 +1,33 @@
+From d76f77c650dbbba2fba64d46350390a45c3b5ae5 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 24 May 2020 08:24:42 +0200
+Subject: [PATCH 09/76] SUSE chromium-master-prefs-path.patch
+
+modified.
+
+prefs: use system-provided preference skeleton
+
+This patch makes it possible for distributions to have a global
+default preferences file in /etc/iridium-browser/preferences that get
+copied over to ~ when the user starts the program for the first time.
+---
+ chrome/browser/first_run/first_run_internal_linux.cc | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git chrome/browser/first_run/first_run_internal_linux.cc chrome/browser/first_run/first_run_internal_linux.cc
+index c67666610c39c..13f93a1ed719f 100644
+--- chrome/browser/first_run/first_run_internal_linux.cc
++++ chrome/browser/first_run/first_run_internal_linux.cc
+@@ -20,8 +20,7 @@ bool IsOrganicFirstRun() {
+ base::FilePath MasterPrefsPath() {
+   // The standard location of the master prefs is next to the chrome binary.
+   base::FilePath master_prefs;
+-  if (!base::PathService::Get(base::DIR_EXE, &master_prefs))
+-    return base::FilePath();
++  master_prefs = base::FilePath("/etc/iridium-browser");
+   return master_prefs.AppendASCII(installer::kDefaultMasterPrefs);
+ }
+ 
+-- 
+2.29.1
+

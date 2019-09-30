@@ -1,0 +1,61 @@
+From 681f210cffdba56b0f219e7ffe409529595eea82 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:43:13 +0200
+Subject: [PATCH 19/76] SUSE no-location-leap151.patch
+
+revert location on old GCC on 15.1, 15.2 gets it right tho
+---
+ base/location.cc               | 2 +-
+ base/location.h                | 7 +------
+ media/base/media_serializers.h | 4 ++--
+ 3 files changed, 4 insertions(+), 9 deletions(-)
+
+diff --git base/location.cc base/location.cc
+index e18e66116788f..807110999e0ff 100644
+--- base/location.cc
++++ base/location.cc
+@@ -92,7 +92,7 @@ NOINLINE Location Location::Current(const char* file_name) {
+ #else
+ // static
+ NOINLINE Location Location::Current() {
+-  return Location(nullptr, RETURN_ADDRESS());
++  return Location("[unknown file]", RETURN_ADDRESS());
+ }
+ #endif
+ 
+diff --git base/location.h base/location.h
+index c9057b28004e5..c7f85dbcc1a76 100644
+--- base/location.h
++++ base/location.h
+@@ -18,12 +18,7 @@
+ 
+ namespace base {
+ 
+-#if defined(__has_builtin)
+-// Clang allows detection of these builtins.
+-#define SUPPORTS_LOCATION_BUILTINS                                       \
+-  (__has_builtin(__builtin_FUNCTION) && __has_builtin(__builtin_FILE) && \
+-   __has_builtin(__builtin_LINE))
+-#elif defined(COMPILER_GCC) && __GNUC__ >= 7
++#if defined(COMPILER_GCC) && __GNUC__ >= 10
+ // GCC has supported these for a long time, but they point at the function
+ // declaration in the case of default arguments, rather than at the call site.
+ #define SUPPORTS_LOCATION_BUILTINS 1
+diff --git media/base/media_serializers.h media/base/media_serializers.h
+index 832625da3ff33..f281a4ac24582 100644
+--- media/base/media_serializers.h
++++ media/base/media_serializers.h
+@@ -378,8 +378,8 @@ template <>
+ struct MediaSerializer<base::Location> {
+   static base::Value Serialize(const base::Location& value) {
+     base::Value result(base::Value::Type::DICTIONARY);
+-    FIELD_SERIALIZE("file", value.file_name());
+-    FIELD_SERIALIZE("line", value.line_number());
++    FIELD_SERIALIZE("file", value.file_name() ? value.file_name() : "unknown");
++    FIELD_SERIALIZE("line", value.line_number() ? value.line_number() : 0);
+     return result;
+   }
+ };
+-- 
+2.29.1
+

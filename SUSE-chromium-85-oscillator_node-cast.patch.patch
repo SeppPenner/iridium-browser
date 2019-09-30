@@ -1,0 +1,44 @@
+From 07a73e152dfe156c3366559fca85e16c1f793479 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:46:39 +0200
+Subject: [PATCH 27/76] SUSE chromium-85-oscillator_node-cast.patch
+
+From abd4ce23840614bb9e47fd0e674d1cbe74ec3fb6 Mon Sep 17 00:00:00 2001
+From: Jose Dapena Paz <jdapena@igalia.com>
+Date: Tue, 16 Jun 2020 21:08:28 +0200
+Subject: [PATCH] fixup: do not return to 128 integer word from _mm_cmplt_ps in v_wrap_virtual_index.
+
+After the changes to convert to SIMD several operations in
+WebAudio oscillator node, GCC refuses to compile a call to _mm_cmplt_ps
+as it returns to an m128i (integer quad), though the declaration of
+_mm_cmplt_ps expects to return to an m128 (float quad).
+
+To fix that, we reinterpret_cast<__m128i>. When we obtain 0xffffffff,
+that is NaN, if we interpret it as an integer, it will convert it to
+0x80000000, which is wrong.
+
+Verified with webaudio/Oscillator/* web tests.
+
+Bug: 819294
+Change-Id: Ia00a7695476e84996548b6c679ffeedead49213b
+---
+ third_party/blink/renderer/modules/webaudio/oscillator_node.cc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git third_party/blink/renderer/modules/webaudio/oscillator_node.cc third_party/blink/renderer/modules/webaudio/oscillator_node.cc
+index 08f20fc022a88..71671affd8dcd 100644
+--- third_party/blink/renderer/modules/webaudio/oscillator_node.cc
++++ third_party/blink/renderer/modules/webaudio/oscillator_node.cc
+@@ -377,7 +377,8 @@ static __m128 v_wrap_virtual_index(__m128 x,
+ 
+   // cmplt(a,b) returns 0xffffffff (-1) if a < b and 0 if not.  So cmp is -1 or
+   // 0 depending on whether r < f, which is what we need to compute floor(r).
+-  const __m128i cmp = _mm_cmplt_ps(r, _mm_cvtepi32_ps(f));
++  const __m128i cmp =
++      reinterpret_cast<__m128i>(_mm_cmplt_ps(r, _mm_cvtepi32_ps(f)));
+ 
+   // This subtracts 1 if needed to get floor(r).
+   f = _mm_add_epi32(f, cmp);
+-- 
+2.29.1
+

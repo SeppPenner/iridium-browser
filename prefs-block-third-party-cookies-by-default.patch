@@ -1,7 +1,7 @@
-From 4ae4f2e72ede0725a969994ca5a585d1280abc00 Mon Sep 17 00:00:00 2001
+From 40dccec743423c0510f99b4ad6c2be18c237e051 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:43:55 +0200
-Subject: [PATCH 23/61] prefs: block third-party cookies by default
+Subject: [PATCH 42/76] prefs: block third-party cookies by default
 
 Reject extra cookies which are likely used for tracking and whatnot.
 There are very few websites which require this, and if you do visit
@@ -10,11 +10,11 @@ some, static exceptions can be defined.
  components/content_settings/core/browser/cookie_settings.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/components/content_settings/core/browser/cookie_settings.cc b/components/content_settings/core/browser/cookie_settings.cc
-index 5ec81fad84e91..9bb9c672ee997 100644
---- a/components/content_settings/core/browser/cookie_settings.cc
-+++ b/components/content_settings/core/browser/cookie_settings.cc
-@@ -59,7 +59,7 @@ void CookieSettings::GetCookieSettings(
+diff --git components/content_settings/core/browser/cookie_settings.cc components/content_settings/core/browser/cookie_settings.cc
+index a7868548eaa1d..9143278b5ff08 100644
+--- components/content_settings/core/browser/cookie_settings.cc
++++ components/content_settings/core/browser/cookie_settings.cc
+@@ -63,7 +63,7 @@ void CookieSettings::GetCookieSettings(
  void CookieSettings::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(
@@ -24,5 +24,5 @@ index 5ec81fad84e91..9bb9c672ee997 100644
    registry->RegisterIntegerPref(
        prefs::kCookieControlsMode,
 -- 
-2.26.0
+2.29.1
 

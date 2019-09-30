@@ -1,0 +1,28 @@
+From 85552c88752d668e5d168c5f42b48f8c17b85180 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Thu, 29 Jan 2015 10:46:40 +0100
+Subject: [PATCH 08/76] SUSE exclude_ymp.patch
+
+mime_util: force text/x-suse-ymp to be downloaded
+
+YMP files (YaST One Click Install) are plaintext XML, but also not
+very interesting in themselves. Force them to be stored.
+---
+ third_party/blink/common/mime_util/mime_util.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git third_party/blink/common/mime_util/mime_util.cc third_party/blink/common/mime_util/mime_util.cc
+index 2c2fcc8c15253..f6f5e75adf454 100644
+--- third_party/blink/common/mime_util/mime_util.cc
++++ third_party/blink/common/mime_util/mime_util.cc
+@@ -77,6 +77,7 @@ static const char* const kUnsupportedTextTypes[] = {
+     "text/x-csv",
+     "text/x-vcf",
+     "text/rtf",
++    "text/x-suse-ymp",
+     "text/comma-separated-values",
+     "text/csv",
+     "text/tab-separated-values",
+-- 
+2.29.1
+

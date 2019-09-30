@@ -1,0 +1,26 @@
+From 933cbedb14c8b72551fecbefb9d4b7dadb7c4946 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:36:03 +0200
+Subject: [PATCH 10/76] SUSE chromium-drm.patch
+
+---
+ ui/gfx/native_pixmap_handle.cc | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git ui/gfx/native_pixmap_handle.cc ui/gfx/native_pixmap_handle.cc
+index fa41b717ea7f7..a5cf9baef4e7c 100644
+--- ui/gfx/native_pixmap_handle.cc
++++ ui/gfx/native_pixmap_handle.cc
+@@ -22,6 +22,9 @@
+ namespace gfx {
+ 
+ #if defined(OS_LINUX)
++#ifndef DRM_FORMAT_MOD_INVALID
++#define DRM_FORMAT_MOD_INVALID ((1ULL<<56) - 1)
++#endif
+ static_assert(NativePixmapHandle::kNoModifier == DRM_FORMAT_MOD_INVALID,
+               "gfx::NativePixmapHandle::kNoModifier should be an alias for"
+               "DRM_FORMAT_MOD_INVALID");
+-- 
+2.29.1
+

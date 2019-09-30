@@ -1,0 +1,27 @@
+From 124489b4e6647b62b0dd8bf9ac3993660e4bc2cd Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:44:37 +0200
+Subject: [PATCH 21/76] SUSE chromium-blink-gcc-diagnostic-pragma.patch
+
+---
+ third_party/blink/renderer/platform/heap/finalizer_traits.h | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git third_party/blink/renderer/platform/heap/finalizer_traits.h third_party/blink/renderer/platform/heap/finalizer_traits.h
+index b72703232ff33..17a3abc1f9b3c 100644
+--- third_party/blink/renderer/platform/heap/finalizer_traits.h
++++ third_party/blink/renderer/platform/heap/finalizer_traits.h
+@@ -43,10 +43,7 @@ struct FinalizerTraitImpl<T, true> {
+ // an object's base class has a virtual destructor. In case there is no virtual
+ // destructor present, the object is always finalized through its leaf type. In
+ // other words: there is no finalization through a base pointer.
+-#pragma GCC diagnostic push
+-#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
+       static_cast<T*>(obj)->~T();
+-#pragma GCC diagnostic pop
+     }
+   };
+   using FinalizeImpl =
+-- 
+2.29.1
+

@@ -1,7 +1,7 @@
-From 7daa48a21935374461db8f86efc7cb74d52190ea Mon Sep 17 00:00:00 2001
+From c599c8fa815166308218ad4d853624255016a610 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Jan 2015 13:57:44 +0100
-Subject: [PATCH 36/61] src: use cached copy of safebrowsing lists at
+Subject: [PATCH 54/76] src: use cached copy of safebrowsing lists at
  iridiumbrowser.de
 
 To avoid contacing Google, let the UA use safebrowsing lists hosted at
@@ -11,11 +11,11 @@ regular basis.
  chrome/browser/safe_browsing/client_side_model_loader.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/chrome/browser/safe_browsing/client_side_model_loader.cc b/chrome/browser/safe_browsing/client_side_model_loader.cc
-index 1f626d44cb867..8e4b3b74237d9 100644
---- a/chrome/browser/safe_browsing/client_side_model_loader.cc
-+++ b/chrome/browser/safe_browsing/client_side_model_loader.cc
-@@ -34,7 +34,7 @@ namespace safe_browsing {
+diff --git chrome/browser/safe_browsing/client_side_model_loader.cc chrome/browser/safe_browsing/client_side_model_loader.cc
+index 0c740b727f212..abb6b273013ed 100644
+--- chrome/browser/safe_browsing/client_side_model_loader.cc
++++ chrome/browser/safe_browsing/client_side_model_loader.cc
+@@ -58,7 +58,7 @@ std::string ReadFileIntoString(base::FilePath path) {
  const size_t ModelLoader::kMaxModelSizeBytes = 150 * 1024;
  const int ModelLoader::kClientModelFetchIntervalMs = 3600 * 1000;
  const char ModelLoader::kClientModelUrlPrefix[] =
@@ -25,5 +25,5 @@ index 1f626d44cb867..8e4b3b74237d9 100644
      "client_model_v5%s_variation_%d.pb";
  const char ModelLoader::kClientModelFinchExperiment[] =
 -- 
-2.26.0
+2.29.1
 

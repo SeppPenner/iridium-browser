@@ -1,0 +1,25 @@
+From 8bed1562277de09e049e8eeadc5a3c4747e24c79 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Mon, 7 Sep 2020 10:33:59 +0200
+Subject: [PATCH 30/76] SUSE chromium-disable-parallel-gold.patch
+
+---
+ build/config/compiler/BUILD.gn | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git build/config/compiler/BUILD.gn build/config/compiler/BUILD.gn
+index 6e219b3994e2f..420ddbdbc7295 100644
+--- build/config/compiler/BUILD.gn
++++ build/config/compiler/BUILD.gn
+@@ -423,8 +423,6 @@ config("compiler") {
+         # https://groups.google.com/a/chromium.org/group/chromium-dev/browse_thread/thread/281527606915bb36
+         # Only apply this to the target linker, since the host
+         # linker might not be gold, but isn't used much anyway.
+-        "-Wl,--threads",
+-        "-Wl,--thread-count=4",
+       ]
+     }
+ 
+-- 
+2.29.1
+

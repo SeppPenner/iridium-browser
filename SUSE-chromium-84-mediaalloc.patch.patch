@@ -1,0 +1,35 @@
+From 858401772d9a0468b45b42fdf3aabde16b70fc5a Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 6 Sep 2020 20:43:58 +0200
+Subject: [PATCH 20/76] SUSE chromium-84-mediaalloc.patch
+
+https://bugs.chromium.org/p/chromium/issues/detail?id=1095962
+---
+ media/base/media.cc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git media/base/media.cc media/base/media.cc
+index c282ee49a038d..3feece8a2caf0 100644
+--- media/base/media.cc
++++ media/base/media.cc
+@@ -2,6 +2,8 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <limits>
++
+ #include "media/base/media.h"
+ 
+ #include "base/allocator/buildflags.h"
+@@ -41,7 +43,7 @@ class MediaInitializer {
+ 
+ #if BUILDFLAG(USE_ALLOCATOR_SHIM)
+     // Remove allocation limit from ffmpeg, so calls go down to shim layer.
+-    av_max_alloc(0);
++    av_max_alloc(std::numeric_limits<size_t>::max());
+ #endif  // BUILDFLAG(USE_ALLOCATOR_SHIM)
+ 
+ #endif  // BUILDFLAG(ENABLE_FFMPEG)
+-- 
+2.29.1
+

@@ -1,7 +1,7 @@
-From 17477125f10898da3a051fb73c381aa08d0a0138 Mon Sep 17 00:00:00 2001
+From 5dd4cb00381d8242aab5fa7ccf34f1a527f54e60 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 13 Feb 2015 00:59:04 +0100
-Subject: [PATCH 39/61] updater: disable auto-update
+Subject: [PATCH 56/76] updater: disable auto-update
 
 As per http://www.chromium.org/administrators/turning-off-auto-updates ,
 the auto update function is decidedly disabled on Linux, i.e.
@@ -14,11 +14,11 @@ the case anyway, since we are based off Chromium, not Chrome.
  chrome/browser/app_controller_mac.mm | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/chrome/browser/app_controller_mac.mm b/chrome/browser/app_controller_mac.mm
-index af7738e169479..4e4bbe6ee5a33 100644
---- a/chrome/browser/app_controller_mac.mm
-+++ b/chrome/browser/app_controller_mac.mm
-@@ -660,7 +660,7 @@ static base::mac::ScopedObjCClassSwizzler* g_swizzle_imk_input_session;
+diff --git chrome/browser/app_controller_mac.mm chrome/browser/app_controller_mac.mm
+index 559e51776e421..0ebbd61a38942 100644
+--- chrome/browser/app_controller_mac.mm
++++ chrome/browser/app_controller_mac.mm
+@@ -668,7 +668,7 @@ static base::mac::ScopedObjCClassSwizzler* g_swizzle_imk_input_session;
    CFStringRef checkInterval = CFSTR("checkInterval");
    CFPropertyListRef plist = CFPreferencesCopyAppValue(checkInterval, app);
    if (!plist) {
@@ -28,5 +28,5 @@ index af7738e169479..4e4bbe6ee5a33 100644
      CFPreferencesSetAppValue(checkInterval, value, app);
      CFPreferencesAppSynchronize(app);
 -- 
-2.26.0
+2.29.1
 

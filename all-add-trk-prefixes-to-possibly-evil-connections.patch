@@ -1,11 +1,11 @@
-From 43e216c6b38925debe29121b1e7de4095c4f166e Mon Sep 17 00:00:00 2001
+From 06f6141610cb2aa562c94dbb9f1f4355e4b34c5d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 30 Sep 2019 09:37:51 +0200
-Subject: [PATCH 56/61] all: add trk: prefixes to possibly evil connections
+Subject: [PATCH 75/76] all: add trk: prefixes to possibly evil connections
 
 Prefix URLs to Google services with trk: so that whenever something
 tries to load them, the developer will be informed via printf and
-dialog about this infraction.
+dialog (extra info bar between URLbar and content window) about this.
 
 If you see such dialog, we know that (a) either the URL needs to be
 whitelisted, or (b) the feature that triggered it needs to be disabled
@@ -22,7 +22,6 @@ by default.
  .../media/webrtc/webrtc_log_uploader.cc       |  2 +-
  .../nacl_host/nacl_infobar_delegate.cc        |  2 +-
  .../profiles/profile_avatar_downloader.cc     |  2 +-
- .../chromevox/background/prefs.js             |  4 ++--
  .../default_apps/external_extensions.json     |  6 +++---
  .../client_side_detection_service.cc          |  2 +-
  .../download_protection/download_feedback.cc  |  2 +-
@@ -31,26 +30,21 @@ by default.
  .../browser/tracing/crash_service_uploader.cc |  2 +-
  .../ui/views/outdated_upgrade_bubble_view.cc  |  2 +-
  .../ui/webui/ntp/ntp_resource_cache.cc        |  8 ++++----
+ .../components/recovery_component.cc          |  2 +-
  .../crash/crashpad_crash_reporter.cc          |  2 +-
  .../extensions/chrome_extensions_client.cc    |  4 ++--
  .../setup/google_chrome_behaviors.cc          |  2 +-
- chrome/updater/updater_constants.cc           |  2 +-
  .../browser/service/cast_service_simple.cc    |  2 +-
  chromecast/crash/linux/minidump_uploader.cc   |  2 +-
  .../simple_geolocation_provider.cc            |  2 +-
  .../common/cloud_devices_urls.cc              |  8 ++++----
- .../crash/content/app/breakpad_linux.cc       |  2 +-
- .../crash/content/app/crashpad_linux.cc       |  2 +-
- components/crash/content/app/crashpad_mac.mm  |  2 +-
- components/crash/content/app/crashpad_win.cc  |  2 +-
  components/drive/service/drive_api_service.cc |  4 ++--
  components/feedback/feedback_uploader.cc      |  2 +-
  components/gcm_driver/gcm_account_tracker.cc  |  4 ++--
+ components/google/core/common/google_util.cc  |  2 +-
  .../core/browser/web_history_service.cc       |  6 +++---
- .../invalidation/impl/gcm_network_channel.cc  |  2 +-
  components/metrics/url_constants.cc           |  2 +-
  .../core/browser/password_store.cc            |  8 ++++----
- .../policy/core/common/policy_loader_win.cc   |  2 +-
  components/rappor/rappor_service_impl.cc      |  2 +-
  .../safe_search_url_checker_client.cc         |  2 +-
  .../safe_search_api/stub_url_checker.cc       |  2 +-
@@ -61,6 +55,7 @@ by default.
  .../browser/webauth/authenticator_common.cc   |  4 ++--
  .../shell/browser/shell_browser_main_parts.cc |  2 +-
  google_apis/gaia/gaia_constants.cc            | 20 +++++++++----------
+ google_apis/gaia/gaia_urls.cc                 |  1 +
  google_apis/gcm/engine/gservices_settings.cc  |  6 +++---
  .../notifier/base/gaia_token_pre_xmpp_auth.cc |  2 +-
  remoting/base/breakpad_mac.mm                 |  2 +-
@@ -70,12 +65,12 @@ by default.
  .../chromevox/background/prefs.js             |  4 ++--
  .../chromevoxclassic/host/chrome/host.js      |  4 ++--
  ui/views/examples/webview_example.cc          |  2 +-
- 59 files changed, 95 insertions(+), 94 deletions(-)
+ 54 files changed, 89 insertions(+), 87 deletions(-)
 
-diff --git a/build/mac/tweak_info_plist.py b/build/mac/tweak_info_plist.py
+diff --git build/mac/tweak_info_plist.py build/mac/tweak_info_plist.py
 index bbf3332d35084..1faf1da872820 100755
---- a/build/mac/tweak_info_plist.py
-+++ b/build/mac/tweak_info_plist.py
+--- build/mac/tweak_info_plist.py
++++ build/mac/tweak_info_plist.py
 @@ -211,7 +211,7 @@ def _AddKeystoneKeys(plist, bundle_identifier):
    also requires the |bundle_identifier| argument (com.example.product)."""
    plist['KSVersion'] = plist['CFBundleShortVersionString']
@@ -85,10 +80,10 @@ index bbf3332d35084..1faf1da872820 100755
  
    _RemoveKeys(plist, 'KSChannelID')
    for tag_suffix in _TagSuffixes():
-diff --git a/chrome/browser/chromeos/customization/customization_document.cc b/chrome/browser/chromeos/customization/customization_document.cc
-index cb8c9708477cf..2f7757a9e4a48 100644
---- a/chrome/browser/chromeos/customization/customization_document.cc
-+++ b/chrome/browser/chromeos/customization/customization_document.cc
+diff --git chrome/browser/chromeos/customization/customization_document.cc chrome/browser/chromeos/customization/customization_document.cc
+index a5d3713e967e3..86f67d5c9dc1f 100644
+--- chrome/browser/chromeos/customization/customization_document.cc
++++ chrome/browser/chromeos/customization/customization_document.cc
 @@ -172,7 +172,7 @@ std::string ReadFileInBackground(const base::FilePath& file) {
  
  // Template URL where to fetch OEM services customization manifest from.
@@ -98,24 +93,24 @@ index cb8c9708477cf..2f7757a9e4a48 100644
  
  // A custom extensions::ExternalLoader that the ServicesCustomizationDocument
  // creates and uses to publish OEM default apps to the extensions system.
-diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-index 62fc508e228ff..acc4a5ba35023 100644
---- a/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-+++ b/chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
-@@ -1042,7 +1042,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
-       IdentityManagerFactory::GetForProfile(chrome_details.GetProfile());
-   const CoreAccountId& account_id = identity_manager->GetPrimaryAccountId();
+diff --git chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
+index aab114d861b3b..cfa8b55c84a93 100644
+--- chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
++++ chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc
+@@ -1036,7 +1036,7 @@ void FileManagerPrivateInternalGetDownloadUrlFunction::OnGotDownloadUrl(
+   const CoreAccountId& account_id =
+       identity_manager->GetPrimaryAccountId(signin::ConsentLevel::kNotRequired);
    std::vector<std::string> scopes;
 -  scopes.emplace_back("https://www.googleapis.com/auth/drive.readonly");
 +  scopes.emplace_back("trk:208:https://www.googleapis.com/auth/drive.readonly");
  
    scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory =
        content::BrowserContext::GetDefaultStoragePartition(
-diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-index 42b2f8db2acb2..5b2259f98b626 100644
---- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-+++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-@@ -82,7 +82,7 @@ namespace {
+diff --git chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
+index aa70e32fdeefd..75411ab99944f 100644
+--- chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
++++ chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
+@@ -86,7 +86,7 @@ namespace {
  
  using api::file_manager_private::ProfileInfo;
  
@@ -124,11 +119,11 @@ index 42b2f8db2acb2..5b2259f98b626 100644
  
  // Thresholds for mountCrostini() API.
  constexpr base::TimeDelta kMountCrostiniSlowOperationThreshold =
-diff --git a/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc b/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
-index b4b5e00ff5745..cb8279f6e85c7 100644
---- a/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
-+++ b/chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
-@@ -81,11 +81,11 @@ constexpr char kCRDConnectClientKey[] = "client";
+diff --git chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
+index a963ac506a5f7..9b33521dfc18c 100644
+--- chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
++++ chrome/browser/chromeos/policy/remote_commands/crd_host_delegate.cc
+@@ -78,11 +78,11 @@ constexpr char kCRDConnectClientKey[] = "client";
  
  // OAuth2 Token scopes
  constexpr char kCloudDevicesOAuth2Scope[] =
@@ -143,11 +138,11 @@ index b4b5e00ff5745..cb8279f6e85c7 100644
  
  }  // namespace
  
-diff --git a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-index 0a4dc66eb5e16..323b2cbc96e61 100644
---- a/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-+++ b/chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
-@@ -52,8 +52,8 @@ enum class U2FAttestationPromptResult {
+diff --git chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
+index 204f0bd2e1755..51376663e7eb3 100644
+--- chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
++++ chrome/browser/extensions/api/cryptotoken_private/cryptotoken_private_api.cc
+@@ -60,8 +60,8 @@ enum class U2FAttestationPromptResult {
  
  const char kGoogleDotCom[] = "google.com";
  constexpr const char* kGoogleGstaticAppIds[] = {
@@ -158,11 +153,11 @@ index 0a4dc66eb5e16..323b2cbc96e61 100644
  
  // ContainsAppIdByHash returns true iff the SHA-256 hash of one of the
  // elements of |list| equals |hash|.
-diff --git a/chrome/browser/extensions/install_signer.cc b/chrome/browser/extensions/install_signer.cc
-index 6d284cd61adfc..d08ef3ed7589f 100644
---- a/chrome/browser/extensions/install_signer.cc
-+++ b/chrome/browser/extensions/install_signer.cc
-@@ -66,7 +66,7 @@ const int kSignatureFormatVersion = 2;
+diff --git chrome/browser/extensions/install_signer.cc chrome/browser/extensions/install_signer.cc
+index b05c4ef22e492..070f4885244b4 100644
+--- chrome/browser/extensions/install_signer.cc
++++ chrome/browser/extensions/install_signer.cc
+@@ -65,7 +65,7 @@ const int kSignatureFormatVersion = 2;
  const size_t kSaltBytes = 32;
  
  const char kBackendUrl[] =
@@ -171,23 +166,23 @@ index 6d284cd61adfc..d08ef3ed7589f 100644
  
  const char kPublicKeyPEM[] =                                            \
      "-----BEGIN PUBLIC KEY-----"                                        \
-diff --git a/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc b/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-index b095a44da6c7e..eed96d5a717a5 100644
---- a/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-+++ b/chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-@@ -123,7 +123,7 @@ void OnURLLoadUploadProgress(uint64_t current, uint64_t total) {
+diff --git chrome/browser/media/webrtc/webrtc_event_log_uploader.cc chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
+index 9be22d20e3608..7554b9811be49 100644
+--- chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
++++ chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
+@@ -121,7 +121,7 @@ void OnURLLoadUploadProgress(uint64_t current, uint64_t total) {
  }  // namespace
  
  const char WebRtcEventLogUploaderImpl::kUploadURL[] =
 -    "https://clients2.google.com/cr/report";
 +    "trk:300:https://clients2.google.com/cr/report";
  
- std::unique_ptr<WebRtcEventLogUploader>
- WebRtcEventLogUploaderImpl::Factory::Create(const WebRtcLogFileInfo& log_file,
-diff --git a/chrome/browser/media/webrtc/webrtc_log_uploader.cc b/chrome/browser/media/webrtc/webrtc_log_uploader.cc
-index 1b386f4a80396..3de0480b886b9 100644
---- a/chrome/browser/media/webrtc/webrtc_log_uploader.cc
-+++ b/chrome/browser/media/webrtc/webrtc_log_uploader.cc
+ WebRtcEventLogUploaderImpl::Factory::Factory(
+     scoped_refptr<base::SequencedTaskRunner> task_runner)
+diff --git chrome/browser/media/webrtc/webrtc_log_uploader.cc chrome/browser/media/webrtc/webrtc_log_uploader.cc
+index 61851b8c669f6..606c4f12887bf 100644
+--- chrome/browser/media/webrtc/webrtc_log_uploader.cc
++++ chrome/browser/media/webrtc/webrtc_log_uploader.cc
 @@ -480,7 +480,7 @@ void WebRtcLogUploader::UploadCompressedLog(
              "Not implemented, it would be good to do so."
          })");
@@ -197,10 +192,10 @@ index 1b386f4a80396..3de0480b886b9 100644
    auto resource_request = std::make_unique<network::ResourceRequest>();
    resource_request->url = !upload_url_for_testing_.is_empty()
                                ? upload_url_for_testing_
-diff --git a/chrome/browser/nacl_host/nacl_infobar_delegate.cc b/chrome/browser/nacl_host/nacl_infobar_delegate.cc
+diff --git chrome/browser/nacl_host/nacl_infobar_delegate.cc chrome/browser/nacl_host/nacl_infobar_delegate.cc
 index 023c21d9ab3d4..f972d8cce6bbc 100644
---- a/chrome/browser/nacl_host/nacl_infobar_delegate.cc
-+++ b/chrome/browser/nacl_host/nacl_infobar_delegate.cc
+--- chrome/browser/nacl_host/nacl_infobar_delegate.cc
++++ chrome/browser/nacl_host/nacl_infobar_delegate.cc
 @@ -32,7 +32,7 @@ base::string16 NaClInfoBarDelegate::GetLinkText() const {
  }
  
@@ -210,10 +205,10 @@ index 023c21d9ab3d4..f972d8cce6bbc 100644
  }
  
  base::string16 NaClInfoBarDelegate::GetMessageText() const {
-diff --git a/chrome/browser/profiles/profile_avatar_downloader.cc b/chrome/browser/profiles/profile_avatar_downloader.cc
-index 365120a6fa26f..2979f5614145e 100644
---- a/chrome/browser/profiles/profile_avatar_downloader.cc
-+++ b/chrome/browser/profiles/profile_avatar_downloader.cc
+diff --git chrome/browser/profiles/profile_avatar_downloader.cc chrome/browser/profiles/profile_avatar_downloader.cc
+index 93cd3890eaa9d..90221e3a790ff 100644
+--- chrome/browser/profiles/profile_avatar_downloader.cc
++++ chrome/browser/profiles/profile_avatar_downloader.cc
 @@ -18,7 +18,7 @@
  
  namespace {
@@ -222,28 +217,12 @@ index 365120a6fa26f..2979f5614145e 100644
 +    "trk:271:https://www.gstatic.com/chrome/profile_avatars/";
  }
  
- ProfileAvatarDownloader::ProfileAvatarDownloader(
-diff --git a/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js b/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
-index 6a941a73d3514..53a2d30646220 100644
---- a/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
-+++ b/chrome/browser/resources/chromeos/accessibility/chromevox/background/prefs.js
-@@ -219,9 +219,9 @@ ChromeVoxPrefs.DEFAULT_PREFS = {
-   'position': '{}',
-   'siteSpecificEnhancements': true,
-   'siteSpecificScriptBase':
--      'https://ssl.gstatic.com/accessibility/javascript/ext/',
-+      'trk:240:https://ssl.gstatic.com/accessibility/javascript/ext/',
-   'siteSpecificScriptLoader':
--      'https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
-+      'trk:241:https://ssl.gstatic.com/accessibility/javascript/ext/loader.js',
-   'speakTextUnderMouse': false,
-   'sticky': false,
-   'typingEcho': 0,
-diff --git a/chrome/browser/resources/default_apps/external_extensions.json b/chrome/browser/resources/default_apps/external_extensions.json
-index 59a0f9ad07fd4..888e42bb72e91 100644
---- a/chrome/browser/resources/default_apps/external_extensions.json
-+++ b/chrome/browser/resources/default_apps/external_extensions.json
-@@ -24,15 +24,15 @@
+ ProfileAvatarDownloader::ProfileAvatarDownloader(size_t icon_index,
+diff --git chrome/browser/resources/default_apps/external_extensions.json chrome/browser/resources/default_apps/external_extensions.json
+index 9449bc103f231..3cee0c78ba55a 100644
+--- chrome/browser/resources/default_apps/external_extensions.json
++++ chrome/browser/resources/default_apps/external_extensions.json
+@@ -23,15 +23,15 @@
    },
    // Google Sheets
    "aapocclcgogkmnckokdopfmhonfmgoek" : {
@@ -262,11 +241,11 @@ index 59a0f9ad07fd4..888e42bb72e91 100644
    }
  }
  
-diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 6e324515de44f..50c5114e7ffe6 100644
---- a/chrome/browser/safe_browsing/client_side_detection_service.cc
-+++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -56,7 +56,7 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
+diff --git chrome/browser/safe_browsing/client_side_detection_service.cc chrome/browser/safe_browsing/client_side_detection_service.cc
+index 9e305dbf75175..e91d20c0e01a4 100644
+--- chrome/browser/safe_browsing/client_side_detection_service.cc
++++ chrome/browser/safe_browsing/client_side_detection_service.cc
+@@ -57,7 +57,7 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
  const int ClientSideDetectionService::kPositiveCacheIntervalMinutes = 30;
  
  const char ClientSideDetectionService::kClientReportPhishingUrl[] =
@@ -275,11 +254,11 @@ index 6e324515de44f..50c5114e7ffe6 100644
  
  struct ClientSideDetectionService::ClientPhishingReportInfo {
    std::unique_ptr<network::SimpleURLLoader> loader;
-diff --git a/chrome/browser/safe_browsing/download_protection/download_feedback.cc b/chrome/browser/safe_browsing/download_protection/download_feedback.cc
-index ce9c1cbe0ac56..d46cf10bbf7b5 100644
---- a/chrome/browser/safe_browsing/download_protection/download_feedback.cc
-+++ b/chrome/browser/safe_browsing/download_protection/download_feedback.cc
-@@ -256,7 +256,7 @@ const int64_t DownloadFeedback::kMaxUploadSize = 50 * 1024 * 1024;
+diff --git chrome/browser/safe_browsing/download_protection/download_feedback.cc chrome/browser/safe_browsing/download_protection/download_feedback.cc
+index b3a1ee0b66556..cedbf36d13887 100644
+--- chrome/browser/safe_browsing/download_protection/download_feedback.cc
++++ chrome/browser/safe_browsing/download_protection/download_feedback.cc
+@@ -255,7 +255,7 @@ const int64_t DownloadFeedback::kMaxUploadSize = 50 * 1024 * 1024;
  
  // static
  const char DownloadFeedback::kSbFeedbackURL[] =
@@ -288,11 +267,11 @@ index ce9c1cbe0ac56..d46cf10bbf7b5 100644
  
  // static
  DownloadFeedbackFactory* DownloadFeedback::factory_ = nullptr;
-diff --git a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-index 707b48f8b4a4c..ee134e63f3a36 100644
---- a/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-+++ b/chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
-@@ -256,7 +256,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
+diff --git chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
+index 5272b99db1d06..9a75dbb16f1e5 100644
+--- chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
++++ chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
+@@ -278,7 +278,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
    DCHECK(!bdict_file.empty());
  
    static const char kDownloadServerUrl[] =
@@ -301,11 +280,11 @@ index 707b48f8b4a4c..ee134e63f3a36 100644
  
    return GURL(std::string(kDownloadServerUrl) +
                base::ToLowerASCII(bdict_file));
-diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index 06b79b3da8b5b..d0385ec2a775a 100644
---- a/chrome/browser/supervised_user/supervised_user_service.cc
-+++ b/chrome/browser/supervised_user/supervised_user_service.cc
-@@ -82,7 +82,7 @@ namespace {
+diff --git chrome/browser/supervised_user/supervised_user_service.cc chrome/browser/supervised_user/supervised_user_service.cc
+index 7cd418f35bbf3..4f7a1ca44aaa2 100644
+--- chrome/browser/supervised_user/supervised_user_service.cc
++++ chrome/browser/supervised_user/supervised_user_service.cc
+@@ -85,7 +85,7 @@ namespace {
  
  // The URL from which to download a host blacklist if no local one exists yet.
  const char kBlacklistURL[] =
@@ -314,10 +293,10 @@ index 06b79b3da8b5b..d0385ec2a775a 100644
  // The filename under which we'll store the blacklist (in the user data dir).
  const char kBlacklistFilename[] = "su-blacklist.bin";
  
-diff --git a/chrome/browser/tracing/crash_service_uploader.cc b/chrome/browser/tracing/crash_service_uploader.cc
-index fb5c354c729fd..c8e0581048ee5 100644
---- a/chrome/browser/tracing/crash_service_uploader.cc
-+++ b/chrome/browser/tracing/crash_service_uploader.cc
+diff --git chrome/browser/tracing/crash_service_uploader.cc chrome/browser/tracing/crash_service_uploader.cc
+index b6a88c758118b..58a70e0105db7 100644
+--- chrome/browser/tracing/crash_service_uploader.cc
++++ chrome/browser/tracing/crash_service_uploader.cc
 @@ -40,7 +40,7 @@ using std::string;
  
  namespace {
@@ -327,11 +306,11 @@ index fb5c354c729fd..c8e0581048ee5 100644
  const char kCrashUploadContentType[] = "multipart/form-data";
  const char kCrashMultipartBoundary[] =
      "----**--yradnuoBgoLtrapitluMklaTelgooG--**----";
-diff --git a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
-index 432c52e538f31..91cb27d040d3d 100644
---- a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
-+++ b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
-@@ -34,7 +34,7 @@ namespace {
+diff --git chrome/browser/ui/views/outdated_upgrade_bubble_view.cc chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
+index 3e0cad4e0c08b..6336ccd1f626d 100644
+--- chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
++++ chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
+@@ -35,7 +35,7 @@ namespace {
  
  // The URL to be used to re-install Chrome when auto-update failed for too long.
  constexpr char kDownloadChromeUrl[] =
@@ -340,11 +319,11 @@ index 432c52e538f31..91cb27d040d3d 100644
      "&utm_campaign=en&utm_source=en-et-na-us-chrome-bubble&utm_medium=et";
  
  // The maximum number of ignored bubble we track in the NumLaterPerReinstall
-diff --git a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-index 4dee2c66c3ca1..0da7d8eb25525 100644
---- a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-+++ b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-@@ -78,17 +78,17 @@ namespace {
+diff --git chrome/browser/ui/webui/ntp/ntp_resource_cache.cc chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
+index 89cd233b1357c..c8cfe2e98c1d9 100644
+--- chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
++++ chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
+@@ -80,17 +80,17 @@ namespace {
  // The URL for the the Learn More page shown on incognito new tab.
  const char kLearnMoreIncognitoUrl[] =
  #if defined(OS_CHROMEOS)
@@ -366,10 +345,23 @@ index 4dee2c66c3ca1..0da7d8eb25525 100644
  #endif
  
  SkColor GetThemeColor(const ui::ThemeProvider& tp, int id) {
-diff --git a/chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc b/chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
+diff --git chrome/chrome_cleaner/components/recovery_component.cc chrome/chrome_cleaner/components/recovery_component.cc
+index ef7d811fa6a51..6e304b2a8f803 100644
+--- chrome/chrome_cleaner/components/recovery_component.cc
++++ chrome/chrome_cleaner/components/recovery_component.cc
+@@ -38,7 +38,7 @@ namespace chrome_cleaner {
+ namespace {
+ 
+ const char kComponentDownloadUrl[] =
+-    "https://clients2.google.com/service/update2/crx?response=redirect&os=win"
++    "trk:108:https://clients2.google.com/service/update2/crx?response=redirect&os=win"
+     "&installsource=swreporter&x=id%3Dnpdjjkjlcidkjlamlmmdelcjbcpdjocm"
+     "%26v%3D0.0.0.0%26uc&acceptformat=crx3";
+ 
+diff --git chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
 index 8c55ddc39ccb2..acd9901aecb25 100644
---- a/chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
-+++ b/chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
+--- chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
++++ chrome/chrome_cleaner/crash/crashpad_crash_reporter.cc
 @@ -28,7 +28,7 @@
  namespace {
  
@@ -379,10 +371,10 @@ index 8c55ddc39ccb2..acd9901aecb25 100644
  
  // Whether the current process is connected to a crash handler process.
  bool g_is_connected_to_crash_handler = false;
-diff --git a/chrome/common/extensions/chrome_extensions_client.cc b/chrome/common/extensions/chrome_extensions_client.cc
-index a57d93fed58df..4544d3914a5f7 100644
---- a/chrome/common/extensions/chrome_extensions_client.cc
-+++ b/chrome/common/extensions/chrome_extensions_client.cc
+diff --git chrome/common/extensions/chrome_extensions_client.cc chrome/common/extensions/chrome_extensions_client.cc
+index 832b6e46cec2d..0d8c9e0a4818c 100644
+--- chrome/common/extensions/chrome_extensions_client.cc
++++ chrome/common/extensions/chrome_extensions_client.cc
 @@ -46,9 +46,9 @@ namespace {
  
  // TODO(battre): Delete the HTTP URL once the blacklist is downloaded via HTTPS.
@@ -395,10 +387,10 @@ index a57d93fed58df..4544d3914a5f7 100644
  
  const char kThumbsWhiteListedExtension[] = "khopmbdjffemhegeeobelklnbglcdgfh";
  
-diff --git a/chrome/installer/setup/google_chrome_behaviors.cc b/chrome/installer/setup/google_chrome_behaviors.cc
-index af915b06e311e..93559fa85f747 100644
---- a/chrome/installer/setup/google_chrome_behaviors.cc
-+++ b/chrome/installer/setup/google_chrome_behaviors.cc
+diff --git chrome/installer/setup/google_chrome_behaviors.cc chrome/installer/setup/google_chrome_behaviors.cc
+index 0a153c4d58703..6e85482d66a39 100644
+--- chrome/installer/setup/google_chrome_behaviors.cc
++++ chrome/installer/setup/google_chrome_behaviors.cc
 @@ -44,7 +44,7 @@ base::string16 LocalizeUrl(const wchar_t* url) {
  
  base::string16 GetUninstallSurveyUrl() {
@@ -408,23 +400,10 @@ index af915b06e311e..93559fa85f747 100644
    return LocalizeUrl(kSurveyUrl);
  }
  
-diff --git a/chrome/updater/updater_constants.cc b/chrome/updater/updater_constants.cc
-index 00bf70ebe540e..59f200b9ae623 100644
---- a/chrome/updater/updater_constants.cc
-+++ b/chrome/updater/updater_constants.cc
-@@ -26,7 +26,7 @@ const char kLoggingModuleSwitch[] = "vmodule";
- // URLs.
- const char kUpdaterJSONDefaultUrl[] =
-     "https://update.googleapis.com/service/update2/json";
--const char kCrashUploadURL[] = "https://clients2.google.com/cr/report";
-+const char kCrashUploadURL[] = "trk:304:https://clients2.google.com/cr/report";
- const char kCrashStagingUploadURL[] =
-     "https://clients2.google.com/cr/staging_report";
- 
-diff --git a/chromecast/browser/service/cast_service_simple.cc b/chromecast/browser/service/cast_service_simple.cc
-index 3f7ea0abc3d48..e3abf6c76a26c 100644
---- a/chromecast/browser/service/cast_service_simple.cc
-+++ b/chromecast/browser/service/cast_service_simple.cc
+diff --git chromecast/browser/service/cast_service_simple.cc chromecast/browser/service/cast_service_simple.cc
+index c436bf33ad5cd..9b7dfb80b0632 100644
+--- chromecast/browser/service/cast_service_simple.cc
++++ chromecast/browser/service/cast_service_simple.cc
 @@ -27,7 +27,7 @@ GURL GetStartupURL() {
    const base::CommandLine::StringVector& args = command_line->GetArgs();
  
@@ -434,10 +413,10 @@ index 3f7ea0abc3d48..e3abf6c76a26c 100644
  
    GURL url(args[0]);
    if (url.is_valid() && url.has_scheme())
-diff --git a/chromecast/crash/linux/minidump_uploader.cc b/chromecast/crash/linux/minidump_uploader.cc
-index d63a1281bd903..38db5da10a653 100644
---- a/chromecast/crash/linux/minidump_uploader.cc
-+++ b/chromecast/crash/linux/minidump_uploader.cc
+diff --git chromecast/crash/linux/minidump_uploader.cc chromecast/crash/linux/minidump_uploader.cc
+index 4f581882001be..b6d8a5e602d9d 100644
+--- chromecast/crash/linux/minidump_uploader.cc
++++ chromecast/crash/linux/minidump_uploader.cc
 @@ -38,7 +38,7 @@ namespace {
  
  const char kProductName[] = "Eureka";
@@ -447,10 +426,10 @@ index d63a1281bd903..38db5da10a653 100644
  
  const char kVirtualChannel[] = "virtual-channel";
  
-diff --git a/chromeos/geolocation/simple_geolocation_provider.cc b/chromeos/geolocation/simple_geolocation_provider.cc
+diff --git chromeos/geolocation/simple_geolocation_provider.cc chromeos/geolocation/simple_geolocation_provider.cc
 index 015e62b43801b..e6f0a7fa070b1 100644
---- a/chromeos/geolocation/simple_geolocation_provider.cc
-+++ b/chromeos/geolocation/simple_geolocation_provider.cc
+--- chromeos/geolocation/simple_geolocation_provider.cc
++++ chromeos/geolocation/simple_geolocation_provider.cc
 @@ -20,7 +20,7 @@ namespace chromeos {
  namespace {
  
@@ -460,10 +439,10 @@ index 015e62b43801b..e6f0a7fa070b1 100644
  
  }  // namespace
  
-diff --git a/components/cloud_devices/common/cloud_devices_urls.cc b/components/cloud_devices/common/cloud_devices_urls.cc
+diff --git components/cloud_devices/common/cloud_devices_urls.cc components/cloud_devices/common/cloud_devices_urls.cc
 index b08cc6f087812..e23589a652571 100644
---- a/components/cloud_devices/common/cloud_devices_urls.cc
-+++ b/components/cloud_devices/common/cloud_devices_urls.cc
+--- components/cloud_devices/common/cloud_devices_urls.cc
++++ components/cloud_devices/common/cloud_devices_urls.cc
 @@ -14,20 +14,20 @@
  namespace cloud_devices {
  
@@ -489,62 +468,10 @@ index b08cc6f087812..e23589a652571 100644
  
  }
  
-diff --git a/components/crash/content/app/breakpad_linux.cc b/components/crash/content/app/breakpad_linux.cc
-index 27683246750c4..be1e9e587624d 100644
---- a/components/crash/content/app/breakpad_linux.cc
-+++ b/components/crash/content/app/breakpad_linux.cc
-@@ -103,7 +103,7 @@ namespace {
- // while we do have functions to deal with uint64_t's.
- uint64_t g_crash_loop_before_time = 0;
- #else
--const char kUploadURL[] = "https://clients2.google.com/cr/report";
-+const char kUploadURL[] = "trk:306:https://clients2.google.com/cr/report";
- #endif
- 
- bool g_is_crash_reporter_enabled = false;
-diff --git a/components/crash/content/app/crashpad_linux.cc b/components/crash/content/app/crashpad_linux.cc
-index b0716b944f7cd..eeedcabaa1e5a 100644
---- a/components/crash/content/app/crashpad_linux.cc
-+++ b/components/crash/content/app/crashpad_linux.cc
-@@ -122,7 +122,7 @@ base::FilePath PlatformCrashpadInitialization(
-     std::string url;
- #if BUILDFLAG(GOOGLE_CHROME_BRANDING) && defined(OFFICIAL_BUILD) && \
-     !defined(OS_CHROMEOS)
--    url = "https://clients2.google.com/cr/report";
-+    url = "trk:307:https://clients2.google.com/cr/report";
- #else
-     url = std::string();
- #endif
-diff --git a/components/crash/content/app/crashpad_mac.mm b/components/crash/content/app/crashpad_mac.mm
-index c2de9fe867c5e..0d493010896cb 100644
---- a/components/crash/content/app/crashpad_mac.mm
-+++ b/components/crash/content/app/crashpad_mac.mm
-@@ -136,7 +136,7 @@ base::FilePath PlatformCrashpadInitialization(
- #if BUILDFLAG(GOOGLE_CHROME_BRANDING) && defined(OFFICIAL_BUILD)
-       // Only allow the possibility of report upload in official builds. This
-       // crash server won't have symbols for any other build types.
--      std::string url = "https://clients2.google.com/cr/report";
-+      std::string url = "trk:308:https://clients2.google.com/cr/report";
- #else
-       std::string url;
- #endif
-diff --git a/components/crash/content/app/crashpad_win.cc b/components/crash/content/app/crashpad_win.cc
-index 4e6d3052b315e..5ac5110f692d4 100644
---- a/components/crash/content/app/crashpad_win.cc
-+++ b/components/crash/content/app/crashpad_win.cc
-@@ -86,7 +86,7 @@ base::FilePath PlatformCrashpadInitialization(
-     GetPlatformCrashpadAnnotations(&process_annotations);
- 
- #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
--    std::string url = "https://clients2.google.com/cr/report";
-+    std::string url = "trk:309:https://clients2.google.com/cr/report";
- #else
-     std::string url;
- #endif
-diff --git a/components/drive/service/drive_api_service.cc b/components/drive/service/drive_api_service.cc
-index f9f6332e07c0c..64371a5f6a11a 100644
---- a/components/drive/service/drive_api_service.cc
-+++ b/components/drive/service/drive_api_service.cc
+diff --git components/drive/service/drive_api_service.cc components/drive/service/drive_api_service.cc
+index 0574fdb5a457b..21920df55db2d 100644
+--- components/drive/service/drive_api_service.cc
++++ components/drive/service/drive_api_service.cc
 @@ -74,9 +74,9 @@ namespace drive {
  namespace {
  
@@ -557,10 +484,10 @@ index f9f6332e07c0c..64371a5f6a11a 100644
  const char kDriveAppsScope[] = "https://www.googleapis.com/auth/drive.apps";
  
  // Mime type to create a directory.
-diff --git a/components/feedback/feedback_uploader.cc b/components/feedback/feedback_uploader.cc
+diff --git components/feedback/feedback_uploader.cc components/feedback/feedback_uploader.cc
 index 83443c5f1ec1a..327e9a85a5daf 100644
---- a/components/feedback/feedback_uploader.cc
-+++ b/components/feedback/feedback_uploader.cc
+--- components/feedback/feedback_uploader.cc
++++ components/feedback/feedback_uploader.cc
 @@ -25,7 +25,7 @@ constexpr base::FilePath::CharType kFeedbackReportPath[] =
      FILE_PATH_LITERAL("Feedback Reports");
  
@@ -570,11 +497,11 @@ index 83443c5f1ec1a..327e9a85a5daf 100644
  
  constexpr char kProtoBufMimeType[] = "application/x-protobuf";
  
-diff --git a/components/gcm_driver/gcm_account_tracker.cc b/components/gcm_driver/gcm_account_tracker.cc
-index bc7b5cbc41c2b..fe288908f406d 100644
---- a/components/gcm_driver/gcm_account_tracker.cc
-+++ b/components/gcm_driver/gcm_account_tracker.cc
-@@ -26,9 +26,9 @@ namespace gcm {
+diff --git components/gcm_driver/gcm_account_tracker.cc components/gcm_driver/gcm_account_tracker.cc
+index 98edc8d5a0e7a..3c3a2936a53fa 100644
+--- components/gcm_driver/gcm_account_tracker.cc
++++ components/gcm_driver/gcm_account_tracker.cc
+@@ -27,9 +27,9 @@ namespace gcm {
  namespace {
  
  // Scopes needed by the OAuth2 access tokens.
@@ -586,11 +513,24 @@ index bc7b5cbc41c2b..fe288908f406d 100644
  // Name of the GCM account tracker for fetching access tokens.
  const char kGCMAccountTrackerName[] = "gcm_account_tracker";
  // Minimum token validity when sending to GCM groups server.
-diff --git a/components/history/core/browser/web_history_service.cc b/components/history/core/browser/web_history_service.cc
-index 9d84a530cb3cf..4f950d0dd3b48 100644
---- a/components/history/core/browser/web_history_service.cc
-+++ b/components/history/core/browser/web_history_service.cc
-@@ -40,13 +40,13 @@ namespace history {
+diff --git components/google/core/common/google_util.cc components/google/core/common/google_util.cc
+index 3c7d10d023817..7ced68376e9fe 100644
+--- components/google/core/common/google_util.cc
++++ components/google/core/common/google_util.cc
+@@ -152,7 +152,7 @@ bool IsGoogleSearchSubdomainUrl(const GURL& url) {
+ 
+ // Global functions -----------------------------------------------------------
+ 
+-const char kGoogleHomepageURL[] = "https://www.google.com/";
++const char kGoogleHomepageURL[] = "trk:113:https://www.google.com/";
+ 
+ bool HasGoogleSearchQueryParam(base::StringPiece str) {
+   url::Component query(0, static_cast<int>(str.length())), key, value;
+diff --git components/history/core/browser/web_history_service.cc components/history/core/browser/web_history_service.cc
+index bfd7569432d42..ad4f0bbfbb8f9 100644
+--- components/history/core/browser/web_history_service.cc
++++ components/history/core/browser/web_history_service.cc
+@@ -41,13 +41,13 @@ namespace history {
  namespace {
  
  const char kHistoryOAuthScope[] =
@@ -607,23 +547,10 @@ index 9d84a530cb3cf..4f950d0dd3b48 100644
  
  const char kHistoryAudioHistoryUrl[] =
      "https://history.google.com/history/api/lookup?client=audio";
-diff --git a/components/invalidation/impl/gcm_network_channel.cc b/components/invalidation/impl/gcm_network_channel.cc
-index af61bde19d9cd..68815ca238a91 100644
---- a/components/invalidation/impl/gcm_network_channel.cc
-+++ b/components/invalidation/impl/gcm_network_channel.cc
-@@ -40,7 +40,7 @@ namespace syncer {
- namespace {
- 
- const char kCacheInvalidationEndpointUrl[] =
--    "https://clients4.google.com/invalidation/android/request/";
-+    "trk:264:https://clients4.google.com/invalidation/android/request/";
- const char kCacheInvalidationPackageName[] = "com.google.chrome.invalidations";
- 
- // Register backoff policy.
-diff --git a/components/metrics/url_constants.cc b/components/metrics/url_constants.cc
+diff --git components/metrics/url_constants.cc components/metrics/url_constants.cc
 index f60d33bfa1625..d768d60b81789 100644
---- a/components/metrics/url_constants.cc
-+++ b/components/metrics/url_constants.cc
+--- components/metrics/url_constants.cc
++++ components/metrics/url_constants.cc
 @@ -7,7 +7,7 @@
  namespace metrics {
  
@@ -633,11 +560,11 @@ index f60d33bfa1625..d768d60b81789 100644
  
  const char kNewMetricsServerUrlInsecure[] =
      "http://clientservices.googleapis.com/uma/v2";
-diff --git a/components/password_manager/core/browser/password_store.cc b/components/password_manager/core/browser/password_store.cc
-index 8e62456c36391..2b02fbaf0714b 100644
---- a/components/password_manager/core/browser/password_store.cc
-+++ b/components/password_manager/core/browser/password_store.cc
-@@ -258,10 +258,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
+diff --git components/password_manager/core/browser/password_store.cc components/password_manager/core/browser/password_store.cc
+index 93d9670c59dba..190a4f477b669 100644
+--- components/password_manager/core/browser/password_store.cc
++++ components/password_manager/core/browser/password_store.cc
+@@ -255,10 +255,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
    // TODO(mdm): actually delete them at some point, say M24 or so.
    base::Time cutoff;  // the null time
    if (form.scheme == PasswordForm::Scheme::kHtml &&
@@ -652,23 +579,10 @@ index 8e62456c36391..2b02fbaf0714b 100644
      static const base::Time::Exploded exploded_cutoff = {
          2012, 1, 0, 1, 0, 0, 0, 0};  // 00:00 Jan 1 2012
      base::Time out_time;
-diff --git a/components/policy/core/common/policy_loader_win.cc b/components/policy/core/common/policy_loader_win.cc
-index 53ce978da1c6e..ad2f5db576b4a 100644
---- a/components/policy/core/common/policy_loader_win.cc
-+++ b/components/policy/core/common/policy_loader_win.cc
-@@ -56,7 +56,7 @@ const char kKeyThirdParty[] = "3rdparty";
- 
- // The web store url that is the only trusted source for extensions.
- const char kExpectedWebStoreUrl[] =
--    ";https://clients2.google.com/service/update2/crx";
-+    ";trk:15:https://cache.iridiumbrowser.de/clients2.google.com/service/update2/crx";
- // String to be prepended to each blocked entry.
- const char kBlockedExtensionPrefix[] = "[BLOCKED]";
- 
-diff --git a/components/rappor/rappor_service_impl.cc b/components/rappor/rappor_service_impl.cc
+diff --git components/rappor/rappor_service_impl.cc components/rappor/rappor_service_impl.cc
 index ac223ff2d3d56..83b325a638436 100644
---- a/components/rappor/rappor_service_impl.cc
-+++ b/components/rappor/rappor_service_impl.cc
+--- components/rappor/rappor_service_impl.cc
++++ components/rappor/rappor_service_impl.cc
 @@ -32,7 +32,7 @@ const char kMimeType[] = "application/vnd.chrome.rappor";
  const char kRapporDailyEventHistogram[] = "Rappor.DailyEvent.IntervalType";
  
@@ -678,10 +592,10 @@ index ac223ff2d3d56..83b325a638436 100644
  
  }  // namespace
  
-diff --git a/components/safe_search_api/safe_search/safe_search_url_checker_client.cc b/components/safe_search_api/safe_search/safe_search_url_checker_client.cc
-index 8b3d5be51d553..20cfc5cd7dae6 100644
---- a/components/safe_search_api/safe_search/safe_search_url_checker_client.cc
-+++ b/components/safe_search_api/safe_search/safe_search_url_checker_client.cc
+diff --git components/safe_search_api/safe_search/safe_search_url_checker_client.cc components/safe_search_api/safe_search/safe_search_url_checker_client.cc
+index ce6cb4900dcc6..f67e858459d1e 100644
+--- components/safe_search_api/safe_search/safe_search_url_checker_client.cc
++++ components/safe_search_api/safe_search/safe_search_url_checker_client.cc
 @@ -30,7 +30,7 @@ namespace safe_search_api {
  namespace {
  
@@ -689,12 +603,12 @@ index 8b3d5be51d553..20cfc5cd7dae6 100644
 -    "https://safesearch.googleapis.com/v1:classify";
 +    "trk:238:https://safesearch.googleapis.com/v1:classify";
  const char kDataContentType[] = "application/x-www-form-urlencoded";
- const char kDataFormat[] = "key=%s&urls=%s&region_code=%s";
+ const char kDataFormat[] = "key=%s&urls=%s";
  
-diff --git a/components/safe_search_api/stub_url_checker.cc b/components/safe_search_api/stub_url_checker.cc
+diff --git components/safe_search_api/stub_url_checker.cc components/safe_search_api/stub_url_checker.cc
 index b32462da68296..051fa0b0aea16 100644
---- a/components/safe_search_api/stub_url_checker.cc
-+++ b/components/safe_search_api/stub_url_checker.cc
+--- components/safe_search_api/stub_url_checker.cc
++++ components/safe_search_api/stub_url_checker.cc
 @@ -20,7 +20,7 @@ namespace safe_search_api {
  namespace {
  
@@ -704,10 +618,10 @@ index b32462da68296..051fa0b0aea16 100644
  
  std::string BuildResponse(bool is_porn) {
    base::DictionaryValue dict;
-diff --git a/components/translate/core/browser/translate_url_fetcher.cc b/components/translate/core/browser/translate_url_fetcher.cc
+diff --git components/translate/core/browser/translate_url_fetcher.cc components/translate/core/browser/translate_url_fetcher.cc
 index c3cbb8f311b01..b83877208bc92 100644
---- a/components/translate/core/browser/translate_url_fetcher.cc
-+++ b/components/translate/core/browser/translate_url_fetcher.cc
+--- components/translate/core/browser/translate_url_fetcher.cc
++++ components/translate/core/browser/translate_url_fetcher.cc
 @@ -99,6 +99,7 @@ bool TranslateURLFetcher::Request(const GURL& url,
    if (!extra_request_header_.empty())
      resource_request->headers.AddHeaderFromString(extra_request_header_);
@@ -716,23 +630,23 @@ index c3cbb8f311b01..b83877208bc92 100644
    simple_loader_ =
        variations::CreateSimpleURLLoaderWithVariationsHeaderUnknownSignedIn(
            std::move(resource_request),
-diff --git a/components/translate/core/common/translate_util.cc b/components/translate/core/common/translate_util.cc
-index e2c4a61741657..d18b6454cb823 100644
---- a/components/translate/core/common/translate_util.cc
-+++ b/components/translate/core/common/translate_util.cc
-@@ -18,7 +18,7 @@
+diff --git components/translate/core/common/translate_util.cc components/translate/core/common/translate_util.cc
+index 963168cbe4945..8ea9435bac8db 100644
+--- components/translate/core/common/translate_util.cc
++++ components/translate/core/common/translate_util.cc
+@@ -20,7 +20,7 @@ const char kDetectLanguageInSubFrames[] = "detect_language_in_sub_frames";
  
- namespace translate {
+ }  // namespace
  
 -const char kSecurityOrigin[] = "https://translate.googleapis.com/";
 +const char kSecurityOrigin[] = "trk:220:https://translate.googleapis.com/";
  
- GURL GetTranslateSecurityOrigin() {
-   std::string security_origin(kSecurityOrigin);
-diff --git a/components/variations/variations_url_constants.cc b/components/variations/variations_url_constants.cc
+ const base::Feature kTranslateSubFrames{"TranslateSubFrames",
+                                         base::FEATURE_DISABLED_BY_DEFAULT};
+diff --git components/variations/variations_url_constants.cc components/variations/variations_url_constants.cc
 index d97573e63c506..499891816b002 100644
---- a/components/variations/variations_url_constants.cc
-+++ b/components/variations/variations_url_constants.cc
+--- components/variations/variations_url_constants.cc
++++ components/variations/variations_url_constants.cc
 @@ -8,7 +8,7 @@ namespace variations {
  
  // Default server of Variations seed info.
@@ -742,11 +656,11 @@ index d97573e63c506..499891816b002 100644
  
  const char kDefaultInsecureServerUrl[] =
      "http://clientservices.googleapis.com/chrome-variations/seed";
-diff --git a/content/browser/speech/speech_recognition_engine.cc b/content/browser/speech/speech_recognition_engine.cc
-index e55a430e58190..9e96ce3668df1 100644
---- a/content/browser/speech/speech_recognition_engine.cc
-+++ b/content/browser/speech/speech_recognition_engine.cc
-@@ -32,7 +32,7 @@ namespace content {
+diff --git content/browser/speech/speech_recognition_engine.cc content/browser/speech/speech_recognition_engine.cc
+index c7af8469cee97..fa9b359010289 100644
+--- content/browser/speech/speech_recognition_engine.cc
++++ content/browser/speech/speech_recognition_engine.cc
+@@ -30,7 +30,7 @@ namespace content {
  namespace {
  
  const char kWebServiceBaseUrl[] =
@@ -755,11 +669,11 @@ index e55a430e58190..9e96ce3668df1 100644
  const char kDownstreamUrl[] = "/down?";
  const char kUpstreamUrl[] = "/up?";
  
-diff --git a/content/browser/webauth/authenticator_common.cc b/content/browser/webauth/authenticator_common.cc
-index d797ae65a4e22..8f7e9cbb19022 100644
---- a/content/browser/webauth/authenticator_common.cc
-+++ b/content/browser/webauth/authenticator_common.cc
-@@ -298,9 +298,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
+diff --git content/browser/webauth/authenticator_common.cc content/browser/webauth/authenticator_common.cc
+index a90df64c68bdf..2369277f1b3d6 100644
+--- content/browser/webauth/authenticator_common.cc
++++ content/browser/webauth/authenticator_common.cc
+@@ -174,9 +174,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
    // special-case AppIDs. Firefox also does this:
    // https://groups.google.com/forum/#!msg/mozilla.dev.platform/Uiu3fwnA2xw/201ynAiPAQAJ
    const GURL kGstatic1 =
@@ -771,24 +685,24 @@ index d797ae65a4e22..8f7e9cbb19022 100644
    DCHECK(kGstatic1.is_valid() && kGstatic2.is_valid());
  
    if (origin.DomainIs("google.com") && !appid_url.has_ref() &&
-diff --git a/content/shell/browser/shell_browser_main_parts.cc b/content/shell/browser/shell_browser_main_parts.cc
-index e07782a1335a2..bb90a4fe40c15 100644
---- a/content/shell/browser/shell_browser_main_parts.cc
-+++ b/content/shell/browser/shell_browser_main_parts.cc
-@@ -73,7 +73,7 @@ GURL GetStartupURL() {
- #endif
- 
+diff --git content/shell/browser/shell_browser_main_parts.cc content/shell/browser/shell_browser_main_parts.cc
+index 000f06a0e5bf0..76bf7af4faae4 100644
+--- content/shell/browser/shell_browser_main_parts.cc
++++ content/shell/browser/shell_browser_main_parts.cc
+@@ -84,7 +84,7 @@ GURL GetStartupURL() {
+ #else
+   const base::CommandLine::StringVector& args = command_line->GetArgs();
    if (args.empty())
 -    return GURL("https://www.google.com/");
 +    return GURL("trk:183:https://www.google.com/");
  
    GURL url(args[0]);
    if (url.is_valid() && url.has_scheme())
-diff --git a/google_apis/gaia/gaia_constants.cc b/google_apis/gaia/gaia_constants.cc
-index 93cba997fac15..a39df2bd9e856 100644
---- a/google_apis/gaia/gaia_constants.cc
-+++ b/google_apis/gaia/gaia_constants.cc
-@@ -25,36 +25,36 @@ const char kSyncService[] = "chromiumsync";
+diff --git google_apis/gaia/gaia_constants.cc google_apis/gaia/gaia_constants.cc
+index 01c25d1d47969..ee42aacaeed67 100644
+--- google_apis/gaia/gaia_constants.cc
++++ google_apis/gaia/gaia_constants.cc
+@@ -25,23 +25,23 @@ const char kSyncService[] = "chromiumsync";
  const char kRemotingService[] = "chromoting";
  
  // OAuth scopes.
@@ -816,6 +730,10 @@ index 93cba997fac15..a39df2bd9e856 100644
 -    "https://www.googleapis.com/auth/chromesync_playpen";
 +    "trk:105:https://www.googleapis.com/auth/chromesync_playpen";
  
+ // OAuth2 scope for parental consent logging for secondary account addition.
+ const char kKidManagementPrivilegedOAuth2Scope[] =
+@@ -49,16 +49,16 @@ const char kKidManagementPrivilegedOAuth2Scope[] =
+ 
  // OAuth2 scope for access to Google Family Link Supervision Setup.
  const char kKidsSupervisionSetupChildOAuth2Scope[] =
 -    "https://www.googleapis.com/auth/kids.supervision.setup.child";
@@ -835,11 +753,23 @@ index 93cba997fac15..a39df2bd9e856 100644
  
  // OAuth scope for access to the people API (read-only).
  const char kPeopleApiReadOnlyOAuth2Scope[] =
-diff --git a/google_apis/gcm/engine/gservices_settings.cc b/google_apis/gcm/engine/gservices_settings.cc
-index 1d53f9f230875..ef40cd119bba8 100644
---- a/google_apis/gcm/engine/gservices_settings.cc
-+++ b/google_apis/gcm/engine/gservices_settings.cc
-@@ -29,18 +29,18 @@ const char kRegistrationURLKey[] = "gcm_registration_url";
+diff --git google_apis/gaia/gaia_urls.cc google_apis/gaia/gaia_urls.cc
+index a36389dec87dc..ecb3619a60cd0 100644
+--- google_apis/gaia/gaia_urls.cc
++++ google_apis/gaia/gaia_urls.cc
+@@ -25,6 +25,7 @@
+ namespace {
+ 
+ // Gaia service constants
++//adding trk: here currently crashes the program
+ const char kDefaultGoogleUrl[] = "http://google.com";
+ const char kDefaultGaiaUrl[] = "https://accounts.google.com";
+ const char kDefaultGoogleApisBaseUrl[] = "https://www.googleapis.com";
+diff --git google_apis/gcm/engine/gservices_settings.cc google_apis/gcm/engine/gservices_settings.cc
+index c869c5bbf6273..b645ed52771c4 100644
+--- google_apis/gcm/engine/gservices_settings.cc
++++ google_apis/gcm/engine/gservices_settings.cc
+@@ -30,18 +30,18 @@ const char kRegistrationURLKey[] = "gcm_registration_url";
  
  const int64_t kDefaultCheckinInterval = 2 * 24 * 60 * 60;  // seconds = 2 days.
  const int64_t kMinimumCheckinInterval = 12 * 60 * 60;  // seconds = 12 hours.
@@ -861,10 +791,10 @@ index 1d53f9f230875..ef40cd119bba8 100644
  const int kMaxSecurePort = 65535;
  
  std::string MakeMCSEndpoint(const std::string& mcs_hostname, int port) {
-diff --git a/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc b/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
+diff --git jingle/notifier/base/gaia_token_pre_xmpp_auth.cc jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
 index 50567d6db8810..589ee18c3b4a2 100644
---- a/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
-+++ b/jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
+--- jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
++++ jingle/notifier/base/gaia_token_pre_xmpp_auth.cc
 @@ -33,7 +33,7 @@ class GaiaCookieMechanism : public jingle_xmpp::SaslCookieMechanism {
      // These attributes are necessary for working with non-gmail gaia
      // accounts.
@@ -874,10 +804,10 @@ index 50567d6db8810..589ee18c3b4a2 100644
      const jingle_xmpp::QName QN_GOOGLE_ALLOW_GENERATED_JID_XMPP_LOGIN(
          NS_GOOGLE_AUTH_PROTOCOL, "allow-generated-jid");
      const jingle_xmpp::QName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT(
-diff --git a/remoting/base/breakpad_mac.mm b/remoting/base/breakpad_mac.mm
+diff --git remoting/base/breakpad_mac.mm remoting/base/breakpad_mac.mm
 index 34e6024db4104..0b5b44e5de815 100644
---- a/remoting/base/breakpad_mac.mm
-+++ b/remoting/base/breakpad_mac.mm
+--- remoting/base/breakpad_mac.mm
++++ remoting/base/breakpad_mac.mm
 @@ -52,7 +52,7 @@ void InitializeCrashReporting() {
        [breakpad_config setObject:@"21600" forKey:@BREAKPAD_REPORT_INTERVAL];
      }
@@ -887,11 +817,11 @@ index 34e6024db4104..0b5b44e5de815 100644
                            forKey:@BREAKPAD_URL];
      }
  
-diff --git a/remoting/protocol/jingle_messages.cc b/remoting/protocol/jingle_messages.cc
-index 9367bd0a50372..e803e0e71c20d 100644
---- a/remoting/protocol/jingle_messages.cc
-+++ b/remoting/protocol/jingle_messages.cc
-@@ -24,7 +24,7 @@ const char kJabberNamespace[] = "jabber:client";
+diff --git remoting/protocol/jingle_messages.cc remoting/protocol/jingle_messages.cc
+index 502381662fa5a..fa848e5ed4cde 100644
+--- remoting/protocol/jingle_messages.cc
++++ remoting/protocol/jingle_messages.cc
+@@ -25,7 +25,7 @@ const char kJabberNamespace[] = "jabber:client";
  const char kJingleNamespace[] = "urn:xmpp:jingle:1";
  
  // Namespace for transport messages when using standard ICE.
@@ -900,10 +830,10 @@ index 9367bd0a50372..e803e0e71c20d 100644
  
  const char kWebrtcTransportNamespace[] = "google:remoting:webrtc";
  
-diff --git a/rlz/lib/lib_values.cc b/rlz/lib/lib_values.cc
+diff --git rlz/lib/lib_values.cc rlz/lib/lib_values.cc
 index d9cfbbe1480a0..4c6cee0e30ef1 100644
---- a/rlz/lib/lib_values.cc
-+++ b/rlz/lib/lib_values.cc
+--- rlz/lib/lib_values.cc
++++ rlz/lib/lib_values.cc
 @@ -41,7 +41,7 @@ const char kSetDccResponseVariable[] = "set_dcc";
  //
  
@@ -913,10 +843,10 @@ index d9cfbbe1480a0..4c6cee0e30ef1 100644
  const int kFinancialPort = 443;
  
  // Ping times in 100-nanosecond intervals.
-diff --git a/third_party/libjingle_xmpp/xmpp/constants.cc b/third_party/libjingle_xmpp/xmpp/constants.cc
+diff --git third_party/libjingle_xmpp/xmpp/constants.cc third_party/libjingle_xmpp/xmpp/constants.cc
 index 1102746586d34..b19a5612ae5ce 100644
---- a/third_party/libjingle_xmpp/xmpp/constants.cc
-+++ b/third_party/libjingle_xmpp/xmpp/constants.cc
+--- third_party/libjingle_xmpp/xmpp/constants.cc
++++ third_party/libjingle_xmpp/xmpp/constants.cc
 @@ -194,7 +194,7 @@ const StaticQName QN_SASL_TEMPORARY_AUTH_FAILURE =
  
  // These are non-standard.
@@ -944,10 +874,10 @@ index 1102746586d34..b19a5612ae5ce 100644
  const StaticQName QN_GOOGLE_CIRCLE_ID = { STR_EMPTY, "google-circle-id" };
  const StaticQName QN_GOOGLE_USER_ID = { STR_EMPTY, "google-user-id" };
  const StaticQName QN_GOOGLE_SESSION_BLOCKED = { NS_GOOGLE_SESSION, "blocked" };
-diff --git a/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js b/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
+diff --git ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
 index 0e07a87572fe7..8f211e4bcd3d7 100644
---- a/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
-+++ b/ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
+--- ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
++++ ui/accessibility/extensions/chromevoxclassic/chromevox/background/prefs.js
 @@ -72,9 +72,9 @@ cvox.ChromeVoxPrefs.DEFAULT_PREFS = {
    'outputContextFirst': false,
    'position': '{}',
@@ -960,10 +890,10 @@ index 0e07a87572fe7..8f211e4bcd3d7 100644
    'sticky': false,
    'typingEcho': 0,
    'useIBeamCursor': cvox.ChromeVox.isMac,
-diff --git a/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js b/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
+diff --git ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
 index 44ef19f8c5521..3affd32ce9052 100644
---- a/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
-+++ b/ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
+--- ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
++++ ui/accessibility/extensions/chromevoxclassic/host/chrome/host.js
 @@ -96,9 +96,9 @@ cvox.ChromeHost.prototype.init = function() {
            (!cvox.ApiImplementation.siteSpecificScriptLoader ||
             !cvox.ApiImplementation.siteSpecificScriptBase);
@@ -976,11 +906,11 @@ index 44ef19f8c5521..3affd32ce9052 100644
        if (apiPrefsChanged) {
          var searchInit = prefs['siteSpecificEnhancements'] === 'true' ?
              cvox.SearchLoader.init :
-diff --git a/ui/views/examples/webview_example.cc b/ui/views/examples/webview_example.cc
-index 86d4c9741b367..128a952d7191d 100644
---- a/ui/views/examples/webview_example.cc
-+++ b/ui/views/examples/webview_example.cc
-@@ -25,7 +25,7 @@ void WebViewExample::CreateExampleView(View* container) {
+diff --git ui/views/examples/webview_example.cc ui/views/examples/webview_example.cc
+index 1571dd2fc9e43..2290a8fffc866 100644
+--- ui/views/examples/webview_example.cc
++++ ui/views/examples/webview_example.cc
+@@ -29,7 +29,7 @@ void WebViewExample::CreateExampleView(View* container) {
    container->SetLayoutManager(std::make_unique<FillLayout>());
    container->AddChildView(webview_);
  
@@ -990,5 +920,5 @@ index 86d4c9741b367..128a952d7191d 100644
  }
  
 -- 
-2.26.0
+2.29.1
 

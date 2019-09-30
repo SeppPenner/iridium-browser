@@ -1,19 +1,19 @@
-From b3d4aa94e3215457657596853294cdf9ffe512be Mon Sep 17 00:00:00 2001
+From 38b2c9e4764b4998f2472f5c2b985ea216fd9e53 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/61] build: remove calling untrusted hooks
+Subject: [PATCH 01/76] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 215 ++---------------------------------------------------------
- 1 file changed, 4 insertions(+), 211 deletions(-)
+ DEPS | 38 +++++++++++++++++++++-----------------
+ 1 file changed, 21 insertions(+), 17 deletions(-)
 
-diff --git a/DEPS b/DEPS
-index 352738248846d..fc2d94d4ce37b 100644
---- a/DEPS
-+++ b/DEPS
-@@ -81,7 +81,7 @@ vars = {
+diff --git DEPS DEPS
+index 30795f6cd6bf3..509905e94fcd5 100644
+--- DEPS
++++ DEPS
+@@ -86,7 +86,7 @@ vars = {
  
    # Check out and download nacl by default. This can be disabled e.g. with
    # custom_vars.
@@ -22,7 +22,7 @@ index 352738248846d..fc2d94d4ce37b 100644
  
    # By default, do not check out src-internal. This can be overridden e.g. with
    # custom_vars.
-@@ -108,8 +108,8 @@ vars = {
+@@ -116,8 +116,8 @@ vars = {
    # support for other platforms may be added in the future.
    'checkout_openxr' : 'checkout_win',
  
@@ -31,275 +31,162 @@ index 352738248846d..fc2d94d4ce37b 100644
 +  'checkout_traffic_annotation_tools': False,
 +  'checkout_instrumented_libraries': False,
  
-   # By default, do not check out WebKit for iOS, as it is not needed unless
-   # running against ToT WebKit rather than system WebKit. This can be overridden
-@@ -601,24 +601,6 @@ deps = {
-   'src/net/third_party/quiche/src':
-     Var('quiche_git') + '/quiche.git' + '@' +  Var('quiche_revision'),
- 
--  'src/tools/luci-go': {
--      'packages': [
--        {
--          'package': 'infra/tools/luci/isolate/${{platform}}',
--          'version': Var('luci_go'),
--        },
--        {
--          'package': 'infra/tools/luci/isolated/${{platform}}',
--          'version': Var('luci_go'),
--        },
--        {
--          'package': 'infra/tools/luci/swarming/${{platform}}',
--          'version': Var('luci_go'),
--        },
--      ],
--      'dep_type': 'cipd',
--  },
--
-   # SPIRV-Cross is in third_party/spirv-cross/spirv-cross instead of
-   # third_party/spirv-cross/src  because its header files are at the root of
-   # the repository and dependencies include them like so:
-@@ -3502,49 +3484,6 @@ hooks = [
-         'sync', '--extract',
-     ],
-   },
--  {
--    'name': 'sysroot_arm',
--    'pattern': '.',
--    'condition': 'checkout_linux and checkout_arm',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=arm'],
--  },
--  {
--    'name': 'sysroot_arm64',
--    'pattern': '.',
--    'condition': 'checkout_linux and checkout_arm64',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=arm64'],
--  },
--  {
--    'name': 'sysroot_x86',
--    'pattern': '.',
--    'condition': 'checkout_linux and (checkout_x86 or checkout_x64)',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=x86'],
--  },
--  {
--    'name': 'sysroot_mips',
--    'pattern': '.',
--    'condition': 'checkout_linux and checkout_mips',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=mips'],
--  },
--  {
--    'name': 'sysroot_mips64',
--    'pattern': '.',
--    'condition': 'checkout_linux and checkout_mips64',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=mips64el'],
--  },
--
--  {
--    'name': 'sysroot_x64',
--    'pattern': '.',
--    'condition': 'checkout_linux and checkout_x64',
--    'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
--               '--arch=x64'],
--  },
+   # By default bot checkouts the WPR archive files only when this
+   # flag is set True.
+@@ -4173,35 +4173,35 @@ hooks = [
    {
-     # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
-     'name': 'ciopfs_linux',
-@@ -3572,44 +3511,6 @@ hooks = [
-     'condition': 'checkout_mac',
-     'action': ['python', 'src/build/mac_toolchain.py'],
-   },
--  # Pull binutils for linux, enabled debug fission for faster linking /
--  # debugging when used with clang on Ubuntu Precise.
--  # https://code.google.com/p/chromium/issues/detail?id=352046
--  {
--    'name': 'binutils',
--    'pattern': 'src/third_party/binutils',
--    'condition': 'host_os == "linux" and host_cpu != "mips64"',
--    'action': [
--        'python',
--        'src/third_party/binutils/download.py',
--    ],
--  },
--  {
--    # Update the prebuilt clang toolchain.
--    # Note: On Win, this should run after win_toolchain, as it may use it.
--    'name': 'clang',
--    'pattern': '.',
--    'condition': 'not llvm_force_head_revision',
--    'action': ['python', 'src/tools/clang/scripts/update.py'],
--  },
--  {
--    # Build the clang toolchain from tip-of-tree.
--    # Note: On Win, this should run after win_toolchain, as it may use it.
--    'name': 'clang_tot',
--    'pattern': '.',
--    'condition': 'llvm_force_head_revision',
--    'action': ['python', 'src/tools/clang/scripts/build.py',
--               '--llvm-force-head-revision',
--               '--with-android={checkout_android}'],
--  },
--  {
--    # This is supposed to support the same set of platforms as 'clang' above.
--    'name': 'clang_coverage',
--    'pattern': '.',
--    'condition': 'checkout_clang_coverage_tools',
--    'action': ['python', 'src/tools/clang/scripts/update.py',
--               '--package=coverage_tools'],
--  },
-   {
-     # This is also supposed to support the same set of platforms as 'clang'
-     # above. LLVM ToT support isn't provided at the moment.
-@@ -3679,18 +3580,6 @@ hooks = [
-                 '-s', 'src/buildtools/mac/clang-format.sha1',
-     ],
-   },
--  {
--    'name': 'clang_format_linux',
--    'pattern': '.',
--    'condition': 'host_os == "linux"',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-clang-format',
--                '-s', 'src/buildtools/linux64/clang-format.sha1',
--    ],
--  },
-   # Pull rc binaries using checked-in hashes.
-   {
-     'name': 'rc_win',
-@@ -3716,39 +3605,6 @@ hooks = [
-                 '-s', 'src/build/toolchain/win/rc/mac/rc.sha1',
-     ],
-   },
--  {
--    'name': 'rc_linux',
--    'pattern': '.',
--    'condition': 'checkout_win and host_os == "linux"',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-browser-clang/rc',
--                '-s', 'src/build/toolchain/win/rc/linux64/rc.sha1',
--    ]
--  },
-- {
--    'name': 'test_fonts',
--    'pattern': '.',
--    'action': [ 'download_from_google_storage',
--                '--no_resume',
--                '--extract',
--                '--no_auth',
--                '--bucket', 'chromium-fonts',
--                '-s', 'src/third_party/test_fonts/test_fonts.tar.gz.sha1',
--    ],
--  },
--  # Download test resources for opus, i.e. audio files.
--  {
--    'name': 'opus_test_files',
--    'pattern': '.',
--    'action': ['download_from_google_storage',
--               '--no_auth',
--               '--quiet',
--               '--bucket', 'chromium-webrtc-resources',
--               '-d', 'src/third_party/opus/tests/resources'],
--  },
-   # Pull order files for the win/clang build.
-   {
-     'name': 'orderfiles_win',
-@@ -3793,57 +3649,8 @@ hooks = [
-                 'src/third_party/apache-win32',
-     ],
-   },
--  {
--    'name': 'msan_chained_origins',
--    'pattern': '.',
--    'condition': 'checkout_instrumented_libraries',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-instrumented-libraries',
--                '-s', 'src/third_party/instrumented_libraries/binaries/msan-chained-origins-trusty.tgz.sha1',
--              ],
--  },
--  {
--    'name': 'msan_no_origins',
--    'pattern': '.',
--    'condition': 'checkout_instrumented_libraries',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-instrumented-libraries',
--                '-s', 'src/third_party/instrumented_libraries/binaries/msan-no-origins-trusty.tgz.sha1',
--              ],
--  },
--  {
--    'name': 'wasm_fuzzer',
--    'pattern': '.',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '-u',
--                '--bucket', 'v8-wasm-fuzzer',
--                '-s', 'src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1',
--    ],
--  },
- 
-   # Pull down Node binaries for WebUI toolchain.
--  {
--    'name': 'node_linux64',
--    'pattern': '.',
--    'condition': 'host_os == "linux"',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--extract',
--                '--no_auth',
--                '--bucket', 'chromium-nodejs/12.14.1',
--                '-s', 'src/third_party/node/linux/node-linux-x64.tar.gz.sha1',
--    ],
--  },
-   {
-     'name': 'node_mac',
+     'name': 'sysroot_arm',
      'pattern': '.',
-@@ -3937,20 +3744,6 @@ hooks = [
-     ],
+-    'condition': 'checkout_linux and checkout_arm',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=arm'],
    },
- 
--  # Pull down Zucchini test data.
--  {
--    'name': 'zucchini_testdata',
--    'pattern': '.',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--num_threads=4',
--                '--bucket', 'chromium-binary-patching/zucchini_testdata',
--                '--recursive',
--                '-d', 'src/components/zucchini',
--    ],
--  },
-   # Pull down Android RenderTest goldens
    {
-     'name': 'Fetch Android RenderTest goldens',
-@@ -3964,7 +3757,7 @@ hooks = [
+     'name': 'sysroot_arm64',
+     'pattern': '.',
+-    'condition': 'checkout_linux and checkout_arm64',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=arm64'],
+   },
+   {
+     'name': 'sysroot_x86',
+     'pattern': '.',
+-    'condition': 'checkout_linux and (checkout_x86 or checkout_x64)',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=x86'],
+   },
+   {
+     'name': 'sysroot_mips',
+     'pattern': '.',
+-    'condition': 'checkout_linux and checkout_mips',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=mips'],
+   },
+   {
+     'name': 'sysroot_mips64',
+     'pattern': '.',
+-    'condition': 'checkout_linux and checkout_mips64',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=mips64el'],
+   },
+@@ -4209,7 +4209,7 @@ hooks = [
+   {
+     'name': 'sysroot_x64',
+     'pattern': '.',
+-    'condition': 'checkout_linux and checkout_x64',
++    'condition': False,
+     'action': ['python', 'src/build/linux/sysroot_scripts/install-sysroot.py',
+                '--arch=x64'],
+   },
+@@ -4246,7 +4246,7 @@ hooks = [
+     # Note: On Win, this should run after win_toolchain, as it may use it.
+     'name': 'clang',
+     'pattern': '.',
+-    'condition': 'not llvm_force_head_revision',
++    'condition': False,
+     'action': ['python', 'src/tools/clang/scripts/update.py'],
+   },
+   {
+@@ -4254,7 +4254,7 @@ hooks = [
+     # Note: On Win, this should run after win_toolchain, as it may use it.
+     'name': 'clang_tot',
+     'pattern': '.',
+-    'condition': 'llvm_force_head_revision',
++    'condition': False,
+     'action': ['python', 'src/tools/clang/scripts/build.py',
+                '--llvm-force-head-revision',
+                '--with-android={checkout_android}'],
+@@ -4263,7 +4263,7 @@ hooks = [
+     # This is supposed to support the same set of platforms as 'clang' above.
+     'name': 'clang_coverage',
+     'pattern': '.',
+-    'condition': 'checkout_clang_coverage_tools',
++    'condition': False,
+     'action': ['python', 'src/tools/clang/scripts/update.py',
+                '--package=coverage_tools'],
+   },
+@@ -4376,7 +4376,7 @@ hooks = [
+   {
+     'name': 'rc_linux',
+     'pattern': '.',
+-    'condition': 'checkout_win and host_os == "linux"',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4388,6 +4388,7 @@ hooks = [
+  {
+     'name': 'test_fonts',
+     'pattern': '.',
++    'condition': False,
+     'action': [ 'download_from_google_storage',
+                 '--no_resume',
+                 '--extract',
+@@ -4400,6 +4401,7 @@ hooks = [
+   {
+     'name': 'opus_test_files',
+     'pattern': '.',
++    'condition': False,
+     'action': ['download_from_google_storage',
+                '--no_auth',
+                '--quiet',
+@@ -4453,7 +4455,7 @@ hooks = [
+   {
+     'name': 'msan_chained_origins',
+     'pattern': '.',
+-    'condition': 'checkout_instrumented_libraries',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4465,7 +4467,7 @@ hooks = [
+   {
+     'name': 'msan_no_origins',
+     'pattern': '.',
+-    'condition': 'checkout_instrumented_libraries',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4477,6 +4479,7 @@ hooks = [
+   {
+     'name': 'wasm_fuzzer',
+     'pattern': '.',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4491,7 +4494,7 @@ hooks = [
+   {
+     'name': 'node_linux64',
+     'pattern': '.',
+-    'condition': 'host_os == "linux"',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4598,6 +4601,7 @@ hooks = [
+   {
+     'name': 'zucchini_testdata',
+     'pattern': '.',
++    'condition': False,
+     'action': [ 'python',
+                 'src/third_party/depot_tools/download_from_google_storage.py',
+                 '--no_resume',
+@@ -4631,7 +4635,7 @@ hooks = [
    {
      'name': 'Fetch Android AFDO profile',
      'pattern': '.',
 -    'condition': 'checkout_android or checkout_linux',
-+    'condition': 'checkout_android',
++    'condition': False,
      'action': [ 'vpython',
-                 'src/tools/download_cros_provided_profile.py',
+                 'src/tools/download_optimization_profile.py',
                  '--newest_state=src/chrome/android/profiles/newest.txt',
 -- 
-2.26.0
+2.29.1
 

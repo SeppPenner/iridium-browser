@@ -1,7 +1,7 @@
-From 88880d192e8e1d1f94c2b1c1168c12dde76a1669 Mon Sep 17 00:00:00 2001
+From 17f4ef75521c28ed0af6c7e05171d579d1e8dbd5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 17:03:14 +0200
-Subject: [PATCH 02/61] build: select default toolchain
+Subject: [PATCH 02/76] build: select default toolchain
 
 (Patch used from openSUSE.)
 
@@ -25,11 +25,11 @@ that would be magnificient.
  1 file changed, 19 insertions(+)
  create mode 100644 toolchain/BUILD.gn
 
-diff --git a/toolchain/BUILD.gn b/toolchain/BUILD.gn
+diff --git toolchain/BUILD.gn toolchain/BUILD.gn
 new file mode 100644
 index 0000000000000..052c0b3f305a9
 --- /dev/null
-+++ b/toolchain/BUILD.gn
++++ toolchain/BUILD.gn
 @@ -0,0 +1,19 @@
 +import("//build/toolchain/gcc_toolchain.gni")
 +
@@ -51,5 +51,5 @@ index 0000000000000..052c0b3f305a9
 +  }
 +}
 -- 
-2.26.0
+2.29.1
 
