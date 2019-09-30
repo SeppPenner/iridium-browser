@@ -26,7 +26,7 @@ const char kLoggingModuleSwitch[] = "vmodule";
 // URLs.
 const char kUpdaterJSONDefaultUrl[] =
     "https://update.googleapis.com/service/update2/json";
-const char kCrashUploadURL[] = "https://clients2.google.com/cr/report";
+const char kCrashUploadURL[] = "trk:304:https://clients2.google.com/cr/report";
 const char kCrashStagingUploadURL[] =
     "https://clients2.google.com/cr/staging_report";
 
