@@ -226,7 +226,7 @@ class WebThemeEngine {
     return base::nullopt;
   }
 
-  virtual ForcedColors ForcedColors() const { return ForcedColors::kNone; }
+  virtual ForcedColors GetForcedColors() const { return ForcedColors::kNone; }
   virtual void SetForcedColors(const blink::ForcedColors forced_colors) {}
 };
 

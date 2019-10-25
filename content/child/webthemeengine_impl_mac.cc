@@ -6,7 +6,7 @@
 
 namespace content {
 
-blink::ForcedColors WebThemeEngineMac::ForcedColors() const {
+blink::ForcedColors WebThemeEngineMac::GetForcedColors() const {
   return forced_colors_;
 }
 

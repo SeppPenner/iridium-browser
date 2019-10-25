@@ -228,7 +228,7 @@ void WebThemeEngineAndroid::Paint(
       native_theme_extra_params, NativeColorScheme(color_scheme));
 }
 
-blink::ForcedColors WebThemeEngineAndroid::ForcedColors() const {
+blink::ForcedColors WebThemeEngineAndroid::GetForcedColors() const {
   return forced_colors_;
 }
 
