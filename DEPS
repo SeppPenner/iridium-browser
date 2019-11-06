@@ -4109,7 +4109,7 @@ hooks = [
     'name': 'landmines',
     'pattern': '.',
     'action': [
-        'python',
+        'python3',
         'src/build/landmines.py',
     ],
   },
