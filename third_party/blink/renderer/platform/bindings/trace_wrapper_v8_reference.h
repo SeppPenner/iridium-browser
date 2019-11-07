@@ -11,15 +11,6 @@
 #include "third_party/blink/renderer/platform/heap/unified_heap_marking_visitor.h"
 #include "v8/include/v8.h"
 
-namespace v8 {
-
-template <typename T>
-struct TracedGlobalTrait<v8::TracedGlobal<T>> {
-  static constexpr bool kRequiresExplicitDestruction = false;
-};
-
-}  // namespace v8
-
 namespace blink {
 
 /**
