@@ -1,33 +1,33 @@
-From c8c6968ac787f6c90949dcd57cd54b79e4884497 Mon Sep 17 00:00:00 2001
+From b268de11f20b2188d529363c08af94406e72c972 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
-Subject: [PATCH 06/58] dns: send IPv6 connectivity probes to RIPE DNS rather
+Subject: [PATCH 11/60] dns: send IPv6 connectivity probes to RIPE DNS rather
  than Google
 
 Short of disabling the code (we may do that in a subsequent patch
 anyway), avoid sending to Google.
 ---
- net/dns/host_resolver_impl.cc | 6 +++---
+ net/dns/host_resolver_manager.cc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/net/dns/host_resolver_impl.cc b/net/dns/host_resolver_impl.cc
-index 9503444eb4cd..a365076060e5 100644
---- a/net/dns/host_resolver_impl.cc
-+++ b/net/dns/host_resolver_impl.cc
-@@ -122,10 +122,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
+diff --git a/net/dns/host_resolver_manager.cc b/net/dns/host_resolver_manager.cc
+index e8dea46e2a0d1..f57048171c472 100644
+--- a/net/dns/host_resolver_manager.cc
++++ b/net/dns/host_resolver_manager.cc
+@@ -123,10 +123,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
  // cached.
  const int kIPv6ProbePeriodMs = 1000;
  
 -// Google DNS address used for IPv6 probes.
-+/* RIPE NCC k.root-servers.net. 2001:7fd::1 (anycasted) */
- const uint8_t kIPv6ProbeAddress[] =
--    { 0x20, 0x01, 0x48, 0x60, 0x48, 0x60, 0x00, 0x00,
--      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x88, 0x88 };
-+    { 0x20, 0x01, 0x07, 0xfd, 0x00, 0x00, 0x00, 0x00,
-+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 };
+-const uint8_t kIPv6ProbeAddress[] = {0x20, 0x01, 0x48, 0x60, 0x48, 0x60,
++// RIPE NCC k.root-servers.net. 2001:7fd::1 (anycasted)
++const uint8_t kIPv6ProbeAddress[] = {0x20, 0x01, 0x07, 0xfd, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-                                     0x00, 0x00, 0x88, 0x88};
++                                     0x00, 0x00, 0x00, 0x01};
  
  enum DnsResolveStatus {
    RESOLVE_STATUS_DNS_SUCCESS = 0,
 -- 
-2.21.0
+2.23.0
 

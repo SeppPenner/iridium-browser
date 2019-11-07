@@ -1,7 +1,7 @@
-From 30d5324c4ac6139bd7ecb9edfbbb3a651d6b6f94 Mon Sep 17 00:00:00 2001
+From 389220cd0a261c1627d00fc3918bd63451885b12 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 8 Nov 2014 21:40:49 +0100
-Subject: [PATCH 25/58] prefs: use separate directory for config
+Subject: [PATCH 30/60] prefs: use separate directory for config
 
 Do not overwrite an existing Chromium configuration.
 ---
@@ -9,11 +9,11 @@ Do not overwrite an existing Chromium configuration.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/common/chrome_paths_linux.cc b/chrome/common/chrome_paths_linux.cc
-index 5659ef5d6f97..9be81f76639f 100644
+index b81cd35ffe4d1..037c8d6f6c0ca 100644
 --- a/chrome/common/chrome_paths_linux.cc
 +++ b/chrome/common/chrome_paths_linux.cc
-@@ -90,7 +90,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
- #if defined(GOOGLE_CHROME_BUILD)
+@@ -91,7 +91,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
+ #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
    *result = config_dir.Append("google-chrome" + GetChannelSuffixForDataDir());
  #else
 -  *result = config_dir.Append("chromium");
@@ -22,5 +22,5 @@ index 5659ef5d6f97..9be81f76639f 100644
    return true;
  }
 -- 
-2.21.0
+2.23.0
 

@@ -1,11 +1,10 @@
-From 0d4350eadea70fb72bcfed70860dba28d0dc2de3 Mon Sep 17 00:00:00 2001
+From 17cc212d160b4ac7364617225c58d41e1ee595fe Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 7 Mar 2016 00:56:09 +0100
-Subject: [PATCH 50/58] icons: iridium icons
+Subject: [PATCH 52/60] icons: iridium icons
 
 ---
  .../app/theme/chromium/product_logo_128.png   | Bin 8366 -> 7826 bytes
- chrome/app/theme/chromium/product_logo_22.png | Bin 1030 -> 1105 bytes
  .../theme/chromium/product_logo_22_mono.png   | Bin 537 -> 698 bytes
  chrome/app/theme/chromium/product_logo_24.png | Bin 1022 -> 1216 bytes
  .../app/theme/chromium/product_logo_256.png   | Bin 19849 -> 16157 bytes
@@ -15,14 +14,12 @@ Subject: [PATCH 50/58] icons: iridium icons
  .../chromium/product_logo_32.png              | Bin 1551 -> 1902 bytes
  .../chromium/product_logo_16.png              | Bin 1551 -> 1902 bytes
  .../chromium/product_logo_32.png              | Bin 3634 -> 3846 bytes
- .../browser/resources/local_ntp/doodles.css   |   2 +-
- .../welcome/dice_welcome/welcome.css          |   2 +-
- chrome/browser/resources/welcome/welcome.css  |   2 +-
+ .../browser/resources/local_ntp/doodles.css   |   4 +-
  .../default_100_percent/common/sadplugin.png  | Bin 238 -> 448 bytes
  .../default_200_percent/common/sadplugin.png  | Bin 321 -> 431 bytes
  ui/webui/resources/images/iridium_text.svg    | 336 ++++++++++++++++++
  ui/webui/resources/webui_resources.grd        |   2 +-
- 18 files changed, 340 insertions(+), 4 deletions(-)
+ 15 files changed, 339 insertions(+), 3 deletions(-)
  create mode 100644 ui/webui/resources/images/iridium_text.svg
 
 diff --git a/chrome/app/theme/chromium/product_logo_128.png b/chrome/app/theme/chromium/product_logo_128.png
@@ -344,55 +341,6 @@ zjk);DF^#B5-eHG=DlT0fj;+PU4t4s7C+=S32X~twxUEY46TktU1;~GV(D7{Lzdrk=
 z@rky-J9hEeYS<Y@(MIXo4X2+}i`Li7eNJOvL{vS~HO6#+wjTuhD}fxY)EZAlCVq0u
 z&UH@#A<tIcaIYTMb63X$;5n+}0dQQ$1K_xh2f%UtfA!-_)dk`DdH?_b07*qoM6N<$
 Eg5v<U;{X5v
-
-diff --git a/chrome/app/theme/chromium/product_logo_22.png b/chrome/app/theme/chromium/product_logo_22.png
-index 1d25e2adaf2b1476a0b20e094d3fabc7b1331e4f..75537a23a6061b2ab54816d9d811a619bd8cf7ae 100644
-GIT binary patch
-delta 1084
-zcmV-C1jGA=2+;_TB!2{RLP=Bz2nYy#2xN!=000SaNLh0L00Tw<00Tw=rs=bi0000P
-zbVXQnQ*UN;cVTj60C#tHE@^ISb7Ns}WiD@WXPfRk8UO$T&PhZ;R5*>*lwE98RS?I2
-zbMC#nYl|#cv{2$lu%RHR!N3awLKh2-K(x4Mc#s4|LM6lpeSZ)V+r(%zMwHe>NmMi@
-zjkri7H5A(IrYRIrUhv}qkPrEgqQaJzVz=9S&-frUyDfxg{!b?}bAFjQb7tUHlMFY+
-z<MGhN%a><~h!b|4A4ZKD<#%`YF0kl)R3;)6qV|j+zl1_gV{>zJ?@ht6SZuNtXOBRU
-z5eBSMD5~#ROn+EJH-Mf2=?5kP<AHwQlY#!orq0e?S8`cq=ulZ%8CG#xjnHKMZ1J2&
-zXO{?ehZ=d^z@B+?W=B)W)@i9^%gj`=WrC<P4fq&%E)>bEzhTC)Sj8$8HWiJHPE8~d
-z!T<KhE4HXIBb98KcfFDqE_`B=WpFhr#i_QvYes;}7k^f4M#ZGs_P!k7dg31A1rLdp
-zyRh78u|^C%HjvX?I{st2ZOe2F3lv?1YO$!)jE-+UEaJT{&}|3pi|!D3++*uH#@+w$
-zQ;$@eE)f|YSckrWfGZh`4L}1>6zdjjP|-S64<V+$Xl!(QB9X{et?(Lw1qz5KhuvpC
-zJ3hPQc7ON7!iX~iz*^;ePnO<Hfa=K7O>{z$Xi(PH)^=>!r$<TxUuu@e-a2T-o|J3x
-zs^**<a%65{#F>FA7kURtU-h{TFSjkXMOS<@vnoy<zLo=?iv2n3N9Kp!%n1#G^o3N-
-zx9*_tcV>N;Qx^yDZ65L!lt~EH`C!`z@;1WV3V%mIcd60sv%0qRbaZz9Eh-zs*x%i*
-zv*!;E_$7Y=#ksc~%U8b01A^v*#hf)NFJ#@|*Imy~Ilpx2(t@j*%*qZm4Iq;ha8%O*
-zP_^~wo505W%ycVC5|Kn6SIqQF4Qu`oH&QMHOF*iCs6ZEh!f5Mf$G8AGXg8a%S*w<!
-z9DhU%kqP9#___2q>r0Ir`U$La?YCOcF9V^@sO%T`uD!k8Hvo<6r(P=Xyc*BRoA6T5
-zWy2b`O#)p6oL00QsC7iAq>`<xMCA=2Y(?uKcUP#&+J=)m2Yh|9HxqCjrPVr98`qWo
-zm20f6tu_1hAE;NT2HlxTwl0U9U4e+Ey?@Lz1)fRXdq<dvXYw|bAg>LF&R@LvzK(qd
-zcKiqBi07D*BR!<}*XoQJJoUkth<Qmwq^CdNa>h?~Z+~^QwV5&iE0m%-7kC;7fgZBH
-zx2(N=_k|mRhqUtZWAnyEyn2P;^!_iF^c^{n0?LMkbp!7ejg7vWNF=hkjvIo9R5e-m
-zTe!ce`az?t0#gj2!dYYW`+|b-?xv=ue{ROOHS{k&S*dk!FdnJ^0000<MNUMnLSTY#
-CB?OxQ
-
-delta 1008
-zcmV<M0}uSs2!;rdB!3BTNLh0L01ejw01ejxLMWSf00007bV*G`2j2(>6bvfvI{H)q
-z000JJOGiWi{{a60|De66lK=n%lSxEDRCwB@m0M_CMHE2So^$TGH#g1uRf|c3X|0X4
-z0izZwKB5xa22-jiNT6bT(0+(SupkBu;zv-Z+K3nsiX!+SLVwlb^TQV?_=wnoF{Y`H
-zhFBVt#^ffsk2A9^`8ed>q&47z{V|+#*6clJW)ExSp8m12uD;Py)`)Ns?&}+=PUXx)
-zIjf!OXbCMz0Yq3(7!uFDUtU!F+S`5g(`yu~?Cm{uD3jGgq0>rLhyqa6XlxAA@mTEH
-zPo8gjfdWikxqm%h7j--_{LbQH*l(4}|4P9+D(BO=!)=fM`sVION8_uD`_%lS$z$2j
-z?o$+1M;^*W$z*NUoN;e~$_nw`)bN0{+OAGf>%eKD^O9p5x_vkI3?IxZ@R5OutGs0C
-z&!az$h;s(<eAIX#22X@*uMF7Q5G+&|Wm13ql@5OyOMlHdJSzg?8z*?``Ql<hY@u#l
-z-JYHYDrS5D7b|@(=6O=Pp_+-`&LUz!p{mT|>HBL)*#tlQPI5L)vh^Bhzahi1FK5U)
-z#Sa2}&qs_wjNtjM8#wF(_%Uump`x~ysk48xn9kq@33|I~`08|mk54KJIE9Z+!tU(>
-zcePdX;eSvDvs9TN9(ZC9q$3g=<Ci*B050F$$jFZ)>}U>{Cvicf0H_l2!3o%2Z`im#
-z;M}Z-@dU)f7(s;=0Du3>TBVwf{$@~=q_Vb(=EgWD&JYO|VA)>&_B7nG#pis+FMOx+
-z=x3TRWl4-vP>7<g;W7||bD%4w(Xt4upimq~%zr?)OgcrEpD+{inMlQGX#jMk6onmE
-z2vZ9M6#*Eg@7*bj1^{Pgmp+OD#uv({E5+{G22M3kx~D~`EzY?M>zglC!0PwW0m<d`
-za|*BugJ0m?x)q-46mD;3DSA7F8=FFg{`8DPD8#9}3*ZCHvv|OF>+Tf6ET4R49$x%Z
-z*nd_Jo7M}Ud^4P8Za!pFW5tSWoyvG-Zu0fK*0TSl>El5%(ZMQ2oy}UZ^C{Y|ufT}O
-zlPVDA+`$KLOS~G1Bl#<Hr((X>L_|SGxsa<jSn6tup+IV_8|-dN99Xq&PRyQb%~?Ah
-zZ9UE36#*IQs*9j7Q>SmF7SB9(=`O2kx@iWckNZJlml27cI~&rvQ7A8sM`c)Rr^2j0
-z^Y9(XBWu2z?(QAi9Ivhz@MGRikdl&ER<GMqqE2mE9N*<a_ukZGc=XAx^7H&3`Uj`W
-e`i`vqGW{1aiNTLmc4JEb0000<MNUMnLSTa9T<#YD
 
 diff --git a/chrome/app/theme/chromium/product_logo_22_mono.png b/chrome/app/theme/chromium/product_logo_22_mono.png
 index dc970053fa02921a43e85d6a4fd9eb1361be2d63..3ad2f55fe7fa72612b07135119838347a34e97cb 100644
@@ -1775,10 +1723,10 @@ zijn5lh|ranEUxCla;-2tu@k6qd-9?0UGslg|DS;W0vhwQy2=Jp`2YX_07*qoM6N<$
 Eg4PWPTmS$7
 
 diff --git a/chrome/browser/resources/local_ntp/doodles.css b/chrome/browser/resources/local_ntp/doodles.css
-index 6e70f2b5e406..ad943c33e8ef 100644
+index 885619db2c1c0..0ec0437ce4370 100644
 --- a/chrome/browser/resources/local_ntp/doodles.css
 +++ b/chrome/browser/resources/local_ntp/doodles.css
-@@ -57,7 +57,7 @@
+@@ -70,7 +70,7 @@
  
  #logo-default,
  #logo-non-white {
@@ -1787,32 +1735,15 @@ index 6e70f2b5e406..ad943c33e8ef 100644
    background-repeat: no-repeat;
    bottom: var(--logo-margin-bottom);
    height: 92px;
-diff --git a/chrome/browser/resources/welcome/dice_welcome/welcome.css b/chrome/browser/resources/welcome/dice_welcome/welcome.css
-index 07febed0c409..b6da71328452 100644
---- a/chrome/browser/resources/welcome/dice_welcome/welcome.css
-+++ b/chrome/browser/resources/welcome/dice_welcome/welcome.css
-@@ -15,7 +15,7 @@ body {
- }
- 
- .watermark {
--  -webkit-mask-image: url(chrome://resources/images/google_logo.svg);
-+  -webkit-mask-image: url(chrome://resources/images/iridium_text.svg);
+@@ -82,7 +82,7 @@
+ body.alternate-logo #logo-default,
+ body.alternate-logo #logo-non-white {
+   -webkit-mask-image:
+-      url(../../../../ui/webui/resources/images/google_logo.svg);
++      url(../../../../ui/webui/resources/images/iridium_text.svg);
    -webkit-mask-repeat: no-repeat;
    -webkit-mask-size: 100%;
-   animation: fadeIn 1s cubic-bezier(0, 0, .2, 1) both;
-diff --git a/chrome/browser/resources/welcome/welcome.css b/chrome/browser/resources/welcome/welcome.css
-index d859a2ec5400..4c769d1e3e5c 100644
---- a/chrome/browser/resources/welcome/welcome.css
-+++ b/chrome/browser/resources/welcome/welcome.css
-@@ -16,7 +16,7 @@ body {
- }
- 
- .watermark {
--  -webkit-mask-image: url(chrome://resources/images/google_logo.svg);
-+  -webkit-mask-image: url(chrome://resources/images/iridium_text.svg);
-   -webkit-mask-repeat: no-repeat;
-   -webkit-mask-size: 100%;
-   animation: fadeIn 1s cubic-bezier(0, 0, .2, 1) both;
+   background: var(--logo-color);
 diff --git a/chrome/renderer/resources/default_100_percent/common/sadplugin.png b/chrome/renderer/resources/default_100_percent/common/sadplugin.png
 index 9ad1225ac67146e719a3b6d6ab223c0c51d7227a..a2299dd496c83cf6a2a1fee1325b9a3d951db624 100644
 GIT binary patch
@@ -1858,7 +1789,7 @@ Ef|m1myZ`_I
 
 diff --git a/ui/webui/resources/images/iridium_text.svg b/ui/webui/resources/images/iridium_text.svg
 new file mode 100644
-index 000000000000..45d8e586f93c
+index 0000000000000..45d8e586f93c3
 --- /dev/null
 +++ b/ui/webui/resources/images/iridium_text.svg
 @@ -0,0 +1,336 @@
@@ -2200,10 +2131,10 @@ index 000000000000..45d8e586f93c
 +           inkscape:connector-curvature="0" /></g></g></g></svg>
 \ No newline at end of file
 diff --git a/ui/webui/resources/webui_resources.grd b/ui/webui/resources/webui_resources.grd
-index 8cb513fdb459..8d7aed5b012d 100644
+index c368d5d694bc4..ead77480ef0f7 100644
 --- a/ui/webui/resources/webui_resources.grd
 +++ b/ui/webui/resources/webui_resources.grd
-@@ -191,7 +191,7 @@ without changes to the corresponding grd file. -->
+@@ -73,7 +73,7 @@ without changes to the corresponding grd file. -->
        <include name="IDR_WEBUI_IMAGES_ERROR_BADGE"
                 file="images/error_badge.svg" type="BINDATA" compress="gzip" />
        <include name="IDR_WEBUI_IMAGES_GOOGLE_LOGO"
@@ -2213,5 +2144,5 @@ index 8cb513fdb459..8d7aed5b012d 100644
                 file="images/select.png" type="BINDATA" />
        <include name="IDR_WEBUI_IMAGES_THROBBER_MEDIUM"
 -- 
-2.21.0
+2.23.0
 

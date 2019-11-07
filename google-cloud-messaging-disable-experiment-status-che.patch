@@ -1,7 +1,7 @@
-From b48f0c45bdf1dc44a91bdc50fd3997197028f5e9 Mon Sep 17 00:00:00 2001
-From: Joachim Bauch <jojo@struktur.de>
+From 364b5d44e4236d6b36374ac30835f0794346a027 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 1 Jun 2015 17:14:34 +0200
-Subject: [PATCH 36/58] google-cloud-messaging: disable experiment status check
+Subject: [PATCH 39/60] google-cloud-messaging: disable experiment status check
 
 This avoids trk:263 from triggering.
 ---
@@ -9,10 +9,10 @@ This avoids trk:263 from triggering.
  1 file changed, 6 insertions(+)
 
 diff --git a/components/gcm_driver/gcm_channel_status_request.cc b/components/gcm_driver/gcm_channel_status_request.cc
-index 15d16e044163..38a2c0f4d21f 100644
+index 7ace8e78f3eb4..20a91778e2f98 100644
 --- a/components/gcm_driver/gcm_channel_status_request.cc
 +++ b/components/gcm_driver/gcm_channel_status_request.cc
-@@ -24,8 +24,10 @@ namespace gcm {
+@@ -23,8 +23,10 @@ namespace gcm {
  
  namespace {
  
@@ -23,7 +23,7 @@ index 15d16e044163..38a2c0f4d21f 100644
  const int kDefaultPollIntervalSeconds = 60 * 60;  // 60 minutes.
  const int kMinPollIntervalSeconds = 30 * 60;  // 30 minutes.
  
-@@ -61,6 +63,7 @@ void GCMChannelStatusRequest::Start() {
+@@ -59,6 +61,7 @@ void GCMChannelStatusRequest::Start() {
    if (!url_loader_factory_)
      return;
  
@@ -31,7 +31,7 @@ index 15d16e044163..38a2c0f4d21f 100644
    DCHECK(!simple_url_loader_);
  
    GURL request_url(channel_status_request_url_);
-@@ -124,6 +127,9 @@ void GCMChannelStatusRequest::Start() {
+@@ -118,6 +121,9 @@ void GCMChannelStatusRequest::Start() {
        url_loader_factory_.get(),
        base::BindOnce(&GCMChannelStatusRequest::OnSimpleLoaderComplete,
                       base::Unretained(this)));
@@ -42,5 +42,5 @@ index 15d16e044163..38a2c0f4d21f 100644
  
  void GCMChannelStatusRequest::OnSimpleLoaderComplete(
 -- 
-2.21.0
+2.23.0
 

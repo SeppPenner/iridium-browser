@@ -1,19 +1,19 @@
-From ed3dae4247912498091c46069461e216582d52b9 Mon Sep 17 00:00:00 2001
+From 0c847d13892405e675c0c9f9e0ff560b05fea05d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 20 Apr 2017 16:25:49 +0200
-Subject: [PATCH 01/58] build: remove calling untrusted hooks
+Subject: [PATCH 01/60] build: remove calling untrusted hooks
 
 Avoid downloading untrusted executables and wasting time with a
 sysroot.
 ---
- DEPS | 213 +++--------------------------------------------------------
- 1 file changed, 11 insertions(+), 202 deletions(-)
+ DEPS | 204 ++---------------------------------------------------------
+ 1 file changed, 4 insertions(+), 200 deletions(-)
 
 diff --git a/DEPS b/DEPS
-index 73933b7cf366..ef3959c1c6df 100644
+index ec3c6070a99c6..8d6fe3ecb5188 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -70,7 +70,7 @@ vars = {
+@@ -75,7 +75,7 @@ vars = {
  
    # Check out and download nacl by default. This can be disabled e.g. with
    # custom_vars.
@@ -22,18 +22,43 @@ index 73933b7cf366..ef3959c1c6df 100644
  
    # By default, do not check out src-internal. This can be overridden e.g. with
    # custom_vars.
-@@ -89,8 +89,8 @@ vars = {
-   # By default do not check out the Oculus SDK. Only available for Googlers.
-   'checkout_oculus_sdk' : 'checkout_src_internal and checkout_win',
+@@ -99,8 +99,8 @@ vars = {
+   # support for other platforms may be added in the future.
+   'checkout_openxr' : 'checkout_win',
  
 -  'checkout_traffic_annotation_tools': 'checkout_configuration != "small"',
 -  'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration != "small"',
 +  'checkout_traffic_annotation_tools': False,
 +  'checkout_instrumented_libraries': False,
  
-   # Default to the empty board. Desktop Chrome OS builds don't need cros SDK
-   # dependencies. Other Chrome OS builds should always define this explicitly.
-@@ -2045,49 +2045,6 @@ hooks = [
+   # By default, do not check out WebKit for iOS, as it is not needed unless
+   # running against ToT WebKit rather than system WebKit. This can be overridden
+@@ -568,24 +568,6 @@ deps = {
+   'src/net/third_party/quiche/src':
+     Var('quiche_git') + '/quiche.git' + '@' +  Var('quiche_revision'),
+ 
+-  'src/tools/luci-go': {
+-      'packages': [
+-        {
+-          'package': 'infra/tools/luci/isolate/${{platform}}',
+-          'version': Var('luci_go'),
+-        },
+-        {
+-          'package': 'infra/tools/luci/isolated/${{platform}}',
+-          'version': Var('luci_go'),
+-        },
+-        {
+-          'package': 'infra/tools/luci/swarming/${{platform}}',
+-          'version': Var('luci_go'),
+-        },
+-      ],
+-      'dep_type': 'cipd',
+-  },
+-
+   # SPIRV-Cross is in third_party/spirv-cross/spirv-cross instead of
+   # third_party/spirv-cross/src  because its header files are at the root of
+   # the repository and dependencies include them like so:
+@@ -3054,49 +3036,6 @@ hooks = [
          'sync', '--extract',
      ],
    },
@@ -83,8 +108,8 @@ index 73933b7cf366..ef3959c1c6df 100644
    {
      # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
      'name': 'ciopfs_linux',
-@@ -2115,31 +2072,6 @@ hooks = [
-     'condition': 'checkout_ios or checkout_mac',
+@@ -3124,43 +3063,6 @@ hooks = [
+     'condition': 'checkout_mac',
      'action': ['python', 'src/build/mac_toolchain.py'],
    },
 -  # Pull binutils for linux, enabled debug fission for faster linking /
@@ -100,10 +125,22 @@ index 73933b7cf366..ef3959c1c6df 100644
 -    ],
 -  },
 -  {
+-    # Update the prebuilt clang toolchain.
 -    # Note: On Win, this should run after win_toolchain, as it may use it.
 -    'name': 'clang',
 -    'pattern': '.',
--    'action': ['python', 'src/tools/clang/scripts/update.py', '--with-android={checkout_android}'],
+-    'condition': 'not llvm_force_head_revision',
+-    'action': ['python', 'src/tools/clang/scripts/update.py'],
+-  },
+-  {
+-    # Build the clang toolchain from tip-of-tree.
+-    # Note: On Win, this should run after win_toolchain, as it may use it.
+-    'name': 'clang_tot',
+-    'pattern': '.',
+-    'condition': 'llvm_force_head_revision',
+-    'action': ['python', 'src/tools/clang/scripts/build.py',
+-               '--llvm-force-head-revision',
+-               '--with-android={checkout_android}'],
 -  },
 -  {
 -    # This is supposed to support the same set of platforms as 'clang' above.
@@ -115,26 +152,7 @@ index 73933b7cf366..ef3959c1c6df 100644
    {
      # Mac doesn't use lld so it's not included in the default clang bundle
      # there.  lld is however needed in win and Fuchsia cross builds, so
-@@ -2199,18 +2131,6 @@ hooks = [
-                 '-s', 'src/buildtools/mac/gn.sha1',
-     ],
-   },
--  {
--    'name': 'gn_linux64',
--    'pattern': '.',
--    'condition': 'host_os == "linux"',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-gn',
--                '-s', 'src/buildtools/linux64/gn.sha1',
--    ],
--  },
-   # Pull clang-format binaries using checked-in hashes.
-   {
-     'name': 'clang_format_win',
-@@ -2236,18 +2156,6 @@ hooks = [
+@@ -3220,18 +3122,6 @@ hooks = [
                  '-s', 'src/buildtools/mac/clang-format.sha1',
      ],
    },
@@ -153,7 +171,7 @@ index 73933b7cf366..ef3959c1c6df 100644
    # Pull rc binaries using checked-in hashes.
    {
      'name': 'rc_win',
-@@ -2273,29 +2181,6 @@ hooks = [
+@@ -3257,29 +3147,6 @@ hooks = [
                  '-s', 'src/build/toolchain/win/rc/mac/rc.sha1',
      ],
    },
@@ -183,26 +201,7 @@ index 73933b7cf366..ef3959c1c6df 100644
    # Pull order files for the win/clang build.
    {
      'name': 'orderfiles_win',
-@@ -2335,18 +2220,6 @@ hooks = [
-                 '-d', 'src/tools/luci-go/mac64',
-     ],
-   },
--  {
--    'name': 'luci-go_linux',
--    'pattern': '.',
--    'condition': 'host_os == "linux"',
--    'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-luci',
--                '-d', 'src/tools/luci-go/linux64',
--    ],
--  },
-   {
-     'name': 'apache_win32',
-     'pattern': '\\.sha1',
-@@ -2362,57 +2235,8 @@ hooks = [
+@@ -3324,57 +3191,8 @@ hooks = [
                  'src/third_party/apache-win32',
      ],
    },
@@ -212,10 +211,10 @@ index 73933b7cf366..ef3959c1c6df 100644
 -    'condition': 'checkout_instrumented_libraries',
 -    'action': [ 'python',
 -                'src/third_party/depot_tools/download_from_google_storage.py',
--                "--no_resume",
--                "--no_auth",
--                "--bucket", "chromium-instrumented-libraries",
--                "-s", "src/third_party/instrumented_libraries/binaries/msan-chained-origins-trusty.tgz.sha1",
+-                '--no_resume',
+-                '--no_auth',
+-                '--bucket', 'chromium-instrumented-libraries',
+-                '-s', 'src/third_party/instrumented_libraries/binaries/msan-chained-origins-trusty.tgz.sha1',
 -              ],
 -  },
 -  {
@@ -224,22 +223,22 @@ index 73933b7cf366..ef3959c1c6df 100644
 -    'condition': 'checkout_instrumented_libraries',
 -    'action': [ 'python',
 -                'src/third_party/depot_tools/download_from_google_storage.py',
--                "--no_resume",
--                "--no_auth",
--                "--bucket", "chromium-instrumented-libraries",
--                "-s", "src/third_party/instrumented_libraries/binaries/msan-no-origins-trusty.tgz.sha1",
+-                '--no_resume',
+-                '--no_auth',
+-                '--bucket', 'chromium-instrumented-libraries',
+-                '-s', 'src/third_party/instrumented_libraries/binaries/msan-no-origins-trusty.tgz.sha1',
 -              ],
 -  },
 -  {
--    "name": "wasm_fuzzer",
--    "pattern": ".",
+-    'name': 'wasm_fuzzer',
+-    'pattern': '.',
 -    'action': [ 'python',
 -                'src/third_party/depot_tools/download_from_google_storage.py',
--                "--no_resume",
--                "--no_auth",
--                "-u",
--                "--bucket", "v8-wasm-fuzzer",
--                "-s", "src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1",
+-                '--no_resume',
+-                '--no_auth',
+-                '-u',
+-                '--bucket', 'v8-wasm-fuzzer',
+-                '-s', 'src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1',
 -    ],
 -  },
  
@@ -253,14 +252,14 @@ index 73933b7cf366..ef3959c1c6df 100644
 -                '--no_resume',
 -                '--extract',
 -                '--no_auth',
--                '--bucket', 'chromium-nodejs/8.9.1',
+-                '--bucket', 'chromium-nodejs/10.15.3',
 -                '-s', 'src/third_party/node/linux/node-linux-x64.tar.gz.sha1',
 -    ],
 -  },
    {
      'name': 'node_mac',
      'pattern': '.',
-@@ -2506,38 +2330,23 @@ hooks = [
+@@ -3468,20 +3286,6 @@ hooks = [
      ],
    },
  
@@ -278,35 +277,18 @@ index 73933b7cf366..ef3959c1c6df 100644
 -                '-d', 'src/components/zucchini',
 -    ],
 -  },
+   # Pull down Android RenderTest goldens
+   {
+     'name': 'Fetch Android RenderTest goldens',
+@@ -3495,7 +3299,7 @@ hooks = [
    {
      'name': 'Fetch Android AFDO profile',
      'pattern': '.',
-     'condition': 'checkout_android or checkout_linux',
-     'action': ['vpython', 'src/chrome/android/profiles/update_afdo_profile.py'],
-   },
--  # Download checkstyle for use in PRESUBMIT for Java changes.
-   {
--    'name': 'checkstyle',
-+    # This downloads SDK extras and puts them in the
-+    # third_party/android_tools/sdk/extras directory.
-+    'name': 'sdkextras',
-     'pattern': '.',
--    # Must also be downloaded on linux for use on chromium_presubmit.
 -    'condition': 'checkout_android or checkout_linux',
 +    'condition': 'checkout_android',
-+    # When adding a new sdk extras package to download, add the package
-+    # directory and zip file to .gitignore in third_party/android_tools.
-     'action': [ 'python',
--                'src/third_party/depot_tools/download_from_google_storage.py',
--                '--no_resume',
--                '--no_auth',
--                '--bucket', 'chromium-android-tools/checkstyle',
--                '-s', 'src/third_party/checkstyle/checkstyle-8.0-all.jar.sha1'
-+                'src/build/android/play_services/update.py',
-+                'download'
-     ],
-   },
-   {
+     'action': [ 'vpython',
+                 'src/tools/download_cros_provided_profile.py',
+                 '--newest_state=src/chrome/android/profiles/newest.txt',
 -- 
-2.21.0
+2.23.0
 

@@ -1,7 +1,7 @@
-From 02312fd5f761e636bfba29ee088ccdeacfaef941 Mon Sep 17 00:00:00 2001
+From a7730b08b0474aaa8e6e0b05228cdaaba4a4734d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 8 Jul 2015 15:08:32 +0200
-Subject: [PATCH 55/58] common: set Iridium version and change User-Agent
+Subject: [PATCH 57/60] common: set Iridium version and change User-Agent
  accordingly
 
 Reduced version number:
@@ -25,23 +25,23 @@ Update "Chromium/*" in UA string when updating chrome/version.
  7 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/VERSION b/chrome/VERSION
-index 4666df6dc74d..f95a75bcbda4 100644
+index 4327edd56870d..cfa70417dcc41 100644
 --- a/chrome/VERSION
 +++ b/chrome/VERSION
 @@ -1,4 +1,4 @@
--MAJOR=73
+-MAJOR=78
 -MINOR=0
--BUILD=3683
--PATCH=103
+-BUILD=3904
+-PATCH=87
 +MAJOR=2019
-+MINOR=04
-+BUILD=73
++MINOR=11
++BUILD=79
 +PATCH=0
 diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
-index f378da9a6857..d30c8b6149a6 100644
+index 57cf7a7fef9de..9cfa190ec58cf 100644
 --- a/components/version_info/version_info.cc
 +++ b/components/version_info/version_info.cc
-@@ -13,7 +13,7 @@
+@@ -16,7 +16,7 @@
  namespace version_info {
  
  std::string GetProductNameAndVersionForUserAgent() {
@@ -51,7 +51,7 @@ index f378da9a6857..d30c8b6149a6 100644
  
  std::string GetProductName() {
 diff --git a/components/version_info/version_info_values.h.version b/components/version_info/version_info_values.h.version
-index 6232e359ef20..3cf4fee096c0 100644
+index 6232e359ef20f..3cf4fee096c06 100644
 --- a/components/version_info/version_info_values.h.version
 +++ b/components/version_info/version_info_values.h.version
 @@ -6,7 +6,7 @@
@@ -64,20 +64,20 @@ index 6232e359ef20..3cf4fee096c0 100644
  #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
  
 diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
-index 544ccc3a4a50..9683c6ce84bb 100644
+index 65083a0955142..2e831ff981b8f 100644
 --- a/content/common/user_agent.cc
 +++ b/content/common/user_agent.cc
-@@ -195,6 +195,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+@@ -196,6 +196,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
        product.c_str(),
        WEBKIT_VERSION_MAJOR,
        WEBKIT_VERSION_MINOR);
 +  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
-+	base::StringAppendF(&user_agent, " Chrome/73.0.0.0");
++	base::StringAppendF(&user_agent, " Chrome/79.0.0.0");
    return user_agent;
  }
  
 diff --git a/extensions/shell/common/version.h.in b/extensions/shell/common/version.h.in
-index c4627fe512a1..bf7d27484e99 100644
+index c4627fe512a1b..bf7d27484e997 100644
 --- a/extensions/shell/common/version.h.in
 +++ b/extensions/shell/common/version.h.in
 @@ -7,7 +7,7 @@
@@ -90,20 +90,20 @@ index c4627fe512a1..bf7d27484e99 100644
  
  #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
 diff --git a/tools/metrics/histograms/extract_histograms.py b/tools/metrics/histograms/extract_histograms.py
-index 549a166f68b4..4e00cd0df08c 100644
+index 40d1f573085dc..9ce9eb681e711 100644
 --- a/tools/metrics/histograms/extract_histograms.py
 +++ b/tools/metrics/histograms/extract_histograms.py
-@@ -69,7 +69,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
+@@ -73,7 +73,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
      'Base histogram. Use suffixes of this histogram instead.')
  
  EXPIRY_DATE_PATTERN = "%Y-%m-%d"
 -EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,3}\Z')
 +EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,4}\Z')
  
+ 
  class Error(Exception):
-   pass
 diff --git a/tools/metrics/histograms/generate_expired_histograms_array.py b/tools/metrics/histograms/generate_expired_histograms_array.py
-index a1222473634d..ecca047bdd5a 100755
+index be99d8aade632..d41f690cb8d58 100755
 --- a/tools/metrics/histograms/generate_expired_histograms_array.py
 +++ b/tools/metrics/histograms/generate_expired_histograms_array.py
 @@ -15,8 +15,8 @@ import extract_histograms
@@ -118,5 +118,5 @@ index a1222473634d..ecca047bdd5a 100755
  _SCRIPT_NAME = "generate_expired_histograms_array.py"
  _HASH_DATATYPE = "uint64_t"
 -- 
-2.21.0
+2.23.0
 

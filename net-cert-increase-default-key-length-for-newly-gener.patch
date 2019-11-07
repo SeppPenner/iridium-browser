@@ -1,7 +1,7 @@
-From dc4579422801801cd07540d1e56750a6fd1a9fad Mon Sep 17 00:00:00 2001
+From 279ecbbea0c6545e056e01bd9370b2defea66edf Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:52:32 +0200
-Subject: [PATCH 05/58] net/cert: increase default key length for
+Subject: [PATCH 10/60] net/cert: increase default key length for
  newly-generated RSA keys
 
 Should we add something for chrome://settings, or just leave
@@ -11,7 +11,7 @@ it as hidden as it was before?
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/net/cert/x509_util.cc b/net/cert/x509_util.cc
-index dfebdaa93228..993e2f9837c8 100644
+index dfebdaa932281..993e2f9837c86 100644
 --- a/net/cert/x509_util.cc
 +++ b/net/cert/x509_util.cc
 @@ -191,7 +191,7 @@ bool GetTLSServerEndPointChannelBinding(const X509Certificate& certificate,
@@ -24,5 +24,5 @@ index dfebdaa93228..993e2f9837c8 100644
  // Certificates made by CreateKeyAndSelfSignedCert will be signed using this
  // digest algorithm.
 -- 
-2.21.0
+2.23.0
 

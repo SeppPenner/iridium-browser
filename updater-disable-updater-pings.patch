@@ -1,7 +1,7 @@
-From 8fdcef23cf760a0d3bac22f2f95533736b4ba14e Mon Sep 17 00:00:00 2001
+From de209e1b2b756ffc2ea8d63af3d2ca8daed68411 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Tue, 2 Jun 2015 11:01:50 +0200
-Subject: [PATCH 38/58] updater: disable updater pings
+Subject: [PATCH 41/60] updater: disable updater pings
 
 Despite auto-updater being arguably disabled (see previous commit),
 Chromium would still send background requests. Kill it.
@@ -12,27 +12,26 @@ Chromium would still send background requests. Kill it.
  2 files changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/components/component_updater/component_updater_url_constants.cc b/components/component_updater/component_updater_url_constants.cc
-index cd1b93217dc8..e600ca1a8a81 100644
+index 42bf2c4b96de5..d8d709482b5a2 100644
 --- a/components/component_updater/component_updater_url_constants.cc
 +++ b/components/component_updater/component_updater_url_constants.cc
-@@ -15,10 +15,10 @@ namespace component_updater {
+@@ -15,9 +15,9 @@ namespace component_updater {
  // The value of |kDefaultUrlSource| can be overridden with
  // --component-updater=url-source=someurl.
- const char kUpdaterDefaultUrl[] =
--    "https://update.googleapis.com/service/update2";
-+    "trk:171:https://update.googleapis.com/service/update2";
- 
- const char kUpdaterFallbackUrl[] =
--    "http://update.googleapis.com/service/update2";
-+    "trk:171:http://update.googleapis.com/service/update2";
- 
  const char kUpdaterJSONDefaultUrl[] =
-     "https://update.googleapis.com/service/update2/json";
+-    "https://update.googleapis.com/service/update2/json";
++    "trk:171:https://update.googleapis.com/service/update2/json";
+ 
+ const char kUpdaterJSONFallbackUrl[] =
+-    "http://update.googleapis.com/service/update2/json";
++    "trk:171:http://update.googleapis.com/service/update2/json";
+ 
+ }  // namespace component_updater
 diff --git a/components/component_updater/configurator_impl.cc b/components/component_updater/configurator_impl.cc
-index 2a964f77fa91..08125fb58d51 100644
+index 81225e22d549a..4359ec0e406c4 100644
 --- a/components/component_updater/configurator_impl.cc
 +++ b/components/component_updater/configurator_impl.cc
-@@ -48,7 +48,7 @@ ConfiguratorImpl::ConfiguratorImpl(
+@@ -42,7 +42,7 @@ ConfiguratorImpl::ConfiguratorImpl(
      : background_downloads_enabled_(config_policy.BackgroundDownloadsEnabled()),
        deltas_enabled_(config_policy.DeltaUpdatesEnabled()),
        fast_update_(config_policy.FastUpdate()),
@@ -41,14 +40,14 @@ index 2a964f77fa91..08125fb58d51 100644
        require_encryption_(require_encryption),
        url_source_override_(config_policy.UrlSourceOverride()),
        initial_delay_(config_policy.InitialDelay()) {
-@@ -81,6 +81,7 @@ int ConfiguratorImpl::UpdateDelay() const {
+@@ -75,6 +75,7 @@ int ConfiguratorImpl::UpdateDelay() const {
  std::vector<GURL> ConfiguratorImpl::UpdateUrl() const {
    if (url_source_override_.is_valid())
      return {GURL(url_source_override_)};
 +  return {};
  
-   std::vector<GURL> urls =
-       base::FeatureList::IsEnabled(kFeatureUpdateClientUseJSON)
+   std::vector<GURL> urls{GURL(kUpdaterJSONDefaultUrl),
+                          GURL(kUpdaterJSONFallbackUrl)};
 -- 
-2.21.0
+2.23.0
 

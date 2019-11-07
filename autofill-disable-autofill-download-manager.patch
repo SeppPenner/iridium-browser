@@ -1,7 +1,7 @@
-From b72749b9ba6aa6e76777920f8f5a643f405da87c Mon Sep 17 00:00:00 2001
+From 12b1028414de725337dd6547e5fbcd3ac2ee35ca Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 11 Sep 2014 16:37:32 +0200
-Subject: [PATCH 10/58] autofill: disable autofill download manager
+Subject: [PATCH 15/60] autofill: disable autofill download manager
 
 Disables the autofill download manager (trk:158).
 ---
@@ -10,36 +10,36 @@ Disables the autofill download manager (trk:158).
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
-index adeb0145dd79..1bb57679b0af 100644
+index 4513830064ba0..3b39e66f1ac0e 100644
 --- a/components/autofill/core/browser/autofill_download_manager.cc
 +++ b/components/autofill/core/browser/autofill_download_manager.cc
-@@ -83,7 +83,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
+@@ -94,7 +94,7 @@ const net::BackoffEntry::Policy kAutofillBackoffPolicy = {
  };
  
  const char kDefaultAutofillServerURL[] =
 -    "https://clients1.google.com/tbproxy/af/";
 +    "trk:158:https://clients1.google.com/tbproxy/af/";
  
- // Header for API key.
- constexpr char kGoogApiKey[] = "X-Goog-Api-Key";
+ // The default number of days after which to reset the registry of autofill
+ // events for which an upload has been sent.
 diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
-index 95dcd22455cf..9abef350550b 100644
+index 98281bbf87fe6..01d363f390fbd 100644
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
-@@ -1287,11 +1287,13 @@ AutofillManager::AutofillManager(
-       weak_ptr_factory_(this) {
-   DCHECK(driver);
-   DCHECK(client_);
+@@ -1484,11 +1484,13 @@ AutofillManager::AutofillManager(
+                                     : std::make_unique<CreditCardAccessManager>(
+                                           driver, client_, personal_data_,
+                                           credit_card_form_event_logger_.get());
 +#if 0
    if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
      version_info::Channel channel = client_->GetChannel();
-     download_manager_.reset(
-         new AutofillDownloadManager(driver, this, GetAPIKeyForUrl(channel)));
+     download_manager_.reset(new AutofillDownloadManager(
+         driver, this, GetAPIKeyForUrl(channel), client_->GetLogManager()));
    }
 +#endif
    CountryNames::SetLocaleString(app_locale_);
-   // Since we want Downstream to still work in incognito, only overwrite the
-   // PDM's sync service if this is not an incognito AutofillManager. However, if
+ }
+ 
 -- 
-2.21.0
+2.23.0
 

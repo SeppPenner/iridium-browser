@@ -1,25 +1,25 @@
-From adb73e8a450f72c68592f40cc1703e3c7f9ed907 Mon Sep 17 00:00:00 2001
+From b94c19f3a4be99e362f5fccd3c315cf3a83d2ace Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
-Date: Fri, 9 Nov 2018 11:59:50 +0100
-Subject: [PATCH 57/58] prefs: disable signinallowed by default
+Date: Mon, 30 Sep 2019 11:44:46 +0200
+Subject: [PATCH 59/60] prefs: disable signinallowed by default
 
 ---
- components/signin/core/browser/signin_manager_base.cc | 2 +-
+ .../signin/internal/identity_manager/primary_account_manager.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/components/signin/core/browser/signin_manager_base.cc b/components/signin/core/browser/signin_manager_base.cc
-index 6012474fe026..0c1c2b7b25f4 100644
---- a/components/signin/core/browser/signin_manager_base.cc
-+++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -53,7 +53,7 @@ void SigninManagerBase::RegisterProfilePrefs(PrefRegistrySimple* registry) {
+diff --git a/components/signin/internal/identity_manager/primary_account_manager.cc b/components/signin/internal/identity_manager/primary_account_manager.cc
+index 91105525fcc7a..ca5c044ed6b48 100644
+--- a/components/signin/internal/identity_manager/primary_account_manager.cc
++++ b/components/signin/internal/identity_manager/primary_account_manager.cc
+@@ -58,7 +58,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
+                                std::string());
    registry->RegisterBooleanPref(prefs::kAutologinEnabled, true);
-   registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList,
-                              std::make_unique<base::ListValue>());
+   registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
 -  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
 +  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
-   registry->RegisterInt64Pref(prefs::kSignedInTime,
-                               base::Time().ToInternalValue());
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
+ 
+   // Deprecated prefs: will be removed in a future release.
 -- 
-2.21.0
+2.23.0
 

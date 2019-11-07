@@ -1,18 +1,18 @@
-From 73543ec948b88e312314e2c11b0f13184f995855 Mon Sep 17 00:00:00 2001
+From 06caf5dea19ff87b945a40410efcca7587c41567 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 9 Nov 2018 11:31:17 +0100
-Subject: [PATCH 56/58] components: disable subdomain stripping
+Subject: [PATCH 58/60] components: disable subdomain stripping
 
 https://www.bleepingcomputer.com/news/security/chrome-69-shows-the-www-and-m-subdomains-again-but-it-s-only-temporary/
 ---
- .../omnibox/browser/omnibox_field_trial.cc       | 16 ----------------
- 1 file changed, 16 deletions(-)
+ components/omnibox/common/omnibox_features.cc | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/components/omnibox/browser/omnibox_field_trial.cc b/components/omnibox/browser/omnibox_field_trial.cc
-index 4ccef7805a57..bf1c002a92dd 100644
---- a/components/omnibox/browser/omnibox_field_trial.cc
-+++ b/components/omnibox/browser/omnibox_field_trial.cc
-@@ -39,44 +39,28 @@ const base::Feature kHideFileUrlScheme {
+diff --git a/components/omnibox/common/omnibox_features.cc b/components/omnibox/common/omnibox_features.cc
+index 7b624d3eab0b7..727ad239ac9c7 100644
+--- a/components/omnibox/common/omnibox_features.cc
++++ b/components/omnibox/common/omnibox_features.cc
+@@ -14,34 +14,26 @@ const base::Feature kHideFileUrlScheme {
    "OmniboxUIExperimentHideFileUrlScheme",
  // Android and iOS don't have the File security chip, and therefore still
  // need to show the file scheme.
@@ -25,25 +25,17 @@ index 4ccef7805a57..bf1c002a92dd 100644
  
  // Feature used to hide the scheme from steady state URLs displayed in the
  // toolbar. It is restored during editing.
- const base::Feature kHideSteadyStateUrlScheme {
-   "OmniboxUIExperimentHideSteadyStateUrlScheme",
--#if defined(OS_IOS)
--      base::FEATURE_ENABLED_BY_DEFAULT
--#else
-       base::FEATURE_DISABLED_BY_DEFAULT
--#endif
- };
+ const base::Feature kHideSteadyStateUrlScheme{
+     "OmniboxUIExperimentHideSteadyStateUrlScheme",
+-    base::FEATURE_ENABLED_BY_DEFAULT};
++    base::FEATURE_DISABLED_BY_DEFAULT};
  
  // Feature used to hide trivial subdomains from steady state URLs displayed in
  // the toolbar. It is restored during editing.
- const base::Feature kHideSteadyStateUrlTrivialSubdomains {
-   "OmniboxUIExperimentHideSteadyStateUrlTrivialSubdomains",
--#if defined(OS_IOS)
--      base::FEATURE_ENABLED_BY_DEFAULT
--#else
-       base::FEATURE_DISABLED_BY_DEFAULT
--#endif
- };
+ const base::Feature kHideSteadyStateUrlTrivialSubdomains{
+     "OmniboxUIExperimentHideSteadyStateUrlTrivialSubdomains",
+-    base::FEATURE_ENABLED_BY_DEFAULT};
++    base::FEATURE_DISABLED_BY_DEFAULT};
  
  // Feature used to hide the path, query and ref from steady state URLs
  // displayed in the toolbar. It is restored during editing.
@@ -58,5 +50,5 @@ index 4ccef7805a57..bf1c002a92dd 100644
  
  // Feature used to undo all omnibox elisions on a single click or focus action.
 -- 
-2.21.0
+2.23.0
 

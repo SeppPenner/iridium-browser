@@ -1,7 +1,12 @@
 build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
+build-use-python3-to-run-landmines.patch
 doc-add-note-to-self-on-build-procedure.patch
-Import-openSUSE-s-chromium-gcc.patch.patch
+openSUSE-chromium-78-gcc-enum-range.patch-Fix-GCC-bu.patch
+openSUSE-chromium-78-gcc-std-vector.patch-dns_util-M.patch
+openSUSE-chromium-78-noexcept.patch-Revert-clang-tid.patch
+openSUSE-chromium-77-clang.patch.patch
+build-cure-partial-specialization-after-instantiatio.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
@@ -24,7 +29,6 @@ search_engines-add-Qwant-as-selectable-and-default-s.patch
 prefs-disable-translation-service.patch
 prefs-use-separate-directory-for-config.patch
 first_run-deactivate-autoupdate-globally.patch
-ui-translation-update-strings-to-read-Iridium-instea.patch
 build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
 prefs-use-system-provided-preference-skeleton.patch
@@ -32,14 +36,12 @@ build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
 plugins-use-cached-copy-of-plugin-description-list-a.patch
 Remove-EV-certificates.patch
-src-add-comments-for-evil-looking-code.patch
 google-cloud-messaging-disable-experiment-status-che.patch
 net-add-trk-scheme-and-help-identify-URLs-being-retr.patch
 updater-disable-updater-pings.patch
 safe_browsing-disable-incident-reporting.patch
 safe_browsing-disable-reporting-of-safebrowsing-over.patch
 safe_browsing-disable-cookie-transmission.patch
-promo-disable-Google-promotion-fetching.patch
 search-show-blank-tab-for-new-tab-page.patch
 Make-default-welcome-page-be-blank.patch
 browser-disable-profile-auto-import-on-first-run.patch
@@ -55,4 +57,4 @@ doc-add-README.md-for-github.patch
 common-set-Iridium-version-and-change-User-Agent-acc.patch
 components-disable-subdomain-stripping.patch
 prefs-disable-signinallowed-by-default.patch
-treewide-fix-google-shitcode-without-returns.patch
+chrome-update-translation-strings-for-different-brow.patch

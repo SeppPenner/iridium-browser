@@ -1,7 +1,7 @@
-From af68e4356a35571a330b9f22b85b08ce8a26bfb2 Mon Sep 17 00:00:00 2001
+From 5ac508ad5b7d79abfa6b4b55d43455e7568e0f32 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 15:27:37 +0200
-Subject: [PATCH 23/58] search_engines: add Qwant as selectable and default
+Subject: [PATCH 28/60] search_engines: add Qwant as selectable and default
  search engine
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 23/58] search_engines: add Qwant as selectable and default
  1 file changed, 108 insertions(+), 1 deletion(-)
 
 diff --git a/components/search_engines/template_url_prepopulate_data.cc b/components/search_engines/template_url_prepopulate_data.cc
-index eaa6c7027958..6807174dfac2 100644
+index 27b5aaebb48df..fae88207eb88d 100644
 --- a/components/search_engines/template_url_prepopulate_data.cc
 +++ b/components/search_engines/template_url_prepopulate_data.cc
 @@ -32,6 +32,7 @@ namespace {
@@ -388,7 +388,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -422,6 +468,7 @@ const PrepopulatedEngine* const engines_IR[] = {
+@@ -421,6 +467,7 @@ const PrepopulatedEngine* const engines_IR[] = {
  
  // Iceland
  const PrepopulatedEngine* const engines_IS[] = {
@@ -396,7 +396,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -430,6 +477,7 @@ const PrepopulatedEngine* const engines_IS[] = {
+@@ -429,6 +476,7 @@ const PrepopulatedEngine* const engines_IS[] = {
  
  // Italy
  const PrepopulatedEngine* const engines_IT[] = {
@@ -404,7 +404,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -438,6 +486,7 @@ const PrepopulatedEngine* const engines_IT[] = {
+@@ -437,6 +485,7 @@ const PrepopulatedEngine* const engines_IT[] = {
  
  // Jamaica
  const PrepopulatedEngine* const engines_JM[] = {
@@ -412,7 +412,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -446,6 +495,7 @@ const PrepopulatedEngine* const engines_JM[] = {
+@@ -445,6 +494,7 @@ const PrepopulatedEngine* const engines_JM[] = {
  
  // Jordan
  const PrepopulatedEngine* const engines_JO[] = {
@@ -420,7 +420,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -455,6 +505,7 @@ const PrepopulatedEngine* const engines_JO[] = {
+@@ -454,6 +504,7 @@ const PrepopulatedEngine* const engines_JO[] = {
  
  // Japan
  const PrepopulatedEngine* const engines_JP[] = {
@@ -428,7 +428,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_jp,
-@@ -464,6 +515,7 @@ const PrepopulatedEngine* const engines_JP[] = {
+@@ -463,6 +514,7 @@ const PrepopulatedEngine* const engines_JP[] = {
  
  // Kenya
  const PrepopulatedEngine* const engines_KE[] = {
@@ -436,7 +436,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -472,6 +524,7 @@ const PrepopulatedEngine* const engines_KE[] = {
+@@ -471,6 +523,7 @@ const PrepopulatedEngine* const engines_KE[] = {
  
  // South Korea
  const PrepopulatedEngine* const engines_KR[] = {
@@ -444,7 +444,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &naver,
-@@ -481,6 +534,7 @@ const PrepopulatedEngine* const engines_KR[] = {
+@@ -480,6 +533,7 @@ const PrepopulatedEngine* const engines_KR[] = {
  
  // Kuwait
  const PrepopulatedEngine* const engines_KW[] = {
@@ -452,7 +452,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -490,6 +544,7 @@ const PrepopulatedEngine* const engines_KW[] = {
+@@ -489,6 +543,7 @@ const PrepopulatedEngine* const engines_KW[] = {
  
  // Kazakhstan
  const PrepopulatedEngine* const engines_KZ[] = {
@@ -460,7 +460,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yandex_kz,
-@@ -499,6 +554,7 @@ const PrepopulatedEngine* const engines_KZ[] = {
+@@ -498,6 +553,7 @@ const PrepopulatedEngine* const engines_KZ[] = {
  
  // Lebanon
  const PrepopulatedEngine* const engines_LB[] = {
@@ -468,7 +468,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -507,6 +563,7 @@ const PrepopulatedEngine* const engines_LB[] = {
+@@ -506,6 +562,7 @@ const PrepopulatedEngine* const engines_LB[] = {
  
  // Liechtenstein
  const PrepopulatedEngine* const engines_LI[] = {
@@ -476,7 +476,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -515,6 +572,7 @@ const PrepopulatedEngine* const engines_LI[] = {
+@@ -514,6 +571,7 @@ const PrepopulatedEngine* const engines_LI[] = {
  
  // Lithuania
  const PrepopulatedEngine* const engines_LT[] = {
@@ -484,7 +484,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -524,6 +582,7 @@ const PrepopulatedEngine* const engines_LT[] = {
+@@ -523,6 +581,7 @@ const PrepopulatedEngine* const engines_LT[] = {
  
  // Luxembourg
  const PrepopulatedEngine* const engines_LU[] = {
@@ -492,7 +492,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -532,6 +591,7 @@ const PrepopulatedEngine* const engines_LU[] = {
+@@ -531,6 +590,7 @@ const PrepopulatedEngine* const engines_LU[] = {
  
  // Latvia
  const PrepopulatedEngine* const engines_LV[] = {
@@ -500,7 +500,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -541,6 +601,7 @@ const PrepopulatedEngine* const engines_LV[] = {
+@@ -540,6 +600,7 @@ const PrepopulatedEngine* const engines_LV[] = {
  
  // Libya
  const PrepopulatedEngine* const engines_LY[] = {
@@ -508,7 +508,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -550,6 +611,7 @@ const PrepopulatedEngine* const engines_LY[] = {
+@@ -549,6 +610,7 @@ const PrepopulatedEngine* const engines_LY[] = {
  
  // Morocco
  const PrepopulatedEngine* const engines_MA[] = {
@@ -516,7 +516,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -559,6 +621,7 @@ const PrepopulatedEngine* const engines_MA[] = {
+@@ -558,6 +620,7 @@ const PrepopulatedEngine* const engines_MA[] = {
  
  // Monaco
  const PrepopulatedEngine* const engines_MC[] = {
@@ -524,7 +524,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -567,6 +630,7 @@ const PrepopulatedEngine* const engines_MC[] = {
+@@ -566,6 +629,7 @@ const PrepopulatedEngine* const engines_MC[] = {
  
  // Moldova
  const PrepopulatedEngine* const engines_MD[] = {
@@ -532,7 +532,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yandex_ru,
-@@ -575,6 +639,7 @@ const PrepopulatedEngine* const engines_MD[] = {
+@@ -574,6 +638,7 @@ const PrepopulatedEngine* const engines_MD[] = {
  
  // Montenegro
  const PrepopulatedEngine* const engines_ME[] = {
@@ -540,7 +540,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -584,6 +649,7 @@ const PrepopulatedEngine* const engines_ME[] = {
+@@ -583,6 +648,7 @@ const PrepopulatedEngine* const engines_ME[] = {
  
  // Macedonia
  const PrepopulatedEngine* const engines_MK[] = {
@@ -548,7 +548,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -592,6 +658,7 @@ const PrepopulatedEngine* const engines_MK[] = {
+@@ -591,6 +657,7 @@ const PrepopulatedEngine* const engines_MK[] = {
  
  // Mexico
  const PrepopulatedEngine* const engines_MX[] = {
@@ -556,7 +556,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -600,6 +667,7 @@ const PrepopulatedEngine* const engines_MX[] = {
+@@ -599,6 +666,7 @@ const PrepopulatedEngine* const engines_MX[] = {
  
  // Malaysia
  const PrepopulatedEngine* const engines_MY[] = {
@@ -564,7 +564,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_my,
-@@ -609,6 +677,7 @@ const PrepopulatedEngine* const engines_MY[] = {
+@@ -608,6 +676,7 @@ const PrepopulatedEngine* const engines_MY[] = {
  
  // Nicaragua
  const PrepopulatedEngine* const engines_NI[] = {
@@ -572,7 +572,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -617,6 +686,7 @@ const PrepopulatedEngine* const engines_NI[] = {
+@@ -616,6 +685,7 @@ const PrepopulatedEngine* const engines_NI[] = {
  
  // Netherlands
  const PrepopulatedEngine* const engines_NL[] = {
@@ -580,7 +580,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -625,6 +695,7 @@ const PrepopulatedEngine* const engines_NL[] = {
+@@ -624,6 +694,7 @@ const PrepopulatedEngine* const engines_NL[] = {
  
  // Norway
  const PrepopulatedEngine* const engines_NO[] = {
@@ -588,7 +588,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -633,6 +704,7 @@ const PrepopulatedEngine* const engines_NO[] = {
+@@ -632,6 +703,7 @@ const PrepopulatedEngine* const engines_NO[] = {
  
  // New Zealand
  const PrepopulatedEngine* const engines_NZ[] = {
@@ -596,7 +596,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -641,6 +713,7 @@ const PrepopulatedEngine* const engines_NZ[] = {
+@@ -640,6 +712,7 @@ const PrepopulatedEngine* const engines_NZ[] = {
  
  // Oman
  const PrepopulatedEngine* const engines_OM[] = {
@@ -604,7 +604,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -650,6 +723,7 @@ const PrepopulatedEngine* const engines_OM[] = {
+@@ -649,6 +722,7 @@ const PrepopulatedEngine* const engines_OM[] = {
  
  // Panama
  const PrepopulatedEngine* const engines_PA[] = {
@@ -612,7 +612,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -658,6 +732,7 @@ const PrepopulatedEngine* const engines_PA[] = {
+@@ -657,6 +731,7 @@ const PrepopulatedEngine* const engines_PA[] = {
  
  // Peru
  const PrepopulatedEngine* const engines_PE[] = {
@@ -620,7 +620,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_pe,
-@@ -666,6 +741,7 @@ const PrepopulatedEngine* const engines_PE[] = {
+@@ -665,6 +740,7 @@ const PrepopulatedEngine* const engines_PE[] = {
  
  // Philippines
  const PrepopulatedEngine* const engines_PH[] = {
@@ -628,7 +628,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_ph,
-@@ -674,6 +750,7 @@ const PrepopulatedEngine* const engines_PH[] = {
+@@ -673,6 +749,7 @@ const PrepopulatedEngine* const engines_PH[] = {
  
  // Pakistan
  const PrepopulatedEngine* const engines_PK[] = {
@@ -636,7 +636,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -683,6 +760,7 @@ const PrepopulatedEngine* const engines_PK[] = {
+@@ -682,6 +759,7 @@ const PrepopulatedEngine* const engines_PK[] = {
  
  // Poland
  const PrepopulatedEngine* const engines_PL[] = {
@@ -644,7 +644,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -691,6 +769,7 @@ const PrepopulatedEngine* const engines_PL[] = {
+@@ -690,6 +768,7 @@ const PrepopulatedEngine* const engines_PL[] = {
  
  // Puerto Rico
  const PrepopulatedEngine* const engines_PR[] = {
@@ -652,7 +652,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -699,6 +778,7 @@ const PrepopulatedEngine* const engines_PR[] = {
+@@ -698,6 +777,7 @@ const PrepopulatedEngine* const engines_PR[] = {
  
  // Portugal
  const PrepopulatedEngine* const engines_PT[] = {
@@ -660,7 +660,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -707,6 +787,7 @@ const PrepopulatedEngine* const engines_PT[] = {
+@@ -706,6 +786,7 @@ const PrepopulatedEngine* const engines_PT[] = {
  
  // Paraguay
  const PrepopulatedEngine* const engines_PY[] = {
@@ -668,7 +668,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -715,6 +796,7 @@ const PrepopulatedEngine* const engines_PY[] = {
+@@ -714,6 +795,7 @@ const PrepopulatedEngine* const engines_PY[] = {
  
  // Qatar
  const PrepopulatedEngine* const engines_QA[] = {
@@ -676,7 +676,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -724,6 +806,7 @@ const PrepopulatedEngine* const engines_QA[] = {
+@@ -723,6 +805,7 @@ const PrepopulatedEngine* const engines_QA[] = {
  
  // Romania
  const PrepopulatedEngine* const engines_RO[] = {
@@ -684,7 +684,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -732,6 +815,7 @@ const PrepopulatedEngine* const engines_RO[] = {
+@@ -731,6 +814,7 @@ const PrepopulatedEngine* const engines_RO[] = {
  
  // Serbia
  const PrepopulatedEngine* const engines_RS[] = {
@@ -692,7 +692,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -740,6 +824,7 @@ const PrepopulatedEngine* const engines_RS[] = {
+@@ -739,6 +823,7 @@ const PrepopulatedEngine* const engines_RS[] = {
  
  // Russia
  const PrepopulatedEngine* const engines_RU[] = {
@@ -700,7 +700,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &yandex_ru,
      &google,
-@@ -749,6 +834,7 @@ const PrepopulatedEngine* const engines_RU[] = {
+@@ -748,6 +833,7 @@ const PrepopulatedEngine* const engines_RU[] = {
  
  // Rwanda
  const PrepopulatedEngine* const engines_RW[] = {
@@ -708,7 +708,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -758,6 +844,7 @@ const PrepopulatedEngine* const engines_RW[] = {
+@@ -757,6 +843,7 @@ const PrepopulatedEngine* const engines_RW[] = {
  
  // Saudi Arabia
  const PrepopulatedEngine* const engines_SA[] = {
@@ -716,7 +716,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -767,6 +854,7 @@ const PrepopulatedEngine* const engines_SA[] = {
+@@ -766,6 +853,7 @@ const PrepopulatedEngine* const engines_SA[] = {
  
  // Sweden
  const PrepopulatedEngine* const engines_SE[] = {
@@ -724,7 +724,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -775,6 +863,7 @@ const PrepopulatedEngine* const engines_SE[] = {
+@@ -774,6 +862,7 @@ const PrepopulatedEngine* const engines_SE[] = {
  
  // Singapore
  const PrepopulatedEngine* const engines_SG[] = {
@@ -732,7 +732,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -784,6 +873,7 @@ const PrepopulatedEngine* const engines_SG[] = {
+@@ -783,6 +872,7 @@ const PrepopulatedEngine* const engines_SG[] = {
  
  // Slovenia
  const PrepopulatedEngine* const engines_SI[] = {
@@ -740,7 +740,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -792,6 +882,7 @@ const PrepopulatedEngine* const engines_SI[] = {
+@@ -791,6 +881,7 @@ const PrepopulatedEngine* const engines_SI[] = {
  
  // Slovakia
  const PrepopulatedEngine* const engines_SK[] = {
@@ -748,7 +748,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -800,6 +891,7 @@ const PrepopulatedEngine* const engines_SK[] = {
+@@ -799,6 +890,7 @@ const PrepopulatedEngine* const engines_SK[] = {
  
  // El Salvador
  const PrepopulatedEngine* const engines_SV[] = {
@@ -756,7 +756,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -808,6 +900,7 @@ const PrepopulatedEngine* const engines_SV[] = {
+@@ -807,6 +899,7 @@ const PrepopulatedEngine* const engines_SV[] = {
  
  // Syria
  const PrepopulatedEngine* const engines_SY[] = {
@@ -764,7 +764,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -817,6 +910,7 @@ const PrepopulatedEngine* const engines_SY[] = {
+@@ -816,6 +909,7 @@ const PrepopulatedEngine* const engines_SY[] = {
  
  // Thailand
  const PrepopulatedEngine* const engines_TH[] = {
@@ -772,7 +772,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_th,
-@@ -826,6 +920,7 @@ const PrepopulatedEngine* const engines_TH[] = {
+@@ -825,6 +919,7 @@ const PrepopulatedEngine* const engines_TH[] = {
  
  // Tunisia
  const PrepopulatedEngine* const engines_TN[] = {
@@ -780,7 +780,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo,
-@@ -835,6 +930,7 @@ const PrepopulatedEngine* const engines_TN[] = {
+@@ -834,6 +929,7 @@ const PrepopulatedEngine* const engines_TN[] = {
  
  // Turkey
  const PrepopulatedEngine* const engines_TR[] = {
@@ -788,7 +788,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yandex_tr,
-@@ -844,6 +940,7 @@ const PrepopulatedEngine* const engines_TR[] = {
+@@ -843,6 +939,7 @@ const PrepopulatedEngine* const engines_TR[] = {
  
  // Trinidad and Tobago
  const PrepopulatedEngine* const engines_TT[] = {
@@ -796,7 +796,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -852,6 +949,7 @@ const PrepopulatedEngine* const engines_TT[] = {
+@@ -851,6 +948,7 @@ const PrepopulatedEngine* const engines_TT[] = {
  
  // Taiwan
  const PrepopulatedEngine* const engines_TW[] = {
@@ -804,7 +804,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_tw,
-@@ -861,6 +959,7 @@ const PrepopulatedEngine* const engines_TW[] = {
+@@ -860,6 +958,7 @@ const PrepopulatedEngine* const engines_TW[] = {
  
  // Tanzania
  const PrepopulatedEngine* const engines_TZ[] = {
@@ -812,7 +812,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -870,6 +969,7 @@ const PrepopulatedEngine* const engines_TZ[] = {
+@@ -869,6 +968,7 @@ const PrepopulatedEngine* const engines_TZ[] = {
  
  // Ukraine
  const PrepopulatedEngine* const engines_UA[] = {
@@ -820,7 +820,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yandex_ua,
-@@ -879,6 +979,7 @@ const PrepopulatedEngine* const engines_UA[] = {
+@@ -878,6 +978,7 @@ const PrepopulatedEngine* const engines_UA[] = {
  
  // United States
  const PrepopulatedEngine* const engines_US[] = {
@@ -828,7 +828,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -887,6 +988,7 @@ const PrepopulatedEngine* const engines_US[] = {
+@@ -886,6 +987,7 @@ const PrepopulatedEngine* const engines_US[] = {
  
  // Uruguay
  const PrepopulatedEngine* const engines_UY[] = {
@@ -836,7 +836,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -895,6 +997,7 @@ const PrepopulatedEngine* const engines_UY[] = {
+@@ -894,6 +996,7 @@ const PrepopulatedEngine* const engines_UY[] = {
  
  // Venezuela
  const PrepopulatedEngine* const engines_VE[] = {
@@ -844,7 +844,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &yahoo_ve,
-@@ -903,6 +1006,7 @@ const PrepopulatedEngine* const engines_VE[] = {
+@@ -902,6 +1005,7 @@ const PrepopulatedEngine* const engines_VE[] = {
  
  // Vietnam
  const PrepopulatedEngine* const engines_VN[] = {
@@ -852,7 +852,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &coccoc,
-@@ -912,6 +1016,7 @@ const PrepopulatedEngine* const engines_VN[] = {
+@@ -911,6 +1015,7 @@ const PrepopulatedEngine* const engines_VN[] = {
  
  // Yemen
  const PrepopulatedEngine* const engines_YE[] = {
@@ -860,7 +860,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -921,6 +1026,7 @@ const PrepopulatedEngine* const engines_YE[] = {
+@@ -920,6 +1025,7 @@ const PrepopulatedEngine* const engines_YE[] = {
  
  // South Africa
  const PrepopulatedEngine* const engines_ZA[] = {
@@ -868,7 +868,7 @@ index eaa6c7027958..6807174dfac2 100644
      &duckduckgo,
      &google,
      &bing,
-@@ -929,6 +1035,7 @@ const PrepopulatedEngine* const engines_ZA[] = {
+@@ -928,6 +1034,7 @@ const PrepopulatedEngine* const engines_ZA[] = {
  
  // Zimbabwe
  const PrepopulatedEngine* const engines_ZW[] = {
@@ -877,5 +877,5 @@ index eaa6c7027958..6807174dfac2 100644
      &google,
      &bing,
 -- 
-2.21.0
+2.23.0
 
