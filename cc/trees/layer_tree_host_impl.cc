@@ -18,7 +18,6 @@
 #include "base/containers/flat_map.h"
 #include "base/debug/crash_logging.h"
 #include "base/debug/dump_without_crashing.h"
-#include "base/location.h"
 #include "base/memory/ptr_util.h"
 #include "base/memory/read_only_shared_memory_region.h"
 #include "base/metrics/histogram.h"
@@ -286,7 +285,7 @@ LayerTreeHostImpl::LayerTreeHostImpl(
     : client_(client),
       scheduling_client_(scheduling_client),
       task_runner_provider_(task_runner_provider),
-      current_begin_frame_tracker_(FROM_HERE),
+      current_begin_frame_tracker_(BEGINFRAMETRACKER_FROM_HERE),
       compositor_frame_reporting_controller_(
           std::make_unique<CompositorFrameReportingController>(
               /*should_report_metrics=*/!settings
