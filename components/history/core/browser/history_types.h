@@ -141,7 +141,7 @@ class QueryResults {
   ~QueryResults();
 
   QueryResults(QueryResults&& other) noexcept;
-  QueryResults& operator=(QueryResults&& other) noexcept;
+  QueryResults& operator=(QueryResults&& other);
 
   void set_reached_beginning(bool reached) { reached_beginning_ = reached; }
   bool reached_beginning() { return reached_beginning_; }
@@ -276,7 +276,7 @@ struct QueryURLResult {
   QueryURLResult(const QueryURLResult&);
   QueryURLResult(QueryURLResult&&) noexcept;
   QueryURLResult& operator=(const QueryURLResult&);
-  QueryURLResult& operator=(QueryURLResult&&) noexcept;
+  QueryURLResult& operator=(QueryURLResult&&);
   ~QueryURLResult();
 
   // Indicates whether the call to HistoryBackend::QueryURL was successfull

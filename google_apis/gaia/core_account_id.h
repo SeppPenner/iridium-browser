@@ -20,7 +20,7 @@ struct CoreAccountId {
   ~CoreAccountId();
 
   CoreAccountId& operator=(const CoreAccountId&);
-  CoreAccountId& operator=(CoreAccountId&&) noexcept;
+  CoreAccountId& operator=(CoreAccountId&&);
 
   // Those implicit constructor and conversion operator allow to
   // progressively migrate the code to use this struct. Removing

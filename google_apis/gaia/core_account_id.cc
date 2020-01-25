@@ -14,7 +14,7 @@ CoreAccountId::~CoreAccountId() = default;
 
 CoreAccountId& CoreAccountId::operator=(const CoreAccountId&) = default;
 
-CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) noexcept = default;
+CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) = default;
 
 CoreAccountId::CoreAccountId(const char* id) : id(id) {}
 
