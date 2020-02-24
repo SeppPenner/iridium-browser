@@ -30,7 +30,7 @@ struct CoreAccountId {
   ~CoreAccountId();
 
   CoreAccountId& operator=(const CoreAccountId&);
-  CoreAccountId& operator=(CoreAccountId&&) noexcept;
+  CoreAccountId& operator=(CoreAccountId&&);
 
   // Checks if the account is valid or not.
   bool empty() const;
