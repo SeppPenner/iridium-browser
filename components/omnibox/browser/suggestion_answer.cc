@@ -60,7 +60,7 @@ SuggestionAnswer::TextField::TextField(TextField&&) noexcept = default;
 SuggestionAnswer::TextField& SuggestionAnswer::TextField::operator=(
     const TextField&) = default;
 SuggestionAnswer::TextField& SuggestionAnswer::TextField::operator=(
-    TextField&&) noexcept = default;
+    TextField&&) = default;
 
 // static
 bool SuggestionAnswer::TextField::ParseTextField(const base::Value& field_json,

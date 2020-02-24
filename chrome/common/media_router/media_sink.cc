@@ -19,12 +19,12 @@ MediaSink::MediaSink(const MediaSink::Id& sink_id,
       provider_id_(provider_id) {}
 
 MediaSink::MediaSink(const MediaSink& other) = default;
-MediaSink::MediaSink(MediaSink&& other) noexcept = default;
+MediaSink::MediaSink(MediaSink&& other) = default;
 MediaSink::MediaSink() = default;
 MediaSink::~MediaSink() = default;
 
 MediaSink& MediaSink::operator=(const MediaSink& other) = default;
-MediaSink& MediaSink::operator=(MediaSink&& other) noexcept = default;
+MediaSink& MediaSink::operator=(MediaSink&& other) = default;
 
 bool MediaSink::IsMaybeCloudSink() const {
   switch (icon_type_) {

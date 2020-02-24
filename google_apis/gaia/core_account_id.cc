@@ -24,7 +24,7 @@ CoreAccountId::~CoreAccountId() = default;
 
 CoreAccountId& CoreAccountId::operator=(const CoreAccountId&) = default;
 
-CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) noexcept = default;
+CoreAccountId& CoreAccountId::operator=(CoreAccountId&&) = default;
 
 // static
 CoreAccountId CoreAccountId::FromGaiaId(const std::string& gaia_id) {

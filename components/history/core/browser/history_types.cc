@@ -42,7 +42,7 @@ QueryResults::QueryResults(QueryResults&& other) noexcept {
   Swap(&other);
 }
 
-QueryResults& QueryResults::operator=(QueryResults&& other) noexcept {
+QueryResults& QueryResults::operator=(QueryResults&& other) {
   Swap(&other);
   return *this;
 }
@@ -186,7 +186,7 @@ QueryURLResult::QueryURLResult(QueryURLResult&&) noexcept = default;
 
 QueryURLResult& QueryURLResult::operator=(const QueryURLResult&) = default;
 
-QueryURLResult& QueryURLResult::operator=(QueryURLResult&&) noexcept = default;
+QueryURLResult& QueryURLResult::operator=(QueryURLResult&&) = default;
 
 // MostVisitedURL --------------------------------------------------------------
 

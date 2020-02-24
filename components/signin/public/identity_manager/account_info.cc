@@ -58,7 +58,7 @@ CoreAccountInfo::CoreAccountInfo(CoreAccountInfo&& other) noexcept = default;
 CoreAccountInfo& CoreAccountInfo::operator=(const CoreAccountInfo& other) =
     default;
 
-CoreAccountInfo& CoreAccountInfo::operator=(CoreAccountInfo&& other) noexcept =
+CoreAccountInfo& CoreAccountInfo::operator=(CoreAccountInfo&& other) =
     default;
 
 bool CoreAccountInfo::IsEmpty() const {
@@ -75,7 +75,7 @@ AccountInfo::AccountInfo(AccountInfo&& other) noexcept = default;
 
 AccountInfo& AccountInfo::operator=(const AccountInfo& other) = default;
 
-AccountInfo& AccountInfo::operator=(AccountInfo&& other) noexcept = default;
+AccountInfo& AccountInfo::operator=(AccountInfo&& other) = default;
 
 bool AccountInfo::IsEmpty() const {
   return CoreAccountInfo::IsEmpty() && hosted_domain.empty() &&
