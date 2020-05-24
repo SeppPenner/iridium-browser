@@ -31,10 +31,10 @@ class CORE_EXPORT DOMRectReadOnly : public ScriptWrappable {
 
   DOMRectReadOnly(double x, double y, double width, double height);
 
-  double x() const { return x_; }
-  double y() const { return y_; }
-  double width() const { return width_; }
-  double height() const { return height_; }
+  constexpr double x() const { return x_; }
+  constexpr double y() const { return y_; }
+  constexpr double width() const { return width_; }
+  constexpr double height() const { return height_; }
 
   double top() const { return geometry_util::NanSafeMin(y_, y_ + height_); }
   double right() const { return geometry_util::NanSafeMax(x_, x_ + width_); }
