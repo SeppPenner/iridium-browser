@@ -6,6 +6,7 @@
 #define CHROME_BROWSER_SEARCH_BACKGROUND_NTP_BACKGROUNDS_H_
 
 #include <array>
+#include <cstddef>
 
 class GURL;
 

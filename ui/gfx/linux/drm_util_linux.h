@@ -7,6 +7,8 @@
 
 #include "ui/gfx/buffer_types.h"
 
+#include <cstdint>
+
 namespace ui {
 
 int GetFourCCFormatFromBufferFormat(gfx::BufferFormat format);
