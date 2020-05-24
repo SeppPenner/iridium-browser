@@ -268,12 +268,17 @@ class CORE_EXPORT SerializedScriptValue
   MessagePortChannelArray& GetStreamChannels() { return stream_channels_; }
 
   bool IsLockedToAgentCluster() const {
+    auto AnyOfIsLockedToAgentCluster = [&]() {
+      for (auto entry = attachments_.begin();
+           entry != attachments_.end(); ++entry) {
+           if (entry->value->IsLockedToAgentCluster())
+             return true;
+      }
+      return false;
+    };
     return !wasm_modules_.IsEmpty() ||
            !shared_array_buffers_contents_.IsEmpty() ||
-           std::any_of(attachments_.begin(), attachments_.end(),
-                       [](const auto& entry) {
-                         return entry.value->IsLockedToAgentCluster();
-                       });
+           AnyOfIsLockedToAgentCluster();
   }
 
   // Returns true after serializing script values that remote origins cannot
