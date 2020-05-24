@@ -124,7 +124,7 @@ class CrossVariantMojoAssociatedReceiver {
   ~CrossVariantMojoAssociatedReceiver() = default;
 
   CrossVariantMojoAssociatedReceiver(
-      CrossVariantMojoAssociatedReceiver&&) noexcept = default;
+      CrossVariantMojoAssociatedReceiver&&) = default;
   CrossVariantMojoAssociatedReceiver& operator=(
       CrossVariantMojoAssociatedReceiver&&) noexcept = default;
 
@@ -155,7 +155,7 @@ class CrossVariantMojoAssociatedRemote {
   ~CrossVariantMojoAssociatedRemote() = default;
 
   CrossVariantMojoAssociatedRemote(
-      CrossVariantMojoAssociatedRemote&&) noexcept = default;
+      CrossVariantMojoAssociatedRemote&&) = default;
   CrossVariantMojoAssociatedRemote& operator=(
       CrossVariantMojoAssociatedRemote&&) noexcept = default;
 
