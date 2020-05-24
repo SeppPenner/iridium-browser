@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include <limits>
+
 #include "chrome/browser/performance_manager/graph/policies/background_tab_loading_policy_helpers.h"
 #include "base/logging.h"
 
