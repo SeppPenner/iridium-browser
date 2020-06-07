@@ -167,7 +167,7 @@ GpuMojoMediaClient::GetSupportedVideoDecoderConfigs() {
         *d3d11_supported_configs_;
   }
 
-#elif BUILDFLAG(USE_CHROMEOS_MEDIA_ACCELERATION)
+#elif defined(OS_CHROMEOS) && BUILDFLAG(USE_CHROMEOS_MEDIA_ACCELERATION)
   if (IsNewAcceleratedVideoDecoderUsed(gpu_preferences_)) {
     if (!cros_supported_configs_) {
       cros_supported_configs_ =
