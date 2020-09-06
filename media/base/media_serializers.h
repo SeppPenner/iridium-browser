@@ -378,8 +378,8 @@ template <>
 struct MediaSerializer<base::Location> {
   static base::Value Serialize(const base::Location& value) {
     base::Value result(base::Value::Type::DICTIONARY);
-    FIELD_SERIALIZE("file", value.file_name());
-    FIELD_SERIALIZE("line", value.line_number());
+    FIELD_SERIALIZE("file", value.file_name() ? value.file_name() : "unknown");
+    FIELD_SERIALIZE("line", value.line_number() ? value.line_number() : 0);
     return result;
   }
 };
