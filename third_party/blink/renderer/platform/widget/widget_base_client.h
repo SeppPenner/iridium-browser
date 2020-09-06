@@ -150,7 +150,7 @@ class WidgetBaseClient {
       mojo::PendingRemote<mojom::blink::WidgetInputHandlerHost> host) = 0;
 
   // The FrameWidget interface if this is a FrameWidget.
-  virtual FrameWidget* FrameWidget() { return nullptr; }
+  virtual blink::FrameWidget* FrameWidget() { return nullptr; }
 
   // Send the composition change to the browser.
   virtual void SendCompositionRangeChanged(
