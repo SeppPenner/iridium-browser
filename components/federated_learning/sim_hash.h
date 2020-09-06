@@ -5,6 +5,8 @@
 #ifndef COMPONENTS_FEDERATED_LEARNING_SIM_HASH_H_
 #define COMPONENTS_FEDERATED_LEARNING_SIM_HASH_H_
 
+#include <stdint.h>
+#include <string>
 #include <set>
 #include <unordered_set>
 
