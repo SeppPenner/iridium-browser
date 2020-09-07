@@ -1179,6 +1179,11 @@ VAImplementation VaapiWrapper::GetImplementationType() {
 }
 
 // static
+const std::string& VaapiWrapper::GetVendorString() {
+  return VADisplayState::Get()->va_vendor_string();
+}
+
+// static
 scoped_refptr<VaapiWrapper> VaapiWrapper::Create(
     CodecMode mode,
     VAProfile va_profile,

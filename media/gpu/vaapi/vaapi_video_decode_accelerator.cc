@@ -677,6 +677,7 @@ void VaapiVideoDecodeAccelerator::AssignPictureBuffers(
   // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
   // internal decoded frame.
   if (buffer_allocation_mode_ != BufferAllocationMode::kNone &&
+      buffer_allocation_mode_ != BufferAllocationMode::kWrapVdpau &&
       !vpp_vaapi_wrapper_) {
     vpp_vaapi_wrapper_ = VaapiWrapper::Create(
         VaapiWrapper::kVideoProcess, VAProfileNone,
@@ -708,7 +709,8 @@ void VaapiVideoDecodeAccelerator::AssignPictureBuffers(
             : gfx::Size();
 
     std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
-        (buffer_allocation_mode_ == BufferAllocationMode::kNone)
+        ((buffer_allocation_mode_ == BufferAllocationMode::kNone) ||
+         (buffer_allocation_mode_ == BufferAllocationMode::kWrapVdpau))
             ? vaapi_wrapper_
             : vpp_vaapi_wrapper_,
         make_context_current_cb_, bind_image_cb_, buffer, size_to_bind);
@@ -1164,6 +1166,14 @@ VaapiVideoDecodeAccelerator::GetSupportedProfiles() {
 
 VaapiVideoDecodeAccelerator::BufferAllocationMode
 VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
+  // NVIDIA blobs use VDPAU
+  if (base::StartsWith(VaapiWrapper::GetVendorString(),
+              "Splitted-Desktop Systems VDPAU",
+              base::CompareCase::SENSITIVE)) {
+    LOG(INFO) << "VA-API driver on VDPAU backend";
+    return BufferAllocationMode::kWrapVdpau;
+  }
+
   // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
   // |output_mode_| as well.
   if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
@@ -1174,7 +1184,7 @@ VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
   // associated format reconciliation copy, avoiding all internal buffer
   // allocations.
   // TODO(crbug.com/911754): Enable for VP9 Profile 2.
-  if (IsGeminiLakeOrLater() &&
+  if (false && IsGeminiLakeOrLater() &&
       (profile_ == VP9PROFILE_PROFILE0 || profile_ == VP8PROFILE_ANY ||
        (profile_ >= H264PROFILE_MIN && profile_ <= H264PROFILE_MAX))) {
     // Add one to the reference frames for the one being currently egressed, and

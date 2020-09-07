@@ -209,6 +209,7 @@ class MEDIA_GPU_EXPORT VaapiVideoDecodeAccelerator
     // Using |client_|s provided PictureBuffers and as many internally
     // allocated.
     kNormal,
+    kWrapVdpau,
   };
 
   // Decides the concrete buffer allocation mode, depending on the hardware
